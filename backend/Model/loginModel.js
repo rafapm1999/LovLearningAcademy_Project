@@ -23,15 +23,9 @@ const loginSchema = new mongoose.Schema({
     type: Date,
     required: false,
   },
-  lastLogin: {
-    type: String,
-    required: false,
-    default: null,
-  }, 
   role: {
     type: String,
     required: false,
-    default: "user",
   }
 });
 

@@ -16,7 +16,6 @@ const signup = async (req, res) => {
     //3. Obtenemos la fecha de registro
     const registerAt = getRegisterAt();
     const role = "user";
-    const lastLogin = "lastday"
     //4. Creamos el usuario (Información que tendra nuestra base de datos)
     const newUser = new Login({
       name,
@@ -25,7 +24,6 @@ const signup = async (req, res) => {
       password: passwordHash,
       role,
       registerAt,
-      lastLogin,
     });
     //5. Guardamos en la base de datos al nuevo ususario
     const user = await newUser.save();
@@ -37,7 +35,7 @@ const signup = async (req, res) => {
     });
   } catch (error) {
     //Si el error.code es 11000, enviamos un error de usuario duplicado (ya existe en la base de datos)
-    if (error.code === 11000) {
+    if ((error.code === 11000)) {
         res.status(409).json({
             status: "failed",
             data: null,

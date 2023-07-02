@@ -1,73 +1,78 @@
 import "./LoginForm.module.css";
-import {useRef} from "react";
+import { useRef } from "react";
 
-function LoginForm() {
-  const userName = useRef("");
-  const userLastName = useRef("");
+function LoginForm(props) {
+  const userNameRef = useRef("");
+  const userLastNameRef = useRef("");
   const emailRef = useRef("");
   const passwordRef = useRef("");
-
-  const handleSubmit = async (e) => {
+  const rememberMeRef = useRef("");
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const userData = {
-      "name": userName.current.value,
-      "lastName": userLastName.current.value,
-      "email": emailRef.current.value,
-      "password": passwordRef.current.value,
-    }
-  }
-    
+    const loginData = {
+      name: userNameRef.current.value,
+      lastName: userLastNameRef.current.value,
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
+      rememberMe: rememberMeRef.current.checked,
+    };
+    props.onLogin(loginData);
+  };
+
   return (
     <>
       <div>
         <h4>Signup</h4>
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="userName">Name</label>
-            <input ref={userName} type="text" name="name" id="userName"/>
+            <label htmlFor="userName">Name: </label>
+            <input ref={userNameRef} type="text" name="name" id="userName" />
           </div>
           <div>
-            <label htmlFor="userLastName">Lastname</label>
-            <input ref={userLastName} type="text" name="lastName" id="userLastName"/>
+            <label htmlFor="userLastName">Lastname: </label>
+            <input
+              ref={userLastNameRef}
+              type="text"
+              name="lastName"
+              id="userLastName"
+            />
           </div>
           <div>
-            <label htmlFor="email">Email</label>
-            <input ref={emailRef} type="userEmail"
+            <label htmlFor="email">Email: </label>
+            <input
+              ref={emailRef}
+              type="email"
               name="email"
               id="userEmail"
               placeholder="Introduce your email adress"
             />
           </div>
           <div>
-            <label htmlFor="userPassword">Password</label>
-            <input ref={passwordRef} type="password" name="password" id="userPassword" placeholder="***********" />
+            <label htmlFor="userPassword">Password: </label>
+            <input
+              ref={passwordRef}
+              type="password"
+              name="password"
+              id="userPassword"
+              placeholder="***********"
+            />
           </div>
-          <div><button type="submit">Register</button></div>
+          <div>
+            <label htmlFor="rememberMe">Remember</label>
+            <input
+              ref={rememberMeRef}
+              type="checkbox"
+              name="checkbox"
+              id="rememberMe"
+            />
+          </div>
+          <div>
+            <button type="submit">Register</button>
+          </div>
         </form>
       </div>
     </>
   );
-};
-/* try {
-  const response = await fetch ("http://localhost:8000/auth/signup", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-    //"auth-token": localStorage.getItem("token"),
-  },
-  body: JSON.stringify(userData),
-});
-const data = await response.json();
-if (data.status === 409) {
-  console.log("ya esta registrado");
 }
-console.log(data);
-
-} catch (error) {
-  
-}
-
-} */
 
 export default LoginForm;
-

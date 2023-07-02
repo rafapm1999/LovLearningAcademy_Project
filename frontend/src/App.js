@@ -1,14 +1,14 @@
 //import './App.css';
-import LoginPage from "./components/LoginPage";
+/* import {Route, Routes} from "react-router-dom"; */
+import { Route, Routes } from "react-router-dom";
+import LoginPage from "./views/Login/LoginPage";
 
 function App() {
 
   return (
-  <div> 
-     <h1>Hello World!</h1>
-     <p>Lorem Ipsum dolor si tamet consectetur adipisicing elit.</p>
-     <LoginPage></LoginPage>
-  </div>
+  <Routes> 
+     <Route path="/" element={<LoginPage />} />
+  </Routes>
   );
 }
 

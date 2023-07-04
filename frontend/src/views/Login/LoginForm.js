@@ -1,4 +1,4 @@
-import "./LoginForm.module.css";
+import classes from "./LoginForm.module.css";
 import { useRef } from "react";
 
 function LoginForm(props) {
@@ -21,55 +21,71 @@ function LoginForm(props) {
 
   return (
     <>
-      <div>
-        <h4>Signup</h4>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="userName">Name: </label>
-            <input ref={userNameRef} type="text" name="name" id="userName" />
-          </div>
-          <div>
-            <label htmlFor="userLastName">Lastname: </label>
-            <input
-              ref={userLastNameRef}
-              type="text"
-              name="lastName"
-              id="userLastName"
-            />
-          </div>
-          <div>
-            <label htmlFor="email">Email: </label>
-            <input
-              ref={emailRef}
-              type="email"
-              name="email"
-              id="userEmail"
-              placeholder="Introduce your email adress"
-            />
-          </div>
-          <div>
-            <label htmlFor="userPassword">Password: </label>
-            <input
-              ref={passwordRef}
-              type="password"
-              name="password"
-              id="userPassword"
-              placeholder="***********"
-            />
-          </div>
-          <div>
-            <label htmlFor="rememberMe">Remember</label>
-            <input
-              ref={rememberMeRef}
-              type="checkbox"
-              name="checkbox"
-              id="rememberMe"
-            />
-          </div>
-          <div>
-            <button type="submit">Register</button>
-          </div>
-        </form>
+      <div className={classes["form-root"]}>
+        <div className={classes.photo}></div>
+        <div className={classes["form-main"]}>
+          <form onSubmit={handleSubmit}>
+            <h4 className={classes.title}>Create new acount now</h4>
+            <div className={classes["form-info"]}>
+              {/* <label htmlFor="userName">Name </label> */}
+              <input
+                ref={userNameRef}
+                type="text"
+                name="name"
+                id="userName"
+                placeholder="Name"
+              />
+            </div>
+            <div className={classes["form-info"]}>
+              {/* <label htmlFor="userLastName">Lastname </label> */}
+              <input
+                ref={userLastNameRef}
+                type="text"
+                name="lastName"
+                id="userLastName"
+                placeholder="Lastname"
+              />
+            </div>
+            <div className={classes["form-info"]}>
+              {/* <label htmlFor="email">Email </label> */}
+              <input
+                ref={emailRef}
+                type="email"
+                name="email"
+                id="userEmail"
+                placeholder="Email"
+              />
+            </div>
+            <div className={classes["form-info"]}>
+              {/* <label htmlFor="userPassword">Password </label> */}
+              <input
+                ref={passwordRef}
+                type="password"
+                name="password"
+                id="userPassword"
+                placeholder="Password"
+              />
+            </div>
+            <div className={`${classes["form-info"]} ${classes["remember"]}`}>
+              <input
+                ref={rememberMeRef}
+                type="checkbox"
+                name="checkbox"
+                id="rememberMe"
+              />
+              <label htmlFor="rememberMe">
+                <span>Remember my details</span>
+              </label>
+            </div>
+            <div
+              className={`${classes["form-info"]} ${classes["submit-button"]}`}
+            >
+              <button type="submit">
+                <span>Create acount</span>
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </>
   );

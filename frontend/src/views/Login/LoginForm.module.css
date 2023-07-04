@@ -1,0 +1,74 @@
+.form-root{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0b3657;
+    width: 50%;
+    padding: 2em;
+    border-radius: .90rem
+}
+form .form-info {
+    width: 100%;
+    color: azure;
+    font-size: 1.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5em 0;
+    padding: .5rem;
+}
+form .form-info > input{
+   background-color: white;
+   border-radius: .25rem;
+   padding: .6rem;
+}
+.title{
+    color: white;
+    display: block;
+    font-size: 1.9rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.9em;
+}
+form .remember{
+    justify-content: center;
+    align-items: center;
+    color: lightgrey;
+    font-size: 1rem;
+    border-radius: .25rem;
+}
+form .remember input[type="checkbox"]{
+    margin-right: 1.5em;
+}
+form .remember input[type="checkbox"] + label {
+    margin-left: 1.5em;
+    color: darkgrey;
+    cursor: pointer;
+}
+form .remember input[type="checkbox"]:checked + label {
+    color: white;
+}
+.submit-button button[type= "submit"]{
+    background-color: #1e90ff;
+    padding: 1em 3em;
+    margin-top: 1.9em;
+    border-radius: .30rem;
+    color: white;
+    font-weight: bold;
+}
+.photo{
+    z-index: 15;
+    display: inline-block;
+    height: 100px;
+    width: 100px;
+    background-color: black;
+}
+
+
+

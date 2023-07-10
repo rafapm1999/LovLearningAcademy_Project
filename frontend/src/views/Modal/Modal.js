@@ -1,21 +1,23 @@
-import classes from "./Modal.module.css";
-import { useNavigate } from "react-router-dom";
-
+import classes from './Modal.module.css';
 function Modal(props) {
   return (
     <>
-      <div className={classes["modal-effect"]}>
-        <div className={classes["modal-content"]}>
+      <div className={`${classes["md-modal"]} ${classes["md-effect-1"]} ${props.visible && classes["show"]}`}>
+        <div className={`${classes["md-content"]} ${props.data.loggedIn ? classes.success : classes.danger}`}>
           <h3>{props.data.loginHeader}</h3>
           <div>
             <p>{props.data.loginMessage}</p>
             <ul>
+              <li>Name: {props.data.name}</li>
+              <li>Lastname: {props.data.lastName}</li>
               <li>Email: {props.data.email}</li>
+              <li>Password: {props.data.password}</li>
             </ul>
-            <button >Close</button>
+            <button onClick={props.onLogin} className={classes["md-close"]}>Close</button>
           </div>
         </div>
       </div>
+      <div className={classes["md-overlay"]}/>
     </>
   );
 }

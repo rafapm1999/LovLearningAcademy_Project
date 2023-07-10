@@ -1,5 +1,5 @@
 import Login from "./LoginForm";
-import "./LoginPage.module.css";
+import classes from "./LoginPage.module.css";
 import Modal from "../Modal/Modal";
 import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
@@ -19,7 +19,7 @@ function LoginPage() {
     loginMessage: "",
   });
   const handleVisibility = async (loginData) => {
-    if (
+    if ( //Si el email es valido y el password cumple los requisitos entonces hacemos fetch (POST)
       loginData &&
       validateEmail(loginData.email) &&
       validatePassword(loginData.password)
@@ -54,16 +54,38 @@ function LoginPage() {
             navigate("/profile");
           }, 3000);
         }
-      } catch (error) {}
-    } else {
-      console.log("algo salió mal");
+      } catch (error) {
+        setLoginInfo({
+          loggedIn: false,
+          email: loginData.email,
+          password: "*********",
+          loginHeader: "Signup went wrong.",
+          loginMessage: "Try again",
+        })
+      }
+    } else if (!loginData ||
+      !validateEmail(loginData.email)||
+      !validatePassword(loginData.password)||
+      loginData.name === "" ||
+      loginData.lastName === ""){
+        setLoginInfo({
+          loggedIn: false,
+          name: loginData.name === "" ? "Name is required." : loginData.name,
+          lastName: loginData.lastName === "" ? "Lastname is required." : loginData.lastName,
+          email: loginData.email === "" ? "Email is required." : loginData.email,
+          password: loginData.password === "" ? "Password is required." : "Your password is not secure. Make more strong.",
+          rememberMe: loginData.rememberMe,
+          loginHeader: "Ups... something went wrong.",
+          loginMessage: "Try again",
+        })
+        setVisible(!visible);
     }
   };
 
   return (
     <>
       {ReactDOM.createPortal(
-        <Modal visible={visible} data={loginInfo} />,
+        <Modal visible={visible} onLogin={handleVisibility} data={loginInfo} />,
         document.querySelector("#modal")
       )}
       <h3>Formulario</h3>
@@ -73,3 +95,5 @@ function LoginPage() {
 }
 
 export default LoginPage;
+
+

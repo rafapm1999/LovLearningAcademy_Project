@@ -20,7 +20,6 @@ function LoginForm(props) {
   };
 
   return (
-    <>
       <div className={classes["form-root"]}>
         <div className={classes.photo}></div>
         <div className={classes["form-main"]}>
@@ -87,7 +86,6 @@ function LoginForm(props) {
           </form>
         </div>
       </div>
-    </>
   );
 }
 

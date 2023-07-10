@@ -8,9 +8,9 @@
     justify-content: center;
     align-items: center;
     background-color: #0b3657;
-    width: 50%;
-    padding: 2em;
-    border-radius: .90rem
+    height: 70vh;
+    width: 33vw;
+    border-radius: .90rem;
 }
 form .form-info {
     width: 100%;
@@ -42,6 +42,7 @@ form .remember{
     color: lightgrey;
     font-size: 1rem;
     border-radius: .25rem;
+    margin-bottom: 5em;
 }
 form .remember input[type="checkbox"]{
     margin-right: 1.5em;
@@ -55,12 +56,17 @@ form .remember input[type="checkbox"]:checked + label {
     color: white;
 }
 .submit-button button[type= "submit"]{
+    position: absolute;
+    flex-wrap: wrap;
     background-color: #1e90ff;
-    padding: 1em 3em;
-    margin-top: 1.9em;
+    padding: 1em 3em; 
+    margin-top: 1.9em; 
     border-radius: .30rem;
     color: white;
     font-weight: bold;
+    cursor: pointer;
+    transition-duration: 0.9s;
+    transition-timing-function: ease-in-out;
 }
 .photo{
     z-index: 15;
@@ -68,6 +74,12 @@ form .remember input[type="checkbox"]:checked + label {
     height: 100px;
     width: 100px;
     background-color: black;
+}
+.submit-button button:hover{
+    background-color: #ffffff;
+    color: #1e90ff;
+    /* transform: scale(1) rotate(0deg); */
+    border: 1px solid #1e90ff;
 }
 
 

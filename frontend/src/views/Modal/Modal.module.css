@@ -31,9 +31,9 @@
     background: rgba(0, 0, 0, 0.8);
 }
 .md-effect-1 .md-content{
-    transform: scale(0) rotate(720deg);
+    transform: scale(0) rotate(0);
     opacity: 0;
-    transition: transform 0.5s, opacity .5s;
+    transition: transform 0.5s, opacity .7s;
 }
 .md-show.md-effect-1 .md-content{
     transform: scale(1) rotate(0deg);
@@ -48,7 +48,7 @@
     margin: 0 auto;
 }
 .md-content.danger{
-    background: #e74c3c;
+    background: #ce4d3f;
 }
 .md-content.success{
     background: #007f6c;

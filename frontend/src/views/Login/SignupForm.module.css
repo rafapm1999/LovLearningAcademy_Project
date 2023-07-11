@@ -23,7 +23,7 @@ form .form-info {
     padding: .5rem;
 }
 form .form-info > input{
-   background-color: white; 
+   background-color: white;
    border-radius: .25rem;
    padding: .6rem;
 }
@@ -81,12 +81,6 @@ form .remember input[type="checkbox"]:checked + label {
     /* transform: scale(1) rotate(0deg); */
     border: 1px solid #1e90ff;
 }
-.danger{
-    border: 1px solid red;
-}
-.success{
-    border: 1px solid green;
-}
-.empty{
-    border: 1px solid rgb(255, 255, 255);
-}
+
+
+

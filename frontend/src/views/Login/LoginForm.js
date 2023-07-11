@@ -2,49 +2,34 @@ import classes from "./LoginForm.module.css";
 import { useRef } from "react";
 
 function LoginForm(props) {
-  const userNameRef = useRef("");
-  const userLastNameRef = useRef("");
   const emailRef = useRef("");
   const passwordRef = useRef("");
-  const rememberMeRef = useRef("");
   const handleSubmit = (e) => {
     e.preventDefault();
     const loginData = {
-      name: userNameRef.current.value,
-      lastName: userLastNameRef.current.value,
       email: emailRef.current.value,
       password: passwordRef.current.value,
-      rememberMe: rememberMeRef.current.checked,
     };
     props.onLogin(loginData);
   };
+  const handleLogin = (e) => {
+    e.preventDefault();
+    props.onSignup(true);
+  };
+  const handleChange = () => {
+    const loginInfoChange = {
+        email: emailRef.current.value === "" ? true : false,
+        password: passwordRef.current.value === "" ? true : false,
+      };
+    props.onLogin(loginInfoChange)
+  }
 
   return (
+    <>
       <div className={classes["form-root"]}>
-        <div className={classes.photo}></div>
         <div className={classes["form-main"]}>
           <form onSubmit={handleSubmit}>
-            <h4 className={classes.title}>Create new acount now</h4>
-            <div className={classes["form-info"]}>
-              {/* <label htmlFor="userName">Name </label> */}
-              <input
-                ref={userNameRef}
-                type="text"
-                name="name"
-                id="userName"
-                placeholder="Name"
-              />
-            </div>
-            <div className={classes["form-info"]}>
-              {/* <label htmlFor="userLastName">Lastname </label> */}
-              <input
-                ref={userLastNameRef}
-                type="text"
-                name="lastName"
-                id="userLastName"
-                placeholder="Lastname"
-              />
-            </div>
+            <h4 className={classes.title}>Login now!</h4>
             <div className={classes["form-info"]}>
               {/* <label htmlFor="email">Email </label> */}
               <input
@@ -53,6 +38,8 @@ function LoginForm(props) {
                 name="email"
                 id="userEmail"
                 placeholder="Email"
+                onChange={handleChange}
+                className={props.onEmptyInfo.email === false && classes.danger}
               />
             </div>
             <div className={classes["form-info"]}>
@@ -63,29 +50,24 @@ function LoginForm(props) {
                 name="password"
                 id="userPassword"
                 placeholder="Password"
+                onChange={handleChange}
+                className={props.onEmptyInfo.password === false && classes.danger}
               />
-            </div>
-            <div className={`${classes["form-info"]} ${classes["remember"]}`}>
-              <input
-                ref={rememberMeRef}
-                type="checkbox"
-                name="checkbox"
-                id="rememberMe"
-              />
-              <label htmlFor="rememberMe">
-                <span>Remember my details</span>
-              </label>
             </div>
             <div
               className={`${classes["form-info"]} ${classes["submit-button"]}`}
             >
               <button type="submit">
-                <span>Create acount</span>
+                <span>Login!</span>
               </button>
             </div>
           </form>
+          <form onSubmit={handleLogin}>
+            <button type="submit">Signup</button>
+          </form>
         </div>
       </div>
+    </>
   );
 }
 

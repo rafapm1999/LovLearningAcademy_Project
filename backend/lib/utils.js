@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const getRegisterAt = () => {
-  return Date.now();
+  return String(Date.now());
 };
 
 module.exports = { getRegisterAt };

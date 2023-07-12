@@ -27,10 +27,11 @@ function SignupForm(props) {
     <>
       <div className={classes["form-root"]}>
         <div className={classes["form-main"]}>
-          <form onSubmit={handleSubmit}>
+          <div className={classes.title}>
             <h4 className={classes.title}>Create new account now</h4>
+          </div>
+          <form onSubmit={handleSubmit}>
             <div className={classes["form-info"]}>
-              {/* <label htmlFor="userName">Name </label> */}
               <input
                 ref={userNameRef}
                 type="text"
@@ -40,7 +41,6 @@ function SignupForm(props) {
               />
             </div>
             <div className={classes["form-info"]}>
-              {/* <label htmlFor="userLastName">Lastname </label> */}
               <input
                 ref={userLastNameRef}
                 type="text"
@@ -50,7 +50,6 @@ function SignupForm(props) {
               />
             </div>
             <div className={classes["form-info"]}>
-              {/* <label htmlFor="email">Email </label> */}
               <input
                 ref={emailRef}
                 type="email"
@@ -60,7 +59,6 @@ function SignupForm(props) {
               />
             </div>
             <div className={classes["form-info"]}>
-              {/* <label htmlFor="userPassword">Password </label> */}
               <input
                 ref={passwordRef}
                 type="password"
@@ -70,15 +68,17 @@ function SignupForm(props) {
               />
             </div>
             <div className={`${classes["form-info"]} ${classes["remember"]}`}>
-              <input
-                ref={rememberMeRef}
-                type="checkbox"
-                name="checkbox"
-                id="rememberMe"
-              />
-              <label htmlFor="rememberMe">
-                <span>Remember my details</span>
-              </label>
+              <div className={classes.checkbox}>
+                <input
+                  ref={rememberMeRef}
+                  type="checkbox"
+                  name="checkbox"
+                  id="rememberMe"
+                />
+                <label htmlFor="rememberMe">
+                  <span>Remember my details</span>
+                </label>
+              </div>
             </div>
             <div
               className={`${classes["form-info"]} ${classes["submit-button"]}`}
@@ -88,12 +88,13 @@ function SignupForm(props) {
               </button>
             </div>
           </form>
-          <form onSubmit={handleLogin}>
-            <button type="submit">Login</button>
-          </form>
+          <div className={classes["form-links"]}>
+            <span>Already have an account? Login it </span>
+            <a href="/login">Login</a>
+          </div>
         </div>
       </div>
-    </>
+    </> 
   );
 }
 

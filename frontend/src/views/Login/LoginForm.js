@@ -18,20 +18,21 @@ function LoginForm(props) {
   };
   const handleChange = () => {
     const loginInfoChange = {
-        email: emailRef.current.value === "" ? true : false,
-        password: passwordRef.current.value === "" ? true : false,
-      };
-    props.onLogin(loginInfoChange)
-  }
+      email: emailRef.current.value === "" ? true : false,
+      password: passwordRef.current.value === "" ? true : false,
+    };
+    props.onLogin(loginInfoChange);
+  };
 
   return (
     <>
       <div className={classes["form-root"]}>
         <div className={classes["form-main"]}>
+          <div className={classes.title}>
+            <h4>Login now!</h4>
+          </div>
           <form onSubmit={handleSubmit}>
-            <h4 className={classes.title}>Login now!</h4>
             <div className={classes["form-info"]}>
-              {/* <label htmlFor="email">Email </label> */}
               <input
                 ref={emailRef}
                 type="email"
@@ -43,7 +44,6 @@ function LoginForm(props) {
               />
             </div>
             <div className={classes["form-info"]}>
-              {/* <label htmlFor="userPassword">Password </label> */}
               <input
                 ref={passwordRef}
                 type="password"
@@ -51,7 +51,9 @@ function LoginForm(props) {
                 id="userPassword"
                 placeholder="Password"
                 onChange={handleChange}
-                className={props.onEmptyInfo.password === false && classes.danger}
+                className={
+                  props.onEmptyInfo.password === false && classes.danger
+                }
               />
             </div>
             <div
@@ -62,9 +64,10 @@ function LoginForm(props) {
               </button>
             </div>
           </form>
-          <form onSubmit={handleLogin}>
-            <button type="submit">Signup</button>
-          </form>
+          <div className={classes["form-links"]}>
+            <span>Don't have an account? Create one </span>
+            <a href="/signup">Signup</a>
+          </div>
         </div>
       </div>
     </>

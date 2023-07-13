@@ -38,6 +38,7 @@ function LoginForm(props) {
                 type="email"
                 name="email"
                 id="userEmail"
+                aria-label="Email"
                 placeholder="Email"
                 onChange={handleChange}
                 className={props.onEmptyInfo.email === false && classes.danger}

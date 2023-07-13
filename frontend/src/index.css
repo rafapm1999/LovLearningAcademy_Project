@@ -1,6 +1,7 @@
 :root{
   box-sizing: border-box;
   font-size: 0.785em;
+  overflow-x: hidden;
 }
 *,::after,::before{
   box-sizing: inherit;

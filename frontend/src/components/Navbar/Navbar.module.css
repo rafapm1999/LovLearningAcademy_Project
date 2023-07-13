@@ -1,0 +1,39 @@
+.navbar-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 100vw;
+    height: 10vh;
+}
+.navbar-logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30vw;
+}
+.navbar-links{
+    width: 40vw;
+}
+.navbar-links > .links{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.navbar-button{
+    width: 30vw;
+    display: flex;
+    justify-content: center;
+}
+.navbar-button .link{
+    padding: 1.5em 2em;
+    background-color: #1e90ff;
+    color: white;
+}
+.link{
+    color: black
+}
+.navbar-main .link{
+    text-decoration: none;
+ /*    color: rgb(39, 39, 39); */
+}

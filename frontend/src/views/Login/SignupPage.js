@@ -104,7 +104,7 @@ function SignupPage() {
         <Modal visible={visible} onLogin={handleVisibility} data={loginInfo} />,
         document.querySelector("#modal")
       )}
-      <h3>Formulario</h3>
+
       <Signup onLogin={handleVisibility} onRegister={setLogin}></Signup>
     </>
   );

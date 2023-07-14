@@ -27,6 +27,7 @@ function LoginForm(props) {
   return (
     <>
       <div className={classes["form-root"]}>
+        <div className={classes["login-img"]}></div>
         <div className={classes["form-main"]}>
           <div className={classes.title}>
             <h4>Login now!</h4>

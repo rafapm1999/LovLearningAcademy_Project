@@ -1,34 +1,64 @@
-.homePage-images{
-    background-image: url(../../assets/bg-login.jpg);
-    background-size: cover;
-    background-position: top left;
-    background-repeat: no-repeat;
-    width: 100vw;
-    height: 80vh;
+.homePage-images {
+  background-color: #d6ccc2;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 60vh;
 }
-.homePage-title{
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    width: 50%;
+.homePage-title {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 50%;
 }
-.homePage-title > h1{
-    position: relative;
-    margin-left: 15rem;
-    margin-top: 5rem;
-    color: black;
+.homePage-title > h1 {
+  position: relative;
+  margin-left: 15rem;
+  margin-top: 5rem;
+  color: black;
 }
-.homePage-info{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 25vw;
-    height: 30vh;
-    background-color: black;
+.homePage-info {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  flex-direction: column;
 }
-.homePage-info > p{
-    display: block;
+.info-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: start;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  height: 25vh;
+  margin-right: 10%;
+  margin-top: 5em;
 }
-.homePage-info > .list{
-    display: block;
+.info-container > h3 {
+  font-size: 1.8rem;
+}
+.info-container > .list {
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  height: 15vh;
+}
+.homePage-details-1 {
+  background-color: white;
+  width: 100vw;
+  height: 60vh;
+}
+.homePage-details-2 {
+  background-color: #f5ebe0;
+  width: 100vw;
+  height: 60vh;
+}
+.homePage-details-3 {
+  background-color: #d5bdaf;
+  width: 100vw;
+  height: 60vh;
+}
+.container-1 {
 }

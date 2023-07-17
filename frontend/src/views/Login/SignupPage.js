@@ -3,7 +3,7 @@ import classes from "./SignupPage.module.css";
 import Modal from "../Modal/Modal";
 import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { validateEmail, validatePassword } from "../../utils/validate";
 
 function SignupPage() {
@@ -99,14 +99,14 @@ function SignupPage() {
   };
 
   return (
-    <>
+    <Fragment>
       {ReactDOM.createPortal(
         <Modal visible={visible} onLogin={handleVisibility} data={loginInfo} />,
         document.querySelector("#modal")
       )}
 
       <Signup onLogin={handleVisibility} onRegister={setLogin}></Signup>
-    </>
+    </Fragment>
   );
 }
 

@@ -1,5 +1,5 @@
 import classes from "./LoginForm.module.css";
-import { useRef } from "react";
+import { Fragment, useRef } from "react";
 
 function LoginForm(props) {
   const emailRef = useRef("");
@@ -25,7 +25,7 @@ function LoginForm(props) {
   };
 
   return (
-    <>
+    <Fragment>
       <div className={classes["form-root"]}>
         <div className={classes["login-img"]}></div>
         <div className={classes["form-main"]}>
@@ -72,8 +72,9 @@ function LoginForm(props) {
           </div>
         </div>
       </div>
-    </>
+    </Fragment>
   );
+  
 }
 
 export default LoginForm;

@@ -1,10 +1,10 @@
 .homePage-images {
-  background-color: #d6ccc2;
+  background-color: transparent;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   width: 100vw;
-  height: 60vh;
+  height: 20vh;
 }
 .homePage-title {
   display: flex;
@@ -18,6 +18,10 @@
   margin-top: 5rem;
   color: black;
 }
+.homePage-title > h1 > span{
+  color: red;
+  font-style: italic;
+}
 .homePage-info {
   display: flex;
   justify-content: center;
@@ -29,7 +33,6 @@
   justify-content: space-evenly;
   align-items: start;
   flex-direction: column;
-  flex-wrap: nowrap;
   height: 25vh;
   margin-right: 10%;
   margin-top: 5em;
@@ -37,13 +40,18 @@
 .info-container > h3 {
   font-size: 1.8rem;
 }
+.info-container > h3 > span{
+  color: red;
+  font-style: italic;
+}
 .info-container > .list {
   list-style: none;
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  justify-content: right;
+  align-items: flex-end;
   flex-direction: column;
   height: 15vh;
+  width: 20vw;
 }
 .homePage-details-1 {
   background-color: white;
@@ -59,6 +67,4 @@
   background-color: #d5bdaf;
   width: 100vw;
   height: 60vh;
-}
-.container-1 {
 }

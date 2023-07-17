@@ -1,8 +1,9 @@
+import { Fragment } from 'react';
 import classes from './Modal.module.css';
 
 function Modal(props) {
   return (
-    <>
+    <Fragment>
       <div className={`${classes["md-modal"]} ${classes["md-effect-1"]} ${props.visible && classes["md-show"]}`}>
         <div className={`${classes["md-content"]} ${props.data.loggedIn ? classes.success : classes.danger}`}>
           <h3>{props.data.loginHeader}</h3>
@@ -19,7 +20,7 @@ function Modal(props) {
         </div>
       </div>
       <div className={classes["md-overlay"]}/>
-    </>
+    </Fragment>
   );
 }
 

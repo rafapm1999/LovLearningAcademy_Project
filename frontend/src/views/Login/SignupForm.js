@@ -1,5 +1,5 @@
 import classes from "./SignupForm.module.css";
-import { useRef } from "react";
+import { Fragment, useRef } from "react";
 
 function SignupForm(props) {
   const userNameRef = useRef("");
@@ -24,7 +24,7 @@ function SignupForm(props) {
   };
 
   return (
-    <>
+    <Fragment>
       <div className={classes["form-root"]}>
         <div className={classes["form-main"]}>
           <div className={classes.title}>
@@ -94,7 +94,7 @@ function SignupForm(props) {
           </div>
         </div>
       </div>
-    </> 
+    </Fragment> 
   );
 }
 

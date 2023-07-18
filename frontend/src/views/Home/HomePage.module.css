@@ -1,5 +1,4 @@
 .homePage-images {
-  background-color: transparent;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -19,8 +18,10 @@
   color: black;
 }
 .homePage-title > h1 > span{
+  display: block;
   color: red;
   font-style: italic;
+  animation: changeWords 8s linear infinite; /* Creamos una animación personalizada */
 }
 .homePage-info {
   display: flex;
@@ -54,7 +55,8 @@
   width: 20vw;
 }
 .homePage-details-1 {
-  background-color: white;
+  display: block;
+  background-color: grey;
   width: 100vw;
   height: 60vh;
 }
@@ -67,4 +69,13 @@
   background-color: #d5bdaf;
   width: 100vw;
   height: 60vh;
+}
+@keyframes changeWords { /* Damos forma a la animación personalizada changeWords */
+  0%, 100% { /* 2. Los tramos restantes 0% a 100% tendrá un color transparente */
+    color: transparent;
+    
+  }
+  15%, 85% { /* 1. En el tramo de 15% a 85% el color será rojo */
+    color: red;
+  }
 }

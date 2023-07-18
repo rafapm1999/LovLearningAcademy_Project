@@ -6,6 +6,7 @@ export const Main = styled.div`
   background: #d6ccc2;
   height: 25vh;
   width: 100vw;
+  flex-shrink: 0;
   
 
   // Añadimos 2 mediaquery.

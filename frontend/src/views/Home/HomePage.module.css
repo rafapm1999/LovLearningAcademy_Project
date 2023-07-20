@@ -54,22 +54,91 @@
   height: 15vh;
   width: 20vw;
 }
-.homePage-details-1 {
-  display: block;
-  background-color: grey;
+.homePage-details {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background:linear-gradient(transparent, #f1e5d9, transparent);
   width: 100vw;
   height: 60vh;
 }
-.homePage-details-2 {
-  background-color: #f5ebe0;
-  width: 100vw;
-  height: 60vh;
+.container-1{
+  background-image: url(../../assets/homePage-container-1.jpg);
+  background-size: cover;
+  background-position: right;
+  background-repeat: no-repeat;
+  border-radius: 0 0 0 10%;
+  width: 20vw;
+  height: 40vh;
 }
-.homePage-details-3 {
-  background-color: #d5bdaf;
-  width: 100vw;
-  height: 60vh;
+.container-2{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  width: 60vw;
+  height: 40vh;
+  background-color: transparent;
 }
+.container-2 > .info-section-1{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 60vw;
+  height: 19vh;
+}
+.info-section-1 > .img-section-1{
+  background-image: url(../../assets/homePage-img-section-1.jpg);
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+  width: 15vw;
+  height: 19vh;
+}
+.info-section-1 > .details-section-1{
+  background: linear-gradient(to right, white 65%, transparent);
+  width: 40vw;
+  height: 19vh;
+  padding: 2em;
+  border-radius: 2rem 0 0 0;
+}
+.details-section-1 span{
+  font-size: 2rem;
+}
+.container-2 > .info-section-2{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 60vw;
+  height: 19vh;
+}
+.info-section-2 > .img-section-2{
+  background-image: url(../../assets/homePage-img-section-2.jpg);
+  background-size: cover;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  width: 15vw;
+  height: 19vh;
+}
+.info-section-2 > .details-section-2{
+  background: linear-gradient(to left, white 65%, transparent);
+  text-align: right;
+  border-radius: 0 0 2rem 0;
+  width: 40vw;
+  height: 19vh;
+  padding: 2em;
+}
+.details-section-2 span{
+  font-size: 2rem;
+}
+.link{
+  text-decoration: none;
+  color: black;
+}
+
+
+
+
 @keyframes changeWords { /* Damos forma a la animación personalizada changeWords */
   0%, 100% { /* 2. Los tramos restantes 0% a 100% tendrá un color transparente */
     color: transparent;

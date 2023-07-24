@@ -1,6 +1,6 @@
 .form-root {
   display: flex;
-  justify-content: space-between;
+  justify-content: right;
   align-items: center;
   flex-direction: row;
   width: 100vw;
@@ -8,24 +8,25 @@
 }
 .form-main {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: linear-gradient(#ECECEC,#EFEFEF, #F0F0F0);
-  height: 90vh;
+  background: transparent;
+  height: 100vh;
   width: 50vw;
-
+  z-index: 2000;
 }
 .login-img {
+  position: absolute;
   background-image: url(../../assets/bg-login.jpg);
   background-size: cover;
   background-position: left;
   background-repeat: no-repeat;
-  width: 50vw;
+  width: 100vw;
   height: 90vh;
 }
 form .form-info {
-  width: 100%;
+  width: 100vw;
   color: azure;
   font-size: 1.3rem;
   display: flex;
@@ -58,7 +59,7 @@ form .remember {
   color: lightgrey;
   font-size: 1rem;
   border-radius: 0.25rem;
-  margin-bottom: 5em;
+  margin-bottom: 1em;
 }
 form .remember input[type="checkbox"] {
   margin-right: 1.5em;

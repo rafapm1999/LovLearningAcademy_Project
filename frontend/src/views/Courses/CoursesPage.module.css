@@ -1,9 +1,30 @@
-.grid-parent{
-    height: 100vh;
+.coursesPage-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 4em 1em;
 }
-.grid-container{
-    background-color: coral;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.coursesPage-container {
+  box-shadow: 0 0 6px 1px rgb(160, 160, 160);
+  margin: 2em;
+}
+.coursesPage-info {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  width: 30vw;
+  height: 40vh;
+  background-color: transparent;
+  padding: 2rem;
+}
+.coursesPage-info > h3{
+  font-size: 1.9rem;
+}
+.coursesPage-info > p{
+  text-align: center;
+}
+.coursesPage-info:hover{
+  background: radial-gradient(transparent, white,  rgb(235, 235, 235));
 }

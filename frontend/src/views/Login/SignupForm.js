@@ -26,9 +26,10 @@ function SignupForm(props) {
   return (
     <Fragment>
       <div className={classes["form-root"]}>
+        <div className={classes["login-img"]}></div>
         <div className={classes["form-main"]}>
           <div className={classes.title}>
-            <h4 className={classes.title}>Create new account now</h4>
+            <h4>Create new account now</h4>
           </div>
           <form onSubmit={handleSubmit}>
             <div className={classes["form-info"]}>
@@ -94,7 +95,7 @@ function SignupForm(props) {
           </div>
         </div>
       </div>
-    </Fragment> 
+    </Fragment>
   );
 }
 

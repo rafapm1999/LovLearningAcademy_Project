@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 //Importamos el esquema de validación
 const Login = require("../Model/loginModel");
 //Importamos fecha
-const { getRegisterAt } = require("../lib/utils");
+const { getRegisterAt, generateToken } = require("../lib/utils");
 
 //POST => /auth/signup
 
@@ -27,6 +27,11 @@ const signup = async (req, res) => {
     });
     //5. Guardamos en la base de datos al nuevo ususario
     const user = await newUser.save();
+    //6. Generamos el token de seguridad incluyendo datos del usuario
+    const payload = { id: user._id, email: user.email, role: user.role };
+    //Generamos un token con los datos del payload
+    const token = generateToken(payload, false);
+
     //Enviamos respuesta de que todo se ha realizado correctamente
     res.status(201).json({
       status: "succeeded",
@@ -72,19 +77,25 @@ const login = async (req, res) => {
         data: null,
         error: "Wrong email or password",
       });
+    //Si la contraseña es correcta, generar el token
+    const payload = { id: user._id, email: user.email, role: user.role };
+    //Generamos un token con los datos del payload
+    const token = generateToken(payload, false);
+    
     res.status(200).json({
       status: "succeded",
       data: {
         user,
+        token,
       },
       error: null,
     });
   } catch (error) {
-    /* res.status(400).json({
+    res.status(400).json({
       status: "failed",
       data: null,
       error: error.message,
-    }); */
+    });
   }
 };
 

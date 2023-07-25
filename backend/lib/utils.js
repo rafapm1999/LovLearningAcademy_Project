@@ -1,7 +1,17 @@
 const jwt = require("jsonwebtoken");
 
 const getRegisterAt = () => {
-  return String(Date.now());
+  return Date.now().toString();
 };
 
-module.exports = { getRegisterAt };
+const generateToken = (user, isRefreshToken) => {
+  if (isRefreshToken) {
+    return jwt.sign(user, process.env.REFRESH_TOKEN, {
+      expiresIn: "20m",
+    });
+  } else {
+    return jwt.sign(user, process.env.TOKEN, { expiresIn: "10m" });
+  }
+};
+
+module.exports = { getRegisterAt, generateToken };

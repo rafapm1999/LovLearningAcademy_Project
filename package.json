@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "bson": "^5.4.0",
     "uuid": "^9.0.0"
   }
 }

@@ -16,7 +16,7 @@ function Navbar() {
         </div>
       </div>
       <div className={classes["navbar-button"]}>
-        <Link className={classes.link} to="/login">Login</Link>
+        <Link className={classes.link} to="/login">Get Started</Link>
       </div>
     </div>
     </Fragment>

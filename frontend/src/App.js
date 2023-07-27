@@ -8,23 +8,23 @@ import ContactUs from "./views/Contact/ContactUs";
 import AboutUs from "./views/About/AboutUs";
 import HomePage from "./views/Home/HomePage";
 import Footer from "./components/Footer/Footer";
-import {Fragment} from "react";
+import { Fragment } from "react";
 import CoursesPage from "./views/Courses/CoursesPage";
-
-
+import CourseInfoPage from "./views/Courses/CourseInfoPage";
 
 function App() {
   return (
     <Fragment>
       <Navbar></Navbar>
       <Routes>
-      <Route path="/" element={<Fragment></Fragment>}/>
-        <Route path="/home" element={<HomePage/>}/>
-        <Route path="/about" element={<AboutUs></AboutUs>}/>
-        <Route path="/courses" element={<CoursesPage></CoursesPage>}/>
-        <Route path="/contact" element={<ContactUs></ContactUs>}/>
+        <Route path="/" element={<Fragment></Fragment>} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/about" element={<AboutUs></AboutUs>} />
+        <Route path="/courses" element={<CoursesPage></CoursesPage>} />
+        <Route path="/contact" element={<ContactUs></ContactUs>} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/course/:id" element={<CourseInfoPage />} />
       </Routes>
       <Footer></Footer>
     </Fragment>

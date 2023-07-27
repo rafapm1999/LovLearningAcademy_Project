@@ -1,11 +1,15 @@
 import classes from "./CoursesPage.module.css";
 import { useEffect, useState } from "react";
-/* import data from "../../mockedDB/data.json"; */
-/* import { useNavigate } from "react-router-dom"; */
+import { useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import CourseInfoPage from "./CourseInfoPage";
 
 function CoursesPage() {
   const [courses, setCourses] = useState([]);
+  const [course, setCourse] = useState({});
   const [pending, setPending] = useState(false);
+  const [click, setClick] = useState(false);
+  const navigate = useNavigate();
 
   const fetchCourses = async () => {
     if (pending === false) {
@@ -33,34 +37,25 @@ function CoursesPage() {
 
   const getCourse = async (id) => {
     console.log(id);
-    try {
-      const response = await fetch(
-        `http://localhost:8000/courses/${id}`,
-        {
+      try {
+        const response = await fetch(`http://localhost:8000/courses/${id}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
+        });
+        const data = await response.json();
+        if (response.ok) {
+          console.log(data);
+          setCourse(data);
+          setClick(true);
+          navigate(`/course/${data.data.title}`, {state: data})
         }
-      );
-      const data = await response.json();
-      console.log(data.data);
-      if (response.ok) {
-      console.log(data);
+      } catch (error) {
+        console.log("Algo ha fallado con el curso");
       }
-    } catch (error) {
-      console.log("Algo ha fallado");
-    }
     
   };
-
-
-
-
-
-
-
-
 
   useEffect(() => {
     fetchCourses();
@@ -68,10 +63,9 @@ function CoursesPage() {
 
   const onHandlerClick = (id) => {
     console.log(`Log del curso ${id}`);
-    getCourse(id);
+    getCourse(id);    
   };
 
-  /*   console.log(courses); */
   if (!Array.isArray(courses)) {
     return (
       <div>
@@ -80,7 +74,7 @@ function CoursesPage() {
     );
   }
   if (!pending) {
-    return <h1>Somenthing went wrong</h1>;
+    return <h1></h1>;
   }
   return (
     <div className={classes["coursesPage-root"]}>

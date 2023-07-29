@@ -6,7 +6,7 @@ function AboutUs() {
       <div className={classes["container-1"]}>
         <div className={classes["container-info-1"]}>
           <div className={classes.title}>
-            <h1>Lorem Ipsum.</h1>
+            <h1>About us</h1>
           </div>
           <div></div>
         </div>

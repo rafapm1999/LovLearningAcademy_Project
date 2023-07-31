@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import classes from './Modal.module.css';
 
+
 function Modal(props) {
   return (
     <Fragment>
@@ -10,10 +11,10 @@ function Modal(props) {
           <div>
             <p>{props.data.loginMessage}</p>
             <ul>
-              <li>Name: {props.data.name}</li>
-              <li>Lastname: {props.data.lastName}</li>
-              <li>Email: {props.data.email}</li>
-              <li>Password: {props.data.password}</li>
+              <li>{props.data.name}</li>
+              <li>{props.data.lastName}</li>
+              <li>{props.data.email}</li>
+              <li>{props.data.password}</li>
             </ul>
             <button onClick={props.onLogin} className={classes["md-close"]}>Close</button>
           </div>

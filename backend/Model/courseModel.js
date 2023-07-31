@@ -1,23 +1,23 @@
 const mongoose = require("mongoose");
 
 const coursesSchema = new mongoose.Schema({
-    title:{
+    title: {
         type: String,
         required: true,
     },
-    info:{
+    info: {
         type: String,
         required: true,
     },
-    image:{
+    image: {
         type: String,
         required: false,
     },
-    level:{
+    level: {
         type: String,
         required: false,
     },
-    quantityHours:{
+    quantityHours: {
         type: Number,
         required: false,
     }

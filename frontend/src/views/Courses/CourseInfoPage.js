@@ -4,6 +4,8 @@ import { useLocation } from "react-router-dom";
 function CourseInfoPage() {
   const location = useLocation();
   const courseData = location.state;
+  console.log(courseData);
+  
   console.log(courseData.data.title);
   return (
     <div>

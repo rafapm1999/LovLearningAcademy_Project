@@ -78,7 +78,9 @@ function CoursesPage() {
   }
   return (
     <div className={classes["coursesPage-root"]}>
-      <h1>Courses</h1>
+      <div className={classes.title}>
+        <h1>Courses</h1>
+      </div>
       <div className={classes["coursesPage-main"]}>
         {courses[0].data.map((course, i) => {
           return (

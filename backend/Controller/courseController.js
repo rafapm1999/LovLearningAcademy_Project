@@ -1,5 +1,6 @@
 const ObjectId = require("bson").ObjectId;
 const Courses = require("../Model/courseModel");
+const Login = require("../Model/loginModel");
 
 const getAllCourses = async (req, res) => {
   try {
@@ -24,42 +25,20 @@ const getCourse = async (req, res) => {
       error: error.message,
     });
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* Courses.findById(req.params.courseID)
-    .exec()
-    .then((data) => {
-      res.status(200).json({
-        status: "Has llegado aqui",
-        data,
-        error: null,
-      });
-    })
-    .catch((err) => {
-      res.status(400).json({
-        status: "NO ha salido",
-        data: null,
-        error: err.message,
-      })
-    }) */
+  
 };
+/* const wantTheCourse = async (req, res) => {
+  try {
+    const data = await Login.findById(req.user._id);
+    res.status(200).json({ status: "Estas Logeado", data, error: null });
+  } catch (error) {
+    res.status(404).json({
+      status: "No estas Logeado",
+      data: null,
+      error: error.message,
+    });
+  } */
+  
+/* }; */
 
-module.exports = { getAllCourses, getCourse };
+module.exports = { getAllCourses, getCourse, /* wantTheCourse */ };

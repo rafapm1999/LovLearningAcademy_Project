@@ -68,10 +68,6 @@
     font-weight: 300;
     font-size: 1.15em;
 }
-.md-content > div p{
-    margin: 0;
-    padding: 10px 0;
-}
 .md-content > div ul{
     margin: 0;
     padding: 0 0 30px 20px;
@@ -102,4 +98,50 @@
 }
 .md-content.success button:hover{
     background: #003f3b;
+}
+.info-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column; 
+    padding: 15px 40px 30px;
+    font-weight: 300;
+    font-size: 1.15em;
+}
+.info-container > p{
+    margin: 3rem 0;
+    padding: 10px 0;
+    font-size: 1.15em;
+}
+.md-close{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 10px;
+    height: auto;
+    background-color: white;
+    border-radius: 5px;
+    margin: 0 auto;
+    padding: 0.6em 1.2em;
+    font-family: "Lato", sans-serif;
+    font-size: 1em;
+    letter-spacing: 1px;
+    color: #fff;
+    cursor: pointer;
+}
+.md-close > span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+}
+.md-button{
+    background-color: white;
+    margin: 2.5rem;
+    padding: 0.6em 1.2em;
+    font-family: "Lato", sans-serif;
+    font-size: 1em;
+    letter-spacing: 1px;
+    color: #fff;
+    cursor: pointer;
 }

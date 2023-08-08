@@ -7,7 +7,7 @@ import { Fragment, useState } from "react";
 import { validateEmail, validatePassword } from "../../utils/validate";
 
 function SignupPage() {
-  const navigate = useNavigate();
+/*   const navigate = useNavigate(); */
   const [login, setLogin] = useState(false);
   const [visible, setVisible] = useState(false);
   const [loginInfo, setLoginInfo] = useState({
@@ -19,12 +19,6 @@ function SignupPage() {
     loginHeader: "",
     loginMessage: "",
   });
-  if (login === true) {
-    setTimeout(()=> {
-      navigate("/login");
-    }, 100)
-  }
-
   const handleVisibility = async (signupData) => {
     if (
       //Si el email es valido y el password cumple los requisitos entonces hacemos fetch (POST)
@@ -45,22 +39,16 @@ function SignupPage() {
             password: signupData.password,
           }),
         });
-        const fetchData = await response.json();
+        const data = await response.json();
         console.log("Guardo respuesta");
-        console.log(fetchData);
+        console.log(data);
         if (response.ok) {
           setLoginInfo({
             loggedIn: true,
-            email: signupData.email,
-            password: "*********",
-            rememberMe: signupData.rememberMe,
-            loginHeader: "Login Successfully",
-            loginMessage: "You are a new user!",
+            loginHeader: "User created!",
+            loginMessage: "Login to confirm your access",
           });
           setVisible(!visible);
-          setTimeout(() => {
-            navigate("/profile");
-          }, 3000);
         }
       } catch (error) {
         setLoginInfo({

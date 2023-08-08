@@ -43,18 +43,18 @@ function LoginPage() {
             password: loginData.password,
           }),
         });
-        const fetchData = await response.json();
+        const data = await response.json();
         console.log("Guardo respuesta");
-        console.log(fetchData);
+        console.log(data);
         if (response.ok) {
           setTimeout(() => {
-            navigate("/profile");
+            navigate("/user/home", {state: data});
           }, 100);
         }
         if (!response.ok){
           setLoginInfo({
-            email: loginData.email === false,
-            password: loginData.password === false,
+            email: loginData.email = false,
+            password: loginData.password = false,
           });
         }
       } catch (error) {

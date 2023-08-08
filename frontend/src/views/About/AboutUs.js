@@ -1,5 +1,6 @@
 import classes from "./AboutUs.module.css";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faBrain, faTrophy, faGraduationCap} from "@fortawesome/free-solid-svg-icons"
 function AboutUs() {
   return (
     <div>
@@ -43,9 +44,9 @@ function AboutUs() {
                 unde.
               </p>
               <div className={classes.icons}>
-                <span>A</span>
-                <span>B</span>
-                <span>C</span>
+                <span><FontAwesomeIcon icon={faBrain} size="2xl" /></span>
+                <span><FontAwesomeIcon icon={faTrophy} size="2xl" /></span>
+                <span><FontAwesomeIcon icon={faGraduationCap} size="2xl" /></span>
               </div>
               
             </div>

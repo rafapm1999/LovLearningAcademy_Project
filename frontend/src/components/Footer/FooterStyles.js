@@ -4,9 +4,9 @@ import styled from "styled-components";
 
 export const Main = styled.div`
   background: #d6ccc2;
-  height: 25vh;
+  height: auto;
   width: 100vw;
-  flex-shrink: 0;
+  flex-shrink: 1;
   
 
   // Añadimos 2 mediaquery.
@@ -34,7 +34,7 @@ export const Column = styled.div`
 export const Row = styled.div`
   display: flex;
   justify-content: center;
-  align-items: start;
+  align-items: center;
   flex-direction: row;
 
 
@@ -65,5 +65,5 @@ export const Heading = styled.p`
   font-size: 1.5rem;
   color: black;
   font-style: italic;
-  margin: 1em 1em 1.5em 1em;
+  margin: 1rem;
 `;

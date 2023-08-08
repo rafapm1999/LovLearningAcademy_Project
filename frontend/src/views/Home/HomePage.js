@@ -12,7 +12,7 @@ function HomePage() {
     const interval = setInterval(() => {
       // Cambiar el índice para mostrar la siguiente palabra en el array
       setIndex((prevIndex) => (prevIndex + 1) % words.length);
-    }, 8000); // 5000 milisegundos = 5 segundos
+    }, 8000);
 
     // Limpiar el intervalo cuando el componente se desmonte para evitar fugas de memoria
     return () => clearInterval(interval);
@@ -26,24 +26,9 @@ function HomePage() {
             Learn new skills with an awesome <span>{words[index]}</span>
           </h1>
         </div>
-        <div className={`${classes["homePage-info"]}`}>
-          <div className={classes["info-container"]}>
-            <h3>
-              All kind of <span>courses</span> for all kinds of{" "}
-              <span>people</span>
-            </h3>
-            <ul className={classes.list}>
-              {/* <li>Students</li>
-              <li>Employees</li>
-              <li>Unemployed</li>
-              <li>Get started!</li> */}
-            </ul>
-          </div>
-        </div>
       </div>
-
-      <div className={classes["CoursesCarrousel"]}></div>
-
+      <div className={classes["CoursesCarrousel"]}>
+      </div>
       <div className={classes["homePage-details"]}>
         <div className={classes["container-1"]}>
           <div className={classes["image-container-1"]}></div>
@@ -71,6 +56,13 @@ function HomePage() {
             </div>
             <div className={classes["img-section-2"]}></div>
           </section>
+        </div>
+      </div>
+      <div className={`${classes["homePage-info"]}`}>
+        <div className={classes["info-container"]}>
+          <h3>
+            The favorite place for<span>learning lovers</span>
+          </h3>
         </div>
       </div>
 

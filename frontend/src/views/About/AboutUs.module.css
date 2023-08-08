@@ -68,3 +68,6 @@
     justify-content: space-evenly;
     align-items: center;
   }
+  .icons > span{
+    color: black;
+  }

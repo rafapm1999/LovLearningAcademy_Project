@@ -11,24 +11,54 @@ import Footer from "./components/Footer/Footer";
 import { Fragment } from "react";
 import CoursesPage from "./views/Courses/CoursesPage";
 import CourseInfoPage from "./views/Courses/CourseInfoPage";
-
+import UserDashboard from "./views/UserDashboard/UserDashboard";
+import { useState } from "react";
+import UserNavbar from "./components/Navbar/UserNavbar";
 function App() {
-  return (
-    <Fragment>
-      <Navbar></Navbar>
-      <Routes>
-        <Route path="/" element={<Fragment></Fragment>} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/about" element={<AboutUs></AboutUs>} />
-        <Route path="/courses" element={<CoursesPage></CoursesPage>} />
-        <Route path="/contact" element={<ContactUs></ContactUs>} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/course/:id" element={<CourseInfoPage />} />
-      </Routes>
-      <Footer></Footer>
-    </Fragment>
-  );
+  let [logged, setLogged] = useState(false);
+  const [userData, setUserData] = useState({})
+  const userLogged = (data) => {
+    setLogged(data);
+  }
+  const userDataInfo = (e) => {
+    setUserData(e);
+  }
+
+  if (logged === false) {
+    console.log(userData);
+    return (
+      <Fragment>
+        <Navbar></Navbar>
+        <Routes>
+          <Route path="/" element={<Fragment></Fragment>} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/about" element={<AboutUs></AboutUs>} />
+          <Route path="/courses" element={<CoursesPage></CoursesPage>} />
+          <Route path="/contact" element={<ContactUs></ContactUs>} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/login" element={<LoginPage onLogin={userLogged}/>} />
+          <Route path="/course/:id" element={<CourseInfoPage />} />
+          <Route path="/user-dashboard" element={<UserDashboard />} />
+        </Routes>
+        <Footer></Footer>
+      </Fragment>
+    );
+  } else if (logged === true) {
+    console.log(userData);
+    return (
+      <Fragment>
+        <UserNavbar userData={userData} onLogin={userLogged} />
+        <Routes>
+          <Route path="/courses" element={<CoursesPage></CoursesPage>} />
+          <Route path="/contact" element={<ContactUs></ContactUs>} />
+          <Route path="/course/:id" element={<CourseInfoPage userData={userData}/>} />
+          <Route path="/user-dashboard" element={<UserDashboard userInfo={userDataInfo} onLogin={userLogged} />} />
+        </Routes>
+        <Footer></Footer>
+      </Fragment>
+    );
+  }
+  
 }
 
 export default App;

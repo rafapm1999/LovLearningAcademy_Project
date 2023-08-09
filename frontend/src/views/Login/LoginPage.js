@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Fragment, useState } from "react";
 import { validateEmail, validatePassword } from "../../utils/validate";
 
-function LoginPage() {
+function LoginPage(props) {
   const navigate = useNavigate();
   const [login, setLogin] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -47,8 +47,9 @@ function LoginPage() {
         console.log("Guardo respuesta");
         console.log(data);
         if (response.ok) {
+          props.onLogin(true);
           setTimeout(() => {
-            navigate("/user/home", {state: data});
+            navigate("/user-dashboard", {state: data});
           }, 100);
         }
         if (!response.ok){

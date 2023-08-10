@@ -4,7 +4,7 @@ import { useState } from "react";
 import ReactDOM from "react-dom";
 import CourseModal from "../Modal/CourseModal";
 
-function CourseInfoPage() {
+function CourseInfoPage(props) {
   const location = useLocation();
   const courseData = location.state;
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ function CourseInfoPage() {
   return (
     <div>
        {ReactDOM.createPortal(
-        <CourseModal visible={visible} data={courseData.data} onClose={handleClose} />,
+        <CourseModal visible={visible} data={courseData.data} onClose={handleClose} userData={props.userData} logged={props.onLogin}/>,
         document.querySelector("#modal")
       )}
         <div className={classes["courseInfoPage-main"]}>

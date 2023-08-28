@@ -1,5 +1,7 @@
+//Importamos Fragment para no usar <></> 
 import { Fragment } from 'react';
 import classes from './Navbar.module.css';
+//Importamos Link de react-roouter-dom para los botones del Navbar
 import{Link}from "react-router-dom";
 
 function Navbar() {

@@ -2,20 +2,27 @@ import classes from "./LoginForm.module.css";
 import { Fragment, useRef } from "react";
 
 function LoginForm(props) {
+  //Creamos constantes de referencia para el formulario de login
   const emailRef = useRef("");
   const passwordRef = useRef("");
+  //Esta función se ejecuta cuando se envia el formulario
   const handleSubmit = (e) => {
+    //Evitamos la recarga por defecto del form
     e.preventDefault();
+    //loginData guardara la información introducida en el form con current.value
     const loginData = {
       email: emailRef.current.value,
       password: passwordRef.current.value,
     };
+    //Enviamos por props a LoginPage la información recibida
     props.onLogin(loginData);
   };
-  const handleLogin = (e) => {
+  //Revisar su funcionamiento
+ /*  const handleLogin = (e) => {
     e.preventDefault();
     props.onSignup(true);
-  };
+  }; */
+  //Esta función hace que si la info esta vacía se guarde como true, y sino como false
   const handleChange = () => {
     const loginInfoChange = {
       email: emailRef.current.value === "" ? true : false,

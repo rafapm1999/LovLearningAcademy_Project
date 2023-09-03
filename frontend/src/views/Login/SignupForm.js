@@ -18,11 +18,11 @@ function SignupForm(props) {
     };
     props.onLogin(signupData);
   };
-  const handleLogin = (e) => {
+  /* const handleLogin = (e) => {
     e.preventDefault();
     props.onRegister(true);
   };
-
+ */
   return (
     <Fragment>
       <div className={classes["form-root"]}>

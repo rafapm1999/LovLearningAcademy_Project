@@ -93,7 +93,7 @@ function SignupPage() {
         document.querySelector("#modal")
       )}
 
-      <Signup onLogin={handleVisibility} onRegister={setLogin}></Signup>
+      <Signup onLogin={handleVisibility} /* onRegister={setLogin} */></Signup>
     </Fragment>
   );
 }

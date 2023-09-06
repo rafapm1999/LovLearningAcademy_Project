@@ -5,16 +5,18 @@ import { useEffect } from "react";
 
 function UserDashboard(props) {
     const location = useLocation();
-    const data = location.state;
+    const userData = location.state;
    /*  console.log(data); */
 
-    if (data !== "") {
-        props.onUserInfo(data);
+    if (userData !== "") {
+        props.onUserInfo(userData);
     }
-    
+    console.log(userData.data.user.name);
 
     return (
         <Fragment>
+            <h1>Hello {userData.data.user.name}</h1>
+
 
         </Fragment>
     );

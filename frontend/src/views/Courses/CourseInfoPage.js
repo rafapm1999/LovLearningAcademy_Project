@@ -10,8 +10,32 @@ function CourseInfoPage(props) {
   const location = useLocation();
   //Guardamos en la constante courseData la información del curso seleccionado
   const courseData = location.state;
+  const userData = props.userData;
   const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
+  const fetchWantCourse = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:8000/auth/${userData.data.user._id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            courses: courseData.data,
+          }),
+        }
+      );
+      const data = await response.json();
+      if (response.ok) {
+        console.log(data);
+        
+      }
+    } catch (error) {
+      console.log("Error de algo");
+    }
+  }
   //Función para cuando damos al boton de back
   const handleBack = () => {
     navigate("/courses")
@@ -19,13 +43,18 @@ function CourseInfoPage(props) {
   //Función para cuando queremos el curso
   const getTheCourse = () => {
     setVisible(!visible);
-  }
+    if (userData != "" || userData != null) {
+      console.log('Has entrado en userData != "" || userData != null');
+      fetchWantCourse();
+      }; 
+    };
+  
   //Función para cuando cerramos el modal
   const handleClose = () => {
     setVisible(!visible);
   }
 
-  console.log(courseData.data.title);
+  console.log(userData);
   return (
     <div>
       {ReactDOM.createPortal(

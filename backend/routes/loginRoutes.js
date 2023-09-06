@@ -7,5 +7,7 @@ const router = require("express").Router();
 router.post("/signup", loginController.signup);
 //ENDPOINT para logearse => /login
 router.post("/login", loginController.login)
+//ENDPOINT para actualizar datos => /update
+router.patch("/:id", loginController.update)
 
 module.exports = router;

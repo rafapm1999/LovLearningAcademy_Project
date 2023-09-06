@@ -16,6 +16,7 @@ const signup = async (req, res) => {
     //3. Obtenemos la fecha de registro
     const registerAt = getRegisterAt();
     const role = "user";
+    const courses = "";
     //4. Creamos el usuario (Información que tendra nuestra base de datos)
     const newUser = new Login({
       name,
@@ -24,6 +25,7 @@ const signup = async (req, res) => {
       password: passwordHash,
       role,
       registerAt,
+      courses
     });
     //5. Guardamos en la base de datos al nuevo ususario
     const user = await newUser.save();
@@ -99,4 +101,21 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { signup, login };
+const update = async (req, res) => {
+  try {
+    const data = await Login.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {new: true}
+      );
+    res.status(200).json({ status: "Hola", data: { params: req.params.id, data: data}, error: null });
+  } catch (error) {
+    res.status(404).json({
+      status: "no ha salido bien",
+      data: null,
+      error: error.message,
+    });
+  }
+};
+
+module.exports = { signup, login, update };

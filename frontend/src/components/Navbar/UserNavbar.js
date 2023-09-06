@@ -20,7 +20,7 @@ function UserNavbar(props) {
         <div className={classes["navbar-links"]}>
           <div className={classes.links}>
             <Link className={classes.link} to="/courses"><span>Courses</span></Link>
-            <Link className={classes.link} to="/mycourses"><span>MyLearnplace</span></Link>
+            <Link className={classes.link} to="/mylearnplace"><span>MyLearnplace</span></Link>
             <Link className={classes.link} to="/community"><span>Community</span></Link>
           </div>
         </div>

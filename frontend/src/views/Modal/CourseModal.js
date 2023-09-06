@@ -8,7 +8,7 @@ function CourseModal(props) {
         navigate("/login");
     }
     const onNavigate = () => {
-        navigate("/mycourses");
+        navigate("/mylearnplace", {state: props.userData});
     }
     if (props.logged === true ) {
         console.log(props.userData);

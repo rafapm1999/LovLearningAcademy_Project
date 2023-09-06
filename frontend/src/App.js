@@ -62,7 +62,7 @@ function App() {
           <Route path="/contact" element={<ContactUs></ContactUs>} />
           <Route path="/course/:id" element={<CourseInfoPage userData={userData} onLogin={logged}/>} />
           <Route path="/user-dashboard" element={<UserDashboard onUserInfo={handlerUserInfo} />} />
-          <Route path="/mycourses" element={<LearnPlace />} />
+          <Route path="/mylearnplace" element={<LearnPlace userData={userData}/>} />
         </Routes>
         <Footer></Footer>
       </Fragment>

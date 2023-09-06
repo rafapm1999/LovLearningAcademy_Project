@@ -14,6 +14,7 @@ const cors = require("cors");
 const logins = require("./routes/loginRoutes");
 const courses = require("./routes/courseRoutes");
 const contact = require("./routes/contactRoutes");
+/* const user = require("./routes/userRoutes") */
 
 //Para leer las variables de entorno
 dotenv.config();
@@ -45,6 +46,7 @@ mongoose.connection.on("error", (err) => {
 app.use("/auth", logins);
 app.use("/courses", courses)
 app.use("/contact", contact)
+/* app.use("user", user) */
 
 //Levantamos el servidor
 //Hacemos que el servidor escuche las conexiones para el puerto y host especificados (devuelve un objeto http.Server)

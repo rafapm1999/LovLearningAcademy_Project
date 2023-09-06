@@ -25,7 +25,6 @@ const getCourse = async (req, res) => {
       error: error.message,
     });
   }
-  
 };
 /* const wantTheCourse = async (req, res) => {
   try {

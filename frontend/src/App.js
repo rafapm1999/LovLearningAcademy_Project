@@ -40,6 +40,7 @@ function App() {
       <Fragment>
         <Navbar></Navbar>
         <Routes>
+        <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/about" element={<AboutUs></AboutUs>} />
           <Route path="/courses" element={<CoursesPage></CoursesPage>} />
@@ -62,7 +63,7 @@ function App() {
           <Route path="/contact" element={<ContactUs></ContactUs>} />
           <Route path="/course/:id" element={<CourseInfoPage userData={userData} onLogin={logged}/>} />
           <Route path="/user-dashboard" element={<UserDashboard onUserInfo={handlerUserInfo} />} />
-          <Route path="/mylearnplace" element={<LearnPlace userData={userData}/>} />
+          <Route path="/mylearnplace" element={<LearnPlace userData={userData} newUserData={setUserData}/>} />
         </Routes>
         <Footer></Footer>
       </Fragment>

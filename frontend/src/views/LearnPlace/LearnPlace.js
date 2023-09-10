@@ -3,12 +3,18 @@ import { useLocation } from 'react-router-dom';
 
 function LearnPlace(props) {
   const user = props.userData;
-  console.log(user);
+  const courses = user.data.user.courses;
+  /* console.log(user); */
+  /* console.log(typeof(Array(courses))); */
+  
   
   return (
     <div>
         <h1>MyLearnplace</h1>
-        <span>{user.data.user.name}</span>
+        <div className={classes["main-container"]}>
+          <h3>Happy to see you {user.data.user.name}, you have {courses.length} course waiting for you!</h3>
+
+        </div>
     </div>
   );
 }

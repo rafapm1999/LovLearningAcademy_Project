@@ -9,5 +9,6 @@ router.post("/signup", loginController.signup);
 router.post("/login", loginController.login)
 //ENDPOINT para actualizar datos => /update
 router.patch("/:id", loginController.update)
-
+//ENDPOINT para coger un ususario => /getuser
+router.get("/getuser/:id", loginController.getuser)
 module.exports = router;

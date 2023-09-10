@@ -11,13 +11,11 @@ function UserDashboard(props) {
     if (userData !== "") {
         props.onUserInfo(userData);
     }
-    console.log(userData.data.user.name);
+    console.log(userData);
 
     return (
         <Fragment>
-            <h1>Hello {userData.data.user.name}</h1>
-
-
+            <h1>Hello {/* {userData.data.user.name} */}</h1>
         </Fragment>
     );
 }

@@ -15,27 +15,61 @@ function CourseInfoPage(props) {
   const [visible, setVisible] = useState(false);
   const fetchWantCourse = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:8000/auth/${userData.data.user._id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            courses: courseData.data,
-          }),
-        }
-      );
-      const data = await response.json();
-      if (response.ok) {
-        console.log(data);
-        
+      // Obtener los datos existentes del servidor
+      const response = await fetch(`http://localhost:8000/auth/getuser/${userData.data.user._id}`);
+      let existingData = await response.json();
+
+      // Verificar si existingData.courses es un array o está ausente
+      if (!Array.isArray(existingData.data.courses)) {
+        existingData.data.courses = []; // Inicializar como un array vacío si no existe o no es un array
       }
+
+      // Combina los cursos existentes con los nuevos cursos
+      existingData.data.courses = [...existingData.data.courses, ...Array(courseData.data)];
+
+      // Realizar el PATCH con los datos combinados
+      const patchResponse = await fetch(`http://localhost:8000/auth/${userData.data.user._id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          courses: existingData.data.courses,
+        }),
+      });
+
+      const data = await patchResponse.json();
+
+      if (patchResponse.ok) {
+        console.log(data);
+      };
     } catch (error) {
-      console.log("Error de algo");
+      console.log(error);
     }
-  }
+  };
+  //En reserva hasta que valide el funcionamiento del nuevo codigo
+  /*  try {
+     const response = await fetch(
+       `http://localhost:8000/auth/${userData.data.user._id}`,
+       {
+         method: "PATCH",
+         headers: {
+           "Content-Type": "application/json",
+         },
+         body: JSON.stringify({
+           courses: courseData.data,
+         }),
+       }
+     );
+     const data = await response.json();
+     if (response.ok) {
+       console.log(data);
+       
+     }
+   } catch (error) {
+     console.log("Error de algo");
+   }
+ } */
   //Función para cuando damos al boton de back
   const handleBack = () => {
     navigate("/courses")
@@ -46,9 +80,9 @@ function CourseInfoPage(props) {
     if (userData != "" || userData != null) {
       console.log('Has entrado en userData != "" || userData != null');
       fetchWantCourse();
-      }; 
     };
-  
+  };
+
   //Función para cuando cerramos el modal
   const handleClose = () => {
     setVisible(!visible);

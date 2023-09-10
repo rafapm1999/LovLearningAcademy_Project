@@ -16,7 +16,7 @@ const signup = async (req, res) => {
     //3. Obtenemos la fecha de registro
     const registerAt = getRegisterAt();
     const role = "user";
-    const courses = "";
+    const courses = [];
     //4. Creamos el usuario (Información que tendra nuestra base de datos)
     const newUser = new Login({
       name,
@@ -83,7 +83,7 @@ const login = async (req, res) => {
     const payload = { id: user._id, email: user.email, role: user.role };
     //Generamos un token con los datos del payload
     const token = generateToken(payload, false);
-    
+
     res.status(200).json({
       status: "succeded",
       data: {
@@ -106,9 +106,9 @@ const update = async (req, res) => {
     const data = await Login.findByIdAndUpdate(
       req.params.id,
       req.body,
-      {new: true}
-      );
-    res.status(200).json({ status: "Hola", data: { params: req.params.id, data: data}, error: null });
+      { new: true }
+    );
+    res.status(200).json({ status: "update course", data, error: null });
   } catch (error) {
     res.status(404).json({
       status: "no ha salido bien",
@@ -118,4 +118,19 @@ const update = async (req, res) => {
   }
 };
 
-module.exports = { signup, login, update };
+const getuser = async (req, res) => {
+  try {
+    const data = await Login.findById(
+      req.params.id
+    );
+    res.status(200).json({ status: "getuser realizado", data, error: null });
+  } catch (error) {
+    res.status(404).json({
+      status: "no ha salido bien",
+      data: null,
+      error: error.message,
+    });
+  }
+};
+
+module.exports = { signup, login, update, getuser };

@@ -29,7 +29,7 @@ const loginSchema = new mongoose.Schema({
     default: "user",
   },
   courses: {
-    type: Object,
+    type: Array,
     required: false,
   }
 });

@@ -47,9 +47,9 @@ function HomePage() {
           </section>
           <section className={classes["info-section-2"]}>
             <div className={classes["details-section-2"]}>
-              <Link className={classes.link} to="/login">
+              <Link className={classes.link} to="/contact">
                 <h3>
-                  Be a <span>creator</span>
+                  Ask us a <span>question</span>
                 </h3>
               </Link>
               <p>Lorem ipsum dolor sit amet consectetur.</p>

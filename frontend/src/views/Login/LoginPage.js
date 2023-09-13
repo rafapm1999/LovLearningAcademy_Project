@@ -49,6 +49,7 @@ function LoginPage(props) {
         if (response.ok) {
           //SI la respuesta del fetch es correcta enviamos por props que estamos logeados (true)
           props.onLogin(true);
+          props.newUserData(data.data.user)
           //Usamos setTimeout para navegar a /user-dashboard usando state para guardar el data que nos devulve el fetch
           setTimeout(() => {
             navigate("/user-dashboard", {state: data});

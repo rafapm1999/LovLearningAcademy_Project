@@ -15,6 +15,8 @@ import UserDashboard from "./views/UserDashboard/UserDashboard";
 import { useState } from "react";
 import UserNavbar from "./components/Navbar/UserNavbar";
 import LearnPlace from "./views/LearnPlace/LearnPlace";
+import AdminPage from "./views/Admin/AdminPage";
+import AdminNavbar from "./components/Navbar/AdminNavbar";
 /* import { useNavigate } from 'react-router-dom'; */
 
 function App() {
@@ -40,16 +42,28 @@ function App() {
       <Fragment>
         <Navbar></Navbar>
         <Routes>
-        <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/about" element={<AboutUs></AboutUs>} />
           <Route path="/courses" element={<CoursesPage></CoursesPage>} />
           <Route path="/contact" element={<ContactUs></ContactUs>} />
           <Route path="/signup" element={<SignupPage />} />
-          <Route path="/login" element={<LoginPage onLogin={userLogged} />} />
-          <Route path="/course/:id" element={<CourseInfoPage userData={userData} onLogin={logged}/>} />
+          <Route path="/login" element={<LoginPage newUserData={handlerUserInfo} onLogin={userLogged} />} />
+          <Route path="/course/:id" element={<CourseInfoPage userData={userData} onLogin={logged} />} />
         </Routes>
         <Footer></Footer>
+      </Fragment>
+    );
+
+  } else if (logged === true && userData.role === "admin") {
+    console.log('logged === true && userData.role === "admin"');
+    return (
+      <Fragment>
+        <AdminNavbar onLogin={userLogged} logout={logout}/>
+        <Routes>
+          <Route path="/user-dashboard" element={<UserDashboard userData={userData} onUserInfo={handlerUserInfo} />} />
+          <Route path="/admin" element={<AdminPage />} />
+        </Routes>
       </Fragment>
     );
   } else if (logged === true) {
@@ -60,16 +74,19 @@ function App() {
         <UserNavbar userData={userData} onLogin={userLogged} logout={logout} />
         <Routes>
           <Route path="/courses" element={<CoursesPage></CoursesPage>} />
-          <Route path="/contact" element={<ContactUs userData={userData}/>} />
-          <Route path="/course/:id" element={<CourseInfoPage userData={userData} onLogin={logged} newUserData={handlerUserInfo}/>} />
+          <Route path="/contact" element={<ContactUs userData={userData} />} />
+          <Route path="/course/:id" element={<CourseInfoPage userData={userData} onLogin={logged} newUserData={handlerUserInfo} />} />
           <Route path="/user-dashboard" element={<UserDashboard userData={userData} onUserInfo={handlerUserInfo} />} />
-          <Route path="/mylearnplace" element={<LearnPlace userData={userData} newUserData={handlerUserInfo}/>} />
+          <Route path="/mylearnplace" element={<LearnPlace userData={userData} newUserData={handlerUserInfo} />} />
         </Routes>
         <Footer></Footer>
       </Fragment>
     );
-  }
 
+
+
+  }
 }
+
 
 export default App;

@@ -9,9 +9,9 @@ function UserDashboard(props) {
    /*  console.log(data); */
 
     if (userData !== "") {
-        props.onUserInfo(userData);
+        props.onUserInfo(userData.data.user);
     }
-    console.log(userData);
+    console.log(userData.data.user);
 
     return (
         <Fragment>

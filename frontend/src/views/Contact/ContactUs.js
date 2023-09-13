@@ -67,7 +67,7 @@ function ContactUs() {
     <Fragment>
       {ReactDOM.createPortal(
         <ContactModal data={commentInfo} visible={visible} onClose={handleClose} />,
-        document.querySelector("#modal"))};
+        document.querySelector("#modal"))}
 
       <div className="contactUs-root">
         <div className={classes.title}>

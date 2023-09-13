@@ -3,12 +3,13 @@ import { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function CourseModal(props) {
+    let userData = props.userData;
     const navigate = useNavigate();
     const onLogin = () => {
         navigate("/login");
     }
     const onNavigate = () => {
-        navigate("/mylearnplace", {state: props.userData});
+        navigate("/mylearnplace");
     }
     if (props.logged === true ) {
         console.log(props.userData);

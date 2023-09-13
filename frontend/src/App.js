@@ -60,10 +60,10 @@ function App() {
         <UserNavbar userData={userData} onLogin={userLogged} logout={logout} />
         <Routes>
           <Route path="/courses" element={<CoursesPage></CoursesPage>} />
-          <Route path="/contact" element={<ContactUs></ContactUs>} />
-          <Route path="/course/:id" element={<CourseInfoPage userData={userData} onLogin={logged}/>} />
-          <Route path="/user-dashboard" element={<UserDashboard onUserInfo={handlerUserInfo} />} />
-          <Route path="/mylearnplace" element={<LearnPlace userData={userData} newUserData={setUserData}/>} />
+          <Route path="/contact" element={<ContactUs userData={userData}/>} />
+          <Route path="/course/:id" element={<CourseInfoPage userData={userData} onLogin={logged} newUserData={handlerUserInfo}/>} />
+          <Route path="/user-dashboard" element={<UserDashboard userData={userData} onUserInfo={handlerUserInfo} />} />
+          <Route path="/mylearnplace" element={<LearnPlace userData={userData} newUserData={handlerUserInfo}/>} />
         </Routes>
         <Footer></Footer>
       </Fragment>

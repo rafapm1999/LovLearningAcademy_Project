@@ -10,13 +10,13 @@ function CourseInfoPage(props) {
   const location = useLocation();
   //Guardamos en la constante courseData la información del curso seleccionado
   const courseData = location.state;
-  const userData = props.userData;
+  let userData = props.userData;
   const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
   const fetchWantCourse = async () => {
     try {
       // Obtener los datos existentes del servidor
-      const response = await fetch(`http://localhost:8000/auth/getuser/${userData.data.user._id}`);
+      const response = await fetch(`http://localhost:8000/auth/getuser/${userData._id}`);
       let existingData = await response.json();
 
       // Verificar si existingData.courses es un array o está ausente
@@ -28,7 +28,7 @@ function CourseInfoPage(props) {
       existingData.data.courses = [...existingData.data.courses, ...Array(courseData.data)];
 
       // Realizar el PATCH con los datos combinados
-      const patchResponse = await fetch(`http://localhost:8000/auth/${userData.data.user._id}`, {
+      const patchResponse = await fetch(`http://localhost:8000/auth/${userData._id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -42,6 +42,10 @@ function CourseInfoPage(props) {
 
       if (patchResponse.ok) {
         console.log(data);
+        console.log(data);
+        props.newUserData(data.data)
+        userData = props.userData;
+        console.log(userData);
       };
     } catch (error) {
       console.log(error);
@@ -92,7 +96,7 @@ function CourseInfoPage(props) {
   return (
     <div>
       {ReactDOM.createPortal(
-        <CourseModal visible={visible} data={courseData.data} onClose={handleClose} userData={props.userData} logged={props.onLogin} />,
+        <CourseModal visible={visible} data={courseData.data} onClose={handleClose} userData={userData} logged={props.onLogin} />,
         document.querySelector("#modal")
       )}
       <div className={classes["courseInfoPage-main"]}>

@@ -34,7 +34,7 @@ function CourseModal(props) {
                     <div className={`${classes["md-content"]}`}>
                         <div className={classes["info-container"]}>
                             <p>{`If you want to done the ${props.data.title} course you must to loggin.`}</p>
-                            <button onClick={onLogin} className={classes["md-loggin"]}><span>Loggin</span></button>
+                            <button onClick={onLogin} className={classes["md-loggin"]}><span>Login</span></button>
                             <button onClick={props.onClose} className={classes["md-close"]}><span>X</span></button>
                         </div>
                     </div>

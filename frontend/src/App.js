@@ -17,6 +17,9 @@ import UserNavbar from "./components/Navbar/UserNavbar";
 import LearnPlace from "./views/LearnPlace/LearnPlace";
 import AdminPage from "./views/Admin/AdminPage";
 import AdminNavbar from "./components/Navbar/AdminNavbar";
+import AdminMembers from "./views/Admin/AdminMembers"
+import AdminCourses from "./views/Admin/AdminMembers";
+import ErrorPage from "./views/ErrorPage/ErrorPage";
 /* import { useNavigate } from 'react-router-dom'; */
 
 function App() {
@@ -50,6 +53,7 @@ function App() {
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage newUserData={handlerUserInfo} onLogin={userLogged} />} />
           <Route path="/course/:id" element={<CourseInfoPage userData={userData} onLogin={logged} />} />
+          <Route path="/error-page" element={<ErrorPage />} />
         </Routes>
         <Footer></Footer>
       </Fragment>
@@ -63,10 +67,13 @@ function App() {
         <Routes>
           <Route path="/user-dashboard" element={<UserDashboard userData={userData} onUserInfo={handlerUserInfo} />} />
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/bbdd-members" element={<AdminMembers />} />
+          <Route path="/bbdd-courses" element={<AdminCourses />} />
+          <Route path="/error-page" element={<ErrorPage />} />
         </Routes>
       </Fragment>
     );
-  } else if (logged === true) {
+  } else if (logged === true && userData.role === "user") {
     console.log('Has entrado en logged = true');
     console.log(userData);
     return (
@@ -78,6 +85,7 @@ function App() {
           <Route path="/course/:id" element={<CourseInfoPage userData={userData} onLogin={logged} newUserData={handlerUserInfo} />} />
           <Route path="/user-dashboard" element={<UserDashboard userData={userData} onUserInfo={handlerUserInfo} />} />
           <Route path="/mylearnplace" element={<LearnPlace userData={userData} newUserData={handlerUserInfo} />} />
+          <Route path="/error-page" element={<ErrorPage />} />
         </Routes>
         <Footer></Footer>
       </Fragment>

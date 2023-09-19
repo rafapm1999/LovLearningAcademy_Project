@@ -5,10 +5,36 @@
   flex-wrap: wrap;
   padding: 4em 1em;
 }
-.title{
+.title {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.search {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.search > form > input {
+  width: 50vw;
+  box-shadow: 0 0 6px 1px rgb(160, 160, 160);
+  margin: 1rem 3rem;
+  padding: 0.9rem;
+}
+.search > form > button {
+  font-weight: bold;
+  border: 2px solid #1e90ff;
+  padding: 0.9rem;
+  color: #1e90ff;
+  background-color: white;
+  cursor: pointer;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+}
+.search > form > button:hover{
+  color: white;
+  background-color: #1e90ff;
 }
 .coursesPage-container {
   box-shadow: 0 0 6px 1px rgb(160, 160, 160);
@@ -24,12 +50,12 @@
   background-color: transparent;
   padding: 2rem;
 }
-.coursesPage-info > h3{
+.coursesPage-info > h3 {
   font-size: 1.9rem;
 }
-.coursesPage-info > p{
+.coursesPage-info > p {
   text-align: center;
 }
-.coursesPage-info:hover{
-  background: radial-gradient(transparent, white,  rgb(235, 235, 235));
+.coursesPage-info:hover {
+  background: radial-gradient(transparent, white, rgb(235, 235, 235));
 }

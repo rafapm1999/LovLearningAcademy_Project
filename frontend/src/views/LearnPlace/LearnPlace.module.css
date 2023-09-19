@@ -1,0 +1,44 @@
+.coursesLearnPage-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 4em 1em;
+}
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.user-info{
+    text-align: end;
+    width: 90vw;
+    border-top: 1px solid rgba(97, 97, 97, 0.5);
+    font-size: 1.2rem;
+    padding: 2rem 2.5rem 0 0;
+    margin-left: 2rem;
+    margin-top: 2rem;
+}
+.coursesLearnPage-container {
+  box-shadow: 0 0 6px 1px rgb(160, 160, 160);
+  margin: 2em;
+}
+.coursesLearnPage-info {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  width: 30vw;
+  height: 40vh;
+  background-color: transparent;
+  padding: 2rem;
+}
+.coursesLearnPage-info > h3 {
+  font-size: 1.9rem;
+}
+.coursesLearnPage-info > p {
+  text-align: center;
+}
+.coursesLearnPage-info:hover {
+  background: radial-gradient(transparent, white, rgb(235, 235, 235));
+}

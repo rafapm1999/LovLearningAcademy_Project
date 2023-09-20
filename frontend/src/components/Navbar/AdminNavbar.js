@@ -19,7 +19,7 @@ function AdminNavbar(props) {
         <div className={classes["navbar-links"]}>
           <div className={classes.links}>
             <Link className={classes.link} to="/bbdd-members"><span>All Members</span></Link>
-            <Link className={classes.link} to="/bbdd-courses"><span>All site courses</span></Link>
+            <Link className={classes.link} to="/bbdd-courses"><span>All courses</span></Link>
           </div>
         </div>
         <div className={classes["navbar-button"]}>

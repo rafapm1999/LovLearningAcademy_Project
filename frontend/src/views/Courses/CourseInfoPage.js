@@ -12,7 +12,10 @@ function CourseInfoPage(props) {
   const courseData = location.state;
   let userData = props.userData;
   const navigate = useNavigate();
+  const [courseExisting, setCourseExisting] = useState("");
+  /* const [getNewCourse, setGetNewCourse] = useState([]) */
   const [visible, setVisible] = useState(false);
+
   const fetchWantCourse = async () => {
     try {
       // Obtener los datos existentes del servidor
@@ -23,34 +26,65 @@ function CourseInfoPage(props) {
       if (!Array.isArray(existingData.data.courses)) {
         existingData.data.courses = []; // Inicializar como un array vacío si no existe o no es un array
       }
+      
+      // Verificar si el curso ya existe en el "user-dashboard"
+      const courseExist = existingData.data.courses.some((course) => {
+        console.log('Id de course');
+        
+        console.log(course._id);
 
-      // Combina los cursos existentes con los nuevos cursos
-      existingData.data.courses = [...existingData.data.courses, ...Array(courseData.data)];
+        console.log('Id de courseData');
 
-      // Realizar el PATCH con los datos combinados
-      const patchResponse = await fetch(`http://localhost:8000/auth/${userData._id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          courses: existingData.data.courses,
-        }),
+        console.log(courseData.data._id);
+        return course._id === courseData.data._id;
       });
+      setCourseExisting(courseExist)
 
-      const data = await patchResponse.json();
+      console.log(courseExist);
+      if (courseExist === true) {
+        console.log("El curso ya existe en tu dashboard.");
+      } else if (courseExist === false) {
+        console.log("Puedes agregar el curso al dashboard.");
+        // Combina los cursos existentes con los nuevos cursos
+        existingData.data.courses = [...existingData.data.courses, ...Array(courseData.data)];
+        const patchTheCourse = async () => {
+          try {
+            const patchResponse = await fetch(`http://localhost:8000/auth/${userData._id}`, {
+              method: "PATCH",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                courses: existingData.data.courses,
+              }),
+            });
 
-      if (patchResponse.ok) {
-        console.log(data);
-        console.log(data);
-        props.newUserData(data.data)
-        userData = props.userData;
-        console.log(userData);
+            const data = await patchResponse.json();
+
+            if (patchResponse.ok) {
+              console.log("Has entrado en patchResponse");
+              props.newUserData(data.data)
+              userData = props.userData;
+              console.log(userData);
+            };
+          } catch (error) {
+
+          }
+        }
+        return patchTheCourse();
+
       };
+
     } catch (error) {
       console.log(error);
     }
   };
+
+
+
+
+
+
   //En reserva hasta que valide el funcionamiento del nuevo codigo
   /*  try {
      const response = await fetch(
@@ -96,7 +130,7 @@ function CourseInfoPage(props) {
   return (
     <div>
       {ReactDOM.createPortal(
-        <CourseModal visible={visible} data={courseData.data} onClose={handleClose} userData={userData} logged={props.onLogin} />,
+        <CourseModal visible={visible} data={courseData.data} onClose={handleClose} userData={userData} logged={props.onLogin} courseExists={courseExisting} />,
         document.querySelector("#modal")
       )}
       <div className={classes["courseInfoPage-main"]}>

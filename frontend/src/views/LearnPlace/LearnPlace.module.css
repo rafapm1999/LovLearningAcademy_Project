@@ -10,14 +10,19 @@
   justify-content: center;
   align-items: center;
 }
-.user-info{
-    text-align: end;
-    width: 90vw;
-    border-top: 1px solid rgba(97, 97, 97, 0.5);
-    font-size: 1.2rem;
-    padding: 2rem 2.5rem 0 0;
-    margin-left: 2rem;
-    margin-top: 2rem;
+.user-info-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.user-info {
+  text-align: center;
+  width: 30vw;
+  border-top: 1px solid rgba(97, 97, 97, 0.5);
+  font-size: 1.2rem;
+  padding: 2rem;
+  margin-left: 2rem;
+  margin-top: 2rem;
 }
 .coursesLearnPage-container {
   box-shadow: 0 0 6px 1px rgb(160, 160, 160);

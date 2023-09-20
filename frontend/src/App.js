@@ -18,7 +18,7 @@ import LearnPlace from "./views/LearnPlace/LearnPlace";
 import AdminPage from "./views/Admin/AdminPage";
 import AdminNavbar from "./components/Navbar/AdminNavbar";
 import AdminMembers from "./views/Admin/AdminMembers"
-import AdminCourses from "./views/Admin/AdminMembers";
+import AdminCourses from "./views/Admin/AdminCourses";
 import ErrorPage from "./views/ErrorPage/ErrorPage";
 /* import { useNavigate } from 'react-router-dom'; */
 

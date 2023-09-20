@@ -12,8 +12,10 @@ function LearnPlace(props) {
   return (
     <div className={classes["main-container"]}>
       <h1 className={classes.title}>MyLearnplace</h1>
-      <p className={classes["user-info"]}>Happy to see you {user.name}, you have {courses.length} {""}
-        courses waiting for you!</p>
+      <div className={classes["user-info-container"]}>
+        <p className={classes["user-info"]}>Happy to see you {user.name}, you have {courses.length} {""}
+          courses waiting for you!</p>
+      </div>
       <div className={classes["coursesLearnPage-main"]}>
         {courses.map((course, i) => {
           return (

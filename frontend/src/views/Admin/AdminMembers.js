@@ -1,9 +1,9 @@
-/* import './AdminCourses.module.css'; */
+/* import './AdminMembers.module.css'; */
 
-function AdminCourses() {
+function AdminMembers() {
   return (
     <div></div>
   );
 }
 
-export default AdminCourses;
+export default AdminMembers;

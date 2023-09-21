@@ -133,4 +133,17 @@ const getuser = async (req, res) => {
   }
 };
 
-module.exports = { signup, login, update, getuser };
+const alluser = async (req, res) => {
+  try {
+    const data = await Login.find();
+    res.status(200).json({ status: "alluser realizado", data, error: null });
+  } catch (error) {
+    res.status(404).json({
+      status: "no ha salido bien",
+      data: null,
+      error: error.message,
+    });
+  }
+};
+
+module.exports = { signup, login, update, getuser, alluser };

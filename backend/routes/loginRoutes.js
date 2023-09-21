@@ -11,4 +11,6 @@ router.post("/login", loginController.login)
 router.patch("/:id", loginController.update)
 //ENDPOINT para coger un ususario => /getuser
 router.get("/getuser/:id", loginController.getuser)
+//ENDPOINT para coger un ususario => /alluser
+router.get("/alluser", loginController.alluser)
 module.exports = router;

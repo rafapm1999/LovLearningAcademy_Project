@@ -10,6 +10,8 @@ function AdminMembers() {
   const [wordSearch, setWordSearch] = useState("");
   const inputRef = useRef("");
   const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 10;
 
   const loaderFunction = () => {
     setTimeout(() => {
@@ -17,8 +19,6 @@ function AdminMembers() {
     }, 1500)
     return (<Loader></Loader>)
   };
-
-
 
   const allUsers = async () => {
     if (pending === false) {
@@ -49,13 +49,16 @@ function AdminMembers() {
     allUsers();
   }, []);
 
-  const onHandlerClick = () => { }; 
+
+
+
+  const onHandlerClick = () => { };
 
   //Funcion para cuando se hace el submit cal pulsar el boton search
   const handleSearch = (e) => {
     e.preventDefault()
     const filteredUsers = users[0].filter(user =>
-      user.title.toLowerCase().includes(wordSearch.toLowerCase())
+      user.name.toLowerCase().includes(wordSearch.toLowerCase())
     );
     setUsers(Array(filteredUsers))
     console.log(filteredUsers);
@@ -66,9 +69,22 @@ function AdminMembers() {
     return loaderFunction();
   }
   if (pending === true && users[0].length !== 0) {
+    //Creación de la paginación del contenido de la tabla
+    const indexOfLastUser = currentPage * usersPerPage;
+    const indexOfFirstUser = indexOfLastUser - usersPerPage;
+    const currentUsers = users[0].slice(indexOfFirstUser, indexOfLastUser);
+    const totalPages = Math.ceil(users[0].length / usersPerPage);
+    const paginate = (pageNumber) => {
+      console.log("Has dado click");
+      console.log(currentUsers);
+      setCurrentPage(pageNumber);
+    };
     console.log(wordSearch);
+    console.log('console.log(Math.ceil(users.length / usersPerPage));');
+
+    console.log(Math.ceil(users[0].length / usersPerPage));
     return (
-      <div className={classes["coursesPage-root"]}>
+      <div className={classes["usersPage-root"]}>
         <div className={classes.title}>
           <h1>Users</h1>
         </div>
@@ -93,24 +109,46 @@ function AdminMembers() {
             <button type="submit">Search</button>
           </form>
         </div>
-        <div className={classes["usersPage-main"]}>
-          {users[0].map((user, i) => {
-            return (
-              <div
-                onClick={() => {
-                  onHandlerClick(user._id);
-                }}
-                className={classes["usersPage-container"]}
-                key={user.id}
-              >
-                <div className={classes["usersPage-info"]}>
-                  <p>{user.name}</p>
-                  <p>{user.lastName}</p>
-                  <p>{user.email}</p>
-                </div>
-              </div>
-            );
-          })}
+        <div className={classes["data-message"]}>
+          <p>The total number of registered users in LovLearning Academy is {users[0].length}</p>
+        </div>
+
+        
+        <div className={classes["table-container"]}>
+          <table className={classes["usersPage-main-table"]}>
+            <tr>
+              <th>Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Courses</th>
+            </tr>
+            <tbody>
+              {currentUsers.map((user, i) => {
+                return (
+                  <tr className={classes["usersPage-info"]} key={i}>
+                    <td>{user.name}</td>
+                    <td>{user.lastName}</td>
+                    <td>{user.email}</td>
+                    <td>{user.role}</td>
+                    <td>{user.courses.length}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        {/* Pagination component */}
+        <div className={classes["pagination-main"]}>
+          <div className={classes["pagination-container"]}>
+            <div className={classes["pagination-info"]}>
+          
+                  <button onClick={() => paginate(currentPage === 1 ? currentPage : currentPage - 1)}> <span>&#5176;</span> Back </button>
+                  <span>Page {currentPage} of {totalPages}</span>
+                  <button onClick={() => paginate(currentPage === totalPages ? currentPage : currentPage + 1)}> Next <span>&#5171;</span></button>
+          
+            </div>
+          </div>
         </div>
       </div>
     );

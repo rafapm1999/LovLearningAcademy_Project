@@ -2,7 +2,11 @@ import { Fragment, useState } from 'react';
 import classes from './Navbar.module.css';
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
-
+//Importamos FontAwesomeIcon para usarlo en el footer
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowRightFromBracket,
+} from "@fortawesome/free-solid-svg-icons";
 
 function AdminNavbar(props) {
   const navigate = useNavigate();
@@ -23,7 +27,7 @@ function AdminNavbar(props) {
           </div>
         </div>
         <div className={classes["navbar-button"]}>
-          <button onClick={unlogged} className={classes.profile}> Logout </button>
+          <button onClick={unlogged} className={classes.profile}> Log out <span><FontAwesomeIcon icon={faArrowRightFromBracket}/></span></button>
         </div>
       </div>
     </Fragment>

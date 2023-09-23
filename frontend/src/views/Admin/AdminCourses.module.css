@@ -1,0 +1,116 @@
+.coursesPage-root{
+  height: 100vh;
+  width: 100vw;
+}
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .search {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+  }
+  .search > form > input {
+    width: 50vw;
+    box-shadow: 0 0 6px 1px rgb(160, 160, 160);
+    margin: 1rem 3rem;
+    padding: 0.9rem;
+  }
+  .search > form > button {
+    font-weight: bold;
+    border: 2px solid #1e90ff;
+    padding: 0.9rem;
+    color: #1e90ff;
+    background-color: white;
+    cursor: pointer;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+  }
+  .search > form > button:hover {
+    color: white;
+    background-color: #1e90ff;
+  }
+  .data-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .data-message > p {
+    border-top: 1px solid #000;
+    margin-top: 1rem;
+    padding: 1rem 3rem;
+  }
+  .table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+  }
+  .coursesPage-main-table {
+    margin: 1rem 3rem;
+    width: 40vw;
+    border-collapse: collapse;
+    min-height: 400px;
+  }
+  .coursesPage-main-table th {
+    text-align: start;
+    border: 1px solid #000;
+    padding: 0.5rem;
+    width: 100px;
+  }
+  tr {
+    border: 1px solid #000;
+    max-height: 10vh;
+    min-height: 10vh;
+  }
+  td {
+    border: 1px solid #000;
+    padding: 0.5rem;
+    width: 100px;
+  }
+  .coursesPage-info:hover {
+    background-color: #a3a3a3;
+  }
+  .coursesPage-info td[class*="-button"]{
+    text-align: center;
+    font-weight: bold;
+  }
+  .coursesPage-info > .info-button:hover{
+    background-color: #1f90c4;
+    color: white;
+    cursor: pointer;
+  }
+  .coursesPage-info > .edit-button:hover{
+    background-color: #1fc43a;
+    color: white;
+    cursor: pointer;
+  }
+  .coursesPage-info > .remove-button:hover{
+    background-color: #fc3333;
+    color: white;
+    cursor: pointer;
+  }
+  .pagination-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: .9rem;
+  }
+  .pagination-container{
+    box-shadow: 0 0 6px 1px rgb(160, 160, 160);
+  }
+  .pagination-info{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 40vw;
+    padding: .9rem;
+  }
+  .pagination-info > button {
+    background-color: transparent;
+    padding: 1rem;
+  }

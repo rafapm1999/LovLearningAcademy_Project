@@ -2,6 +2,12 @@ import classes from './AdminCourses.module.css';
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
+//Importamos FontAwesomeIcon para usarlo en el footer
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faEye, faPenToSquare, faTrashCan
+} from "@fortawesome/free-regular-svg-icons";
+
 
 function AdminCourses() {
   const [courses, setCourses] = useState([])
@@ -11,6 +17,9 @@ function AdminCourses() {
   const [wordSearch, setWordSearch] = useState("");
   const navigate = useNavigate();
   const inputRef = useRef("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const coursePerPage = 6;
+
   console.log("Has entrado en admincourses");
   const loaderFunction = () => {
     setTimeout(() => {
@@ -50,7 +59,11 @@ function AdminCourses() {
   }, []);
 
 
-  const onHandlerClick = () => { };
+  const onHandlerClick = (courseID, clickType) => {
+    console.log(courseID);
+    console.log(clickType);
+
+  };
 
   //Funcion para cuando se hace el submit cal pulsar el boton search
   const handleSearch = (e) => {
@@ -69,6 +82,16 @@ function AdminCourses() {
 
   if (pending === true && courses[0].length !== 0) {
     console.log(wordSearch);
+    //Creación de la paginación del contenido de la tabla
+    const indexOfLastUser = currentPage * coursePerPage;
+    const indexOfFirstUser = indexOfLastUser - coursePerPage;
+    const currentCourses = courses[0].slice(indexOfFirstUser, indexOfLastUser);
+    const totalPages = Math.ceil(courses[0].length / coursePerPage);
+    const paginate = (pageNumber) => {
+      console.log("Has dado click");
+      console.log(currentCourses);
+      setCurrentPage(pageNumber);
+    };
     return (
       <div className={classes["coursesPage-root"]}>
         <div className={classes.title}>
@@ -95,24 +118,47 @@ function AdminCourses() {
             <button type="submit">Search</button>
           </form>
         </div>
-        <div className={classes["coursesPage-main"]}>
-          {courses[0].map((course, i) => {
-            return (
-              <div
-                onClick={() => {
-                  onHandlerClick(course._id);
-                }}
-                className={classes["coursesPage-container"]}
-                key={course.id}
-              >
-                <div className={classes["coursesPage-info"]}>
-                  <h3>{course.title}</h3>
-                  <img src={course.image} alt={`Foto curso ${course.id}`}></img>
-                  <p>{course.info}</p>
-                </div>
-              </div>
-            );
-          })}
+        <div className={classes["data-message"]}>
+          <p>The total number of courses in LovLearning Academy is {courses[0].length}</p>
+        </div>
+
+        <div className={classes["table-container"]}>
+          <table className={classes["coursesPage-main-table"]}>
+            <tr>
+              <th>Order</th>
+              <th>Title</th>
+              <th>ID</th>
+              <th>Info</th>
+              <th>Edit</th>
+              <th>Remove</th>
+            </tr>
+            <tbody>
+              {currentCourses.map((course, i) => {
+                return (
+                  <tr className={classes["coursesPage-info"]} key={i}>
+                    <td>{course.id}</td>
+                    <td>{course.title}</td>
+                    <td>{course._id}</td>
+                    <td onClick={() => { onHandlerClick(course._id, "INFO") }} className={classes["info-button"]}><FontAwesomeIcon onClick={() => { onHandlerClick(course._id, "INFO") }} icon={faEye} size='xl' /></td>
+                    <td onClick={() => { onHandlerClick(course._id, "EDIT") }} className={classes["edit-button"]}><FontAwesomeIcon onClick={() => { onHandlerClick(course._id, "EDIT") }} icon={faPenToSquare} size='xl' /></td>
+                    <td onClick={() => { onHandlerClick(course._id, "REMOVE") }} className={classes["remove-button"]}><FontAwesomeIcon onClick={() => { onHandlerClick(course._id, "REMOVE") }} icon={faTrashCan} size='xl' /></td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        {/* Pagination component */}
+        <div className={classes["pagination-main"]}>
+          <div className={classes["pagination-container"]}>
+            <div className={classes["pagination-info"]}>
+
+              <button onClick={() => paginate(currentPage === 1 ? currentPage : currentPage - 1)}> <span>&#5176;</span> Back </button>
+              <span>Page {currentPage} of {totalPages}</span>
+              <button onClick={() => paginate(currentPage === totalPages ? currentPage : currentPage + 1)}> Next <span>&#5171;</span></button>
+
+            </div>
+          </div>
         </div>
       </div>
     );

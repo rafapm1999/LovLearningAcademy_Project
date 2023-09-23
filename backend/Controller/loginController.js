@@ -93,11 +93,11 @@ const login = async (req, res) => {
       error: null,
     });
   } catch (error) {
-    res.status(400).json({
+    /* res.status(400).json({
       status: "failed",
       data: null,
       error: error.message,
-    });
+    }); */
   }
 };
 

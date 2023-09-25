@@ -1,6 +1,18 @@
-.coursesPage-root{
-  height: 100vh;
+.modal-main{
+  z-index: 1000;
   width: 100vw;
+  height: 90vh;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+}
+.coursesPage-root{
+  height: 90vh;
+  width: 100vw;
+  z-index: 1;
+}
+.blur{
+  filter: blur(5px);
 }
 .title {
     display: flex;

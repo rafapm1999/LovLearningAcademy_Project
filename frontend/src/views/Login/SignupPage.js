@@ -1,14 +1,14 @@
 import Signup from "./SignupForm";
-import classes from "./SignupPage.module.css";
+/* import classes from "./SignupPage.module.css"; */
 import Modal from "../Modal/Modal";
 import ReactDOM from "react-dom";
-import { useNavigate } from "react-router-dom";
+/* import { useNavigate } from "react-router-dom"; */
 import { Fragment, useState } from "react";
 import { validateEmail, validatePassword } from "../../utils/validate";
 
 function SignupPage() {
-/*   const navigate = useNavigate(); */
-  const [login, setLogin] = useState(false);
+  /*   const navigate = useNavigate(); */
+  /*   const [login, setLogin] = useState(false); */
   const [visible, setVisible] = useState(false);
   const [loginInfo, setLoginInfo] = useState({
     loggedIn: false,

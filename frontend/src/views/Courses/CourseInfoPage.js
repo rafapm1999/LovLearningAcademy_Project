@@ -80,34 +80,6 @@ function CourseInfoPage(props) {
     }
   };
 
-
-
-
-
-
-  //En reserva hasta que valide el funcionamiento del nuevo codigo
-  /*  try {
-     const response = await fetch(
-       `http://localhost:8000/auth/${userData.data.user._id}`,
-       {
-         method: "PATCH",
-         headers: {
-           "Content-Type": "application/json",
-         },
-         body: JSON.stringify({
-           courses: courseData.data,
-         }),
-       }
-     );
-     const data = await response.json();
-     if (response.ok) {
-       console.log(data);
-       
-     }
-   } catch (error) {
-     console.log("Error de algo");
-   }
- } */
   //Función para cuando damos al boton de back
   const handleBack = () => {
     navigate("/courses")

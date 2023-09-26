@@ -51,7 +51,7 @@ function AdminCourseModal(props) {
         const handleSubmitEdit = (e) => {
             e.preventDefault();
             console.log('Fetch Edit course');
-            
+
         }
         return (
             <div>
@@ -138,24 +138,24 @@ function AdminCourseModal(props) {
                             <div className={`${classes["md-content"]}`}>
                                 <div className={classes["form-container"]}>
                                     <form id="editCourseForm" onSubmit={handleSubmitRemove}>
-                                        <div className={classes["form-info"]}>
-                                            <p>WARNING</p>
+                                        <div className={classes["remove-header"]}>
+                                            <p className={classes["warning"]}>WARNING</p>
                                             <p>This action has not return!</p>
                                             <p>{"You must to put the same title (with capital and normal letters)"}</p>
                                         </div>
-                                        <div className={classes["form-info"]}>
+                                        <div className={classes["remove-form"]}>
                                             <p>{props.courseData.title}</p>
                                             <input
                                                 ref={titleRemoveRef}
                                                 type="text"
                                                 name="courseTitleRemove"
                                                 id="titleRemove"
-                                                placeholder={"Becareful this action has not return!"}
+                                                placeholder={"Copy / Paste or write the title"}
                                             />
                                         </div>
-                                        <div className={`${classes["form-info"]} ${classes["submit-button"]}`}>
+                                        <div className={`${classes["remove-button"]} ${classes["submit-button"]}`}>
                                             <button type="submit">
-                                                <span>Remove</span>
+                                                <span>REMOVE</span>
                                             </button>
                                         </div>
                                     </form>

@@ -27,13 +27,13 @@ const Footer = () => {
           <Column>
             <Heading>Socials</Heading>
             <LinkContainer>
-              <FooterLink target="blank" href="https://www.github.com">
+              <FooterLink target="blank" href="https://www.twitter.com">
                 <FontAwesomeIcon icon={faSquareTwitter} size="2xl" />
               </FooterLink>
-              <FooterLink target="blank" href="https://www.instagram.com">
+              <FooterLink target="blank" href="https://www.linkedin.com">
                 <FontAwesomeIcon icon={faLinkedin} size="2xl" />
               </FooterLink>
-              <FooterLink target="blank" href="https://www.facebook.com">
+              <FooterLink target="blank" href="https://www.github.com">
                 <FontAwesomeIcon icon={faGithub} size="2xl" />
               </FooterLink>
             </LinkContainer>

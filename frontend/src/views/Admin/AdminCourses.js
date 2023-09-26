@@ -10,9 +10,7 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import AdminCourseModal from '../Modal/AdminCoursesModal';
 
-
-
-function AdminCourses() {
+function AdminCourses(props) {
   const [courses, setCourses] = useState([])
   const [coursesCopy, setCoursesCopy] = useState([]);
   const [courseID, setCourseID] = useState("")
@@ -128,10 +126,13 @@ function AdminCourses() {
       console.log(currentCourses);
       setCurrentPage(pageNumber);
     };
+    console.log('userdata');
+    console.log(props.userData);
+    
     return (
       <>
         {ReactDOM.createPortal(
-          <AdminCourseModal courseId={courseID} courseData={courseData} clickType={clickAction} visible={visible} onClose={handleClose}/>,
+          <AdminCourseModal courseId={courseID} courseData={courseData} adminData={props.userData}clickType={clickAction} visible={visible} onClose={handleClose}/>,
           document.querySelector("#modal")
         )}
         <div className={`${classes["coursesPage-root"]} ${visible && classes["blur"]}`}>
@@ -161,6 +162,9 @@ function AdminCourses() {
           </div>
           <div className={classes["data-message"]}>
             <p>The total number of courses in LovLearning Academy is {courses[0].length}</p>
+          </div>
+          <div>
+            <button>Create new course<span></span></button>
           </div>
           <div className={classes["table-container"]}>
             <table className={classes["coursesPage-main-table"]}>

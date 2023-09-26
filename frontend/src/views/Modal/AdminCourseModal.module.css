@@ -176,3 +176,13 @@
     border-top: 1px solid black;
     margin-bottom: 1.5rem;
 }
+form .form-info {
+    width: 100vw;
+    color: black;
+    font-size: 1.3rem;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    margin: 0.5em 0;
+    padding: 1rem;
+  }

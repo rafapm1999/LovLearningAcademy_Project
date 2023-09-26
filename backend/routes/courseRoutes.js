@@ -5,7 +5,7 @@ const router = require("express").Router();
 
 router.get("/all-courses", courseController.getAllCourses);
 router.get("/:id", courseController.getCourse)
-router.post("/create-course", verifyToken, courseController.postCourse)
-router.patch("/edit/:id", verifyToken, courseController.patchCourse)
-router.delete("/delete/:id", verifyToken, courseController.deleteCourse)
+router.post("/create-course", courseController.postCourse)
+router.patch("/edit/:id",  courseController.patchCourse)
+router.delete("/delete/:id", courseController.deleteCourse)
 module.exports = router;

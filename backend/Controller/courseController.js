@@ -55,7 +55,10 @@ const postCourse = async (req, res) => {
 
 const patchCourse = async (req, res) => {
   try {
-    const data = await Courses.findById(req.params.id);
+    const data = await Courses.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true });
     res.status(200).json({ status: "Has llegado status 200 de patchCourse", data, error: null });
   } catch (error) {
     res.status(404).json({

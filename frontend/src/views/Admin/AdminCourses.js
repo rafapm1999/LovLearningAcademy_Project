@@ -33,8 +33,10 @@ function AdminCourses(props) {
     return (<Loader></Loader>)
   };
 
-  const fetchCourses = async () => {
-    if (pending === false) {
+  const fetchCourses = async (e) => {
+    if (pending === false || e === "RESET") {
+      console.log('HAS ENTRADO EN EL TRY');
+      
       try {
         const response = await fetch(
           "http://localhost:8000/courses/all-courses",
@@ -57,37 +59,37 @@ function AdminCourses(props) {
         navigate(`/error-page`, { state: error });
       }
     };
-    console.log(courses);
+    
   };
 
   const fetchTheCourse = async (id) => {
 
-      try{
-        const response = await fetch(`http://localhost:8000/courses/${id}`, {
-          method: "GET",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-        });
-        const data = await response.json();
-        if (response.ok) {
-          setCourseData(data.data)
-          console.log("Has entrado en response.ok");
-          console.log(data.data);
-          setTimeout(()=> {
-            setVisible(!visible) 
-          }, 100)
-        };
-      } catch {
-  
-      }
-  }
+    try {
+      const response = await fetch(`http://localhost:8000/courses/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setCourseData(data.data)
+        console.log("Has entrado en response.ok");
+        console.log(data.data);
+        setTimeout(() => {
+          setVisible(!visible)
+        }, 100)
+      };
+    } catch {
+
+    }
+  };
 
   useEffect(() => {
     fetchCourses();
   }, []);
 
- //Función para cuando hacemos click
+  //Función para cuando hacemos click
   const onHandlerClick = (courseId, clickType) => {
     console.log(courseId);
     console.log(clickType);
@@ -97,7 +99,7 @@ function AdminCourses(props) {
   };
   //Función para cuando cerramos el modal
   const handleClose = () => {
-    setVisible(!visible);
+    setVisible(false);
   }
   //Funcion para cuando se hace el submit cal pulsar el boton search
   const handleSearch = (e) => {
@@ -108,6 +110,15 @@ function AdminCourses(props) {
     setCourses(Array(filteredCourses))
     console.log(filteredCourses);
   }
+  //Funcion para cambiar el estado de pending
+  const handlerPending = () => {
+    setTimeout(() => {
+      fetchCourses("RESET");
+    },);
+    setTimeout(() => {
+      handleClose();
+    }, 100);
+  };
 
   if (pending === false) {
     console.log("pending === false");
@@ -128,11 +139,12 @@ function AdminCourses(props) {
     };
     console.log('userdata');
     console.log(props.userData);
-    
+    console.log(courses);
+
     return (
       <>
         {ReactDOM.createPortal(
-          <AdminCourseModal courseId={courseID} courseData={courseData} adminData={props.userData}clickType={clickAction} visible={visible} onClose={handleClose}/>,
+          <AdminCourseModal courseId={courseID} courseData={courseData} adminData={props.userData} clickType={clickAction} visible={visible} onClose={handleClose} onPending={handlerPending} />,
           document.querySelector("#modal")
         )}
         <div className={`${classes["coursesPage-root"]} ${visible && classes["blur"]}`}>

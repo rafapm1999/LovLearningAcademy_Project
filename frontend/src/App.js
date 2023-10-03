@@ -20,6 +20,7 @@ import AdminNavbar from "./components/Navbar/AdminNavbar";
 import AdminMembers from "./views/Admin/AdminMembers"
 import AdminCourses from "./views/Admin/AdminCourses";
 import ErrorPage from "./views/ErrorPage/ErrorPage";
+import AdminCreateCourse from "./views/Admin/AdminCreateCourse";
 /* import { useNavigate } from 'react-router-dom'; */
 
 function App() {
@@ -67,6 +68,7 @@ function App() {
         <Routes>
           <Route path="/user-dashboard" element={<UserDashboard userData={userData} onUserInfo={handlerUserInfo} />} />
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/create-course" element={<AdminCreateCourse />} />
           <Route path="/bbdd-members" element={<AdminMembers />} />
           <Route path="/bbdd-courses" element={<AdminCourses />} />
           <Route path="/error-page" element={<ErrorPage />} />

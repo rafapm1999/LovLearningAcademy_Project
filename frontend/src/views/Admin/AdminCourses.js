@@ -36,7 +36,7 @@ function AdminCourses(props) {
   const fetchCourses = async (e) => {
     if (pending === false || e === "RESET") {
       console.log('HAS ENTRADO EN EL TRY');
-      
+
       try {
         const response = await fetch(
           "http://localhost:8000/courses/all-courses",
@@ -59,7 +59,7 @@ function AdminCourses(props) {
         navigate(`/error-page`, { state: error });
       }
     };
-    
+
   };
 
   const fetchTheCourse = async (id) => {
@@ -112,6 +112,8 @@ function AdminCourses(props) {
   }
   //Funcion para cambiar el estado de pending
   const handlerPending = () => {
+    console.log('Has entrado en handlerPending');
+
     setTimeout(() => {
       fetchCourses("RESET");
     },);
@@ -119,6 +121,10 @@ function AdminCourses(props) {
       handleClose();
     }, 100);
   };
+  //Funcion para crear nuevo curso 
+  const createCourse = () => {
+    navigate("/create-course")
+  }
 
   if (pending === false) {
     console.log("pending === false");
@@ -176,7 +182,7 @@ function AdminCourses(props) {
             <p>The total number of courses in LovLearning Academy is {courses[0].length}</p>
           </div>
           <div>
-            <button>Create new course<span></span></button>
+            <button onClick={createCourse}>Create new course<span></span></button>
           </div>
           <div className={classes["table-container"]}>
             <table className={classes["coursesPage-main-table"]}>
@@ -192,7 +198,7 @@ function AdminCourses(props) {
                 {currentCourses.map((course, i) => {
                   return (
                     <tr className={classes["coursesPage-info"]} key={i}>
-                      <td>{course.id}</td>
+                      <td>{i + 1}</td>
                       <td>{course.title}</td>
                       <td>{course._id}</td>
                       <td onClick={() => { onHandlerClick(course._id, "INFO") }} className={classes["info-button"]}><FontAwesomeIcon onClick={() => { onHandlerClick(course._id, "INFO") }} icon={faEye} size='xl' /></td>

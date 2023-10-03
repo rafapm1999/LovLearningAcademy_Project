@@ -10,19 +10,10 @@ function AdminCourseModal(props) {
     const hoursRef = useRef("");
     const courseInfoRef = useRef("");
     const titleRemoveRef = useRef("");
-    
+
     const fetchEditCourse = async (id) => {
         console.log(titleRef.current.value);
         console.log(courseInfoRef.current.value);
-
-        const editCourseJSON = {
-            title: titleRef.current.value === "" ? props.courseData.title : titleRef.current.value,
-            info: courseInfoRef.current.value === "" ? props.courseData.info : courseInfoRef.current.value,
-            image: imageRef.current.value === "" ? props.courseData.image : imageRef.current.value,
-            level: levelRef.current.value === "" ? props.courseData.level : levelRef.current.value,
-            quantityHours: hoursRef.current.value === "" ? props.courseData.quantityHours : hoursRef.current.value,
-        }
-        console.log(editCourseJSON);
         try {
             const response = await fetch(
                 `http://localhost:8000/courses/edit/${id}`,
@@ -44,7 +35,7 @@ function AdminCourseModal(props) {
             console.log(data.data);
             if (response.ok) {
                 console.log("HA SALIDO BIEN!!!");
-                return(props.onPending);  
+                return (props.onPending);
             }
 
         } catch (error) {
@@ -54,16 +45,41 @@ function AdminCourseModal(props) {
         }
     };
 
+    const fetchRemoveCourse = async (id) => {
+        try {
+            const response = await fetch(
+                `http://localhost:8000/courses/delete/${id}`,
+                {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+            const data = await response.json();
+            console.log(data.data);
+            if (response.ok) {
+                console.log("HA BORRADO EL CURSO BIEN!!!");
+                return (handlerClose());
+            }
+        } catch (error) {
+            console.log("Error de algo");
+            console.log(error);
+            navigate(`/error-page`, { state: error });
+        }
+        console.log('Hola');
+
+    }
+
     const handlerClose = (e) => {
-        if (e === "info") {
-            return props.onClose;
-        } else if (e === "EDIT" || e === "REMOVE") {
-            /* Hacer que el formulario se resetee cuando se clicka en X en los modals */
-            console.log("HAS DADO A HANDLERCLOSE EDIT");
-            return (props.onClose);
-        };
-        return(props.onPending)
-    };
+        console.log('Has entrado en handlerClose');
+
+        return e === "INFO" || e === "EDIT" || e === "REMOVE" ? props.onClose : props.onPending;
+    }
+
+
+
+
 
 
     if (props.clickType === "INFO") {
@@ -77,7 +93,7 @@ function AdminCourseModal(props) {
                                 <div className={classes["info-container"]}>
                                     <div className={classes["course-header"]}>
                                         <div className={classes["info-title"]}>
-                                            <p> Nº: {props.courseData.id}</p>
+                                            {/* <p> Nº: {props.courseData.id}</p> */}
                                             <p className={classes["course-title"]}>{props.courseData.title}</p>
                                             <p> ID: {props.courseData._id}</p>
                                         </div>
@@ -100,7 +116,7 @@ function AdminCourseModal(props) {
                                         <p className={classes["course-info-title"]}>Course Description</p>
                                         <p>{props.courseData.info}</p>
                                     </div>
-                                    <button onClick={handlerClose("info")} className={classes["md-close"]}><span>X</span></button>
+                                    <button onClick={handlerClose("INFO")} className={classes["md-close"]}><span>X</span></button>
                                 </div>
                             </div>
                         </div>
@@ -207,7 +223,7 @@ function AdminCourseModal(props) {
                                             </button>
                                         </div>
                                     </form>
-                                    <button onClick={handlerClose("EDIT", "editCourseForm")} className={classes["md-close"]}><span>X</span></button>
+                                    <button onClick={handlerClose("EDIT")} className={classes["md-close"]}><span>X</span></button>
                                 </div>
                             </div>
                         </div>
@@ -218,9 +234,20 @@ function AdminCourseModal(props) {
         );
     } else if (props.clickType === "REMOVE") {
         const handleSubmitRemove = (e) => {
+
+
+            const courseTitle = titleRemoveRef.current.value;
             e.preventDefault();
-            if (props.courseData.title === titleRemoveRef.current.value) {
+            console.log(props.courseData.title);
+            console.log(courseTitle);
+            if (props.courseData.title === courseTitle) {
                 console.log('Fetch para remove the course');
+                let id = props.courseData._id;
+                console.log('Fetch Remove course');
+                fetchRemoveCourse(id);
+                handlerClose("REMOVE");
+            } else {
+                console.log('Titulo e input no son iguales');
             }
         }
         return (
@@ -247,13 +274,13 @@ function AdminCourseModal(props) {
                                             />
                                         </div>
                                         <div className={`${classes["remove-button"]} ${classes["submit-button"]}`}>
-                                            <button type="submit">
+                                            <button type="submit" onClick={handlerClose()}>
                                                 <span>REMOVE</span>
                                             </button>
                                         </div>
                                     </form>
                                 </div>
-                                <button onClick={handlerClose("REMOVE", "removeCourseForm")} className={classes["md-close"]}><span>X</span></button>
+                                <button onClick={handlerClose("REMOVE")} className={classes["md-close"]}><span>X</span></button>
                             </div>
                         </div>
                         <div className={classes["md-overlay"]} />

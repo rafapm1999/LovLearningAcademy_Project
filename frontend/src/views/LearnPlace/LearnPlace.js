@@ -8,7 +8,6 @@ function LearnPlace(props) {
   console.log(user);
   console.log(courses);
   const onHandlerClick = () => { };
-
   return (
     <div className={classes["main-container"]}>
       <h1 className={classes.title}>MyLearnplace</h1>

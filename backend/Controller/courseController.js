@@ -45,7 +45,7 @@ const postCourse = async (req, res) => {
     //Enviamos respuesta de que todo se ha realizado correctamente
     res.status(201).json({
       status: "succeeded",
-      data: "User create!",
+      data: "Course create!",
       error: null,
     });
   } catch (error) {

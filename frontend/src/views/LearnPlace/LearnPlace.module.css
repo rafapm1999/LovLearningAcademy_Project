@@ -47,3 +47,25 @@
 .coursesLearnPage-info:hover {
   background: radial-gradient(transparent, white, rgb(235, 235, 235));
 }
+.pagination-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.9rem;
+  margin-bottom: 2rem;
+}
+.pagination-container {
+  box-shadow: 0 0 6px 1px rgb(160, 160, 160);
+}
+.pagination-info {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 40vw;
+  padding: 0.9rem;
+}
+.pagination-info > button {
+  background-color: transparent;
+  padding: 1rem;
+}
+

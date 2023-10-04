@@ -22,11 +22,11 @@ function AdminCreateCourse() {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                        title: titleRef.current.value ,
-                        info: courseInfoRef.current.value ,
-                        image: imageRef.current.value ,
-                        level: levelRef.current.value ,
-                        quantityHours: hoursRef.current.value ,
+                        title: titleRef.current.value,
+                        info: courseInfoRef.current.value,
+                        image: imageRef.current.value,
+                        level: levelRef.current.value,
+                        quantityHours: hoursRef.current.value,
                     }),
                 }
             );
@@ -48,11 +48,13 @@ function AdminCreateCourse() {
         fetchCreateCourse();
     }
     return (
-        <div>
-            <div><h1>AdminCreateCourse</h1></div>
+        <div className={classes["main-container"]}>
+            <div>
+                <h1>Create new course</h1>
+            </div>
             <div className={classes["info-container"]}>
                 <form onSubmit={handleSubmitEdit}>
-                    <div className={classes["edit-title"]}>
+                    <div className={classes["title"]}>
                         <div>
                             <p>Title</p>
                             <input
@@ -65,13 +67,13 @@ function AdminCreateCourse() {
                             />
                         </div>
                     </div>
-                    <div className={classes["edit-image"]}>
+                    <div className={classes["image"]}>
                         <div>
                             <input type="file" id="courseImage" name="image" accept="image/png, image/jpeg" ref={imageRef} required />
                         </div>
                     </div>
                     <div className={classes["level-hours-section"]}>
-                        <div className={classes["edit-level"]}>
+                        <div className={classes["level"]}>
                             <p>Level</p>
                             <select name="select" ref={levelRef}>
                                 <option value="Easy">Easy</option>
@@ -79,7 +81,7 @@ function AdminCreateCourse() {
                                 <option value="Hard">Hard</option>
                             </select>
                         </div>
-                        <div className={classes["edit-hours"]}>
+                        <div className={classes["hours"]}>
                             <p>Quantity Hours</p>
                             <input
                                 ref={hoursRef}
@@ -91,18 +93,18 @@ function AdminCreateCourse() {
                             <span> Hours</span>
                         </div>
                     </div>
-                    <div className={classes["edit-description"]}>
-                            <p>Description</p>
-                            <textarea
-                                ref={courseInfoRef}
-                                name="courseInfo"
-                                id="info"
-                                maxlength="50"
-                                rows={5}
-                                cols={40}
-                                placeholder='Course Description'
-                                required
-                            ></textarea>
+                    <div className={classes["description"]}>
+                        <p>Description</p>
+                        <textarea
+                            ref={courseInfoRef}
+                            name="courseInfo"
+                            id="info"
+                            maxlength="50"
+                            rows={5}
+                            cols={40}
+                            placeholder='Course Description'
+                            required
+                        ></textarea>
                     </div>
                     <div className={`${classes["save-button"]} ${classes["submit-button"]}`}>
                         <button type="submit">

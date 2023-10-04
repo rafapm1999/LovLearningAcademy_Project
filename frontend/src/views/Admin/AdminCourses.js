@@ -22,6 +22,7 @@ function AdminCourses(props) {
   //Creamos un useState para la palabra buscada
   const [wordSearch, setWordSearch] = useState("");
   const inputRef = useRef("");
+  //Paginación
   const [currentPage, setCurrentPage] = useState(1);
   const coursePerPage = 6;
 
@@ -157,7 +158,7 @@ function AdminCourses(props) {
           <div className={classes.title}>
             <h1>Courses</h1>
           </div>
-          <div className={classes.search}>
+          {/* <div className={classes.search}>
             <form onSubmit={handleSearch}>
               <input
                 ref={inputRef}
@@ -177,12 +178,12 @@ function AdminCourses(props) {
               />
               <button type="submit">Search</button>
             </form>
-          </div>
+          </div> */}
           <div className={classes["data-message"]}>
             <p>The total number of courses in LovLearning Academy is {courses[0].length}</p>
           </div>
-          <div>
-            <button onClick={createCourse}>Create new course<span></span></button>
+          <div className={classes["create-button-container"]}>
+            <button className={classes["create-button"]} onClick={createCourse}>Create new course<span></span></button>
           </div>
           <div className={classes["table-container"]}>
             <table className={classes["coursesPage-main-table"]}>

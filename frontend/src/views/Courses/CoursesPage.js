@@ -14,6 +14,9 @@ function CoursesPage() {
   const inputRef = useRef("");
   //Creamos un useState para la palabra buscada
   const [wordSearch, setWordSearch] = useState("");
+  //Paginación
+  const [currentPage, setCurrentPage] = useState(1);
+  const coursePerPage = 9;
   const navigate = useNavigate();
   const loaderFunction = () => {
     setTimeout(() => {
@@ -103,6 +106,16 @@ function CoursesPage() {
   }
 
   if (pending === true && courses[0].length !== 0) {
+     //Creación de la paginación del contenido de la tabla
+     const indexOfLastUser = currentPage * coursePerPage;
+     const indexOfFirstUser = indexOfLastUser - coursePerPage;
+     const currentCourses = courses[0].slice(indexOfFirstUser, indexOfLastUser);
+     const totalPages = Math.ceil(courses[0].length / coursePerPage);
+     const paginate = (pageNumber) => {
+       console.log("Has dado click");
+       console.log(currentCourses);
+       setCurrentPage(pageNumber);
+     };
     return (
       <div className={classes["coursesPage-root"]}>
         <div className={classes.title}>
@@ -130,7 +143,7 @@ function CoursesPage() {
           </form>
         </div>
         <div className={classes["coursesPage-main"]}>
-          {courses[0].map((course, i) => {
+          {currentCourses.map((course, i) => {
             return (
               <div
                 onClick={() => {
@@ -148,6 +161,16 @@ function CoursesPage() {
             );
           })}
         </div>
+        {/* Pagination component */}
+        <div className={classes["pagination-main"]}>
+            <div className={classes["pagination-container"]}>
+              <div className={classes["pagination-info"]}>
+                <button onClick={() => paginate(currentPage === 1 ? currentPage : currentPage - 1)}> <span>&#5176;</span> Back </button>
+                <span>Page {currentPage} of {totalPages}</span>
+                <button onClick={() => paginate(currentPage === totalPages ? currentPage : currentPage + 1)}> Next <span>&#5171;</span></button>
+              </div>
+            </div>
+          </div>
       </div>
     );
   } else if (courses[0].length === 0) {

@@ -2,39 +2,35 @@
 import { Fragment } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useState } from "react";
+import Loader from "../../components/Loader/Loader";
 
-function UserDashboard(props) {
+function UserDashboard() {
+    const [pending, setPending] = useState(false)
     const location = useLocation();
     const data = location.state;
     const userData = data.data.user;
     const navigate = useNavigate();
-    const handlerAdmin = () => {
-        navigate("/admin")
-    }
+    const loaderFunction = () => {
+        if (userData.role === "user") {
+            setTimeout(() => {
+                navigate("/mylearnplace")
+            }, 1500)
+            return (<Loader userData={userData}></Loader>)
+        }
+        if (userData.role === "admin") {
+            setTimeout(() => {
+                setPending(true)
+                navigate("/admin")
+            }, 1500)
+            return (<Loader userData={userData}></Loader>)
+        }
+    };
 
-    if (userData !== "") {
-        props.onUserInfo(userData);
-    }
+    if (pending === false) {
+        return loaderFunction();
+    };
 
-    console.log(data);
     
-    console.log(userData);
-
-    if (userData.role === "admin") {
-        return (
-        <Fragment>
-            <h1>Hello {userData.name}</h1>
-            <button onClick={handlerAdmin}>Go admin page</button>
-        </Fragment>
-        );
-    } else {
-        return (
-            <Fragment>
-                <h1>Hello {userData.name}</h1>
-            </Fragment>
-        );
-    }
 }
-
 export default UserDashboard;

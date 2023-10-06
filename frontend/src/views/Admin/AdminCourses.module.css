@@ -65,15 +65,16 @@
 .create-button-container .create-button{
  padding: 1.5rem;
  border: 2px solid  rgb(27, 172, 27);
- background: transparent;
+ background: rgb(27, 172, 27);
  font-weight: bold;
- color: rgb(27, 172, 27);
- transition-duration: 2 seg;
+ color: white;
+ transition-duration: 100ms;
  transition-timing-function: ease-in-out;
 }
 .create-button-container .create-button:hover{
-  color: white;
-  background: rgb(27, 172, 27);
+  color: rgb(27, 172, 27);
+  background: white;
+  cursor: pointer;
 }
 .table-container {
   display: flex;
@@ -143,4 +144,7 @@ td {
 .pagination-info > button {
   background-color: transparent;
   padding: 1rem;
+}
+.pagination-info > button:hover {
+  cursor: pointer;
 }

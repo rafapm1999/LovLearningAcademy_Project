@@ -67,7 +67,15 @@
 .navbar-button button:hover{
   background-color: #ffffff;
   color: #1e90ff;
+  cursor: pointer;
 }
-.navbar-button button > span{
+.navbar-button .logout{
+  margin-left: 1rem;
+}
+.logout span{
   margin-left: 0.5rem;
 }
+.navbar-button .profile{
+  margin-right: 0.5rem;
+}
+

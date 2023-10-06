@@ -34,7 +34,7 @@
   align-items: center;
   flex-direction: column;
   width: 30vw;
-  height: 40vh;
+  height: 45vh;
   background-color: transparent;
   padding: 2rem;
 }
@@ -67,5 +67,8 @@
 .pagination-info > button {
   background-color: transparent;
   padding: 1rem;
+}
+.pagination-info > button:hover {
+  cursor: pointer;
 }
 

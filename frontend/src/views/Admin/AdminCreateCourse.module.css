@@ -1,7 +1,122 @@
-.main-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    flex-direction: column;
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  flex-direction: column;
+}
+.main-container .info-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 75%;
+  margin-top: 2rem;
+  box-shadow: 0 0 6px 1px rgb(160, 160, 160);
+}
+.back-button-container{
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  width: 70%;
+}
+.back-button-container .back-button{
+  padding: .9rem;
+  border: 2px solid #1e90ff;
+  background:transparent;
+  color: #1e90ff;
+  
+  transition-duration: 100ms;
+  transition-timing-function: ease-in-out;
+}
+.info-container form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  flex-direction: column;
+  padding: 1rem;
+}
+.title{
+    width: 100%;
+}
+.title div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 1.2rem;
+}
+.title input{
+    text-align: center;
+    border: 1px solid black;
+    width: 50%;
+    padding: .9rem;
+}
+ /* p {
+  padding: 0.5rem 5rem;
+  margin-bottom: .5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  font-size: 1.5rem;
+} */
+.level-hours-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+}
+.level-hours-section .level{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 1rem 1rem 1rem 0;
+}
+.level select{
+  padding: 0.2rem;
+  border: 1px solid black;
+  background: transparent;
+}
+.level-hours-section .hours{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 1rem 0 1rem 1rem;
+}
+.hours input{
+  text-align: right;
+  padding: 0.2rem;
+ /*  width: 50%; */
+  border: 1px solid black;
+}
+.description{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.description textarea{
+  border: 1px solid black;
+  padding: 0.9rem;
+}
+.save-button{
+  margin-top: 2rem;
+}
+.save-button button{
+  padding: 1.9rem;
+  border: 3px solid #1e90ff;
+  background: #1e90ff;
+  color: white;
+  font-weight: bold;
+  transition-duration: 100ms;
+  transition-timing-function: ease-in-out;
+}
+.save-button button:hover{
+  background: white;
+  color:  #1e90ff;
+  cursor: pointer;
+}
+.save-button button:active{
+  box-shadow: 0 0 6px 1px rgb(160, 160, 160);
 }

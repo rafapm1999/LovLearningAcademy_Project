@@ -82,3 +82,6 @@
   background-color: transparent;
   padding: 1rem;
 }
+.pagination-info > button:hover {
+  cursor: pointer;
+}

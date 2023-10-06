@@ -21,6 +21,7 @@ import AdminMembers from "./views/Admin/AdminMembers"
 import AdminCourses from "./views/Admin/AdminCourses";
 import ErrorPage from "./views/ErrorPage/ErrorPage";
 import AdminCreateCourse from "./views/Admin/AdminCreateCourse";
+import Profile from "./views/Profile/Profile";
 /* import { useNavigate } from 'react-router-dom'; */
 
 function App() {
@@ -67,7 +68,7 @@ function App() {
         <AdminNavbar onLogin={userLogged} logout={logout}/>
         <Routes>
           <Route path="/user-dashboard" element={<UserDashboard userData={userData} onUserInfo={handlerUserInfo} />} />
-          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin" element={<AdminPage userData={userData}/>} />
           <Route path="/create-course" element={<AdminCreateCourse />} />
           <Route path="/bbdd-members" element={<AdminMembers />} />
           <Route path="/bbdd-courses" element={<AdminCourses />} />
@@ -87,6 +88,7 @@ function App() {
           <Route path="/course/:id" element={<CourseInfoPage userData={userData} onLogin={logged} newUserData={handlerUserInfo} />} />
           <Route path="/user-dashboard" element={<UserDashboard userData={userData} onUserInfo={handlerUserInfo} />} />
           <Route path="/mylearnplace" element={<LearnPlace userData={userData} newUserData={handlerUserInfo} />} />
+          <Route path="/profile" element={<Profile userData={userData}/>} />
           <Route path="/error-page" element={<ErrorPage />} />
         </Routes>
         <Footer></Footer>

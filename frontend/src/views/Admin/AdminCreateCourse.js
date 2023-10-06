@@ -47,10 +47,16 @@ function AdminCreateCourse() {
         e.preventDefault();
         fetchCreateCourse();
     }
+    const handlerBack = () => {
+        navigate(`/bbdd-courses`);
+    }
     return (
         <div className={classes["main-container"]}>
             <div>
                 <h1>Create new course</h1>
+            </div>
+            <div className={classes["back-button-container"]}>
+                <button className={classes["back-button"]} onClick={handlerBack}>BACK</button>
             </div>
             <div className={classes["info-container"]}>
                 <form onSubmit={handleSubmitEdit}>
@@ -69,6 +75,7 @@ function AdminCreateCourse() {
                     </div>
                     <div className={classes["image"]}>
                         <div>
+                            <p>Image</p>
                             <input type="file" id="courseImage" name="image" accept="image/png, image/jpeg" ref={imageRef} required />
                         </div>
                     </div>
@@ -83,14 +90,16 @@ function AdminCreateCourse() {
                         </div>
                         <div className={classes["hours"]}>
                             <p>Quantity Hours</p>
-                            <input
-                                ref={hoursRef}
-                                type="number"
-                                name="email"
-                                id="quntyHours"
-                                required
-                            />
-                            <span> Hours</span>
+                            <div>
+                                <input
+                                    ref={hoursRef}
+                                    type="number"
+                                    name="email"
+                                    id="quntyHours"
+                                    required
+                                />
+                                <span> Hours</span>
+                            </div>
                         </div>
                     </div>
                     <div className={classes["description"]}>
@@ -99,9 +108,9 @@ function AdminCreateCourse() {
                             ref={courseInfoRef}
                             name="courseInfo"
                             id="info"
-                            maxlength="50"
-                            rows={5}
-                            cols={40}
+                            maxlength="300"
+                            rows={10}
+                            cols={60}
                             placeholder='Course Description'
                             required
                         ></textarea>

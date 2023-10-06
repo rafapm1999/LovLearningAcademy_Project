@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 //Importamos FontAwesomeIcon para usarlo en el footer
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faArrowRightFromBracket,
+  faArrowRightFromBracket, faUser
 } from "@fortawesome/free-solid-svg-icons";
 
 function UserNavbar(props) {
@@ -25,11 +25,13 @@ function UserNavbar(props) {
           <div className={classes.links}>
             <Link className={classes.link} to="/courses" userData={userData}><span>Courses</span></Link>
             <Link className={classes.link} to="/mylearnplace" userData={userData}><span>MyLearnplace</span></Link>
-            <Link className={classes.link} to="/community" userData={userData}><span>Community</span></Link>
+            {/* <Link className={classes.link} to="/community" userData={userData}><span>Community</span></Link> */}
           </div>
         </div>
         <div className={classes["navbar-button"]}>
-          <button onClick={unlogged} className={classes.profile}> Log out <span><FontAwesomeIcon icon={faArrowRightFromBracket}/></span> </button>
+        <button onClick={() => {navigate("/profile")}} className={classes.profile}><span><FontAwesomeIcon icon={faUser}/></span></button>
+          <button onClick={unlogged} className={classes.logout}> Log out <span><FontAwesomeIcon icon={faArrowRightFromBracket}/></span> </button>
+          
         </div>
       </div>
     </Fragment>

@@ -26,11 +26,11 @@ function CourseInfoPage(props) {
       if (!Array.isArray(existingData.data.courses)) {
         existingData.data.courses = []; // Inicializar como un array vacío si no existe o no es un array
       }
-      
+
       // Verificar si el curso ya existe en el "user-dashboard"
       const courseExist = existingData.data.courses.some((course) => {
         console.log('Id de course');
-        
+
         console.log(course._id);
 
         console.log('Id de courseData');
@@ -115,6 +115,12 @@ function CourseInfoPage(props) {
           </div>
           <div className={classes["course-image"]}>
             <img src={courseData.data.image} alt={`Photo of the course ${courseData.data.title}`} />
+          </div>
+          <div className={classes["level-hopurs-container"]}>
+            <p>Level</p>
+            <p>{courseData.data.level === undefined ? "Level not specificated" : courseData.data.level}</p>
+            <p>Quantity Hours</p>
+            <p>{courseData.data.quantityHours === undefined ? "Quantity Hours not specificated" : courseData.data.quantityHours}</p>
           </div>
         </div>
         <div className={classes.buttons}>

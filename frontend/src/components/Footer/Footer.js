@@ -28,7 +28,7 @@ const Footer = () => {
             <Heading>Socials</Heading>
             <LinkContainer>
               <FooterLink target="blank" href="https://www.twitter.com">
-                <FontAwesomeIcon icon={faSquareTwitter} size="2xl" />
+                <FontAwesomeIcon icon={faSquareTwitter} size="2xl" /> 
               </FooterLink>
               <FooterLink target="blank" href="https://www.linkedin.com">
                 <FontAwesomeIcon icon={faLinkedin} size="2xl" />

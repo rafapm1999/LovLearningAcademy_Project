@@ -8,7 +8,7 @@ function LearnPlace(props) {
   let courses = user.courses;
   console.log(user);
   console.log(courses);
-  
+
   //Paginación
   const [currentPage, setCurrentPage] = useState(1);
   const coursePerPage = 3;
@@ -22,8 +22,34 @@ function LearnPlace(props) {
     console.log(currentCourses);
     setCurrentPage(pageNumber);
   };
-  
+
   const onHandlerClick = () => { };
+  if (courses.length === 0) {
+    return (
+      <div className={classes["main-container"]}>
+        <h1 className={classes.title}>MyLearnplace</h1>
+        <div className={classes["user-info-container"]}>
+
+          <div className={classes["details-info-title"]}>
+            <p>Hello {user.name}, you don't have any course in your MyLearnplace!</p>
+            <p>If you want to start to learn with the best courses you'll imagine...</p>
+            <p>Follow the next steps!</p>
+          </div>
+        </div>
+        <div className={classes["details-info-container"]} >
+          <div className={classes["steps"]}>
+            <ul>
+              <li className={classes["list-items"]}>Click in <span>Courses</span></li>
+              <li className={classes["list-items"]}><span></span>Choose the course you like the most and click it<span></span></li>
+              <li className={classes["list-items"]}>Press the <span>I want it!</span> button</li>
+              <li className={classes["list-items"]}>And start to learn it!</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    )
+
+  }
   return (
     <div className={classes["main-container"]}>
       <h1 className={classes.title}>MyLearnplace</h1>

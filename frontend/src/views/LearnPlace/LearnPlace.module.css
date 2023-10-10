@@ -71,4 +71,31 @@
 .pagination-info > button:hover {
   cursor: pointer;
 }
+.details-info-container{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+  height: 58vh;
+}
+.steps{
+  background-color: #1e90ff;
+}
+.details-info-title > p{
+  font-size: 1.9rem;
+  text-align: center;
+  margin: 1.9rem;
+}
+.details-info-title:nth-child(1){
+  border-top: 1px solid #000;
+  padding: .5rem;
+}
+.list-items{
+  list-style: none;
+  font-size: 1.5rem;
+  margin: 4rem;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
 

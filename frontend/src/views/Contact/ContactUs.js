@@ -69,7 +69,7 @@ function ContactUs() {
         <ContactModal data={commentInfo} visible={visible} onClose={handleClose} />,
         document.querySelector("#modal"))}
 
-      <div className="contactUs-root">
+      <div className={classes["contactUs-root"]}>
         <div className={classes.title}>
           <h1>Contact Us</h1>
         </div>

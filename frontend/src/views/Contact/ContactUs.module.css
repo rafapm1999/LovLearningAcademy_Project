@@ -1,4 +1,7 @@
-
+.contactUs-root{
+  width: 100vw;
+  height: auto;
+}
 form .form-info {
     width: 100vw;
     color: azure;
@@ -31,6 +34,7 @@ form .form-info {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 2.3em;
   }
   .submit-button button[type="submit"] {
     flex-wrap: wrap;

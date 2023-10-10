@@ -52,7 +52,7 @@ function LoginPage(props) {
           props.newUserData(data.data.user)
           //Usamos setTimeout para navegar a /user-dashboard usando state para guardar el data que nos devulve el fetch
           setTimeout(() => {
-            navigate("/user-dashboard", {state: data});
+            navigate("/loader-page", {state: data});
           }, 100);
         }
         //Revisar este codigo porque va relacionado con lo de border red si la info es incorrecta 

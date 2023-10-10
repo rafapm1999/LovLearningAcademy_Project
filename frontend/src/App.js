@@ -11,7 +11,7 @@ import Footer from "./components/Footer/Footer";
 import { Fragment } from "react";
 import CoursesPage from "./views/Courses/CoursesPage";
 import CourseInfoPage from "./views/Courses/CourseInfoPage";
-import UserDashboard from "./views/UserDashboard/UserDashboard";
+import LoaderPage from "./views/LoaderPage/LoaderPage";
 import { useState } from "react";
 import UserNavbar from "./components/Navbar/UserNavbar";
 import LearnPlace from "./views/LearnPlace/LearnPlace";
@@ -25,8 +25,11 @@ import Profile from "./views/Profile/Profile";
 /* import { useNavigate } from 'react-router-dom'; */
 
 function App() {
+  const [visible, setVisible] = useState(false);
   let [logged, setLogged] = useState(false);
   let [userData, setUserData] = useState({});
+  const [openProfile, setOpenProfile] = useState(false)
+
   /* const navigate = useNavigate(); */
 
   const userLogged = (data) => {
@@ -39,6 +42,8 @@ function App() {
   const logout = () => {
     setUserData(null);
   };
+
+ 
 
   if (logged === false) {
     console.log('Has entrado en logged = false');
@@ -63,15 +68,28 @@ function App() {
 
   } else if (logged === true && userData.role === "admin") {
     console.log('logged === true && userData.role === "admin"');
+
+    const openAdminProfile = () => {
+      console.log('Has entrado en openAdminProfile');
+      setVisible(true)
+      setOpenProfile(true)
+    }
+    console.log(openProfile);
+    const closeAdminProfile = () => {
+      console.log('Has entrado en closeAdminProfile');
+      setVisible(!visible)
+      setOpenProfile(false)
+    }
+    console.log(openProfile);
     return (
       <Fragment>
-        <AdminNavbar onLogin={userLogged} logout={logout}/>
+        <AdminNavbar onLogin={userLogged} logout={logout} userData={userData} openProfile={openAdminProfile} closeProfile={closeAdminProfile} visible={visible} openedProfile={openProfile}/>
         <Routes>
-          <Route path="/user-dashboard" element={<UserDashboard userData={userData} onUserInfo={handlerUserInfo} />} />
-          <Route path="/admin" element={<AdminPage userData={userData}/>} />
-          <Route path="/create-course" element={<AdminCreateCourse />} />
-          <Route path="/bbdd-members" element={<AdminMembers />} />
-          <Route path="/bbdd-courses" element={<AdminCourses />} />
+          <Route path="/loader-page" element={<LoaderPage userData={userData} onUserInfo={handlerUserInfo} closeProfile={closeAdminProfile} openedProfile={openProfile}/>} />
+          <Route path="/admin" element={<AdminPage userData={userData} visible={visible}/>} />
+          <Route path="/create-course" element={<AdminCreateCourse visible={visible}/>} />
+          <Route path="/bbdd-members" element={<AdminMembers visible={visible}/>} />
+          <Route path="/bbdd-courses" element={<AdminCourses openProfile={openProfile}/>} />
           <Route path="/error-page" element={<ErrorPage />} />
         </Routes>
       </Fragment>
@@ -86,7 +104,7 @@ function App() {
           <Route path="/courses" element={<CoursesPage></CoursesPage>} />
           <Route path="/contact" element={<ContactUs userData={userData} />} />
           <Route path="/course/:id" element={<CourseInfoPage userData={userData} onLogin={logged} newUserData={handlerUserInfo} />} />
-          <Route path="/user-dashboard" element={<UserDashboard userData={userData} onUserInfo={handlerUserInfo} />} />
+          <Route path="/loader-page" element={<LoaderPage userData={userData} onUserInfo={handlerUserInfo} />} />
           <Route path="/mylearnplace" element={<LearnPlace userData={userData} newUserData={handlerUserInfo} />} />
           <Route path="/profile" element={<Profile userData={userData}/>} />
           <Route path="/error-page" element={<ErrorPage />} />

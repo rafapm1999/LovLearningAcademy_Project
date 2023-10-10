@@ -22,7 +22,7 @@ function CoursesPage() {
     setTimeout(() => {
       setPending(true)
     }, 1500)
-    return (<Loader></Loader>)
+    return (<Loader pending={pending}></Loader>)
   };
 
 

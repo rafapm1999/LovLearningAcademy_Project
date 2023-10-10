@@ -1,6 +1,9 @@
 import './Loader.css';
 
 function Loader(props) {
+    console.log(props.firstTime);
+    console.log(props.pending);
+    console.log(props.userData);
     if (props.userData !== undefined) {
         return (
             <div className="main-container">
@@ -11,7 +14,16 @@ function Loader(props) {
                 </div>
             </div>
         )
-
+    }  else if ( props.adminRole === false ) {
+        return (
+            <div className="main-container">
+                <div className="loader-section">
+                    <h1>Preparing all the info...</h1>
+                    <div className="loader"></div>
+                    <h2>LovLearning Academy</h2>
+                </div>
+            </div>
+        )
     } else {
         return (
             <div className="main-container">
@@ -23,7 +35,7 @@ function Loader(props) {
             </div>
         )
 
-    }
+    } 
 }
 
 export default Loader;

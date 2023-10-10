@@ -20,7 +20,8 @@ export const Main = styled.div`
 `;
 // Container que envolverá la info del footer
 export const Container = styled.div`
-  padding: 2em;
+  padding: 2.6em;
+  
 `;
 // Creamos las columnas.
 export const Column = styled.div`

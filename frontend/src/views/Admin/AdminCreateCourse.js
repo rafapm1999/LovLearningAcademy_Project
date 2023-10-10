@@ -2,7 +2,7 @@ import classes from './AdminCreateCourse.module.css';
 import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
 
-function AdminCreateCourse() {
+function AdminCreateCourse(props) {
     const navigate = useNavigate();
     const titleRef = useRef("");
     const imageRef = useRef("");
@@ -51,7 +51,7 @@ function AdminCreateCourse() {
         navigate(`/bbdd-courses`);
     }
     return (
-        <div className={classes["main-container"]}>
+        <div className={`${classes["main-container"]} ${props.visible && classes["blur"]} ${props.openProfile && classes["blur"]}`}>
             <div>
                 <h1>Create new course</h1>
             </div>
@@ -122,6 +122,7 @@ function AdminCreateCourse() {
                     </div>
                 </form>
             </div>
+            <div className={`${props.visible && classes["modal-main"]} ${props.openProfile && classes["modal-main"]}`}></div>
         </div>
     )
 }

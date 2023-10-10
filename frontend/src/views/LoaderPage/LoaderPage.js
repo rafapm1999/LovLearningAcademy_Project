@@ -1,16 +1,23 @@
-/* import './UserDashboard.css'; */
+/* import './LoaderPage.css'; */
 import { Fragment } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Loader from "../../components/Loader/Loader";
+import { useEffect } from "react";
 
-function UserDashboard() {
+function LoaderPage(props) {
     const [pending, setPending] = useState(false)
+    const [adminRole, setAdminRole] = useState(false)
     const location = useLocation();
     const data = location.state;
     const userData = data.data.user;
     const navigate = useNavigate();
+    const closeAll = () => {
+        if (props.openedProfile !== false) {
+          return props.closeProfile();
+        }
+    }
     const loaderFunction = () => {
         if (userData.role === "user") {
             setTimeout(() => {
@@ -19,11 +26,13 @@ function UserDashboard() {
             return (<Loader userData={userData}></Loader>)
         }
         if (userData.role === "admin") {
+            closeAll();
             setTimeout(() => {
-                setPending(true)
-                navigate("/admin")
+                setPending(true);
+                setAdminRole(true)
+                navigate("/bbdd-members")
             }, 1500)
-            return (<Loader userData={userData}></Loader>)
+            return (<Loader userData={userData} adminRole={adminRole}></Loader>)
         }
     };
 
@@ -31,6 +40,6 @@ function UserDashboard() {
         return loaderFunction();
     };
 
-    
+
 }
-export default UserDashboard;
+export default LoaderPage;

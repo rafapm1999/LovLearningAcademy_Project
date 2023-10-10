@@ -3,8 +3,9 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
 
-function AdminMembers() {
+function AdminMembers(props) {
   const [pending, setPending] = useState(false);
+  const [adminRole, setAdminRole] = useState(false)
   const [users, setUsers] = useState([])
   const [usersCopy, setUsersCopy] = useState([]);
   const [wordSearch, setWordSearch] = useState("");
@@ -16,8 +17,9 @@ function AdminMembers() {
   const loaderFunction = () => {
     setTimeout(() => {
       setPending(true)
+      setAdminRole(!adminRole)
     }, 1500)
-    return (<Loader></Loader>)
+    return (<Loader pending={pending} adminRole={adminRole}></Loader>)
   };
 
   const allUsers = async () => {
@@ -37,6 +39,7 @@ function AdminMembers() {
         if (response.ok) {
           setUsers(Array(data.data));
           setUsersCopy(Array(data.data))
+
         }
       } catch (error) {
         console.log("Error de algo");
@@ -54,7 +57,7 @@ function AdminMembers() {
 
   const onHandlerClick = () => { };
 
-  //Funcion para cuando se hace el submit cal pulsar el boton search
+  //Funcion para cuando se hace el submit al pulsar el boton search
   const handleSearch = (e) => {
     e.preventDefault()
     const filteredUsers = users[0].filter(user =>
@@ -84,7 +87,7 @@ function AdminMembers() {
 
     console.log(Math.ceil(users[0].length / usersPerPage));
     return (
-      <div className={classes["usersPage-root"]}>
+      <div className={`${classes["usersPage-root"]} ${props.visible && classes["blur"]} ${props.openProfile && classes["blur"]}`}>
         <div className={classes.title}>
           <h1>Users</h1>
         </div>
@@ -113,7 +116,7 @@ function AdminMembers() {
           <p>The total number of registered users in LovLearning Academy is {users[0].length}</p>
         </div>
 
-        
+
         <div className={classes["table-container"]}>
           <table className={classes["usersPage-main-table"]}>
             <tr>
@@ -142,14 +145,15 @@ function AdminMembers() {
         <div className={classes["pagination-main"]}>
           <div className={classes["pagination-container"]}>
             <div className={classes["pagination-info"]}>
-          
-                  <button onClick={() => paginate(currentPage === 1 ? currentPage : currentPage - 1)}> <span>&#5176;</span> Back </button>
-                  <span>Page {currentPage} of {totalPages}</span>
-                  <button onClick={() => paginate(currentPage === totalPages ? currentPage : currentPage + 1)}> Next <span>&#5171;</span></button>
-          
+
+              <button onClick={() => paginate(currentPage === 1 ? currentPage : currentPage - 1)}> <span>&#5176;</span> Back </button>
+              <span>Page {currentPage} of {totalPages}</span>
+              <button onClick={() => paginate(currentPage === totalPages ? currentPage : currentPage + 1)}> Next <span>&#5171;</span></button>
+
             </div>
           </div>
         </div>
+        <div className={`${props.visible && classes["modal-main"]} ${props.openProfile && classes["modal-main"]}`}></div>
       </div>
     );
   };

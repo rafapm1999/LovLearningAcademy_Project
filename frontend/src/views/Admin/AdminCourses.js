@@ -8,9 +8,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEye, faPenToSquare, faTrashCan
 } from "@fortawesome/free-regular-svg-icons";
-import AdminCourseModal from '../Modal/AdminCoursesModal';
+import AdminCourseModal from '../Modal/AdminCourseModal';
 
 function AdminCourses(props) {
+  const [adminRole, setAdminRole] = useState(false)
   const [courses, setCourses] = useState([])
   const [coursesCopy, setCoursesCopy] = useState([]);
   const [courseID, setCourseID] = useState("")
@@ -30,8 +31,9 @@ function AdminCourses(props) {
   const loaderFunction = () => {
     setTimeout(() => {
       setPending(true)
+      setAdminRole(!adminRole)
     }, 1500)
-    return (<Loader></Loader>)
+    return (<Loader adminRole={adminRole}></Loader>)
   };
 
   const fetchCourses = async (e) => {
@@ -147,14 +149,14 @@ function AdminCourses(props) {
     console.log('userdata');
     console.log(props.userData);
     console.log(courses);
-
+    console.log(props.openProfile);
     return (
       <>
         {ReactDOM.createPortal(
           <AdminCourseModal courseId={courseID} courseData={courseData} adminData={props.userData} clickType={clickAction} visible={visible} onClose={handleClose} onPending={handlerPending} />,
           document.querySelector("#modal")
         )}
-        <div className={`${classes["coursesPage-root"]} ${visible && classes["blur"]}`}>
+        <div className={`${classes["coursesPage-root"]} ${visible && classes["blur"]} ${props.openProfile && classes["blur"]}`}>
           <div className={classes.title}>
             <h1>Courses</h1>
           </div>
@@ -221,7 +223,7 @@ function AdminCourses(props) {
               </div>
             </div>
           </div>
-          <div className={`${visible && classes["modal-main"]}`}></div>
+          <div className={`${visible && classes["modal-main"]} ${props.openProfile && classes["modal-main"]}`}></div>
         </div>
       </>
     );

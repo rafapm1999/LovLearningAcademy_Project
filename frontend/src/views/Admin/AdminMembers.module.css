@@ -2,6 +2,17 @@
   height: 100vh;
   width: 100vw;
 }
+.modal-main {
+  z-index: 1000;
+  width: 100vw;
+  height: 90vh;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+}
+.blur {
+  filter: blur(5px);
+}
 .title {
   display: flex;
   justify-content: center;

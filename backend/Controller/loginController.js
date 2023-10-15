@@ -100,7 +100,7 @@ const login = async (req, res) => {
     }); */
   }
 };
-
+//PATCH 
 const update = async (req, res) => {
   try {
     const data = await Login.findByIdAndUpdate(
@@ -117,7 +117,7 @@ const update = async (req, res) => {
     });
   }
 };
-
+//GET
 const getuser = async (req, res) => {
   try {
     const data = await Login.findById(
@@ -132,7 +132,7 @@ const getuser = async (req, res) => {
     });
   }
 };
-
+//GET
 const alluser = async (req, res) => {
   try {
     const data = await Login.find();
@@ -145,5 +145,23 @@ const alluser = async (req, res) => {
     });
   }
 };
+//POST intento de borrar cursos de users concretos
+//AUN NO ESTA ACABADO
+const deleteusercourse = async (req, res) => {
+  try {
+    const data = await Login.findByIdAndDelete(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.status(200).json({ status: "update course", data, error: null });
+  } catch (error) {
+    res.status(404).json({
+      status: "no ha salido bien",
+      data: null,
+      error: error.message,
+    });
+  }
+};
 
-module.exports = { signup, login, update, getuser, alluser };
+module.exports = { signup, login, update, getuser, alluser, deleteusercourse };

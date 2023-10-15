@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const getRegisterAt = () => {
-  return Date.now().toString();
+  return  new Date();
 };
 
 const generateToken = (user, isRefreshToken) => {

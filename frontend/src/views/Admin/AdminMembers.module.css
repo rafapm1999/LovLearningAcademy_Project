@@ -1,5 +1,5 @@
 .usersPage-root{
-  height: 100vh;
+  height: 90vh;
   width: 100vw;
 }
 .modal-main {
@@ -59,7 +59,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
+  margin-top: 5em;
 }
 .usersPage-main-table {
   margin: 1rem 3rem;

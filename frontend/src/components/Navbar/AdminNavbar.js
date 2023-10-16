@@ -38,7 +38,7 @@ function AdminNavbar(props) {
         document.querySelector("#modal")
       )}
       <div className={classes["navbar-main"]}>
-        <div className={classes["navbar-logo"]}><Link className={classes.logo} to="/admin">LovLearning Academy</Link></div>
+        <div className={classes["navbar-logo"]}><p className={classes.logo}>LovLearning Academy</p></div>
         <div className={classes["navbar-links"]}>
           <div className={classes.links}>
             <Link onClick={closeAll} className={classes.link} to="/bbdd-members"><span>All Members</span></Link>

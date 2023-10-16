@@ -3,16 +3,14 @@ import { useState } from 'react';
 //Importamos FontAwesomeIcon para usarlo en INFO, EDIT y REMOVE
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-   faTrashCan
+  faTrashCan
 } from "@fortawesome/free-regular-svg-icons";
+import { useNavigate } from 'react-router-dom';
 
 function Profile(props) {
-  const data = props.userData;
-  const date = new Date;
-  const registered = String(data.registerAt.split("", 10));
-  const courses = props.userData.courses;
-  console.log(typeof (registered));
-  console.log(date);
+  let data = props.userData;
+  let courses = props.userData.courses
+  const navigate = useNavigate();
 
   //Paginación
   const [currentPage, setCurrentPage] = useState(1);
@@ -28,26 +26,23 @@ function Profile(props) {
     console.log(currentCourses);
     setCurrentPage(pageNumber);
   };
-/* Aun no esta acabado */
+  //Fetch para eliminar el course seleccionado
   const fetchRemoveCourse = async (userID, courseID) => {
     try {
-      const response = await fetch(`http://localhost:8000/auth/${userID}`, {
-        method: "GET",
+      const response = await fetch(`http://localhost:8000/auth/deleteusercourse/${userID}/${courseID}`, {
+        method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
       });
       const data = await response.json();
       if (response.ok) {
-        setCourseData(data.data)
-        console.log("Has entrado en response.ok");
         console.log(data.data);
-        setTimeout(() => {
-          setVisible(!visible)
-        }, 100)
+        props.newUserData(data.data.user);
+        navigate("/loader-page", {state: data})
       };
     } catch (error) {
-      
+
     }
   }
 
@@ -87,7 +82,7 @@ function Profile(props) {
                         <td>{course.level === undefined ? "Not specificated" : course.level}</td>
                         <td>{course.quantityHours === undefined ? "Not specificated" : course.quantityHours}</td>
                         <td><img src={course.image} alt="" /></td>
-                        <td onClick={() => { onHandlerClick(userData._id, course._id) }} className={classes["remove-button"]}><FontAwesomeIcon onClick={() => { onHandlerClick(course._id) }} icon={faTrashCan} size='xl' /></td>
+                        <td onClick={() => { onHandlerClick(props.userData._id, course._id) }} className={classes["remove-button"]}><FontAwesomeIcon onClick={() => { onHandlerClick(props.userData._id, course._id) }} icon={faTrashCan} size='xl' /></td>
                       </tr>
                     );
                   })}

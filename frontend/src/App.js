@@ -36,6 +36,7 @@ function App() {
     setLogged(data);
   };
   const handlerUserInfo = (e) => {
+    console.log("Has entrado en handlerUserInfo");
     setUserData(e);
   };
 
@@ -106,15 +107,22 @@ function App() {
           <Route path="/course/:id" element={<CourseInfoPage userData={userData} onLogin={logged} newUserData={handlerUserInfo} />} />
           <Route path="/loader-page" element={<LoaderPage userData={userData} onUserInfo={handlerUserInfo} />} />
           <Route path="/mylearnplace" element={<LearnPlace userData={userData} newUserData={handlerUserInfo} />} />
-          <Route path="/profile" element={<Profile userData={userData}/>} />
+          <Route path="/profile" element={<Profile userData={userData} newUserData={handlerUserInfo}/>} />
           <Route path="/error-page" element={<ErrorPage />} />
         </Routes>
         <Footer></Footer>
       </Fragment>
     );
-
-
-
+  } else {
+    return (
+      <Fragment>
+       <Navbar></Navbar>
+      <Routes>
+        <Route path="/error-page" element={<ErrorPage />} />
+      </Routes>
+      <Footer></Footer>
+    </Fragment>
+  );
   }
 }
 

@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Loader from "../../components/Loader/Loader";
-import { useEffect } from "react";
+/* import { useEffect } from "react"; */
 
 function LoaderPage(props) {
     const [pending, setPending] = useState(false)
@@ -12,6 +12,7 @@ function LoaderPage(props) {
     const location = useLocation();
     const data = location.state;
     const userData = data.data.user;
+    console.log(data.data.user);
     const navigate = useNavigate();
     const closeAll = () => {
         if (props.openedProfile !== false) {

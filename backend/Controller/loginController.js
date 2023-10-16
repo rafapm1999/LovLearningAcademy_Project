@@ -145,21 +145,54 @@ const alluser = async (req, res) => {
     });
   }
 };
-//POST intento de borrar cursos de users concretos
-//AUN NO ESTA ACABADO
+//DELETE => Borrar cursos de users concretos
+
 const deleteusercourse = async (req, res) => {
   try {
-    const data = await Login.findByIdAndDelete(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
-    res.status(200).json({ status: "update course", data, error: null });
+    // Obtén el ID del usuario de la solicitud
+    const userId = req.params.userID; // Asumiendo que el parámetro se llama 'userId'
+    const courseId = req.params.courseID; // Asumiendo que el parámetro se llama 'courseId'
+
+    // Busca al usuario por ID
+    const user = await Login.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({
+        status: "Usuario no encontrado",
+        data: null,
+        error: "El usuario no existe",
+      });
+    }
+
+    // Encuentra el índice del curso que deseas eliminar en la lista de cursos del usuario
+    const courseIndex = user.courses.map((course) => {
+      return course._id;
+    }).indexOf(courseId);
+
+    if (courseIndex === -1) {
+      return res.status(404).json({
+        status: "Curso no encontrado",
+        data: null,
+        error: "El curso no existe en la lista de cursos del usuario",
+      });
+    }
+
+    // Elimina el curso del array de cursos del usuario
+    user.courses.splice(courseIndex, 1);
+
+    // Guarda los cambios en la base de datos
+    await user.save();
+
+    return res.status(200).json({
+      status: "Éxito",
+      data: {user},
+      error: null,
+    });
   } catch (error) {
-    res.status(404).json({
-      status: "no ha salido bien",
+    return res.status(500).json({
+      status: "Error del servidor",
       data: null,
-      error: error.message,
+      error: "Fallo",
     });
   }
 };

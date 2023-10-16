@@ -91,7 +91,7 @@ function AdminMembers(props) {
         <div className={classes.title}>
           <h1>Users</h1>
         </div>
-        <div className={classes.search}>
+        {/* <div className={classes.search}>
           <form onSubmit={handleSearch}>
             <input
               ref={inputRef}
@@ -111,7 +111,7 @@ function AdminMembers(props) {
             />
             <button type="submit">Search</button>
           </form>
-        </div>
+        </div> */}
         <div className={classes["data-message"]}>
           <p>The total number of registered users in LovLearning Academy is {users[0].length}</p>
         </div>

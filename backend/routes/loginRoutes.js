@@ -14,6 +14,6 @@ router.get("/getuser/:id", loginController.getuser)
 //ENDPOINT para coger todos los ususarios => /alluser
 router.get("/alluser", loginController.alluser)
 //ENDPOINT para coger todos los ususarios => /alluser
-router.patch("/deleteusercourse", loginController.deleteusercourse)
+router.delete("/deleteusercourse/:userID/:courseID", loginController.deleteusercourse)
 
 module.exports = router;

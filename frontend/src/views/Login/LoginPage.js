@@ -1,7 +1,7 @@
 import Login from "./LoginForm";
 /* import classes from "./LoginPage.module.css"; */
 import { useNavigate } from "react-router-dom";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { validateEmail, validatePassword } from "../../utils/validate";
 
 function LoginPage(props) {
@@ -12,12 +12,17 @@ function LoginPage(props) {
     email: "",
     password: "",
   });
-  //Este codigo esta en desuso 
-  /* if (login === true) {
-    setTimeout(() => {
-      navigate("/signup");
-    }, 100);
-  } */
+  
+  //Funcion para hacer un scroll top
+  const scrollTop = (e) => {
+    window.scrollTo({
+      top: 0,
+      behavior: `${e}`, // Opcional, para tener una animación suave
+    });
+  }
+  useEffect(()=> {
+    scrollTop("auto")
+  })
 
   const handleVisibility = async (loginData) => {
     if (

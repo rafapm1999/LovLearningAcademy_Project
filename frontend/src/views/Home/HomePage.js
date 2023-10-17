@@ -26,6 +26,13 @@ function HomePage() {
             Learn new skills with an awesome <span>{words[index]}</span>
           </h1>
         </div>
+        <div className={`${classes["homePage-info"]}`}>
+        <div className={classes["info-container"]}>
+          <h3>
+            The favorite place for<span>learning lovers</span>
+          </h3>
+        </div>
+      </div>
       </div>
       <div className={classes["CoursesCarrousel"]}>
       </div>
@@ -58,13 +65,7 @@ function HomePage() {
           </section>
         </div>
       </div>
-      <div className={`${classes["homePage-info"]}`}>
-        <div className={classes["info-container"]}>
-          <h3>
-            The favorite place for<span>learning lovers</span>
-          </h3>
-        </div>
-      </div>
+      
 
       <div className={classes["homePage-footer"]}>
         <div className={classes.icons}></div>

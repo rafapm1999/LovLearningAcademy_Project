@@ -19,8 +19,11 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 //Declaramos el footer y hacemos la estructura importando los elementos declarados
 // en FooterStyles.js
-const Footer = () => {
-  return (
+const Footer = (props) => {
+  console.log(props.userData);
+  let data = props.userData;
+ if (data !== undefined && data.role === "user" ) {
+  return(
     <Main>
       <Container>
         <Row>
@@ -28,7 +31,7 @@ const Footer = () => {
             <Heading>Socials</Heading>
             <LinkContainer>
               <FooterLink target="blank" href="https://www.twitter.com">
-                <FontAwesomeIcon icon={faSquareTwitter} size="2xl" /> 
+                <FontAwesomeIcon icon={faSquareTwitter} size="2xl" />
               </FooterLink>
               <FooterLink target="blank" href="https://www.linkedin.com">
                 <FontAwesomeIcon icon={faLinkedin} size="2xl" />
@@ -39,16 +42,45 @@ const Footer = () => {
             </LinkContainer>
           </Column>
           <Column>
-            <Heading>About Us</Heading>
-            <FooterLink href="/about">Info</FooterLink>
-          </Column>
-          <Column>
-            <Heading>Contact us</Heading>
-            <FooterLink href="/contact">Contact form</FooterLink>
+            <Heading>Made with love for CodeSpace Academy</Heading>
           </Column>
         </Row>
       </Container>
     </Main>
-  );
+    )
+ } else{
+  return(
+    <Main>
+  <Container>
+    <Row>
+      <Column>
+        <Heading>Socials</Heading>
+        <LinkContainer>
+          <FooterLink target="blank" href="https://www.twitter.com">
+            <FontAwesomeIcon icon={faSquareTwitter} size="2xl" />
+          </FooterLink>
+          <FooterLink target="blank" href="https://www.linkedin.com">
+            <FontAwesomeIcon icon={faLinkedin} size="2xl" />
+          </FooterLink>
+          <FooterLink target="blank" href="https://www.github.com">
+            <FontAwesomeIcon icon={faGithub} size="2xl" />
+          </FooterLink>
+        </LinkContainer>
+      </Column>
+      <Column>
+        <Heading>About Us</Heading>
+        <FooterLink href="/about">Info</FooterLink>
+      </Column>
+      <Column>
+        <Heading>Contact us</Heading>
+        <FooterLink href="/contact">Contact form</FooterLink>
+      </Column>
+    </Row>
+  </Container>
+</Main>
+  )
+ }
+    
+
 };
 export default Footer;

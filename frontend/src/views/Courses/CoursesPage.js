@@ -94,11 +94,18 @@ function CoursesPage() {
     console.log(filteredCourses);
   }
 
+  //Funcion para hacer un scroll top
+  const scrollTop = (e) => {
+    window.scrollTo({
+      top: 0,
+      behavior: `${e}`, // Opcional, para tener una animación suave
+    });
+  }
+
   /* Revisar esta parte y poner un loader para usarlo en !pending */
   /* if (!Array.isArray(courses)) {
 
     <h1>Hola Mundo</h1>
-
 
   } */
   if (pending === false) {
@@ -148,6 +155,7 @@ function CoursesPage() {
               <div
                 onClick={() => {
                   onHandlerClick(course._id);
+                  scrollTop("auto");
                 }}
                 className={classes["coursesPage-container"]}
                 key={course.id}
@@ -165,9 +173,15 @@ function CoursesPage() {
         <div className={classes["pagination-main"]}>
             <div className={classes["pagination-container"]}>
               <div className={classes["pagination-info"]}>
-                <button onClick={() => paginate(currentPage === 1 ? currentPage : currentPage - 1)}> <span>&#5176;</span> Back </button>
+                <button onClick={() => {
+                  paginate(currentPage === 1 ? currentPage : currentPage - 1)
+                  scrollTop("smooth");
+                  }}> <span>&#5176;</span> Back </button>
                 <span>Page {currentPage} of {totalPages}</span>
-                <button onClick={() => paginate(currentPage === totalPages ? currentPage : currentPage + 1)}> Next <span>&#5171;</span></button>
+                <button onClick={() => {
+                  paginate(currentPage === totalPages ? currentPage : currentPage + 1)
+                  scrollTop("smooth");
+                  }}> Next <span>&#5171;</span></button>
               </div>
             </div>
           </div>

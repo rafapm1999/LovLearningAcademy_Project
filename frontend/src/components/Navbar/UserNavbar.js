@@ -20,7 +20,7 @@ function UserNavbar(props) {
   return (
     <Fragment>
       <div className={classes["navbar-main"]}>
-        <div className={classes["navbar-logo"]}><Link className={classes.logo} to="/mylearnplace">LovLearning Academy</Link></div>
+        <div className={classes["navbar-logo"]}><p className={classes.logo} to="/mylearnplace">LovLearning Academy</p></div>
         <div className={classes["navbar-links"]}>
           <div className={classes.links}>
             <Link className={classes.link} to="/courses" userData={userData}><span>Courses</span></Link>

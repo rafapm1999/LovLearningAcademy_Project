@@ -119,13 +119,15 @@ function AdminMembers(props) {
 
         <div className={classes["table-container"]}>
           <table className={classes["usersPage-main-table"]}>
-            <tr>
-              <th>Name</th>
-              <th>Last Name</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Courses</th>
-            </tr>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Courses</th>
+              </tr>
+            </thead>
             <tbody>
               {currentUsers.map((user, i) => {
                 return (

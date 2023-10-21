@@ -67,17 +67,19 @@ function Profile(props) {
           courses.length !== 0 ?
             <div className={classes["table-container"]}>
               <table className={classes["coursesPage-main-table"]}>
-                <tr>
-                  <th>Title</th>
-                  <th>Level</th>
-                  <th>Total Hours</th>
-                  <th>Image</th>
-                  <th>Remove</th>
-                </tr>
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Level</th>
+                    <th>Total Hours</th>
+                    <th>Image</th>
+                    <th>Remove</th>
+                  </tr>
+                </thead>
                 <tbody>
                   {currentCourses.map((course, i) => {
                     return (
-                      <tr className={classes["coursesPage-info"]}>
+                      <tr className={classes["coursesPage-info"]}  key={i}>
                         <td>{course.title}</td>
                         <td>{course.level === undefined ? "Not specificated" : course.level}</td>
                         <td>{course.quantityHours === undefined ? "Not specificated" : course.quantityHours}</td>

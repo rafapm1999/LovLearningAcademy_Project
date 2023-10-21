@@ -12,7 +12,6 @@ function LoaderPage(props) {
     const location = useLocation();
     const data = location.state;
     const userData = data.data.user;
-    console.log(data.data.user);
     const navigate = useNavigate();
     const closeAll = () => {
         if (props.openedProfile !== false) {
@@ -20,7 +19,7 @@ function LoaderPage(props) {
         }
     }
     const loaderFunction = () => {
-        if (userData.role === "user") {
+        if (userData.role === "user") { 
             setTimeout(() => {
                 navigate("/mylearnplace")
             }, 1500)

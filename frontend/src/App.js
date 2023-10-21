@@ -28,7 +28,8 @@ function App() {
   const [visible, setVisible] = useState(false);
   let [logged, setLogged] = useState(false);
   let [userData, setUserData] = useState({});
-  const [openProfile, setOpenProfile] = useState(false)
+  const [openProfile, setOpenProfile] = useState(false);
+  let [changes, setChanges] = useState(false);
 
   /* const navigate = useNavigate(); */
 
@@ -36,7 +37,7 @@ function App() {
     setLogged(data);
   };
   const handlerUserInfo = (e) => {
-    console.log("Has entrado en handlerUserInfo");
+   
     setUserData(e);
   };
 
@@ -47,8 +48,7 @@ function App() {
  
 
   if (logged === false) {
-    console.log('Has entrado en logged = false');
-    console.log(userData);
+    
     return (
       <Fragment>
         <Navbar></Navbar>
@@ -68,20 +68,20 @@ function App() {
     );
 
   } else if (logged === true && userData.role === "admin") {
-    console.log('logged === true && userData.role === "admin"');
+   
 
     const openAdminProfile = () => {
-      console.log('Has entrado en openAdminProfile');
+      
       setVisible(true)
       setOpenProfile(true)
     }
-    console.log(openProfile);
+   
     const closeAdminProfile = () => {
-      console.log('Has entrado en closeAdminProfile');
+      
       setVisible(!visible)
       setOpenProfile(false)
     }
-    console.log(openProfile);
+   
     return (
       <Fragment>
         <AdminNavbar onLogin={userLogged} logout={logout} userData={userData} openProfile={openAdminProfile} closeProfile={closeAdminProfile} visible={visible} openedProfile={openProfile}/>
@@ -90,7 +90,7 @@ function App() {
           <Route path="/admin" element={<AdminPage userData={userData} visible={visible}/>} />
           <Route path="/create-course" element={<AdminCreateCourse visible={visible}/>} />
           <Route path="/bbdd-members" element={<AdminMembers visible={visible}/>} />
-          <Route path="/bbdd-courses" element={<AdminCourses openProfile={openProfile}/>} />
+          <Route path="/bbdd-courses" element={<AdminCourses openProfile={openProfile} makeChanges={setChanges}/>} />
           <Route path="/error-page" element={<ErrorPage />} />
         </Routes>
       </Fragment>
@@ -107,7 +107,7 @@ function App() {
           <Route path="/course/:id" element={<CourseInfoPage userData={userData} onLogin={logged} newUserData={handlerUserInfo} />} />
           <Route path="/loader-page" element={<LoaderPage userData={userData} onUserInfo={handlerUserInfo} />} />
           <Route path="/about" element={<AboutUs></AboutUs>} />
-          <Route path="/mylearnplace" element={<LearnPlace userData={userData} newUserData={handlerUserInfo} />} />
+          <Route path="/mylearnplace" element={<LearnPlace userData={userData} newUserData={handlerUserInfo} changesUpdate={setChanges} changes={changes}/>} />
           <Route path="/profile" element={<Profile userData={userData} newUserData={handlerUserInfo}/>} />
           <Route path="/error-page" element={<ErrorPage />} />
         </Routes>

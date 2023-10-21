@@ -50,7 +50,7 @@ function ContactUs() {
       //Con esta funcion según el resultado del fetch realizado modificaremos el contenido de nuestro modal, dependiendo de si response.ok o no
       const fetchData = await response.json();
       if (response.ok) {
-        console.log('Send Comment Successfully');
+        
 
         setCommentInfo({
           sending: true,
@@ -59,7 +59,7 @@ function ContactUs() {
         setVisible(!visible)
       }
     } catch (error) {
-      console.log('Send Comment Failed');
+      
       setCommentInfo("Comment sending Failed... try again.")
     }
   };
@@ -107,7 +107,7 @@ function ContactUs() {
               name="userComment"
               id="userCommentText"
               placeholder="What do you tell to us?"
-              maxlength="50"
+              maxLength="50"
             ></textarea>
           </div>
           <div className={`${classes["form-info"]} ${classes["submit-button"]}`}>

@@ -129,6 +129,11 @@ function AdminCourses(props) {
     navigate("/create-course")
   }
 
+  //Cuando se ha editado algun curso
+  const handlerChange = () => {
+    return props.makeChanges(true)
+  }
+
   if (pending === false) {
     console.log("pending === false");
     return loaderFunction();
@@ -153,7 +158,7 @@ function AdminCourses(props) {
     return (
       <>
         {ReactDOM.createPortal(
-          <AdminCourseModal courseId={courseID} courseData={courseData} adminData={props.userData} clickType={clickAction} visible={visible} onClose={handleClose} onPending={handlerPending} />,
+          <AdminCourseModal courseId={courseID} courseData={courseData} adminData={props.userData} clickType={clickAction} visible={visible} onClose={handleClose} onPending={handlerPending} onChange={handlerChange} />,
           document.querySelector("#modal")
         )}
         <div className={`${classes["coursesPage-root"]} ${visible && classes["blur"]} ${props.openProfile && classes["blur"]}`}>
@@ -189,14 +194,16 @@ function AdminCourses(props) {
           </div>
           <div className={classes["table-container"]}>
             <table className={classes["coursesPage-main-table"]}>
-              <tr>
-                <th>Order</th>
-                <th>Title</th>
-                <th>ID</th>
-                <th>Info</th>
-                <th>Edit</th>
-                <th>Remove</th>
-              </tr>
+              <thead>
+                <tr>
+                  <th>Order</th>
+                  <th>Title</th>
+                  <th>ID</th>
+                  <th>Info</th>
+                  <th>Edit</th>
+                  <th>Remove</th>
+                </tr>
+              </thead>
               <tbody>
                 {currentCourses.map((course, i) => {
                   return (

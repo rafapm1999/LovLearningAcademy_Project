@@ -84,7 +84,7 @@ function AdminCreateCourse(props) {
                             <p>Level</p>
                             <select name="select" ref={levelRef}>
                                 <option value="Easy">Easy</option>
-                                <option value="Medium" selected>Medium</option>
+                                <option value="Medium">Medium</option>
                                 <option value="Hard">Hard</option>
                             </select>
                         </div>

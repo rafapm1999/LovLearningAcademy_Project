@@ -20,7 +20,6 @@ import {
 //Declaramos el footer y hacemos la estructura importando los elementos declarados
 // en FooterStyles.js
 const Footer = (props) => {
-  console.log(props.userData);
   let data = props.userData;
  if (data !== undefined && data.role === "user" ) {
   return(

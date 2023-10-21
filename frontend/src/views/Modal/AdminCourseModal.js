@@ -132,8 +132,8 @@ function AdminCourseModal(props) {
             let id = props.courseData._id;
             console.log('Fetch Edit course');
             fetchEditCourse(id);
+            props.onChange();
             handlerClose();
-
         }
         return (
             <div>
@@ -245,6 +245,7 @@ function AdminCourseModal(props) {
                 let id = props.courseData._id;
                 console.log('Fetch Remove course');
                 fetchRemoveCourse(id);
+                props.onChange();
                 handlerClose("REMOVE");
             } else {
                 console.log('Titulo e input no son iguales');

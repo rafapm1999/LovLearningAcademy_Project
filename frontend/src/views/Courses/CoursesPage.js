@@ -40,21 +40,21 @@ function CoursesPage() {
           }
         );
         const data = await response.json();
-        console.log(data);
+       
         if (response.ok) {
           setCourses(Array(data.data));
           setCoursesCopy(Array(data.data));
         }
       } catch (error) {
-        console.log("Error de algo");
+        
         navigate(`/error-page`, { state: error });
       }
     }
   };
-  console.log(pending);
+  
   //Con esta función hacemos un fetch (GET) para cuando clickamos sobre un curso concreto
   const getCourse = async (id) => {
-    console.log(id);
+    
     try {
       const response = await fetch(`http://localhost:8000/courses/${id}`, {
         method: "GET",
@@ -64,12 +64,12 @@ function CoursesPage() {
       });
       const data = await response.json();
       if (response.ok) {
-        console.log(data);
+        
         //Si la respuesta es buena navegamos a la ruta definida, guardando los datos devueltos por el fetch en el state para usarlos posteriormente con useLocation
         navigate(`/course/${data.title}`, { state: data })
       }
     } catch (error) {
-      console.log("Algo ha fallado con el curso");
+      
       navigate(`/error-page`, { state: error });
     }
   };
@@ -80,10 +80,10 @@ function CoursesPage() {
 
   //Esta función nos genera el fetch del elemento concreto que hemos clickado gracias a que recibe su id
   const onHandlerClick = (id) => {
-    console.log(`Log del curso ${id}`);
+   
     getCourse(id);
   };
-  console.log(courses);
+ 
   //Funcion para cuando se hace el submit cal pulsar el boton search
   const handleSearch = (e) => {
     e.preventDefault()
@@ -91,7 +91,7 @@ function CoursesPage() {
       course.title.toLowerCase().includes(wordSearch.toLowerCase())
     );
     setCourses(Array(filteredCourses))
-    console.log(filteredCourses);
+   
   }
 
   //Funcion para hacer un scroll top
@@ -119,8 +119,7 @@ function CoursesPage() {
      const currentCourses = courses[0].slice(indexOfFirstUser, indexOfLastUser);
      const totalPages = Math.ceil(courses[0].length / coursePerPage);
      const paginate = (pageNumber) => {
-       console.log("Has dado click");
-       console.log(currentCourses);
+      
        setCurrentPage(pageNumber);
      };
     return (
@@ -158,11 +157,11 @@ function CoursesPage() {
                   scrollTop("auto");
                 }}
                 className={classes["coursesPage-container"]}
-                key={course.id}
+                key={i}
               >
                 <div className={classes["coursesPage-info"]}>
                   <h3>{course.title}</h3>
-                  <img src={course.image} alt={`Foto curso ${course.id}`}></img>
+                  <img src={course.image} alt={`Foto curso ${course.title}`}></img>
                   <p>{course.info}</p>
                 </div>
               </div>
@@ -188,7 +187,7 @@ function CoursesPage() {
       </div>
     );
   } else if (courses[0].length === 0) {
-    console.log("Hasta entrado en courses[0].length === 0")
+  
     return (
       <div className={classes["coursesPage-root"]}>
         <div className={classes.title}>

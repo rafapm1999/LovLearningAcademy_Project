@@ -17,11 +17,6 @@ function LoginForm(props) {
     //Enviamos por props a LoginPage la información recibida
     props.onLogin(loginData);
   };
-  //Revisar su funcionamiento
- /*  const handleLogin = (e) => {
-    e.preventDefault();
-    props.onSignup(true);
-  }; */
   //Esta función hace que si la info esta vacía se guarde como true, y sino como false
   const handleChange = () => {
     const loginInfoChange = {

@@ -49,8 +49,7 @@ function LoginPage(props) {
           }),
         });
         const data = await response.json();
-        console.log("Guardo respuesta");
-        console.log(data);
+       
         if (response.ok) {
           //SI la respuesta del fetch es correcta enviamos por props que estamos logeados (true)
           props.onLogin(true);

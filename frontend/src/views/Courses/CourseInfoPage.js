@@ -29,22 +29,16 @@ function CourseInfoPage(props) {
 
       // Verificar si el curso ya existe en el "user-dashboard"
       const courseExist = existingData.data.courses.some((course) => {
-        console.log('Id de course');
-
-        console.log(course._id);
-
-        console.log('Id de courseData');
-
-        console.log(courseData.data._id);
+      
         return course._id === courseData.data._id;
       });
       setCourseExisting(courseExist)
 
-      console.log(courseExist);
+     
       if (courseExist === true) {
-        console.log("El curso ya existe en tu dashboard.");
+        
       } else if (courseExist === false) {
-        console.log("Puedes agregar el curso al dashboard.");
+        
         // Combina los cursos existentes con los nuevos cursos
         existingData.data.courses = [...existingData.data.courses, ...Array(courseData.data)];
         const patchTheCourse = async () => {
@@ -62,10 +56,10 @@ function CourseInfoPage(props) {
             const data = await patchResponse.json();
 
             if (patchResponse.ok) {
-              console.log("Has entrado en patchResponse");
+              
               props.newUserData(data.data)
               userData = props.userData;
-              console.log(userData);
+             
             };
           } catch (error) {
 
@@ -76,7 +70,7 @@ function CourseInfoPage(props) {
       };
 
     } catch (error) {
-      console.log(error);
+     
     }
   };
 
@@ -88,7 +82,7 @@ function CourseInfoPage(props) {
   const getTheCourse = () => {
     setVisible(!visible);
     if (userData != "" || userData != null) {
-      console.log('Has entrado en userData != "" || userData != null');
+      
       fetchWantCourse();
     };
   };
@@ -98,7 +92,7 @@ function CourseInfoPage(props) {
     setVisible(!visible);
   }
 
-  console.log(userData);
+ 
   return (
     <div>
       {ReactDOM.createPortal(

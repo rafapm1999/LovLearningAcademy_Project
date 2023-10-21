@@ -40,8 +40,7 @@ function SignupPage() {
           }),
         });
         const data = await response.json();
-        console.log("Guardo respuesta");
-        console.log(data);
+      
         if (response.ok) {
           setLoginInfo({
             loggedIn: true,

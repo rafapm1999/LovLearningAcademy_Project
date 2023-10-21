@@ -1,13 +1,103 @@
 import classes from "./LearnPlace.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 /* import { useLocation } from "react-router-dom"; */
 
 function LearnPlace(props) {
   let user = props.userData;
-  console.log(user);
   let courses = user.courses;
+  const [refreshCourses, setRefreshCourses] = useState([])
   console.log(user);
   console.log(courses);
+  console.log(props.changes);
+
+  //Creacion de una funcion fetch para actualizar los cursos
+  const fetchCoursesChanges = async (id) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8000/courses/${id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      if (response.ok) {
+        console.log('Hacemos logs de fetchcourseschanges');
+        return setRefreshCourses(...data.data);
+      }
+
+    } catch (error) {
+
+    }
+  }
+
+  //Creacion de una funcion fetch para envias los datos editados de los cursos a la bbdd del usuario especifico
+  const patchTheCourse = async () => {
+    console.log(refreshCourses);
+    console.log(courses.length);
+    console.log(refreshCourses.length);
+
+    /*  courses = refreshCourses; */
+    try {
+      const patchResponse = await fetch(`http://localhost:8000/auth/${user._id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          courses: courses,
+        }),
+      });
+
+      const data = await patchResponse.json();
+
+      if (patchResponse.ok) {
+        console.log("Has entrado en patchResponse");
+        props.newUserData(data.data)
+        props.changesUpdate(false)
+      };
+    } catch (error) {
+
+    }
+
+  }
+  const refreshUserCourses = () => {
+    const promises = user.courses.map((course) => {
+      console.log('SIGUES EN PROMISES');
+      console.log(refreshCourses);
+      // Hace un fetch para obtener el curso actualizado que el usuario ya tiene
+      fetchCoursesChanges(course._id);
+      courses=[refreshCourses]
+    });
+
+    // Utiliza Promise.all para esperar a que todas las promesas se completen
+    Promise.all(promises)
+      .then(() => {
+        console.log('HAS PASADO A .ALL');
+        console.log(refreshCourses);
+        console.log(courses);
+
+        // Todas las promesas se han completado
+        patchTheCourse();
+      })
+      .catch((error) => {
+        // Maneja los errores si alguna de las promesas falla
+        console.error('Error:', error);
+      });
+  };
+
+  //Funcion para modificar los datos de los cursos del ususario
+  /* const refreshUserCourses = () => {
+
+    user.courses.map((course) => {
+      Hace un fetch para obtener el curso actualizado que el usuario ya tiene 
+      fetchCoursesChanges(course._id)
+    }
+    )
+    patchTheCourse();
+  } */
 
   //Paginación
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,6 +112,10 @@ function LearnPlace(props) {
     console.log(currentCourses);
     setCurrentPage(pageNumber);
   };
+
+  if (props.changes === true) {
+    return refreshUserCourses();
+  }
 
   const onHandlerClick = () => { };
   if (courses.length === 0) {

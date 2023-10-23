@@ -76,7 +76,7 @@ function AdminCreateCourse(props) {
                     <div className={classes["image"]}>
                         <div>
                             <p>Image</p>
-                            <input type="file" id="courseImage" name="image" accept="image/png, image/jpeg" ref={imageRef} required />
+                            <input type="file" id="image" name="image" accept="image/png, image/jpeg" ref={imageRef} required />
                         </div>
                     </div>
                     <div className={classes["level-hours-section"]}>
@@ -108,7 +108,7 @@ function AdminCreateCourse(props) {
                             ref={courseInfoRef}
                             name="courseInfo"
                             id="info"
-                            maxlength="300"
+                            maxLength="300"
                             rows={10}
                             cols={60}
                             placeholder='Course Description'

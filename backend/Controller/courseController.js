@@ -29,13 +29,22 @@ const getCourse = async (req, res) => {
 
 const postCourse = async (req, res) => {
   try {
+    const imagen = req.file(req.body.image);
+    const nombreImagen = '';
+        
+        if (!empty(imagen)) {
+            if (!empty(imagen.getClientOriginalName())) {
+                nombreImagen = uniqid().strtolower(trim(preg_replace('/[^A-Za-z.]+/', '-', imagen.getClientOriginalName())));
+                imagen.move('uploads/', nombreImagen);
+            }}
+      
     //1. Obtenemos los datos del cliente que nos hacen falta
-    const { title, info, image, level, quantityHours } = req.body;
+    const { title, info,level, quantityHours } = req.body;
     //2. Creamos el curso (Información que tendra nuestra base de datos)
     const newCourse = new Courses({
       title,
       info,
-      image,
+      image:nombreImagen,
       level,
       quantityHours
     });

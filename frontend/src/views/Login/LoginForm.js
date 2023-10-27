@@ -5,6 +5,7 @@ function LoginForm(props) {
   //Creamos constantes de referencia para el formulario de login
   const emailRef = useRef("");
   const passwordRef = useRef("");
+  const rememberMeRef = useRef(false)
   //Esta función se ejecuta cuando se envia el formulario
   const handleSubmit = (e) => {
     //Evitamos la recarga por defecto del form
@@ -13,6 +14,7 @@ function LoginForm(props) {
     const loginData = {
       email: emailRef.current.value,
       password: passwordRef.current.value,
+      rememberMe: rememberMeRef.current.checked,
     };
     //Enviamos por props a LoginPage la información recibida
     props.onLogin(loginData);
@@ -60,6 +62,19 @@ function LoginForm(props) {
                 }
               />
             </div>
+            <div className={`${classes["form-info"]} ${classes["remember"]}`}>
+              <div className={classes.checkbox}>
+                <input
+                  ref={rememberMeRef}
+                  type="checkbox"
+                  name="checkbox"
+                  id="rememberMe"
+                />
+                <label htmlFor="rememberMe">
+                  <span>Remember my details</span>
+                </label>
+              </div>
+            </div>
             <div
               className={`${classes["form-info"]} ${classes["submit-button"]}`}
             >
@@ -76,7 +91,7 @@ function LoginForm(props) {
       </div>
     </Fragment>
   );
-  
+
 }
 
 export default LoginForm;

@@ -11,6 +11,7 @@
   align-items: center;
   width: 75%;
   margin-top: 2rem;
+  padding: 3rem 0;
   box-shadow: 0 0 6px 1px rgb(160, 160, 160);
 }
 .modal-main {
@@ -33,11 +34,16 @@
 .back-button-container .back-button{
   padding: .9rem;
   border: 2px solid #1e90ff;
-  background:transparent;
-  color: #1e90ff;
-  
+  background: #1e90ff;
+  color: white;
+  font-weight: bold;
   transition-duration: 100ms;
   transition-timing-function: ease-in-out;
+}
+.back-button:hover{
+  cursor: pointer;
+  background-color: transparent;
+  color: #1e90ff;
 }
 .info-container form {
   display: flex;
@@ -63,13 +69,6 @@
     width: 50%;
     padding: .9rem;
 }
- /* p {
-  padding: 0.5rem 5rem;
-  margin-bottom: .5rem;
-  font-size: 1.2rem;
-  font-weight: bold;
-  font-size: 1.5rem;
-} */
 .level-hours-section {
   display: flex;
   justify-content: center;

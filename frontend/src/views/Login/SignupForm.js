@@ -6,7 +6,7 @@ function SignupForm(props) {
   const userLastNameRef = useRef("");
   const emailRef = useRef("");
   const passwordRef = useRef("");
-  const rememberMeRef = useRef("");
+  const rewritePasswordRef = useRef("");
   const handleSubmit = (e) => {
     e.preventDefault();
     const signupData = {
@@ -14,7 +14,7 @@ function SignupForm(props) {
       lastName: userLastNameRef.current.value,
       email: emailRef.current.value,
       password: passwordRef.current.value,
-      rememberMe: rememberMeRef.current.checked,
+      rewritePassword: rewritePasswordRef.current.value,
     };
     props.onLogin(signupData);
   };
@@ -68,18 +68,14 @@ function SignupForm(props) {
                 placeholder="Password"
               />
             </div>
-            <div className={`${classes["form-info"]} ${classes["remember"]}`}>
-              <div className={classes.checkbox}>
-                <input
-                  ref={rememberMeRef}
-                  type="checkbox"
-                  name="checkbox"
-                  id="rememberMe"
-                />
-                <label htmlFor="rememberMe">
-                  <span>Remember my details</span>
-                </label>
-              </div>
+            <div className={classes["form-info"]}>
+              <input
+                ref={rewritePasswordRef}
+                type="password"
+                name="password"
+                id="userPassword"
+                placeholder="Rewrite the password"
+              />
             </div>
             <div
               className={`${classes["form-info"]} ${classes["submit-button"]}`}

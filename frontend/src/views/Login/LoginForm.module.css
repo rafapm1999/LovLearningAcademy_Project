@@ -54,18 +54,26 @@ form .form-info > input {
   font-size: 2.5rem;
 }
 form .remember {
+  display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: nowrap;
   color: lightgrey;
   font-size: 1rem;
   border-radius: 0.25rem;
   margin-bottom: 1em;
 }
-form .remember input[type="checkbox"] {
-  margin-right: 1.5em;
+.checkbox{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }
-form .remember input[type="checkbox"] + label {
-  margin-left: 1.5em;
+form .remember input[type="checkbox"] {
+  cursor: pointer;
+  width: 2vw;
+}
+form .remember label > span{
+  font-size: 1rem;
   color: darkgrey;
   cursor: pointer;
 }

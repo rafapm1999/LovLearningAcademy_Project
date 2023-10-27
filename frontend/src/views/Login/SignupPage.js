@@ -25,6 +25,7 @@ function SignupPage() {
       signupData &&
       validateEmail(signupData.email) &&
       validatePassword(signupData.password)
+      && signupData.password === signupData.rewritePassword
     ) {
       try {
         const response = await fetch("http://localhost:8000/auth/signup", {
@@ -77,13 +78,29 @@ function SignupPage() {
           signupData.password === ""
             ? "Password is required."
             : "Your password is not secure. Make more strong.",
-        rememberMe: signupData.rememberMe,
         loginHeader: "Ups... something went wrong.",
         loginMessage: "Try again",
       });
       setVisible(!visible);
-    }
-  };
+    } else if (signupData.password !== signupData.rewritePassword) {
+      setLoginInfo({
+        loggedIn: false,
+        name: signupData.name === "" ? "Name is required." : signupData.name,
+        lastName:
+          signupData.lastName === ""
+            ? "Lastname is required."
+            : signupData.lastName,
+        email: signupData.email === "" ? "Email is required." : signupData.email,
+        password:
+          signupData.password === ""
+            ? "Password is required."
+            : "Those passwords must to be the same.",
+        loginHeader: "Ups... something went wrong.",
+        loginMessage: "Try again",
+      });
+      setVisible(!visible);
+    };
+  }
 
   return (
     <Fragment>

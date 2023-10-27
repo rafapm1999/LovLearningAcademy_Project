@@ -10,9 +10,10 @@ function AdminCreateCourse(props) {
     const hoursRef = useRef("");
     const courseInfoRef = useRef("");
 
-    const fetchCreateCourse = async (id) => {
+    const fetchCreateCourse = async () => {
         console.log(titleRef.current.value);
         console.log(courseInfoRef.current.value);
+        console.log(imageRef.current.value);
         try {
             const response = await fetch(
                 `http://localhost:8000/courses/create-course`,
@@ -46,6 +47,7 @@ function AdminCreateCourse(props) {
     const handleSubmitEdit = (e) => {
         e.preventDefault();
         fetchCreateCourse();
+        navigate(`/bbdd-courses`);
     }
     const handlerBack = () => {
         navigate(`/bbdd-courses`);
@@ -59,7 +61,7 @@ function AdminCreateCourse(props) {
                 <button className={classes["back-button"]} onClick={handlerBack}>BACK</button>
             </div>
             <div className={classes["info-container"]}>
-                <form onSubmit={handleSubmitEdit}>
+                <form onSubmit={handleSubmitEdit} encType="multipart/form-data">
                     <div className={classes["title"]}>
                         <div>
                             <p>Title</p>
@@ -76,7 +78,7 @@ function AdminCreateCourse(props) {
                     <div className={classes["image"]}>
                         <div>
                             <p>Image</p>
-                            <input type="file" id="image" name="image" accept="image/png, image/jpeg" ref={imageRef} required />
+                            <input type="file" /* id="fileID" */ name="file" accept="image/*" ref={imageRef} required />
                         </div>
                     </div>
                     <div className={classes["level-hours-section"]}>
@@ -94,7 +96,7 @@ function AdminCreateCourse(props) {
                                 <input
                                     ref={hoursRef}
                                     type="number"
-                                    name="email"
+                                    name="quntyHours"
                                     id="quntyHours"
                                     required
                                 />

@@ -196,7 +196,7 @@ function AdminCourses(props) {
             <table className={classes["coursesPage-main-table"]}>
               <thead>
                 <tr>
-                  <th>Order</th>
+                  
                   <th>Title</th>
                   <th>ID</th>
                   <th>Info</th>
@@ -208,7 +208,7 @@ function AdminCourses(props) {
                 {currentCourses.map((course, i) => {
                   return (
                     <tr className={classes["coursesPage-info"]} key={i}>
-                      <td>{i + 1}</td>
+                      
                       <td>{course.title}</td>
                       <td>{course._id}</td>
                       <td onClick={() => { onHandlerClick(course._id, "INFO") }} className={classes["info-button"]}><FontAwesomeIcon onClick={() => { onHandlerClick(course._id, "INFO") }} icon={faEye} size='xl' /></td>

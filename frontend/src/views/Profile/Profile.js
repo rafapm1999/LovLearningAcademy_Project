@@ -39,7 +39,7 @@ function Profile(props) {
       if (response.ok) {
         console.log(data.data);
         props.newUserData(data.data.user);
-        navigate("/loader-page", {state: data})
+        navigate("/loader-page", { state: data })
       };
     } catch (error) {
 
@@ -55,14 +55,18 @@ function Profile(props) {
 
   return (
     <div className={classes["main-profile"]}>
-      <div>
-        <h2>My details</h2>
-        <h3>Hello {data.name} {data.lastName}</h3>
-        <h3>Your email is {data.email}</h3>
-        <h3>You have {data.courses.length} courses in your MyLearnplace</h3>
+      <div className={classes["user-info"]}>
+        <div className={classes["user-info-container"]}>
+          <h2 className={classes.title}>My details</h2>
+          <div className={classes["user-info-details"]}>
+            <h3>Hello {data.name} {data.lastName}</h3>
+            <h3>Your email is {data.email}</h3>
+            <h3>You have {data.courses.length} courses in your MyLearnplace</h3>
+          </div>
+        </div>
       </div>
-      <div>
-        <h2>My courses</h2>
+      <div className={classes["main-table"]}>
+        <h2 className={classes.title}>My courses</h2>
         {
           courses.length !== 0 ?
             <div className={classes["table-container"]}>
@@ -79,11 +83,11 @@ function Profile(props) {
                 <tbody>
                   {currentCourses.map((course, i) => {
                     return (
-                      <tr className={classes["coursesPage-info"]}  key={i}>
+                      <tr className={classes["coursesPage-info"]} key={i}>
                         <td>{course.title}</td>
                         <td>{course.level === undefined ? "Not specificated" : course.level}</td>
                         <td>{course.quantityHours === undefined ? "Not specificated" : course.quantityHours}</td>
-                        <td><img src={course.image} alt="" /></td>
+                        <td><img src={course.image} alt={`Photo of course ${course.title}`} /></td>
                         <td onClick={() => { onHandlerClick(props.userData._id, course._id) }} className={classes["remove-button"]}><FontAwesomeIcon onClick={() => { onHandlerClick(props.userData._id, course._id) }} icon={faTrashCan} size='xl' /></td>
                       </tr>
                     );

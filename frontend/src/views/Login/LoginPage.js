@@ -3,6 +3,7 @@ import Login from "./LoginForm";
 import { useNavigate } from "react-router-dom";
 import { Fragment, useEffect, useState } from "react";
 import { validateEmail, validatePassword } from "../../utils/validate";
+import { LocalStorage } from "../../services/LocalStorage.service";
 
 function LoginPage(props) {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ function LoginPage(props) {
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
+    rememberMe: "",
   });
   
   //Funcion para hacer un scroll top
@@ -35,6 +37,7 @@ function LoginPage(props) {
       setLoginInfo({
         email: loginData.email,
         password: loginData.password,
+        rememberMe: loginData.rememberMe,
       });
       //Realizamos el fetch 
       try {
@@ -51,6 +54,12 @@ function LoginPage(props) {
         const data = await response.json();
        
         if (response.ok) {
+          if (loginData.rememberMe) {
+            LocalStorage.setItem("email", loginData.email);
+            LocalStorage.setItem("password", loginData.password);
+            LocalStorage.setItem("rememberMe", loginData.rememberMe);
+          }
+          
           //SI la respuesta del fetch es correcta enviamos por props que estamos logeados (true)
           props.onLogin(true);
           props.newUserData(data.data.user)

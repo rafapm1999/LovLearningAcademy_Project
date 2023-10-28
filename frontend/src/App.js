@@ -86,12 +86,12 @@ function App() {
       <Fragment>
         <AdminNavbar onLogin={userLogged} logout={logout} userData={userData} openProfile={openAdminProfile} closeProfile={closeAdminProfile} visible={visible} openedProfile={openProfile}/>
         <Routes>
-          <Route path="/loader-page" element={<LoaderPage userData={userData} onUserInfo={handlerUserInfo} closeProfile={closeAdminProfile} openedProfile={openProfile}/>} />
-          <Route path="/admin" element={<AdminPage userData={userData} visible={visible}/>} />
-          <Route path="/create-course" element={<AdminCreateCourse visible={visible}/>} />
-          <Route path="/bbdd-members" element={<AdminMembers visible={visible}/>} />
-          <Route path="/bbdd-courses" element={<AdminCourses openProfile={openProfile} makeChanges={setChanges}/>} />
-          <Route path="/error-page" element={<ErrorPage />} />
+            <Route path="/loader-page" element={<LoaderPage userData={userData} onUserInfo={handlerUserInfo} closeProfile={closeAdminProfile} openedProfile={openProfile}/>} />
+            <Route path="/admin" element={<AdminPage userData={userData} visible={visible}/>} />
+            <Route path="/create-course" element={<AdminCreateCourse visible={visible}/>} />
+            <Route path="/bbdd-members" element={<AdminMembers visible={visible}/>} />
+            <Route path="/bbdd-courses" element={<AdminCourses openProfile={openProfile} makeChanges={setChanges}/>} />
+            <Route path="/error-page" element={<ErrorPage />} />
         </Routes>
       </Fragment>
     );

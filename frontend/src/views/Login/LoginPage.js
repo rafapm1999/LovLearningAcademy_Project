@@ -56,8 +56,9 @@ function LoginPage(props) {
         if (response.ok) {
           if (loginData.rememberMe) {
             LocalStorage.setItem("email", loginData.email);
-            LocalStorage.setItem("password", loginData.password);
             LocalStorage.setItem("rememberMe", loginData.rememberMe);
+            
+            //document.cookie('recuedame', 'true', '/', '2023-10-27 00:00:00') ---> GUARDar info durante un tiempo en cookies
           }
           
           //SI la respuesta del fetch es correcta enviamos por props que estamos logeados (true)

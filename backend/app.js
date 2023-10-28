@@ -65,7 +65,7 @@ app.post('/courses/create-course', upload.single('file'),(req, res) => {
   res.send("Termina");
 });
 function saveImage(file) {
-const newPath = `./upload/${file.originalname}`
+const newPath = `../frontend/public/upload/${file.originalname}`
 fs.renameSync(file.path, newPath)
 return newPath;
 }

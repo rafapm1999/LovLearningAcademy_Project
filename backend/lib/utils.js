@@ -7,10 +7,10 @@ const getRegisterAt = () => {
 const generateToken = (user, isRefreshToken) => {
   if (isRefreshToken) {
     return jwt.sign(user, process.env.REFRESH_TOKEN, {
-      expiresIn: "20m",
+      expiresIn: "5h",
     });
   } else {
-    return jwt.sign(user, process.env.TOKEN, { expiresIn: "10m" });
+    return jwt.sign(user, process.env.TOKEN, { expiresIn: "5h" });
   }
 };
 

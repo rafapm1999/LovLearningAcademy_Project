@@ -1,9 +1,9 @@
 import { Fragment } from "react";
-import classes from "./HomePage.module.css";
+import classes from "./Home.module.css";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-function HomePage() {
+function Home() {
   //Carrusel para palabras clave del h1
   const words = ["community", "people", "members", "courses"];
   const [index, setIndex] = useState(0);
@@ -74,4 +74,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default Home;

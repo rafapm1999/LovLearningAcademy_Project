@@ -2,13 +2,13 @@ import classes from './AdminCourses.module.css';
 import ReactDOM from "react-dom";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../../components/Loader/Loader";
 //Importamos FontAwesomeIcon para usarlo en INFO, EDIT y REMOVE
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEye, faPenToSquare, faTrashCan
 } from "@fortawesome/free-regular-svg-icons";
-import AdminCourseModal from '../Modal/AdminCourseModal';
+import AdminCourseModal from '../../Modal/AdminCourseModal/AdminCourseModal';
 
 function AdminCourses(props) {
   const [adminRole, setAdminRole] = useState(false)
@@ -126,7 +126,7 @@ function AdminCourses(props) {
   };
   //Funcion para crear nuevo curso 
   const createCourse = () => {
-    navigate("/create-course")
+    navigate("/admin/create-course")
   }
 
   //Cuando se ha editado algun curso

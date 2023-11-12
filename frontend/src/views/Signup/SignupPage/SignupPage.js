@@ -1,10 +1,10 @@
-import Signup from "./SignupForm";
+import Signup from "../SignupForm/SignupForm";
 /* import classes from "./SignupPage.module.css"; */
-import Modal from "../Modal/Modal";
+import Modal from "../../Modal/Modal/Modal";
 import ReactDOM from "react-dom";
 /* import { useNavigate } from "react-router-dom"; */
 import { Fragment, useState } from "react";
-import { validateEmail, validatePassword } from "../../utils/validate";
+import { validateEmail, validatePassword } from "../../../utils/validate";
 
 function SignupPage() {
   /*   const navigate = useNavigate(); */

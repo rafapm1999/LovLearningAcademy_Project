@@ -33,7 +33,7 @@ const signup = async (req, res) => {
     const payload = { id: user._id, email: user.email, role: user.role };
     //Generamos un token con los datos del payload
     const token = generateToken(payload, false);
-
+    const refreshToken = generateToken(payload, true);
     //Enviamos respuesta de que todo se ha realizado correctamente
     res.status(201).json({
       status: "succeeded",
@@ -60,6 +60,38 @@ const signup = async (req, res) => {
   }
 };
 
+//GET -> /auth/refreshtoken
+const refreshToken = async (req, res) => {
+  try {
+      //Si no hay payload desde token de refresco, enviar un error
+      if (!req.user) {
+          res.status(403).json({
+              status: "failed",
+              data: null,
+              error: "Unauthorized",
+          });
+      }
+      //Si hay token de refresco y no ha expirado, obtener el payload y enviar 2 nuevos tokens
+      const payload = { id: req.user.id, email: req.user.email, role: req.user.role };
+      res.status(200).json({
+          status: "succeeded",
+          data: {
+              user: payload,
+              token: generateToken(payload, false),
+              refreshToken: generateToken(payload, true),
+          },
+          error: null,
+      });
+  } catch (error) {
+      //Si hay algún error, enviar el mensaje del error
+      res.status(400).json({
+          status: "failed",
+          data: null,
+          error: error.message,
+      });
+  }
+};
+
 //POST => /auth/login
 
 const login = async (req, res) => {
@@ -83,21 +115,20 @@ const login = async (req, res) => {
     const payload = { id: user._id, email: user.email, role: user.role };
     //Generamos un token con los datos del payload
     const token = generateToken(payload, false);
-
+    const refreshToken = generateToken(payload, true);
     res.status(200).json({
       status: "succeded",
-      data: {
-        user,
-        token,
-      },
+      data: payload,
+      token: token,
+      refreshToken: refreshToken,
       error: null,
     });
   } catch (error) {
-    /* res.status(400).json({
+    res.status(400).json({
       status: "failed",
       data: null,
       error: error.message,
-    }); */
+    });
   }
 };
 //PATCH 
@@ -123,8 +154,11 @@ const getuser = async (req, res) => {
     const data = await Login.findById(
       req.params.id
     );
+    console.log('Conseguido getuser');
+    
     res.status(200).json({ status: "getuser realizado", data, error: null });
   } catch (error) {
+    console.log('Fallido getuser');
     res.status(404).json({
       status: "no ha salido bien",
       data: null,
@@ -197,4 +231,4 @@ const deleteusercourse = async (req, res) => {
   }
 };
 
-module.exports = { signup, login, update, getuser, alluser, deleteusercourse };
+module.exports = { signup, login, update, getuser, alluser, deleteusercourse, refreshToken };

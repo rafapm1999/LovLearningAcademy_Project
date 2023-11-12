@@ -1,4 +1,4 @@
-import classes from './Modal.module.css';
+import classes from './ContactModal.module.css';
 import { Fragment } from 'react';
 
 function ContactModal(props) {

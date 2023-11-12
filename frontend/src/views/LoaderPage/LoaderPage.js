@@ -1,36 +1,33 @@
-/* import './LoaderPage.css'; */
-import { Fragment } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { takeRole, takeID } from '../../components/Utils';
 import Loader from "../../components/Loader/Loader";
-/* import { useEffect } from "react"; */
 
-function LoaderPage(props) {
-    const [pending, setPending] = useState(false)
-    const [adminRole, setAdminRole] = useState(false)
+function LoaderPage() {
+    const role = takeRole();
+    const id = takeID();
+    console.log(role);
+    console.log(id);
+    const [pending, setPending] = useState(false);
+    const [adminRole, setAdminRole] = useState(false);
+    const navigate = useNavigate();
     const location = useLocation();
     const data = location.state;
-    const userData = data.data.user;
-    const navigate = useNavigate();
-    const closeAll = () => {
-        if (props.openedProfile !== false) {
-          return props.closeProfile();
-        }
-    }
+    console.log(data);
+
+    const userData = data;
+
     const loaderFunction = () => {
-        if (userData.role === "user") { 
+        if (role === "user") {
             setTimeout(() => {
-                navigate("/mylearnplace")
+                navigate("/user/mylearnplace", { state: userData._id })
             }, 1500)
             return (<Loader userData={userData}></Loader>)
         }
-        if (userData.role === "admin") {
-            closeAll();
+        if (role === "admin") {
             setTimeout(() => {
-                setPending(true);
-                setAdminRole(true)
-                navigate("/bbdd-members")
+                navigate("/admin/bbdd-members", { state: userData })
             }, 1500)
             return (<Loader userData={userData} adminRole={adminRole}></Loader>)
         }

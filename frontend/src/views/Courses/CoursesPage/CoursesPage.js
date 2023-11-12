@@ -1,17 +1,22 @@
 import classes from "./CoursesPage.module.css";
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../../components/Loader/Loader";
 // import { Route, Routes } from "react-router-dom";
 // import CourseInfoPage from "./CourseInfoPage";
 
 function CoursesPage() {
+  const [token, setToken] = useState (localStorage.getItem("token"));
   //Creamos la constante courses con useState para que parte de un array vacío
   const [courses, setCourses] = useState([]);
+
+  
   //Creamos una constante pending para usarla con un loader
   const [pending, setPending] = useState(false);
   const [coursesCopy, setCoursesCopy] = useState([]);
   const inputRef = useRef("");
+
+
   //Creamos un useState para la palabra buscada
   const [wordSearch, setWordSearch] = useState("");
   //Paginación
@@ -24,7 +29,6 @@ function CoursesPage() {
     }, 1500)
     return (<Loader pending={pending}></Loader>)
   };
-
 
   //Con esta funcion hacemos un fetch (GET) de todos los cursos de nuestra base de datos
   const fetchCourses = async () => {
@@ -54,7 +58,6 @@ function CoursesPage() {
   
   //Con esta función hacemos un fetch (GET) para cuando clickamos sobre un curso concreto
   const getCourse = async (id) => {
-    
     try {
       const response = await fetch(`http://localhost:8000/courses/${id}`, {
         method: "GET",
@@ -64,12 +67,18 @@ function CoursesPage() {
       });
       const data = await response.json();
       if (response.ok) {
+        let courseTitle = data.data.title;
+        let title = courseTitle.toLowerCase().replace(" ", "-");
+        console.log(title);
         
+        if (token) {
+          navigate(`/user/courses/${title}`, { state: data })
+        } else if (!token ){
+          navigate(`/course/${title}`, { state: data })
+        }
         //Si la respuesta es buena navegamos a la ruta definida, guardando los datos devueltos por el fetch en el state para usarlos posteriormente con useLocation
-        navigate(`/course/${data.title}`, { state: data })
       }
     } catch (error) {
-      
       navigate(`/error-page`, { state: error });
     }
   };

@@ -19,8 +19,8 @@ const cors = require("cors");
 //Importar las rutas
 const logins = require("./routes/loginRoutes");
 const courses = require("./routes/courseRoutes");
-const contact = require("./routes/contactRoutes");
-/* const user = require("./routes/userRoutes") */
+const contacts = require("./routes/contactRoutes");
+const user = require("./routes/userRoutes")
 
 //Para leer las variables de entorno
 dotenv.config();
@@ -54,9 +54,9 @@ mongoose.connection.on("error", (err) => {
 
 //Habilitar las rutas
 app.use("/auth", logins);
-app.use("/courses", courses)
-app.use("/contact", contact)
-/* app.use("user", user) */
+app.use("/courses", courses);
+app.use("/contact", contacts);
+app.use("/user", user);
 
 //
 app.post('/courses/create-course', upload.single('file'),(req, res) => {

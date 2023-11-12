@@ -1,6 +1,6 @@
 .form-root {
   display: flex;
-  justify-content: space-between;
+  justify-content: right;
   align-items: center;
   flex-direction: row;
   width: 100vw;
@@ -11,16 +11,16 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: transparent;
+  background: transparent;
   height: 100vh;
   width: 50vw;
   z-index: 2000;
 }
 .login-img {
   position: absolute;
-  background-image: url(../../assets/bg-signup.jpg);
+  background-image: url(../../../assets/bg-login.jpg);
   background-size: cover;
-  background-position:  bottom right;
+  background-position: left;
   background-repeat: no-repeat;
   width: 100vw;
   height: 90vh;
@@ -106,7 +106,7 @@ form .remember input[type="checkbox"]:checked + label {
   text-decoration: none;
   color: black;
   padding: 1em 2.5em 1em 2.5em;
-  /*     margin: 2em 0 .9em 0; */
+  margin: 2em 0 0.9em 0;
   border-top: 1px solid black;
   cursor: pointer;
   transition-duration: 0.2s;
@@ -115,26 +115,19 @@ form .remember input[type="checkbox"]:checked + label {
 .submit-button button[type="submit"] {
   flex-wrap: wrap;
   background-color: #1e90ff;
+  margin-top: 1em;
   padding: 1em 3em;
   border-radius: 0.3rem;
+  border: 2px solid #1e90ff;
   color: white;
   font-weight: bold;
   cursor: pointer;
   transition-duration: 0.9s;
   transition-timing-function: ease-in-out;
-  border: 2px solid #1e90ff;
 }
-/* .photo{
-    z-index: 15;
-    display: inline-block;
-    height: 100px;
-    width: 100px;
-    background-color: black;
-} */
 .submit-button button:hover {
   background-color: #ffffff;
   color: #1e90ff;
-  
 }
 .danger {
   border: 1px solid red;

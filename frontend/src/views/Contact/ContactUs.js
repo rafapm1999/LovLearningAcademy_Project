@@ -4,7 +4,7 @@ import { useRef, useState, Fragment } from "react";
 //Importamos ReactDOM para usarlo en el momento de la alerta de nuestro modal
 import ReactDOM from "react-dom";
 //Importamos el Modal para Contact 
-import ContactModal from "../Modal/ContactModal";
+import ContactModal from "../Modal/ContactModal/ContactModal";
 
 function ContactUs() {
   //Creamos referencias para usarlas en el formulario con useRef

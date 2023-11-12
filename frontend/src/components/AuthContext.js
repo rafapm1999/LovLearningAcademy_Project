@@ -1,19 +1,53 @@
 import { createContext, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 
+
 export const AuthContext = createContext();
 
 export const AuthProvider = (props) =>  {
     const [token, setToken] = useState (localStorage.getItem("token"));
 
-    if(token){
-        if((token===undefined)||(token===null)){
+    useEffect(() => {
+        if(token){
+          if((token===undefined)||(token===null)){
             localStorage.removeItem("token");
+          }
+          else{
+            fetch(`http://localhost:8000/user/verifyToken`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "auth-token": token,
+                Authorization: "Bearer " + token,
+              },
+            })
+            .then((res) => res.json())
+            .then((data) => {
+              if((data.code===401)||(data.result==="ko")){
+                console.log('HAs llegado a (data.code===401)||(data.result==="ko")');
+                
+                localStorage.removeItem("token");
+              }
+              else{
+                console.log('Tienes el token');
+                
+                localStorage.setItem("token", localStorage.getItem("token"));
+              }
+            }).catch((error) => {
+              console.log('Has llegado a .catch');
+              console.log(error);
+              localStorage.removeItem("token");
+             
+            });
+          }
+        }else{
+          console.log('Has llegado a else');
+          localStorage.removeItem("token");
         }
-        else{
-            //fetch
-        }
-    }
+        
+      }, [token]);
+      
+      if (!token) return <Navigate to="/" replace />;
 
     return (
         <AuthContext.Provider value={{ token, setToken }}>

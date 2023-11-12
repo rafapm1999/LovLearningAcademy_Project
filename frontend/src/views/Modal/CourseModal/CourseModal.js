@@ -1,18 +1,19 @@
 import classes from './CourseModal.module.css';
 import { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 function CourseModal(props) {
-    let userData = props.userData;
+    const [token, setToken] = useState (localStorage.getItem("token"));
     const navigate = useNavigate();
     const onLogin = () => {
         navigate("/login");
     }
     const onNavigate = () => {
-        navigate("/mylearnplace");
+        navigate("/user/mylearnplace");
     }
     console.log(props.courseExists);
-    if (props.logged === true && props.courseExists === false) {
+    if (token && props.courseExists === false) {
         console.log(props.userData);
        return(
        <Fragment>
@@ -28,7 +29,7 @@ function CourseModal(props) {
             <div className={classes["md-overlay"]} />
         </Fragment>
         );
-    } else if (props.logged === true && props.courseExists === true){
+    } else if (token && props.courseExists === true){
         return(
             <Fragment>
                  <div className={`${classes["md-modal"]} ${classes["md-effect-1"]} ${props.visible && classes["md-show"]}`}>
@@ -44,7 +45,7 @@ function CourseModal(props) {
              </Fragment>
              );
     }
-    if (props.logged === false) {
+    if (!token) {
         return (
             <Fragment>
                 <div className={`${classes["md-modal"]} ${classes["md-effect-1"]} ${props.visible && classes["md-show"]}`}>

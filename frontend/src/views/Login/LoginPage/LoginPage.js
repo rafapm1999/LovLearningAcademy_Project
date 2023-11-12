@@ -1,14 +1,11 @@
-import Login from "./LoginForm";
-/* import classes from "./LoginPage.module.css"; */
+import Login from "../LoginForm/LoginForm";
 import { useNavigate } from "react-router-dom";
 import { Fragment, useEffect, useState } from "react";
-import { validateEmail, validatePassword } from "../../utils/validate";
-import { LocalStorage } from "../../services/LocalStorage.service";
+import { validateEmail, validatePassword } from "../../../utils/validate";
+import { LocalStorage } from "../../../services/LocalStorage.service";
 
 function LoginPage(props) {
   const navigate = useNavigate();
-  const [login, setLogin] = useState(false);
-  /* const [visible, setVisible] = useState(false); */
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
@@ -26,7 +23,7 @@ function LoginPage(props) {
     scrollTop("auto")
   })
 
-  const handleVisibility = async (loginData) => {
+  const handleSubmitForm = async (loginData) => {
     if (
       //Si el email es valido y el password cumple los requisitos entonces hacemos fetch (POST)
       loginData &&
@@ -52,32 +49,42 @@ function LoginPage(props) {
           }),
         });
         const data = await response.json();
+        console.log(data);
        
         if (response.ok) {
-          if (loginData.rememberMe) {
+          if(data.code===401){
+            alert('Error, datos incorrecto');
+          }
+          else{
+            LocalStorage.setItem("token", data.token);
+            LocalStorage.setItem("email", data.data.email);
+            LocalStorage.setItem("role", data.data.role);
+            LocalStorage.setItem("rememberMe", loginData.rememberMe);
+            document.cookie= `email=${data.data.email}; expires=5 Nov 2023 00:00:00 UTC; domain=localhost; path=/;`;
+            navigate(`/loader-page`, {state: data.data}, { replace: true });
+          }
+          /* if (loginData.rememberMe) {
             LocalStorage.setItem("email", loginData.email);
             LocalStorage.setItem("rememberMe", loginData.rememberMe);
             
             //document.cookie('recuedame', 'true', '/', '2023-10-27 00:00:00') ---> GUARDar info durante un tiempo en cookies
-          }
+          } */
           
-          //SI la respuesta del fetch es correcta enviamos por props que estamos logeados (true)
-          props.onLogin(true);
-          props.newUserData(data.data.user)
           //Usamos setTimeout para navegar a /user-dashboard usando state para guardar el data que nos devulve el fetch
-          setTimeout(() => {
+          /* setTimeout(() => {
             navigate("/loader-page", {state: data});
-          }, 100);
+          }, 100); */
         }
         //Revisar este codigo porque va relacionado con lo de border red si la info es incorrecta 
         if (!response.ok){
+          alert('Error, datos incorrecto');
           setLoginInfo({
             email: loginData.email = false,
             password: loginData.password = false,
           });
         }
       } catch (error) {
-        
+        alert(`Error: ${error}`);
       }
       //Este apartado es creado para abarcar la opcion de que no haya info enviada, que no sea valido el email o que el password no sea valido
     } else if (
@@ -95,12 +102,11 @@ function LoginPage(props) {
   return (
     <Fragment>
       {/* {ReactDOM.createPortal(
-        <Modal visible={visible} onLogin={handleVisibility} data={loginInfo} />,
+        <Modal visible={visible} onLogin={handleSubmitForm} data={loginInfo} />,
         document.querySelector("#modal")
       )} */}
       <Login
-        onLogin={handleVisibility}
-        /* onSignup={setLogin} */
+        onLogin={handleSubmitForm}
         onEmptyInfo={loginInfo}
       ></Login>
     </Fragment>

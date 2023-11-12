@@ -3,24 +3,34 @@ import classes from "./CourseInfoPage.module.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import ReactDOM from "react-dom";
-import CourseModal from "../Modal/CourseModal";
+import CourseModal from "../../Modal/CourseModal/CourseModal";
+import { takeID } from "../../../components/Utils";
 
-function CourseInfoPage(props) {
+function CourseInfoPage() {
+  const [token, setToken] = useState(localStorage.getItem("token").replaceAll('"', ""));
   //Creamos la contante location y usamos useLocation para guardar la info actual 
   const location = useLocation();
   //Guardamos en la constante courseData la información del curso seleccionado
-  const courseData = location.state;
-  let userData = props.userData;
+  let courseData = location.state;
+
+  let userId = takeID(token);
   const navigate = useNavigate();
-  const [courseExisting, setCourseExisting] = useState("");
+  const [courseExisting, setCourseExisting] = useState([]);
+  const [courseRepeat, setCourseRepeat] = useState("")
   /* const [getNewCourse, setGetNewCourse] = useState([]) */
   const [visible, setVisible] = useState(false);
 
   const fetchWantCourse = async () => {
     try {
       // Obtener los datos existentes del servidor
-      const response = await fetch(`http://localhost:8000/auth/getuser/${userData._id}`);
+      const response = await fetch(`http://localhost:8000/auth/getuser/${userId}`);
       let existingData = await response.json();
+  
+      console.log(existingData);
+      console.log(courseData.data);
+      console.log(userId);
+      console.log(token)
+      console.log(existingData.data.courses);
 
       // Verificar si existingData.courses es un array o está ausente
       if (!Array.isArray(existingData.data.courses)) {
@@ -29,60 +39,63 @@ function CourseInfoPage(props) {
 
       // Verificar si el curso ya existe en el "user-dashboard"
       const courseExist = existingData.data.courses.some((course) => {
-      
+
         return course._id === courseData.data._id;
       });
-      setCourseExisting(courseExist)
+      setCourseRepeat(courseExist);
+      console.log(courseExist);
 
-     
-      if (courseExist === true) {
-        
-      } else if (courseExist === false) {
-        
-        // Combina los cursos existentes con los nuevos cursos
-        existingData.data.courses = [...existingData.data.courses, ...Array(courseData.data)];
-        const patchTheCourse = async () => {
+      if (response.ok && courseExist === false) {
+        existingData.data.courses = [...existingData.data.courses,...Array(courseData.data)];
+        const patchTheCourse = async (id) => {
+          console.log(courseExisting);
           try {
-            const patchResponse = await fetch(`http://localhost:8000/auth/${userData._id}`, {
+            const patchResponse = await fetch(`http://localhost:8000/auth/${id}`, {
               method: "PATCH",
               headers: {
                 "Content-Type": "application/json",
+                "auth-token": token,
               },
               body: JSON.stringify({
                 courses: existingData.data.courses,
               }),
             });
-
+      
             const data = await patchResponse.json();
-
+      
             if (patchResponse.ok) {
-              
-              props.newUserData(data.data)
-              userData = props.userData;
-             
+              console.log(data);
             };
           } catch (error) {
-
+            console.log(error);
           }
         }
-        return patchTheCourse();
-
-      };
-
+       /*  existingData.data.courses = [...existingData.data.courses,...Array(courseData.data)]; */
+        setCourseExisting(courseData.data)
+        return patchTheCourse(userId);
+      } else if (response.ok && courseExist === true) {
+        
+      }
     } catch (error) {
-     
+      console.log(error);
     }
   };
 
+  
+
   //Función para cuando damos al boton de back
   const handleBack = () => {
-    navigate("/courses")
+    if (token) {
+      navigate(`/user/courses`)
+    } else if (!token) {
+      navigate(`/courses`)
+    }
   }
   //Función para cuando queremos el curso
   const getTheCourse = () => {
     setVisible(!visible);
-    if (userData != "" || userData != null) {
-      
+    if (token) {
+      console.log("entras en getthecourse if token");
       fetchWantCourse();
     };
   };
@@ -92,11 +105,11 @@ function CourseInfoPage(props) {
     setVisible(!visible);
   }
 
- 
+
   return (
     <div>
       {ReactDOM.createPortal(
-        <CourseModal visible={visible} data={courseData.data} onClose={handleClose} userData={userData} logged={props.onLogin} courseExists={courseExisting} />,
+        <CourseModal visible={visible} data={courseData.data} onClose={handleClose} userId={userId} logged={token} courseExists={courseRepeat} />,
         document.querySelector("#modal")
       )}
       <div className={classes["courseInfoPage-main"]}>
@@ -110,7 +123,7 @@ function CourseInfoPage(props) {
           <div className={classes["course-image"]}>
             <img src={courseData.data.image} alt={`Photo of the course ${courseData.data.title}`} />
           </div>
-          <div className={classes["level-hopurs-container"]}>
+          <div className={classes["level-hours-container"]}>
             <p>Level</p>
             <p>{courseData.data.level === undefined ? "Level not specificated" : courseData.data.level}</p>
             <p>Quantity Hours</p>

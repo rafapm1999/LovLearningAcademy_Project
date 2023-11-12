@@ -1,9 +1,10 @@
 import classes from './AdminMembers.module.css';
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../../components/Loader/Loader";
 
 function AdminMembers(props) {
+  const token = localStorage.getItem("token").replaceAll('"', ""); 
   const [pending, setPending] = useState(false);
   const [adminRole, setAdminRole] = useState(false)
   const [users, setUsers] = useState([])
@@ -31,6 +32,7 @@ function AdminMembers(props) {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
+              "auth-token": token,
             },
           }
         );

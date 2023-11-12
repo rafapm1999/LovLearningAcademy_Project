@@ -18,17 +18,18 @@ const verifyToken = (req, res, next) => {
     try {
       //Creamos la contante verified para verificar el token utilizando
       const verified = jwt.verify(token, process.env.REFRESH_TOKEN);
-
+      
       //Hacemos que req.user tenga el token verificado
       req.user = verified;
 
       //Damos paso al siguiente middleware de la cadena
       next();
     } catch (error) {
+      console.log(error);
       //Si algo falla enviamos error 400
       res.status(400).send("Expired token");
     }
   }
 };
 
-module.exports = verifyToken;
+module.exports = { verifyToken };

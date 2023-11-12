@@ -1,5 +1,6 @@
 import classes from './Profile.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { takeID } from "../../components/Utils";
 //Importamos FontAwesomeIcon para usarlo en INFO, EDIT y REMOVE
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -8,9 +9,43 @@ import {
 import { useNavigate } from 'react-router-dom';
 
 function Profile(props) {
-  let data = props.userData;
-  let courses = props.userData.courses
+  const token = localStorage.getItem("token").replaceAll('"', "")
+  const id = takeID(token)
+
+  const [user, setUser] = useState({})
+  const [courses, setCourses] = useState([])
   const navigate = useNavigate();
+
+  const getUser = async (id) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8000/auth/getuser/${id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": token,
+          },
+        }
+      );
+      const data = await response.json();
+      if (response.ok) {
+        console.log(data);
+
+        setCourses(data.data.courses);
+        setUser(data.data)
+
+      }
+    } catch (error) {
+      console.log('fALLO');
+
+    }
+  }
+
+  useEffect(() => {
+    getUser(id)
+  }, [])
+
 
   //Paginación
   const [currentPage, setCurrentPage] = useState(1);
@@ -38,7 +73,6 @@ function Profile(props) {
       const data = await response.json();
       if (response.ok) {
         console.log(data.data);
-        props.newUserData(data.data.user);
         navigate("/loader-page", { state: data })
       };
     } catch (error) {
@@ -48,10 +82,12 @@ function Profile(props) {
 
   // 
   const onHandlerClick = (userID, courseID) => {
+    console.log(userID);
+    console.log(courseID);
     fetchRemoveCourse(userID, courseID)
   };
 
-
+console.log(user.courses);
 
   return (
     <div className={classes["main-profile"]}>
@@ -59,9 +95,9 @@ function Profile(props) {
         <div className={classes["user-info-container"]}>
           <h2 className={classes.title}>My details</h2>
           <div className={classes["user-info-details"]}>
-            <h3>Hello {data.name} {data.lastName}</h3>
-            <h3>Your email is {data.email}</h3>
-            <h3>You have {data.courses.length} courses in your MyLearnplace</h3>
+            <h3>Hello {user.name} {user.lastName}</h3>
+            <h3>Your email is {user.email}</h3>
+            <h3>You have {courses.length} courses in your MyLearnplace</h3>
           </div>
         </div>
       </div>
@@ -88,7 +124,7 @@ function Profile(props) {
                         <td>{course.level === undefined ? "Not specificated" : course.level}</td>
                         <td>{course.quantityHours === undefined ? "Not specificated" : course.quantityHours}</td>
                         <td><img src={course.image} alt={`Photo of course ${course.title}`} /></td>
-                        <td onClick={() => { onHandlerClick(props.userData._id, course._id) }} className={classes["remove-button"]}><FontAwesomeIcon onClick={() => { onHandlerClick(props.userData._id, course._id) }} icon={faTrashCan} size='xl' /></td>
+                        <td onClick={() => { onHandlerClick(user._id, course._id) }} className={classes["remove-button"]}><FontAwesomeIcon onClick={() => { onHandlerClick(user._id, course._id) }} icon={faTrashCan} size='xl' /></td>
                       </tr>
                     );
                   })}

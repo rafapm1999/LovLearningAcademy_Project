@@ -1,5 +1,5 @@
 import classes from "./LoginForm.module.css";
-import { Fragment, useRef } from "react";
+import { Fragment, useRef, useState } from "react";
 
 function LoginForm(props) {
   //Creamos constantes de referencia para el formulario de login
@@ -20,8 +20,8 @@ function LoginForm(props) {
     props.onLogin(loginData);
   };
   //Esta función hace que si la info esta vacía se guarde como true, y sino como false
-  const handleChange = () => {
-    const loginInfoChange = {
+  const handleInputChange = (e) => {
+    let loginInfoChange = {
       email: emailRef.current.value === "" ? true : false,
       password: passwordRef.current.value === "" ? true : false,
     };
@@ -45,7 +45,7 @@ function LoginForm(props) {
                 id="userEmail"
                 aria-label="Email"
                 placeholder="Email"
-                onChange={handleChange}
+                onChange={handleInputChange}
                 className={props.onEmptyInfo.email === false && classes.danger}
               />
             </div>
@@ -56,7 +56,7 @@ function LoginForm(props) {
                 name="password"
                 id="userPassword"
                 placeholder="Password"
-                onChange={handleChange}
+                onChange={handleInputChange}
                 className={
                   props.onEmptyInfo.password === false && classes.danger
                 }

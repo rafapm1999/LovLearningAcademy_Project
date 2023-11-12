@@ -47,10 +47,10 @@ function AdminCreateCourse(props) {
     const handleSubmitEdit = (e) => {
         e.preventDefault();
         fetchCreateCourse();
-        navigate(`/bbdd-courses`);
+        navigate(`/admin/bbdd-courses`);
     }
     const handlerBack = () => {
-        navigate(`/bbdd-courses`);
+        navigate(`/admin/bbdd-courses`);
     }
     return (
         <div className={`${classes["main-container"]} ${props.visible && classes["blur"]} ${props.openProfile && classes["blur"]}`}>
@@ -58,7 +58,7 @@ function AdminCreateCourse(props) {
                 <h1>Create new course</h1>
             </div>
             <div className={classes["back-button-container"]}>
-                <button className={classes["back-button"]} onClick={handlerBack}>BACK</button>
+                <button className={classes["back-button"]} onClick={handlerBack}>Back</button>
             </div>
             <div className={classes["info-container"]}>
                 <form onSubmit={handleSubmitEdit} encType="multipart/form-data">
@@ -119,7 +119,7 @@ function AdminCreateCourse(props) {
                     </div>
                     <div className={`${classes["save-button"]} ${classes["submit-button"]}`}>
                         <button type="submit">
-                            <span>SAVE</span>
+                            <span>Save</span>
                         </button>
                     </div>
                 </form>

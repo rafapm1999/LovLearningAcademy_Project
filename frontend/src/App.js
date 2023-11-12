@@ -1,131 +1,20 @@
-//import './App.css';
-import React, { useEffect } from "react";
+import React from "react";
 import { Route, Routes } from "react-router-dom";
-import SignupPage from "./views/Login/SignupPage";
-import LoginPage from "./views/Login/LoginPage";
-import Navbar from "./components/Navbar/Navbar";
-import ContactUs from "./views/Contact/ContactUs";
-import AboutUs from "./views/About/AboutUs";
-import HomePage from "./views/Home/HomePage";
-import Footer from "./components/Footer/Footer";
-import { Fragment } from "react";
-import CoursesPage from "./views/Courses/CoursesPage";
-import CourseInfoPage from "./views/Courses/CourseInfoPage";
-import LoaderPage from "./views/LoaderPage/LoaderPage";
-import { useState } from "react";
-import UserNavbar from "./components/Navbar/UserNavbar";
-import LearnPlace from "./views/LearnPlace/LearnPlace";
-import AdminPage from "./views/Admin/AdminPage";
-import AdminNavbar from "./components/Navbar/AdminNavbar";
-import AdminMembers from "./views/Admin/AdminMembers"
-import AdminCourses from "./views/Admin/AdminCourses";
-import ErrorPage from "./views/ErrorPage/ErrorPage";
-import AdminCreateCourse from "./views/Admin/AdminCreateCourse";
-import Profile from "./views/Profile/Profile";
-/* import { useNavigate } from 'react-router-dom'; */
+import { AuthProvider } from "./components/AuthContext";
+import HomePage from "./pages/HomePage/HomePage";
+import UserPage from "./pages/UserPage/UserPage";
+import AdminPage from "./pages/AdminPage/AdminPage";
+import LoaderPage from "./views/LoaderPage/LoaderPage"
 
 function App() {
-  const [visible, setVisible] = useState(false);
-  let [logged, setLogged] = useState(false);
-  let [userData, setUserData] = useState({});
-  const [openProfile, setOpenProfile] = useState(false);
-  let [changes, setChanges] = useState(false);
-
-  /* const navigate = useNavigate(); */
-
-  const userLogged = (data) => {
-    setLogged(data);
-  };
-  const handlerUserInfo = (e) => {
-   
-    setUserData(e);
-  };
-
-  const logout = () => {
-    setUserData(null);
-  };
-
- 
-
-  if (logged === false) {
+  return (
     
-    return (
-      <Fragment>
-        <Navbar></Navbar>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/about" element={<AboutUs></AboutUs>} />
-          <Route path="/courses" element={<CoursesPage></CoursesPage>} />
-          <Route path="/contact" element={<ContactUs></ContactUs>} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/login" element={<LoginPage newUserData={handlerUserInfo} onLogin={userLogged} />} />
-          <Route path="/course/:id" element={<CourseInfoPage userData={userData} onLogin={logged} />} />
-          <Route path="/error-page" element={<ErrorPage />} />
-        </Routes>
-        <Footer></Footer>
-      </Fragment>
-    );
-
-  } else if (logged === true && userData.role === "admin") {
-   
-
-    const openAdminProfile = () => {
-      
-      setVisible(true)
-      setOpenProfile(true)
-    }
-   
-    const closeAdminProfile = () => {
-      
-      setVisible(!visible)
-      setOpenProfile(false)
-    }
-   
-    return (
-      <Fragment>
-        <AdminNavbar onLogin={userLogged} logout={logout} userData={userData} openProfile={openAdminProfile} closeProfile={closeAdminProfile} visible={visible} openedProfile={openProfile}/>
-        <Routes>
-            <Route path="/loader-page" element={<LoaderPage userData={userData} onUserInfo={handlerUserInfo} closeProfile={closeAdminProfile} openedProfile={openProfile}/>} />
-            <Route path="/admin" element={<AdminPage userData={userData} visible={visible}/>} />
-            <Route path="/create-course" element={<AdminCreateCourse visible={visible}/>} />
-            <Route path="/bbdd-members" element={<AdminMembers visible={visible}/>} />
-            <Route path="/bbdd-courses" element={<AdminCourses openProfile={openProfile} makeChanges={setChanges}/>} />
-            <Route path="/error-page" element={<ErrorPage />} />
-        </Routes>
-      </Fragment>
-    );
-  } else if (logged === true && userData.role === "user") {
-    console.log('Has entrado en logged = true');
-    console.log(userData);
-    return (
-      <Fragment>
-        <UserNavbar userData={userData} onLogin={userLogged} logout={logout} />
-        <Routes>
-          <Route path="/courses" element={<CoursesPage></CoursesPage>} />
-          <Route path="/contact" element={<ContactUs userData={userData} />} />
-          <Route path="/course/:id" element={<CourseInfoPage userData={userData} onLogin={logged} newUserData={handlerUserInfo} />} />
-          <Route path="/loader-page" element={<LoaderPage userData={userData} onUserInfo={handlerUserInfo} />} />
-          <Route path="/about" element={<AboutUs></AboutUs>} />
-          <Route path="/mylearnplace" element={<LearnPlace userData={userData} newUserData={handlerUserInfo} changesUpdate={setChanges} changes={changes}/>} />
-          <Route path="/profile" element={<Profile userData={userData} newUserData={handlerUserInfo}/>} />
-          <Route path="/error-page" element={<ErrorPage />} />
-        </Routes>
-        <Footer userData={userData}></Footer>
-      </Fragment>
-    );
-  } else {
-    return (
-      <Fragment>
-       <Navbar></Navbar>
-      <Routes>
-        <Route path="/error-page" element={<ErrorPage />} />
-      </Routes>
-      <Footer></Footer>
-    </Fragment>
+    <Routes>
+        <Route path="/*" element={<HomePage></HomePage>} />
+        <Route path="/loader-page" element={<LoaderPage/>} />
+        <Route path="/user/*" element={<AuthProvider><UserPage></UserPage></AuthProvider>} />
+        <Route path="/admin/*" element={<AuthProvider><AdminPage></AdminPage></AuthProvider>} />
+    </Routes>
   );
-  }
 }
-
-
 export default App;

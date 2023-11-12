@@ -1,35 +1,35 @@
 import { Fragment, useState } from 'react';
-import classes from './Navbar.module.css';
+import classes from './AdminNavbar.module.css';
 import ReactDOM from "react-dom";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 //Importamos FontAwesomeIcon para usarlo en el footer
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRightFromBracket, faUser
 } from "@fortawesome/free-solid-svg-icons";
-import AdminPage from '../../views/Admin/AdminPage';
+import AdminPage from '../../../views/Admin/AdminDashPage/AdminDashPage';
 
 function AdminNavbar(props) {
   const navigate = useNavigate();
   const unlogged = () => {
-    props.onLogin(false);
-    closeAll();
-    navigate("/home");
-    console.log("has dado click");
-    props.logout();
+    localStorage.removeItem("token");
+    localStorage.removeItem("email");
+    localStorage.removeItem("role");
+    localStorage.removeItem("rememberMe");
+    navigate("/");
   }
-  const closeAll = () => {
+  /* const closeAll = () => {
     if (props.openedProfile === true) {
       return props.closeProfile();
     }
       
-  } 
-  const handlerClick = () => {
-    return props.openProfile;
-  }
+  }  */
+  /* const handlerClick = () => {
+    navigate("/admin/admin-page")
+  } */
   const handlerClose = () => {
-   return props.closeProfile;
+  /*  return props.closeProfile; */
   }
   return (
     <Fragment>
@@ -41,12 +41,14 @@ function AdminNavbar(props) {
         <div className={classes["navbar-logo"]}><p className={classes.logo}>LovLearning Academy</p></div>
         <div className={classes["navbar-links"]}>
           <div className={classes.links}>
-            <Link onClick={closeAll} className={classes.link} to="/bbdd-members"><span>All Members</span></Link>
-            <Link onClick={closeAll} className={classes.link} to="/bbdd-courses"><span>All courses</span></Link>
+          <NavLink className={classes.link} /* onClick={closeAll} */ to={{pathname:'/admin/bbdd-members',
+            state: {}}} ><span>All Members</span></NavLink>
+            <NavLink className={classes.link} /* onClick={closeAll} */ to={{pathname:'/admin/bbdd-courses',
+            state: {}}} ><span>All courses</span></NavLink>
           </div>
         </div>
         <div className={classes["navbar-button"]}>
-          <button onClick={handlerClick()} className={classes.profile}><span><FontAwesomeIcon icon={faUser} /></span></button>
+          <button onClick={() => {navigate("/admin/admin-page")}} className={classes.profile}><span><FontAwesomeIcon icon={faUser} /></span></button>
           <button onClick={unlogged} className={classes.logout}> Log out <span><FontAwesomeIcon icon={faArrowRightFromBracket} /></span></button>
         </div>
       </div>

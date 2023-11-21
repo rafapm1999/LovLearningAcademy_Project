@@ -1,26 +1,30 @@
 const ObjectId = require("bson").ObjectId;
 const Courses = require("../Model/courseModel");
 const Login = require("../Model/loginModel");
+const fs = require("node:fs")
+
+
 
 const getAllCourses = async (req, res) => {
   try {
     const data = await Courses.find();
-    res.status(200).json({ status: "succeeded", data, error: null });
+    res.status(200).json({ status: "ok", data, error: null });
   } catch (error) {
-    res.status(404).json({
-      status: "failed",
+    res.status(400).json({
+      status: "ko",
       data: null,
       error: error.message,
     });
   }
 };
+
 const getCourse = async (req, res) => {
   try {
     const data = await Courses.findById(req.params.id);
-    res.status(200).json({ status: "Has llegado aqui", data, error: null });
+    res.status(200).json({ status: "ok", data, error: null });
   } catch (error) {
-    res.status(404).json({
-      status: "no ha salido bien",
+    res.status(400).json({
+      status: "ko",
       data: null,
       error: error.message,
     });
@@ -42,13 +46,13 @@ const postCourse = async (req, res) => {
     const course = await newCourse.save();
 
     res.status(201).json({
-      status: "succeeded",
+      status: "ok",
       data: course,
       error: null,
     });
   } catch (error) {
     res.status(500).json({
-      status: "failed",
+      status: "ko",
       data: null,
       error: error.message,
     });
@@ -61,10 +65,10 @@ const patchCourse = async (req, res) => {
       req.params.id,
       req.body,
       { new: true });
-    res.status(200).json({ status: "Has llegado status 200 de patchCourse", data, error: null });
+    res.status(200).json({ status: "ok", data, error: null });
   } catch (error) {
-    res.status(404).json({
-      status: "no ha salido bien patchCourse",
+    res.status(400).json({
+      status: "ko",
       data: null,
       error: error.message,
     });
@@ -74,10 +78,28 @@ const patchCourse = async (req, res) => {
 const deleteCourse = async (req, res) => {
   try {
     const data = await Courses.findByIdAndDelete(req.params.id);
-    res.status(200).json({ status: "Has llegado status 200 de deleteCourse", data, error: null });
+    res.status(200).json({ status: "ok", data, error: null });
   } catch (error) {
-    res.status(404).json({
-      status: "no ha salido bien deleteCourse",
+    res.status(400).json({
+      status: "ko",
+      data: null,
+      error: error.message,
+    });
+  }
+};
+
+const saveImage = (req, res) => {
+  function saveCourseImage(file) {
+    const newPath = `../frontend/public/uploads/${file.originalname}`
+    fs.renameSync(file.path, newPath)
+    return newPath;
+  }
+  try {
+    console.log(req.file);
+    saveCourseImage(req.file)
+  } catch (error) {
+    res.status(400).json({
+      status: "ko",
       data: null,
       error: error.message,
     });
@@ -85,4 +107,5 @@ const deleteCourse = async (req, res) => {
 };
 
 
-module.exports = { getAllCourses, getCourse, postCourse, patchCourse, deleteCourse };
+
+module.exports = { getAllCourses, getCourse, postCourse, patchCourse, deleteCourse, saveImage };

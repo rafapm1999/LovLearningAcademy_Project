@@ -1,8 +1,9 @@
 import classes from './AdminCourseModal.module.css';
 import { useNavigate } from 'react-router-dom';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 function AdminCourseModal(props) {
+    const [token, setToken] = useState(localStorage.getItem("token").replaceAll('"', ""))
     const navigate = useNavigate();
     const titleRef = useRef("");
     const imageRef = useRef("");
@@ -12,8 +13,7 @@ function AdminCourseModal(props) {
     const titleRemoveRef = useRef("");
 
     const fetchEditCourse = async (id) => {
-        console.log(titleRef.current.value);
-        console.log(courseInfoRef.current.value);
+
         try {
             const response = await fetch(
                 `http://localhost:8000/courses/edit/${id}`,
@@ -21,6 +21,7 @@ function AdminCourseModal(props) {
                     method: "PATCH",
                     headers: {
                         "Content-Type": "application/json",
+                        "auth-token": token,
                     },
                     body: JSON.stringify({
                         title: titleRef.current.value === "" ? props.courseData.title : titleRef.current.value,
@@ -53,6 +54,7 @@ function AdminCourseModal(props) {
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json",
+                        "auth-token": token,
                     },
                 }
             );
@@ -73,17 +75,21 @@ function AdminCourseModal(props) {
 
     const handlerClose = (e) => {
         console.log('Has entrado en handlerClose');
-
-        return e === "INFO" || e === "EDIT" || e === "REMOVE" ? props.onClose : props.onPending;
+        if (e === "REMOVE" && titleRemoveRef.current.value === props.courseData.title) {
+            props.onClose();
+            props.onPending();
+            console.log("Son iguales");
+        } else {
+            console.log("No son iguales");
+        }
+        if (e === "closeClick") {
+            props.onClose();
+        }
     }
 
 
-
-
-
-
     if (props.clickType === "INFO") {
-        console.log(props.courseData.quantityHours);
+
         return (
             <>
                 <div className={classes["modal-main"]}>
@@ -98,7 +104,7 @@ function AdminCourseModal(props) {
                                             <p> ID: {props.courseData._id}</p>
                                         </div>
                                         <div>
-                                            <img src={props.courseData.image} alt={`Photo of the course ${props.courseData.title}`} width={50} height={50} />
+                                            <img src={require(`../../../../public/uploads/${props.courseData.image}`)} alt={`Photo of the course ${props.courseData.title}`} width={50} height={50} />
                                         </div>
                                     </div>
 
@@ -116,7 +122,7 @@ function AdminCourseModal(props) {
                                         <p className={classes["course-info-title"]}>Course Description</p>
                                         <p>{props.courseData.info}</p>
                                     </div>
-                                    <button onClick={handlerClose("INFO")} className={classes["md-close"]}><span>X</span></button>
+                                    <button onClick={() => { handlerClose("closeClick") }} className={classes["md-close"]}><span>X</span></button>
                                 </div>
                             </div>
                         </div>
@@ -126,11 +132,11 @@ function AdminCourseModal(props) {
             </>
         );
     } else if (props.clickType === "EDIT") {
-        console.log(props.courseData.level);
+        /*  console.log(props.courseData.level); */
         const handleSubmitEdit = (e) => {
             e.preventDefault();
             let id = props.courseData._id;
-            console.log('Fetch Edit course');
+            /*  console.log('Fetch Edit course'); */
             fetchEditCourse(id);
             props.onChange();
             handlerClose();
@@ -162,7 +168,7 @@ function AdminCourseModal(props) {
                                         <div className={classes["edit-image"]}>
                                             <div>
                                                 <p>Course Image</p>
-                                                <img src={props.courseData.image} alt={`Photo of the course ${props.courseData.title}`} width={50} height={50} />
+                                                <img src={require(`../../../../public/uploads/${props.courseData.image}`)} alt={`Photo of the course ${props.courseData.title}`} width={50} height={50} />
                                             </div>
                                             <div>
                                                 <input type="file" id="courseImage" name="image" accept="image/png, image/jpeg" ref={imageRef} />
@@ -218,12 +224,12 @@ function AdminCourseModal(props) {
                                             </div>
                                         </div>
                                         <div className={`${classes["save-button"]} ${classes["submit-button"]}`}>
-                                            <button type="submit" onClick={handlerClose()}>
+                                            <button type="submit" onClick={() => { handlerClose("REMOVE") }}>
                                                 <span>SAVE</span>
                                             </button>
                                         </div>
                                     </form>
-                                    <button onClick={handlerClose("EDIT")} className={classes["md-close"]}><span>X</span></button>
+                                    <button onClick={() => { handlerClose("closeClick") }} className={classes["md-close"]}><span>X</span></button>
                                 </div>
                             </div>
                         </div>
@@ -233,22 +239,20 @@ function AdminCourseModal(props) {
             </div >
         );
     } else if (props.clickType === "REMOVE") {
+
         const handleSubmitRemove = (e) => {
-
-
-            const courseTitle = titleRemoveRef.current.value;
             e.preventDefault();
-            console.log(props.courseData.title);
-            console.log(courseTitle);
+            const courseTitle = titleRemoveRef.current.value;
+            /* console.log(props.courseData.title);
+            console.log(courseTitle); */
             if (props.courseData.title === courseTitle) {
-                console.log('Fetch para remove the course');
+                /*  console.log('Fetch para remove the course'); */
                 let id = props.courseData._id;
-                console.log('Fetch Remove course');
+                /*  console.log('Fetch Remove course'); */
                 fetchRemoveCourse(id);
-                props.onChange();
                 handlerClose("REMOVE");
             } else {
-                console.log('Titulo e input no son iguales');
+                /*     console.log('Titulo e input no son iguales'); */
             }
         }
         return (
@@ -275,13 +279,13 @@ function AdminCourseModal(props) {
                                             />
                                         </div>
                                         <div className={`${classes["remove-button"]} ${classes["submit-button"]}`}>
-                                            <button type="submit" onClick={handlerClose()}>
+                                            <button type="submit" onClick={() => { handlerClose("REMOVE") }}>
                                                 <span>REMOVE</span>
                                             </button>
                                         </div>
                                     </form>
                                 </div>
-                                <button onClick={handlerClose("REMOVE")} className={classes["md-close"]}><span>X</span></button>
+                                <button onClick={() => { handlerClose("closeClick") }} className={classes["md-close"]}><span>X</span></button>
                             </div>
                         </div>
                         <div className={classes["md-overlay"]} />

@@ -5,6 +5,7 @@
   flex-direction: column;
   width: 100vw;
   height: 100vh;
+  margin: 2rem 0;
 }
 .courseInfoPage-info {
   display: flex;
@@ -14,16 +15,24 @@
   margin: 2rem;
 }
 .course-description {
-  width: 20vw;
+  width: 50vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.course-image {
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.course-image {
-  width: 20vw;
+.level-hours-container{
+  width: 50vw;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 .buttons {
   width: 100vw;

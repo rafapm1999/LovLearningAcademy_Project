@@ -46,7 +46,7 @@ function LoginForm(props) {
                 aria-label="Email"
                 placeholder="Email"
                 onChange={handleInputChange}
-                className={props.onEmptyInfo.email === false && classes.danger}
+                className={(props.onEmptyInfo.email === false) ? classes.danger : ''}
               />
             </div>
             <div className={classes["form-info"]}>
@@ -58,7 +58,7 @@ function LoginForm(props) {
                 placeholder="Password"
                 onChange={handleInputChange}
                 className={
-                  props.onEmptyInfo.password === false && classes.danger
+                  (props.onEmptyInfo.password === false) ? classes.danger : ''
                 }
               />
             </div>

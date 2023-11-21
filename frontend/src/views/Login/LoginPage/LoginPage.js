@@ -52,7 +52,8 @@ function LoginPage(props) {
         console.log(data);
        
         if (response.ok) {
-          if(data.code===401){
+          console.log(data);
+          if(data.status==='ko'){
             alert('Error, datos incorrecto');
           }
           else{

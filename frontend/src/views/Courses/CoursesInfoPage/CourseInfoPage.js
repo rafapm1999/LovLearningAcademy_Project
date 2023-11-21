@@ -7,6 +7,7 @@ import CourseModal from "../../Modal/CourseModal/CourseModal";
 import { takeID } from "../../../components/Utils";
 
 function CourseInfoPage() {
+  //Mirar fallo del token
   const [token, setToken] = useState(localStorage.getItem("token").replaceAll('"', ""));
   //Creamos la contante location y usamos useLocation para guardar la info actual 
   const location = useLocation();
@@ -25,7 +26,7 @@ function CourseInfoPage() {
       // Obtener los datos existentes del servidor
       const response = await fetch(`http://localhost:8000/auth/getuser/${userId}`);
       let existingData = await response.json();
-  
+
       console.log(existingData);
       console.log(courseData.data);
       console.log(userId);
@@ -46,7 +47,7 @@ function CourseInfoPage() {
       console.log(courseExist);
 
       if (response.ok && courseExist === false) {
-        existingData.data.courses = [...existingData.data.courses,...Array(courseData.data)];
+        existingData.data.courses = [...existingData.data.courses, ...Array(courseData.data)];
         const patchTheCourse = async (id) => {
           console.log(courseExisting);
           try {
@@ -60,9 +61,9 @@ function CourseInfoPage() {
                 courses: existingData.data.courses,
               }),
             });
-      
+
             const data = await patchResponse.json();
-      
+
             if (patchResponse.ok) {
               console.log(data);
             };
@@ -70,18 +71,18 @@ function CourseInfoPage() {
             console.log(error);
           }
         }
-       /*  existingData.data.courses = [...existingData.data.courses,...Array(courseData.data)]; */
+        /*  existingData.data.courses = [...existingData.data.courses,...Array(courseData.data)]; */
         setCourseExisting(courseData.data)
         return patchTheCourse(userId);
       } else if (response.ok && courseExist === true) {
-        
+
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  
+
 
   //Función para cuando damos al boton de back
   const handleBack = () => {
@@ -116,12 +117,12 @@ function CourseInfoPage() {
         <div className={classes["course-title"]}>
           <h1>{courseData.data.title}</h1>
         </div>
+        <div className={classes["course-image"]}>
+          <img src={require(`../../../../public/uploads/${courseData.data.image}`)} alt={`Photo of the course ${courseData.data.title}`} width={"1000"} />
+        </div>
         <div className={classes["courseInfoPage-info"]}>
           <div className={classes["course-description"]}>
             <p>{courseData.data.info}</p>
-          </div>
-          <div className={classes["course-image"]}>
-            <img src={courseData.data.image} alt={`Photo of the course ${courseData.data.title}`} />
           </div>
           <div className={classes["level-hours-container"]}>
             <p>Level</p>

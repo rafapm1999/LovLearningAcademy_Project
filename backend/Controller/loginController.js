@@ -36,7 +36,7 @@ const signup = async (req, res) => {
     const refreshToken = generateToken(payload, true);
     //Enviamos respuesta de que todo se ha realizado correctamente
     res.status(201).json({
-      status: "succeeded",
+      status: "ok",
       data: "User create!",
       error: null,
     });
@@ -44,7 +44,7 @@ const signup = async (req, res) => {
     //Si el error.code es 11000, enviamos un error de usuario duplicado (ya existe en la base de datos)
     if (error.code === 11000) {
       res.status(409).json({
-        status: "failed",
+        status: "ko",
         data: null,
         error:
           "The email is already registered. Please, try with another email.",
@@ -52,7 +52,7 @@ const signup = async (req, res) => {
     } else {
       //Si es otro error enviamos un mensaje general con error.message
       res.status(400).json({
-        status: "failed",
+        status: "ko",
         data: null,
         error: error.message,
       });
@@ -65,8 +65,8 @@ const refreshToken = async (req, res) => {
   try {
       //Si no hay payload desde token de refresco, enviar un error
       if (!req.user) {
-          res.status(403).json({
-              status: "failed",
+          res.status(200).json({
+              status: "ko",
               data: null,
               error: "Unauthorized",
           });
@@ -74,7 +74,7 @@ const refreshToken = async (req, res) => {
       //Si hay token de refresco y no ha expirado, obtener el payload y enviar 2 nuevos tokens
       const payload = { id: req.user.id, email: req.user.email, role: req.user.role };
       res.status(200).json({
-          status: "succeeded",
+          status: "ok",
           data: {
               user: payload,
               token: generateToken(payload, false),
@@ -85,7 +85,7 @@ const refreshToken = async (req, res) => {
   } catch (error) {
       //Si hay algún error, enviar el mensaje del error
       res.status(400).json({
-          status: "failed",
+          status: "ko",
           data: null,
           error: error.message,
       });
@@ -93,44 +93,50 @@ const refreshToken = async (req, res) => {
 };
 
 //POST => /auth/login
-
-const login = async (req, res) => {
+const login = async (req, res) => {  
   try {
     const { email, password } = req.body;
     const user = await Login.findOne({ email });
-    !user &&
-      res.status(400).json({
-        status: "failed",
+    if(!user){
+      res.status(200).json({
+        status: "ko",
         data: null,
         error: "Wrong email or password. Try again.",
       });
-    const validPassword = await bcrypt.compare(password, user.password);
-    !validPassword &&
-      res.status(400).json({
-        status: "failed",
-        data: null,
-        error: "Wrong email or password",
-      });
-    //Si la contraseña es correcta, generar el token
-    const payload = { id: user._id, email: user.email, role: user.role };
-    //Generamos un token con los datos del payload
-    const token = generateToken(payload, false);
-    const refreshToken = generateToken(payload, true);
-    res.status(200).json({
-      status: "succeded",
-      data: payload,
-      token: token,
-      refreshToken: refreshToken,
-      error: null,
-    });
+    }
+    else{
+      const validPassword = await bcrypt.compare(password, user.password);
+      if(!validPassword){
+        res.status(200).json({
+          status: "ko",
+          data: null,
+          error: "Wrong email or password. Try again.",
+        });
+      } else {
+        //Si la contraseña es correcta, generar el token
+        const payload = { id: user._id, email: user.email, role: user.role };
+        //Generamos un token con los datos del payload
+        const token = generateToken(payload, false);
+        //console.log(token);
+        const refreshToken = generateToken(payload, true);
+        res.status(200).json({
+          status: "ok",
+          data: payload,
+          token: token,
+          refreshToken: refreshToken,
+          error: null,
+        });
+      }
+    }
   } catch (error) {
     res.status(400).json({
-      status: "failed",
+      status: "ko",
       data: null,
       error: error.message,
     });
   }
 };
+
 //PATCH 
 const update = async (req, res) => {
   try {
@@ -154,6 +160,7 @@ const getuser = async (req, res) => {
     const data = await Login.findById(
       req.params.id
     );
+    
     console.log('Conseguido getuser');
     
     res.status(200).json({ status: "getuser realizado", data, error: null });

@@ -1,19 +1,29 @@
 import classes from './AdminCreateCourse.module.css';
 import { useNavigate } from 'react-router-dom';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 function AdminCreateCourse(props) {
+    const [token, setToken] = useState(localStorage.getItem("token").replaceAll('"', ""))
+    const [fileImage, setFileImage] = useState()
     const navigate = useNavigate();
-    const titleRef = useRef("");
-    const imageRef = useRef("");
-    const levelRef = useRef("");
-    const hoursRef = useRef("");
-    const courseInfoRef = useRef("");
-
+    const titleRef = useRef();
+    const imageRef = useRef();
+    const levelRef = useRef();
+    const hoursRef = useRef();
+    const courseInfoRef = useRef();
+ 
+    console.log(typeof "");
     const fetchCreateCourse = async () => {
+        console.log(typeof imageRef);
+        console.log(imageRef.current.value);
+
         console.log(titleRef.current.value);
         console.log(courseInfoRef.current.value);
-        console.log(imageRef.current.value);
+        console.log(fileImage);
+        //
+        const formData = new FormData();
+        formData.append('file', fileImage);
+    
         try {
             const response = await fetch(
                 `http://localhost:8000/courses/create-course`,
@@ -21,11 +31,12 @@ function AdminCreateCourse(props) {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
+                        "auth-token": token,
                     },
                     body: JSON.stringify({
                         title: titleRef.current.value,
                         info: courseInfoRef.current.value,
-                        image: imageRef.current.value,
+                        image: fileImage.name,
                         level: levelRef.current.value,
                         quantityHours: hoursRef.current.value,
                     }),
@@ -42,8 +53,37 @@ function AdminCreateCourse(props) {
             console.log(error);
             navigate(`/error-page`, { state: error });
         }
+        try {
+            const response = await fetch(
+                `http://localhost:8000/courses/save-image`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "auth-token": token,
+                    },
+                    body: formData,
+                    mode: "no-cors",
+                    
+                }
+            );
+            const data = await response.json();
+            console.log(data.data);
+            if (response.ok) {
+                console.log("Has guardado la imagen");
+            }
+
+        } catch (error) {
+            console.log("Save no funciona");
+            console.log(error);
+            navigate(`/error-page`, { state: error });
+        }
     };
 
+
+    const handleFileChange = (e) => {
+        setFileImage(e.target.files[0])
+    }
     const handleSubmitEdit = (e) => {
         e.preventDefault();
         fetchCreateCourse();
@@ -78,7 +118,7 @@ function AdminCreateCourse(props) {
                     <div className={classes["image"]}>
                         <div>
                             <p>Image</p>
-                            <input type="file" /* id="fileID" */ name="file" accept="image/*" ref={imageRef} required />
+                            <input type="file" id="file" name="file" accept="image/*" ref={imageRef} onChange={handleFileChange} required />
                         </div>
                     </div>
                     <div className={classes["level-hours-section"]}>

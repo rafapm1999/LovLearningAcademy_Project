@@ -11,13 +11,13 @@ const postContactUsComment = async (req, res) => {
         });
         const contactComment = await newContactComment.save();
         res.status(201).json({
-            status: "succesfully",
+            status: "ok",
             data: "Your comment is send to our offices",
             error: null,
         });
     } catch (error) {
         res.status(400).json({
-            status: "failed",
+            status: "ko",
             data: null,
             error: error.message,
         });

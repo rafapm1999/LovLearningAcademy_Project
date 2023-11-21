@@ -2,10 +2,10 @@
 //Importar express para crear el servidor
 const express = require("express");
 
-//
+/* //
 const multer = require("multer");
 const fs = require("node:fs")
-//
+// */
 
 //Importar dotenv para leer las variables de entorno
 const dotenv = require("dotenv");
@@ -31,9 +31,9 @@ app.use(express.json());
 //Habilitar cors para poder hacer peticiones desde el frontend
 app.use(cors());
 
-// 
-const upload = multer({dest:'upload/'});
-//
+/* // 
+const upload = multer({dest:'../frontend/public/uploads/'});
+// */
 
 //Conectamos a la base de datos
 mongoose
@@ -58,18 +58,18 @@ app.use("/courses", courses);
 app.use("/contact", contacts);
 app.use("/user", user);
 
-//
-app.post('/courses/create-course', upload.single('file'),(req, res) => {
-  console.log(req.file);
+/* //
+app.post('/imagen', upload.single('file'), (req, res) => {
   saveImage(req.file)
+  res.send(req.file);
   res.send("Termina");
 });
 function saveImage(file) {
-const newPath = `../frontend/public/upload/${file.originalname}`
+const newPath = `../frontend/public/uploads/${file.originalname}`
 fs.renameSync(file.path, newPath)
 return newPath;
-}
-//
+};
+// */
 
 //Levantamos el servidor
 //Hacemos que el servidor escuche las conexiones para el puerto y host especificados (devuelve un objeto http.Server)

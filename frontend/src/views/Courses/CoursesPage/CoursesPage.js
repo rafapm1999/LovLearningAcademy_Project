@@ -180,7 +180,7 @@ function CoursesPage() {
                     onHandlerClick(course._id);
                     scrollTop("auto");
                   }}
-                  className={classes["coursesPage-container"]}
+                  className={`${classes["coursesPage-container"]} ${classes[`${course.level.toLowerCase()}`]}`}
                   key={i}
                 >
                   <div className={classes["coursesPage-info"]}>

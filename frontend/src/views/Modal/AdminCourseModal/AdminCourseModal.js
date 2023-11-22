@@ -104,7 +104,7 @@ function AdminCourseModal(props) {
                                             <p> ID: {props.courseData._id}</p>
                                         </div>
                                         <div>
-                                            <img src={require(`../../../../public/uploads/${props.courseData.image}`)} alt={`Photo of the course ${props.courseData.title}`} width={50} height={50} />
+                                            <img src={require(`../../../../public/uploads/${props.courseData.image}`)} alt={`Photo of the course ${props.courseData.title}`} width={100} />
                                         </div>
                                     </div>
 
@@ -168,7 +168,7 @@ function AdminCourseModal(props) {
                                         <div className={classes["edit-image"]}>
                                             <div>
                                                 <p>Course Image</p>
-                                                <img src={require(`../../../../public/uploads/${props.courseData.image}`)} alt={`Photo of the course ${props.courseData.title}`} width={50} height={50} />
+                                                <img src={require(`../../../../public/uploads/${props.courseData.image}`)} alt={`Photo of the course ${props.courseData.title}`} width={50}  />
                                             </div>
                                             <div>
                                                 <input type="file" id="courseImage" name="image" accept="image/png, image/jpeg" ref={imageRef} />

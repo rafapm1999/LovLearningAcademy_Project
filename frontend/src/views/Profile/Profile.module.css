@@ -44,15 +44,16 @@
   padding: 0.5rem;
   width: 100px;
 }
-tr {
+.coursesPage-main-table tr {
   border: 1px solid #000;
   max-height: 10vh;
   min-height: 10vh;
 }
-td {
+.coursesPage-main-table td {
   border: 1px solid #000;
   padding: 0.5rem;
   width: 100px;
+  text-align: center;
 }
 .coursesPage-info:hover {
   background-color: #a3a3a3;

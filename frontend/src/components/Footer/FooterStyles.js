@@ -7,6 +7,7 @@ export const Main = styled.div`
   height: auto;
   width: 100vw;
   flex-shrink: 1;
+  margin-top: 8rem;
   
 
   // Añadimos 2 mediaquery.

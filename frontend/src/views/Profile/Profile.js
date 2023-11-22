@@ -123,7 +123,7 @@ console.log(user.courses);
                         <td>{course.title}</td>
                         <td>{course.level === undefined ? "Not specificated" : course.level}</td>
                         <td>{course.quantityHours === undefined ? "Not specificated" : course.quantityHours}</td>
-                        <td><img src={course.image} alt={`Photo of course ${course.title}`} /></td>
+                        <td className={classes["image"]}><img src={require(`../../../public/uploads/${course.image}`)} alt={`Photo of course ${course.title}`} width={"100"}/></td>
                         <td onClick={() => { onHandlerClick(user._id, course._id) }} className={classes["remove-button"]}><FontAwesomeIcon onClick={() => { onHandlerClick(user._id, course._id) }} icon={faTrashCan} size='xl' /></td>
                       </tr>
                     );

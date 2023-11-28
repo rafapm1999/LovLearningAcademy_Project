@@ -1,9 +1,11 @@
 import classes from './AdminCreateCourse.module.css';
 import { useNavigate } from 'react-router-dom';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
+import { takeRole } from '../../../components/Utils';
 
 function AdminCreateCourse(props) {
     const [token, setToken] = useState(localStorage.getItem("token").replaceAll('"', ""))
+    const adminValidate = takeRole(String(token));
     const [fileImage, setFileImage] = useState()
     const navigate = useNavigate();
     const titleRef = useRef();
@@ -11,7 +13,13 @@ function AdminCreateCourse(props) {
     const levelRef = useRef();
     const hoursRef = useRef();
     const courseInfoRef = useRef();
- 
+    
+    //Prueba para enseñarselo a Fran
+    useEffect(() => {
+       if(adminValidate !== "admin"){
+        navigate(-1)
+       }
+    },)
     console.log(typeof "");
     const fetchCreateCourse = async () => {
         console.log(typeof imageRef);
@@ -23,7 +31,7 @@ function AdminCreateCourse(props) {
         //
         const formData = new FormData();
         formData.append('file', fileImage);
-    
+
         try {
             const response = await fetch(
                 `http://localhost:8000/courses/create-course`,
@@ -64,7 +72,7 @@ function AdminCreateCourse(props) {
                     },
                     body: formData,
                     mode: "no-cors",
-                    
+
                 }
             );
             const data = await response.json();

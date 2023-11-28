@@ -143,9 +143,6 @@
   color: black;
 }
 
-
-
-
 @keyframes changeWords { /* Damos forma a la animación personalizada changeWords */
   0%, 100% { /* 2. Los tramos restantes 0% a 100% tendrá un color transparente */
     color: transparent;

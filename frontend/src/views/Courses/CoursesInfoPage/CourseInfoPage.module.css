@@ -7,32 +7,86 @@
   height: 100vh;
   margin: 2rem 0;
 }
+.blur{
+  filter: blur(4px);
+}
+.modal-main {
+  z-index: 4000;
+  width: 100vw;
+  height: 100vh;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+}
 .courseInfoPage-info {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 40vw;
   margin: 2rem;
 }
 .course-description {
   width: 50vw;
+  padding: 5rem;
+  box-shadow: 0 0 6px 1px rgb(160, 160, 160);
+  background-color: rgba(255, 255, 255, 0.966);
+}
+.course-description:hover{
+  box-shadow: 0 0 6px 4px rgba(160, 160, 160, 0.801);
+}
+.content {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  margin: 2rem 0;
 }
 .course-image {
-  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.level-hours-container{
-  width: 50vw;
+.details {
+  position: absolute;
+  visibility: visible;
+  opacity: 1;
+  animation: detailsOn 2.5s ease-in-out 1;
+}
+.level-hours-container {
+  width: 30vw;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+.level-hours-container .level {
+  width: 10vw;
+  padding: 2rem;
+  box-shadow: 0 0 6px 1px rgb(160, 160, 160);
+  background-color: rgba(255, 255, 255, 0.966);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.level-hours-container .level p{
+  font-weight: bold;
+}
+.level:hover{
+  box-shadow: 0 0 6px 4px rgba(160, 160, 160, 0.801);
+}
+.level-hours-container .quantyHours {
+  width: 10vw;
+  padding: 2rem;
+  box-shadow: 0 0 6px 1px rgb(160, 160, 160);
+  background-color: rgba(255, 255, 255, 0.966);
+  text-align: center;
+}
+.level-hours-container .quantyHours p{
+  font-weight: bold;
+}
+.quantyHours:hover{
+  box-shadow: 0 0 6px 4px rgba(160, 160, 160, 0.801);
 }
 .buttons {
   width: 100vw;
@@ -74,5 +128,17 @@
 .wantButton:hover {
   background-color: #ffffff;
   color: #1e90ff;
- 
+}
+
+@keyframes detailsOn {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+    /* transition: visibility 0s linear 300ms, opacity 300ms; */
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+   /*  transition: visibility 0s linear 0s, opacity 300ms; */
+  }
 }

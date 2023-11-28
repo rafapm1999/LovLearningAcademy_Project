@@ -156,6 +156,7 @@ function CoursesPage() {
               <input
                 ref={inputRef}
                 type="text"
+                name="search"
                 placeholder="Search your course"
                 value={wordSearch}
                 onChange={e => {

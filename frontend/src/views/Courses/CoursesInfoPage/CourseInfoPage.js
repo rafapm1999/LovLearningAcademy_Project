@@ -113,28 +113,38 @@ function CourseInfoPage() {
         <CourseModal visible={visible} data={courseData.data} onClose={handleClose} userId={userId} logged={token} courseExists={courseRepeat} />,
         document.querySelector("#modal")
       )}
-      <div className={classes["courseInfoPage-main"]}>
+      <div className={`${classes["courseInfoPage-main"]} ${visible && classes["blur"]}`}>
         <div className={classes["course-title"]}>
           <h1>{courseData.data.title}</h1>
         </div>
-        <div className={classes["course-image"]}>
-          <img src={require(`../../../../public/uploads/${courseData.data.image}`)} alt={`Photo of the course ${courseData.data.title}`} width={"1000"} />
-        </div>
-        <div className={classes["courseInfoPage-info"]}>
-          <div className={classes["course-description"]}>
-            <p>{courseData.data.info}</p>
+        <div className={classes["content"]}>
+          <div className={classes["course-image"]}>
+            <img src={require(`../../../../public/uploads/${courseData.data.image}`)} alt={`Photo of the course ${courseData.data.title}`} width={"1000"} height={"auto"} />
           </div>
-          <div className={classes["level-hours-container"]}>
-            <p>Level</p>
-            <p>{courseData.data.level === undefined ? "Level not specificated" : courseData.data.level}</p>
-            <p>Quantity Hours</p>
-            <p>{courseData.data.quantityHours === undefined ? "Quantity Hours not specificated" : courseData.data.quantityHours}</p>
+          <div className={classes["details"]}>
+            <div className={classes["courseInfoPage-info"]}>
+              <div className={classes["course-description"]}>
+                <p>Description</p>
+                <p>{courseData.data.info}</p>
+              </div>
+              <div className={classes["level-hours-container"]}>
+                <div className={classes["level"]}>
+                  <p>Level</p>
+                  <p>{courseData.data.level === undefined ? "Level not specificated" : courseData.data.level}</p>
+                </div>
+                <div className={classes["quantyHours"]}>
+                  <p>Quantity Hours</p>
+                  <p>{courseData.data.quantityHours === undefined ? "Quantity Hours not specificated" : courseData.data.quantityHours}</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div className={classes.buttons}>
           <button onClick={handleBack} className={classes.backButton}>Back</button>
           <button onClick={getTheCourse} className={classes.wantButton}>I want it</button>
         </div>
+        <div className={`${visible && classes["modal-main"]}`}></div>
       </div>
     </div>
   );

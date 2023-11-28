@@ -203,7 +203,7 @@ function LearnPlace() {
                     onHandlerClick(course._id);
                   }}
                   className={classes["coursesLearnPage-container"]}
-                  key={course.id}
+                  key={i}
                 >
                   <div className={classes["coursesLearnPage-info"]}>
                     <h3>{course.title}</h3>

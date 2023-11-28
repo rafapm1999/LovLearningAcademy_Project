@@ -72,8 +72,8 @@ function SignupForm(props) {
               <input
                 ref={rewritePasswordRef}
                 type="password"
-                name="password"
-                id="userPassword"
+                name="rewritePassword"
+                id="userRewritePassword"
                 placeholder="Rewrite the password"
               />
             </div>

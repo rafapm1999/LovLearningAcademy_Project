@@ -16,7 +16,7 @@ function HomePage() {
     return (
         <Routes>
             <Route path="/" element={<Layout lang="en" />}>
-                <Route path="/" element={<Home lang="en" />} />
+                <Route index element={<Home lang="en" />} />
                 <Route path="/about" element={<AboutUs lang="en" />} />
                 <Route path="/courses" element={<Courses lang="en" />} />
                 <Route path="/course/:title" element={<CourseInfoPage lang="en" />} />
@@ -24,8 +24,9 @@ function HomePage() {
                 <Route path="/signup" element={<SignupPage lang="en" />} />
                 <Route path="/login" element={<LoginPage lang="en" />} />
                 <Route path="/loader-page" element={<LoaderPage lang="en" />} /> 
+                <Route path="*" element={<ErrorPage lang="en" />} />
             </Route>
-            <Route path="*" element={<ErrorPage lang="es" />} />
+            {/* <Route path="*" element={<ErrorPage lang="es" />} /> */}
         </Routes>
     );
 }

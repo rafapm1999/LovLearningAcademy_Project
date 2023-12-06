@@ -17,7 +17,7 @@
   margin-top: 5rem;
   color: black;
 }
-.homePage-title > h1 > span{
+.homePage-title > h1 > span {
   display: block;
   color: red;
   font-style: italic;
@@ -41,10 +41,10 @@
 .info-container > h3 {
   font-size: 1.8rem;
 }
-.info-container > h3 > span{
+.info-container > h3 > span {
   color: #ff5050;
   font-style: italic;
-  margin: 0 .5rem;
+  margin: 0 0.5rem;
 }
 .info-container > .list {
   list-style: none;
@@ -59,11 +59,11 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  background:linear-gradient(transparent, #f1e5d9, transparent);
+  background: linear-gradient(transparent, #f1e5d9, transparent);
   width: 100vw;
   height: 60vh;
 }
-.container-1{
+.container-1 {
   background-image: url(../../assets/homePage-container-1.jpg);
   background-size: cover;
   background-position: right;
@@ -72,7 +72,7 @@
   width: 20vw;
   height: 40vh;
 }
-.container-2{
+.container-2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -81,14 +81,14 @@
   height: 40vh;
   background-color: transparent;
 }
-.container-2 > .info-section-1{
+.container-2 > .info-section-1 {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   width: 60vw;
   height: 19vh;
 }
-.info-section-1 > .img-section-1{
+.info-section-1 > .img-section-1 {
   background-image: url(../../assets/homePage-img-section-1.jpg);
   background-size: cover;
   background-position: top;
@@ -96,27 +96,27 @@
   width: 15vw;
   height: 19vh;
 }
-.info-section-1 > .details-section-1{
+.info-section-1 > .details-section-1 {
   background: linear-gradient(to right, white 65%, transparent);
   width: 40vw;
   height: 19vh;
   padding: 2em;
   border-radius: 2rem 0 0 0;
 }
-.details-section-1 span{
+.details-section-1 span {
   font-size: 2rem;
 }
-.details-section-1 span:hover{
+.details-section-1 span:hover {
   text-decoration: underline;
 }
-.container-2 > .info-section-2{
+.container-2 > .info-section-2 {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   width: 60vw;
   height: 19vh;
 }
-.info-section-2 > .img-section-2{
+.info-section-2 > .img-section-2 {
   background-image: url(../../assets/homePage-img-section-2.jpg);
   background-size: cover;
   background-position: bottom;
@@ -124,7 +124,7 @@
   width: 15vw;
   height: 19vh;
 }
-.info-section-2 > .details-section-2{
+.info-section-2 > .details-section-2 {
   background: linear-gradient(to left, white 65%, transparent);
   text-align: right;
   border-radius: 0 0 2rem 0;
@@ -132,23 +132,50 @@
   height: 19vh;
   padding: 2em;
 }
-.details-section-2 span{
+.details-section-2 span {
   font-size: 2rem;
 }
-.details-section-2 span:hover{
+.details-section-2 span:hover {
   text-decoration: underline;
 }
-.link{
+.link {
   text-decoration: none;
   color: black;
 }
+/* Cuando tenemos token */
 
-@keyframes changeWords { /* Damos forma a la animación personalizada changeWords */
-  0%, 100% { /* 2. Los tramos restantes 0% a 100% tendrá un color transparente */
+.homePage-main-header {
+  width: 100vw;
+  height: 40vh;
+  background-color: red;
+  margin-bottom: 2rem;
+}
+.homePage-main-side {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+.homePage-main-leftside {
+  width: 40vw;
+  height: 40vh;
+  background-color: blue;
+}
+.homePage-main-centerside{
+  width: 55vw;
+  height: 40vh;
+  background-color: green;
+}
+
+@keyframes changeWords {
+  /* Damos forma a la animación personalizada changeWords */
+  0%,
+  100% {
+    /* 2. Los tramos restantes 0% a 100% tendrá un color transparente */
     color: transparent;
-    
   }
-  15%, 85% { /* 1. En el tramo de 15% a 85% el color será rojo */
+  15%,
+  85% {
+    /* 1. En el tramo de 15% a 85% el color será rojo */
     color: #ff5050;
   }
 }

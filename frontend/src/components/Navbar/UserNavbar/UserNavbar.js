@@ -28,7 +28,8 @@ function UserNavbar() {
   return (
     <Fragment>
       <div className={classes["navbar-main"]}>
-        <div className={classes["navbar-logo"]}><p className={classes.logo} to="/mylearnplace">LovLearning Academy</p></div>
+        <div className={classes["navbar-logo"]}><NavLink className={classes.logo} to={{pathname:'/',
+            state: {}}} ><span>LovLearning Academy</span></NavLink></div>
         <div className={classes["navbar-links"]}>
           <div className={classes.links}>
             <NavLink className={classes.link} to={{pathname:'/user/courses',

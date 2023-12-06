@@ -18,7 +18,7 @@ function UserPage() {
                 <Route path="/profile" element={<Profile lang="en" />} />
                 <Route path="*" element={<ErrorPage lang="es" />} />
             </Route>
-            <Route path="*" element={<ErrorPage lang="es" />} />
+           {/*  <Route path="*" element={<ErrorPage lang="es" />} /> */}
         </Routes>
     );
 }

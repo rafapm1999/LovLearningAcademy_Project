@@ -208,7 +208,7 @@ function LearnPlace() {
                   <div className={classes["coursesLearnPage-info"]}>
                     <h3>{course.title}</h3>
                     <img src={require(`../../../public/uploads/${course.image}`)} alt={`Foto curso ${course.id}`} width={"150"}></img>
-                    <p>{course.info}</p>
+                    <p>{course.shortDescription}</p>
                   </div>
                 </div>
               );

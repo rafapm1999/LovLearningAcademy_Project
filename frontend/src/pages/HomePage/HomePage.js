@@ -9,6 +9,7 @@ import SignupPage from "../../views/Signup/SignupPage/SignupPage"
 import LoginPage from "../../views/Login/LoginPage/LoginPage"
 import LoaderPage from "../../views/LoaderPage/LoaderPage"
 import ErrorPage from "../../views/ErrorPage/ErrorPage"
+import Unauthorized from "../../views/Unauthorized/Unauthorized";
 import Navbar from "../../components/Navbar/Navbar/Navbar"
 import Footer from "../../components/Footer/Footer"
 
@@ -24,6 +25,7 @@ function HomePage() {
                 <Route path="/signup" element={<SignupPage lang="en" />} />
                 <Route path="/login" element={<LoginPage lang="en" />} />
                 <Route path="/loader-page" element={<LoaderPage lang="en" />} /> 
+                <Route path="/unauthorized" element={<Unauthorized lang="en" />}/>
                 <Route path="*" element={<ErrorPage lang="en" />} />
             </Route>
             {/* <Route path="*" element={<ErrorPage lang="es" />} /> */}

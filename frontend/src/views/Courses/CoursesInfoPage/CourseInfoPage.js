@@ -5,6 +5,8 @@ import { useState } from "react";
 import ReactDOM from "react-dom";
 import CourseModal from "../../Modal/CourseModal/CourseModal";
 import { takeID } from "../../../components/Utils";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCirclePlay, faInfinity, faTrophy, faMobileScreen, faLayerGroup } from "@fortawesome/free-solid-svg-icons"
 
 function CourseInfoPage() {
   //Mirar fallo del token
@@ -117,28 +119,42 @@ function CourseInfoPage() {
         <div className={classes["course-title"]}>
           <h1>{courseData.data.title}</h1>
         </div>
-        <div className={classes["content"]}>
-          <div className={classes["course-image"]}>
-            <img src={require(`../../../../public/uploads/${courseData.data.image}`)} alt={`Photo of the course ${courseData.data.title}`} width={"1000"} height={"auto"} />
-          </div>
-          <div className={classes["details"]}>
-            <div className={classes["courseInfoPage-info"]}>
-              <div className={classes["course-description"]}>
-                <p>Description</p>
-                <p>{courseData.data.info}</p>
-              </div>
-              <div className={classes["level-hours-container"]}>
-                <div className={classes["level"]}>
+        <div div className={classes["main-content"]}>
+          <div className={classes["content"]}>
+            <div className={classes["course-image"]}>
+              <img src={require(`../../../../public/uploads/${courseData.data.image}`)} alt={`Photo of the course ${courseData.data.title}`} width={"850"} height={"auto"} />
+            </div>
+            <div className={classes["course-details"]}>
+              <h3>This course includes:</h3>
+              <div className={classes["course-details-list"]}>
+                <ul /* className={classes["course-details-list-ul"]} */>
+                  <li><span><FontAwesomeIcon icon={faCirclePlay} size="xl" /></span> <p>{courseData.data.quantityHours === undefined ? "Quantity Hours not specificated" : `${courseData.data.quantityHours} hours of video content on demand`}</p></li>
+                  <li><span><FontAwesomeIcon icon={faLayerGroup} size="xl" /></span> <p>{courseData.data.level === undefined ? "Level not specificated" : `${courseData.data.level} lessons level`}</p></li>
+                  <li><span><FontAwesomeIcon icon={faInfinity} size="xl" /></span><p>Lifetime Access</p></li>
+                  <li><span><FontAwesomeIcon icon={faMobileScreen} size="xl" /></span><p>Access on mobile devices and TV</p></li>
+                  <li><span><FontAwesomeIcon icon={faTrophy} size="xl" /></span><p>Certificate of completion</p></li>
+                </ul>
+
+                {/* <div className={classes["level"]}>
                   <p>Level</p>
                   <p>{courseData.data.level === undefined ? "Level not specificated" : courseData.data.level}</p>
                 </div>
                 <div className={classes["quantyHours"]}>
                   <p>Quantity Hours</p>
                   <p>{courseData.data.quantityHours === undefined ? "Quantity Hours not specificated" : courseData.data.quantityHours}</p>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
+        </div>
+        <div className={classes["main-details"]}>
+          <div className={classes["courseInfoPage-info"]}>
+            <div className={classes["course-description-info"]}>
+              <h2>Description</h2>
+              <p>{courseData.data.info}</p>
+            </div>
+          </div>
+
         </div>
         <div className={classes.buttons}>
           <button onClick={handleBack} className={classes.backButton}>Back</button>

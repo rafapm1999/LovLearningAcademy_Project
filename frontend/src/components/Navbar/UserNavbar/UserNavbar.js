@@ -32,7 +32,7 @@ function UserNavbar() {
             state: {}}} ><span>LovLearning Academy</span></NavLink></div>
         <div className={classes["navbar-links"]}>
           <div className={classes.links}>
-            <NavLink className={classes.link} to={{pathname:'/user/courses',
+            <NavLink className={classes.link} to={{pathname:'/courses',
             state: {}}} ><span>Courses</span></NavLink>
           <NavLink className={classes.link} to={{pathname:'/user/mylearnplace',
             state: {id}}} ><span>MyLearnplace</span></NavLink>

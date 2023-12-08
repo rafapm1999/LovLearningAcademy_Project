@@ -343,9 +343,10 @@ form .form-info {
 .edit-description div{
   margin-bottom: 1rem;
 }
-[class*="-description"] p{
+/* Arreglar este css ya que crea conflicto con los demas */
+[class*="-description"] > p{
   font-size: 1.2rem;
-  font-weight: bold;
+  /* font-weight: bold; */
   margin-bottom: 0.2rem;
 }
 [class*="-description"] textarea{

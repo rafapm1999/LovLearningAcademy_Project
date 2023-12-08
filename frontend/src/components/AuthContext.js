@@ -24,24 +24,17 @@ export const AuthProvider = (props) =>  {
             .then((res) => res.json())
             .then((data) => {
               if((data.code===401)||(data.result==="ko")){
-                console.log('HAs llegado a (data.code===401)||(data.result==="ko")');
-                
                 localStorage.removeItem("token");
               }
               else{
-                console.log('Tienes el token');
-                
                 localStorage.setItem("token", localStorage.getItem("token"));
               }
             }).catch((error) => {
-              console.log('Has llegado a .catch');
-              console.log(error);
               localStorage.removeItem("token");
              
             });
           }
         }else{
-          console.log('Has llegado a else');
           localStorage.removeItem("token");
         }
         

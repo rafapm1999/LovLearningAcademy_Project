@@ -100,6 +100,18 @@
  /*  width: 50%; */
   border: 1px solid black;
 }
+.shortDescription{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.shortDescription input {
+  text-align: center;
+  width: 30vw;
+  padding: 0.2rem;
+  border: 1px solid black;
+}
 .description{
   display: flex;
   justify-content: center;

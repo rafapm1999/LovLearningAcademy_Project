@@ -187,7 +187,7 @@ function CoursesPage() {
                   <div className={classes["coursesPage-info"]}>
                     <h3>{course.title}</h3>
                     <img className={classes["image"]} src={require(`../../../../public/uploads/${course.image}`)} alt={`Foto curso ${course.title || "Sin titulo"}`} width={"150"}></img>
-                    <p>{course.info}</p>
+                    <p>{course.shortDescription}</p>
                   </div>
                 </div>
               );

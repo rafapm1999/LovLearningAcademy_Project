@@ -12,13 +12,14 @@ function AdminCreateCourse(props) {
     const imageRef = useRef();
     const levelRef = useRef();
     const hoursRef = useRef();
+    const shortDescriptionRef = useRef()
     const courseInfoRef = useRef();
-    
+
     //Prueba para enseñarselo a Fran
     useEffect(() => {
-       if(adminValidate !== "admin"){
-        navigate(-1)
-       }
+        if (adminValidate !== "admin") {
+            navigate(-1)
+        }
     },)
     console.log(typeof "");
     const fetchCreateCourse = async () => {
@@ -43,6 +44,7 @@ function AdminCreateCourse(props) {
                     },
                     body: JSON.stringify({
                         title: titleRef.current.value,
+                        shortDescription: shortDescriptionRef.current.value,
                         info: courseInfoRef.current.value,
                         image: fileImage.name,
                         level: levelRef.current.value,
@@ -152,13 +154,23 @@ function AdminCreateCourse(props) {
                             </div>
                         </div>
                     </div>
+                    <div className={classes["shortDescription"]}>
+                        <p>Short Description</p>
+                            <input
+                                ref={shortDescriptionRef}
+                                type="text"
+                                name="shortDescription"
+                                id="shortDescription"
+                                required
+                            />
+                    </div>
                     <div className={classes["description"]}>
                         <p>Description</p>
                         <textarea
                             ref={courseInfoRef}
                             name="courseInfo"
                             id="info"
-                            maxLength="300"
+                            /* maxLength="300" */
                             rows={10}
                             cols={60}
                             placeholder='Course Description'

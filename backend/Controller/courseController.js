@@ -33,10 +33,11 @@ const getCourse = async (req, res) => {
 
 const postCourse = async (req, res) => {
   try {
-    const { title, info, level, quantityHours } = req.body;
+    const { title, shortDescription, info, level, quantityHours } = req.body;
 
     const newCourse = new Courses({
       title,
+      shortDescription,
       info,
       image: req.body.image, // Accede al archivo cargado a través de req.file
       level,

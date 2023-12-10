@@ -13,7 +13,7 @@ function UserPage() {
         <Routes>
             <Route path="/" element={<Layout lang="en" />}>
                 <Route path="/courses" element={<CoursesPage lang="en" />} />
-                <Route path="/courses/:title" element={<CourseInfoPage lang="en" />} />
+                <Route path="/courses/:slug" element={<CourseInfoPage lang="en" />} />
                 <Route path="/mylearnplace" element={<LearnPlace lang="en" />} />
                 <Route path="/profile" element={<Profile lang="en" />} />
                 <Route path="*" element={<ErrorPage lang="es" />} />

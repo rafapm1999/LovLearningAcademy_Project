@@ -5,10 +5,10 @@ import { takeRole, takeID } from '../../components/Utils';
 import Loader from "../../components/Loader/Loader";
 
 function LoaderPage() {
-    const role = takeRole();
-    const id = takeID();
-    console.log(role);
-    console.log(id);
+    const [token, setToken] = useState(localStorage.getItem("token").replaceAll('"', ""))
+    const role = takeRole(token);
+    const id = takeID(token);
+
     const [pending, setPending] = useState(false);
     const [adminRole, setAdminRole] = useState(false);
     const navigate = useNavigate();
@@ -21,7 +21,7 @@ function LoaderPage() {
     const loaderFunction = () => {
         if (role === "user") {
             setTimeout(() => {
-                navigate("/user/mylearnplace", { state: userData._id })
+                navigate("/user/mylearnplace")
             }, 1500)
             return (<Loader userData={userData}></Loader>)
         }

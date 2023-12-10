@@ -20,7 +20,9 @@ const getAllCourses = async (req, res) => {
 
 const getCourse = async (req, res) => {
   try {
-    const data = await Courses.findById(req.params.id);
+    const data = await Courses.find({
+      slug: req.params.slug,
+    });
     res.status(200).json({ status: "ok", data, error: null });
   } catch (error) {
     res.status(400).json({
@@ -33,10 +35,11 @@ const getCourse = async (req, res) => {
 
 const postCourse = async (req, res) => {
   try {
-    const { title, shortDescription, info, level, quantityHours } = req.body;
+    const { title, slug, shortDescription, info, level, quantityHours } = req.body;
 
     const newCourse = new Courses({
       title,
+      slug,
       shortDescription,
       info,
       image: req.body.image, // Accede al archivo cargado a través de req.file

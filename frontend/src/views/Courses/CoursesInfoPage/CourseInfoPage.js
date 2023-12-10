@@ -30,7 +30,7 @@ function CourseInfoPage() {
       let existingData = await response.json();
 
       console.log(existingData);
-      console.log(courseData.data);
+      console.log(courseData);
       console.log(userId);
       console.log(token)
       console.log(existingData.data.courses);
@@ -42,14 +42,16 @@ function CourseInfoPage() {
 
       // Verificar si el curso ya existe en el "user-dashboard"
       const courseExist = existingData.data.courses.some((course) => {
-
-        return course._id === courseData.data._id;
+        console.log(course);
+        console.log(courseData.slug);
+        return course === courseData.slug;
       });
       setCourseRepeat(courseExist);
       console.log(courseExist);
 
       if (response.ok && courseExist === false) {
-        existingData.data.courses = [...existingData.data.courses, ...Array(courseData.data)];
+        console.log(courseData.slug);
+        existingData.data.courses = [...existingData.data.courses, ...Array(courseData.slug)];
         const patchTheCourse = async (id) => {
           console.log(courseExisting);
           try {
@@ -77,7 +79,7 @@ function CourseInfoPage() {
         setCourseExisting(courseData.data)
         return patchTheCourse(userId);
       } else if (response.ok && courseExist === true) {
-
+       console.log("el curso ya existe");
       }
     } catch (error) {
       console.log(error);
@@ -89,7 +91,7 @@ function CourseInfoPage() {
   //Función para cuando damos al boton de back
   const handleBack = () => {
     if (token) {
-      navigate(`/user/courses`)
+      navigate(`/courses`)
     } else if (!token) {
       navigate(`/courses`)
     }
@@ -112,24 +114,24 @@ function CourseInfoPage() {
   return (
     <div>
       {ReactDOM.createPortal(
-        <CourseModal visible={visible} data={courseData.data} onClose={handleClose} userId={userId} logged={token} courseExists={courseRepeat} />,
+        <CourseModal visible={visible} data={courseData} onClose={handleClose} userId={userId} logged={token} courseExists={courseRepeat} />,
         document.querySelector("#modal")
       )}
       <div className={`${classes["courseInfoPage-main"]} ${visible && classes["blur"]}`}>
         <div className={classes["course-title"]}>
-          <h1>{courseData.data.title}</h1>
+          <h1>{courseData.title}</h1>
         </div>
         <div div className={classes["main-content"]}>
           <div className={classes["content"]}>
             <div className={classes["course-image"]}>
-              <img src={require(`../../../../public/uploads/${courseData.data.image}`)} alt={`Photo of the course ${courseData.data.title}`} width={"850"} height={"auto"} />
+              <img src={require(`../../../../public/uploads/${courseData.image}`)} alt={`Photo of the course ${courseData.title}`} width={"850"} height={"450"} />
             </div>
             <div className={classes["course-details"]}>
               <h3>This course includes:</h3>
               <div className={classes["course-details-list"]}>
                 <ul /* className={classes["course-details-list-ul"]} */>
-                  <li><span><FontAwesomeIcon icon={faCirclePlay} size="xl" /></span> <p>{courseData.data.quantityHours === undefined ? "Quantity Hours not specificated" : `${courseData.data.quantityHours} hours of video content on demand`}</p></li>
-                  <li><span><FontAwesomeIcon icon={faLayerGroup} size="xl" /></span> <p>{courseData.data.level === undefined ? "Level not specificated" : `${courseData.data.level} lessons level`}</p></li>
+                  <li><span><FontAwesomeIcon icon={faCirclePlay} size="xl" /></span> <p>{courseData.quantityHours === undefined ? "Quantity Hours not specificated" : `${courseData.quantityHours} hours of video content on demand`}</p></li>
+                  <li><span><FontAwesomeIcon icon={faLayerGroup} size="xl" /></span> <p>{courseData.level === undefined ? "Level not specificated" : `${courseData.level} lessons level`}</p></li>
                   <li><span><FontAwesomeIcon icon={faInfinity} size="xl" /></span><p>Lifetime Access</p></li>
                   <li><span><FontAwesomeIcon icon={faMobileScreen} size="xl" /></span><p>Access on mobile devices and TV</p></li>
                   <li><span><FontAwesomeIcon icon={faTrophy} size="xl" /></span><p>Certificate of completion</p></li>
@@ -151,7 +153,7 @@ function CourseInfoPage() {
           <div className={classes["courseInfoPage-info"]}>
             <div className={classes["course-description-info"]}>
               <h2>Description</h2>
-              <p>{courseData.data.info}</p>
+              <p>{courseData.info}</p>
             </div>
           </div>
 

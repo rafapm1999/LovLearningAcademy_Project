@@ -145,10 +145,10 @@ const update = async (req, res) => {
       req.body,
       { new: true }
     );
-    res.status(200).json({ status: "update course", data, error: null });
+    res.status(200).json({ status: "ok", data, error: null });
   } catch (error) {
-    res.status(404).json({
-      status: "no ha salido bien",
+    res.status(400).json({
+      status: "ko",
       data: null,
       error: error.message,
     });
@@ -160,14 +160,10 @@ const getuser = async (req, res) => {
     const data = await Login.findById(
       req.params.id
     );
-    
-    console.log('Conseguido getuser');
-    
-    res.status(200).json({ status: "getuser realizado", data, error: null });
+    res.status(200).json({ status: "ok", data, error: null });
   } catch (error) {
-    console.log('Fallido getuser');
-    res.status(404).json({
-      status: "no ha salido bien",
+    res.status(400).json({
+      status: "ko",
       data: null,
       error: error.message,
     });
@@ -177,10 +173,10 @@ const getuser = async (req, res) => {
 const alluser = async (req, res) => {
   try {
     const data = await Login.find();
-    res.status(200).json({ status: "alluser realizado", data, error: null });
+    res.status(200).json({ status: "ok", data, error: null });
   } catch (error) {
-    res.status(404).json({
-      status: "no ha salido bien",
+    res.status(400).json({
+      status: "ko",
       data: null,
       error: error.message,
     });
@@ -198,8 +194,8 @@ const deleteusercourse = async (req, res) => {
     const user = await Login.findById(userId);
 
     if (!user) {
-      return res.status(404).json({
-        status: "Usuario no encontrado",
+      return res.status(200).json({
+        status: "ko",
         data: null,
         error: "El usuario no existe",
       });
@@ -211,8 +207,8 @@ const deleteusercourse = async (req, res) => {
     }).indexOf(courseId);
 
     if (courseIndex === -1) {
-      return res.status(404).json({
-        status: "Curso no encontrado",
+      return res.status(200).json({
+        status: "ko",
         data: null,
         error: "El curso no existe en la lista de cursos del usuario",
       });
@@ -225,13 +221,13 @@ const deleteusercourse = async (req, res) => {
     await user.save();
 
     return res.status(200).json({
-      status: "Éxito",
+      status: "ok",
       data: {user},
       error: null,
     });
   } catch (error) {
-    return res.status(500).json({
-      status: "Error del servidor",
+    return res.status(400).json({
+      status: "ko",
       data: null,
       error: "Fallo",
     });

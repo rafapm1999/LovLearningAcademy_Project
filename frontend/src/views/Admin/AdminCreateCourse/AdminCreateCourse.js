@@ -1,7 +1,8 @@
 import classes from './AdminCreateCourse.module.css';
 import { useNavigate } from 'react-router-dom';
 import { useRef, useState, useEffect } from 'react';
-import { takeRole } from '../../../components/Utils';
+import { takeRole, generateSlug } from '../../../components/Utils';
+
 
 function AdminCreateCourse(props) {
     const [token, setToken] = useState(localStorage.getItem("token").replaceAll('"', ""))
@@ -44,6 +45,7 @@ function AdminCreateCourse(props) {
                     },
                     body: JSON.stringify({
                         title: titleRef.current.value,
+                        slug: generateSlug(titleRef.current.value),
                         shortDescription: shortDescriptionRef.current.value,
                         info: courseInfoRef.current.value,
                         image: fileImage.name,

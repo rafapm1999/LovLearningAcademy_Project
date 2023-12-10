@@ -11,7 +11,7 @@ function LoginPage(props) {
     password: "",
     rememberMe: "",
   });
-  
+
   //Funcion para hacer un scroll top
   const scrollTop = (e) => {
     window.scrollTo({
@@ -19,7 +19,7 @@ function LoginPage(props) {
       behavior: `${e}`, // Opcional, para tener una animación suave
     });
   }
-  useEffect(()=> {
+  useEffect(() => {
     scrollTop("auto")
   })
 
@@ -50,19 +50,21 @@ function LoginPage(props) {
         });
         const data = await response.json();
         console.log(data);
-       
+
         if (response.ok) {
           console.log(data);
-          if(data.status==='ko'){
+          if (data.status === 'ko') {
             alert('Error, datos incorrecto');
           }
-          else{
+          else {
             LocalStorage.setItem("token", data.token);
             LocalStorage.setItem("email", data.data.email);
             LocalStorage.setItem("role", data.data.role);
             LocalStorage.setItem("rememberMe", loginData.rememberMe);
-            document.cookie= `email=${data.data.email}; expires=5 Nov 2023 00:00:00 UTC; domain=localhost; path=/;`;
-            navigate(`/loader-page`, {state: data.data}, { replace: true });
+            document.cookie = `email=${data.data.email}; expires=5 Nov 2023 00:00:00 UTC; domain=localhost; path=/;`;
+              navigate(`/loader-page`, { replace: true });
+            
+
           }
           /* if (loginData.rememberMe) {
             LocalStorage.setItem("email", loginData.email);
@@ -70,14 +72,14 @@ function LoginPage(props) {
             
             //document.cookie('recuedame', 'true', '/', '2023-10-27 00:00:00') ---> GUARDar info durante un tiempo en cookies
           } */
-          
+
           //Usamos setTimeout para navegar a /user-dashboard usando state para guardar el data que nos devulve el fetch
           /* setTimeout(() => {
             navigate("/loader-page", {state: data});
           }, 100); */
         }
         //Revisar este codigo porque va relacionado con lo de border red si la info es incorrecta 
-        if (!response.ok){
+        if (!response.ok) {
           alert('Error, datos incorrecto');
           setLoginInfo({
             email: loginData.email = false,

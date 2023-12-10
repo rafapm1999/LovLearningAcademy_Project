@@ -51,35 +51,31 @@ function CoursesPage() {
           setCoursesCopy(Array(data.data));
         }
       } catch (error) {
-
         navigate(`/error-page`, { state: error });
       }
     }
   };
 
   //Con esta función hacemos un fetch (GET) para cuando clickamos sobre un curso concreto
-  const getCourse = async (id) => {
+  const getCourse = async (slug) => {
     try {
-      const response = await fetch(`http://localhost:8000/courses/${id}`, {
+      const response = await fetch(`http://localhost:8000/courses/${slug}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
       });
       const data = await response.json();
+      console.log(data.data[0].slug);
       if (response.ok) {
-        let courseTitle = data.data.title;
-        let title = courseTitle.toLowerCase().replace(" ", "-");
-        console.log(title);
-
         if (token) {
-          navigate(`/user/courses/${title}`, { state: data })
-        } else if (!token) {
-          // navigate(`/course/${title}`, { state: data })
-        }
-        //Si la respuesta es buena navegamos a la ruta definida, guardando los datos devueltos por el fetch en el state para usarlos posteriormente con useLocation
+          navigate(`/user/courses/${data.data[0].slug}`, { state: data.data[0] })
+        } 
       }
     } catch (error) {
+      console.log("Estas aqui");
+      console.log(error);
+
       navigate(`/error-page`, { state: error });
     }
   };
@@ -89,11 +85,11 @@ function CoursesPage() {
   }, []);
 
   //Esta función nos genera el fetch del elemento concreto que hemos clickado gracias a que recibe su id
-  const onHandlerClick = (id) => {
+  const onHandlerClick = (slug) => {
     if (!token) {
       setVisible(!visible);
     } else {
-      getCourse(id);
+      getCourse(slug);
     }
 
   };
@@ -178,7 +174,7 @@ function CoursesPage() {
               return (
                 <div
                   onClick={() => {
-                    onHandlerClick(course._id);
+                    onHandlerClick(course.slug);
                     scrollTop("auto");
                   }}
                   className={`${classes["coursesPage-container"]} ${classes[`${course.level.toLowerCase()}`]}`}

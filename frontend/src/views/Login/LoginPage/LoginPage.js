@@ -58,13 +58,8 @@ function LoginPage(props) {
           }
           else {
             LocalStorage.setItem("token", data.token);
-            LocalStorage.setItem("email", data.data.email);
-            LocalStorage.setItem("role", data.data.role);
-            LocalStorage.setItem("rememberMe", loginData.rememberMe);
             document.cookie = `email=${data.data.email}; expires=5 Nov 2023 00:00:00 UTC; domain=localhost; path=/;`;
               navigate(`/loader-page`, { replace: true });
-            
-
           }
           /* if (loginData.rememberMe) {
             LocalStorage.setItem("email", loginData.email);

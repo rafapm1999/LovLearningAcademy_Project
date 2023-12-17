@@ -160,7 +160,11 @@ const getuser = async (req, res) => {
     const data = await Login.findById(
       req.params.id
     );
-    res.status(200).json({ status: "ok", data, error: null });
+    if(!data) {
+      res.status(200).json({ status: "ko", data: null, error });
+    } else {
+      res.status(200).json({ status: "ok", data, error: null });
+    }
   } catch (error) {
     res.status(400).json({
       status: "ko",

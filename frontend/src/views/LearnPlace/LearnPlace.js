@@ -40,6 +40,8 @@ function LearnPlace() {
         console.log(data);
         setUser(data.data);
         getUserCourses(data.data);
+      } else {
+        console.log("ko");
       }
     } catch (error) {
       console.log(error);
@@ -77,7 +79,7 @@ function LearnPlace() {
 
   useEffect(() => {
     getUser(id)
-  }, [])
+  },[])
 
 
   //Creacion de una funcion fetch para actualizar los cursos

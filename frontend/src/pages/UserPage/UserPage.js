@@ -8,6 +8,7 @@ import UserNavbar from "../../components/Navbar/UserNavbar/UserNavbar"
 import Footer from "../../components/Footer/Footer"
 import ErrorPage from "../../views/ErrorPage/ErrorPage"
 
+
 function UserPage() {
     return (
         <Routes>
@@ -16,19 +17,18 @@ function UserPage() {
                 <Route path="/courses/:slug" element={<CourseInfoPage lang="en" />} />
                 <Route path="/mylearnplace" element={<LearnPlace lang="en" />} />
                 <Route path="/profile" element={<Profile lang="en" />} />
-                <Route path="*" element={<ErrorPage lang="es" />} />
+                <Route path="*" element={<ErrorPage lang="en" />} />
             </Route>
-           {/*  <Route path="*" element={<ErrorPage lang="es" />} /> */}
         </Routes>
     );
 }
 function Layout() {
     return (
         <div>
-            <UserNavbar lang="en" />
-            <div>
+            <UserNavbar openSideBar lang="en" />
+             
                 <Outlet />
-            </div>
+            
             <Footer lang="en" />
         </div>
     );

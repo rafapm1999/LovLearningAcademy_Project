@@ -87,17 +87,25 @@ function Profile(props) {
     fetchRemoveCourse(userID, courseID)
   };
 
-console.log(user.courses);
+  console.log(user.courses);
 
   return (
     <div className={classes["main-profile"]}>
       <div className={classes["user-info"]}>
         <div className={classes["user-info-container"]}>
-          <h2 className={classes.title}>My details</h2>
+          <h2 className={classes.title}></h2>
           <div className={classes["user-info-details"]}>
-            <h3>Hello {user.name} {user.lastName}</h3>
-            <h3>Your email is {user.email}</h3>
-            <h3>You have {courses.length} courses in your MyLearnplace</h3>
+            <h3>User Details</h3>
+            <h3 className={classes["user-info-details-title"]}>Email</h3>
+            <h3 className={classes["user-info-details-data"]}>Your email is {user.email}</h3>
+            <h3 className={classes["user-info-details-title"]}>Name</h3>
+            <h3 className={classes["user-info-details-data"]}>{user.name}</h3>
+            <h3 className={classes["user-info-details-title"]}>LastName</h3>
+            <h3 className={classes["user-info-details-data"]}>{user.lastName}</h3>
+            <h3 className={classes["user-info-details-title"]}>Courses</h3>
+            <h3 className={classes["user-info-details-data"]}>You have {courses.length} courses in your MyLearnplace</h3>
+            <h3 className={classes["user-info-details-title"]}>Certificates</h3>
+            <h3 className={classes["user-info-details-data"]}>You don't have certificates yet</h3>
           </div>
         </div>
       </div>

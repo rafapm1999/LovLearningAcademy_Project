@@ -1,3 +1,7 @@
+.main-container{
+  width: 100vw;
+  height: 100vh;
+}
 .coursesLearnPage-main {
   display: flex;
   justify-content: center;
@@ -97,5 +101,37 @@
   text-align: center;
   color: white;
   font-weight: bold;
+}
+
+/* ----------------------------Nuevo css----------------------------------------------------------- */
+.main-container{
+  width: 100vw;
+  height: 100vh;
+}
+.left-section{
+  width: 10vw;
+  height: 90vh;
+  border-right: 1px solid black;
+}
+.links{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.links > .section-button{
+  padding: 10px;
+  background-color: red;
+}
+.links > ul .list-link{
+  list-style: none;
+}
+.list-link{
+  margin: 2rem 0;
+  padding: 2rem;
+  background-color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: left;
 }
 

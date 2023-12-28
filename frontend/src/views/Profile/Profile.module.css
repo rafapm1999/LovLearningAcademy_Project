@@ -1,18 +1,24 @@
 .main-profile {
   height: auto;
   width: 100vw;
-  margin-left: 200px;
-  background-color: #d6ccc2;
+  background: linear-gradient(150deg, rgba(214,204,194,1) 25%, white 70%);
 }
 /* User details */
 .user-info {
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
-  margin: 2rem 0 0 5rem;
+  flex-direction: row;
+  width: 90vw;
+}
+.user-info-img{
+  width: 30vw;
+  height: 90vh;
+  margin-top: 0;
 }
 .user-info-container {
   width: 40vw;
+  margin-left: 15rem;
   text-align: center;
 }
 .user-info-details {
@@ -21,7 +27,7 @@
   color: black;
   text-align: left;
   padding: 3rem;
-  margin-top: 1rem;
+  margin: 1rem 0 0 5rem;
 }
 .user-info-details-title{
   margin-top: 1rem;

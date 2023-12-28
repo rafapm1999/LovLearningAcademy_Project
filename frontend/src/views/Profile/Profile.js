@@ -108,8 +108,11 @@ function Profile(props) {
             <h3 className={classes["user-info-details-data"]}>You don't have certificates yet</h3>
           </div>
         </div>
+        <div className={classes["user-info-img"]}>
+       {/*  <img src={require(`../../assets/profile-picture.jpg`)} alt={`Photo of the course`} width={"auto"} height={"auto"} /> */}
+        </div>
       </div>
-      <div className={classes["main-table"]}>
+      {/* <div className={classes["main-table"]}>
         <h2 className={classes.title}>My courses</h2>
         {
           courses.length !== 0 ?
@@ -131,7 +134,7 @@ function Profile(props) {
                         <td>{course.title}</td>
                         <td>{course.level === undefined ? "Not specificated" : course.level}</td>
                         <td>{course.quantityHours === undefined ? "Not specificated" : course.quantityHours}</td>
-                        {/* <td className={classes["image"]}><img src={require(`../../../public/uploads/${course.image}`)} alt={`Photo of course ${course.title}`} width={"100"}/></td> */}
+                        <td className={classes["image"]}><img src={require(`../../../public/uploads/${course.image}`)} alt={`Photo of course ${course.title}`} width={"100"}/></td>
                         <td onClick={() => { onHandlerClick(user._id, course._id) }} className={classes["remove-button"]}><FontAwesomeIcon onClick={() => { onHandlerClick(user._id, course._id) }} icon={faTrashCan} size='xl' /></td>
                       </tr>
                     );
@@ -141,9 +144,9 @@ function Profile(props) {
             </div> :
             <h1>You don't have any course yet!</h1>
         }
-      </div>
+      </div> */}
       {/* Pagination component */}
-      {
+      {/* {
         courses.length !== 0 ?
           <div className={classes["pagination-main"]}>
             <div className={classes["pagination-container"]}>
@@ -155,7 +158,7 @@ function Profile(props) {
             </div>
           </div> :
           ""
-      }
+      } */}
     </div>
   );
 }

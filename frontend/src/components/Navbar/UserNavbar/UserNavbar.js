@@ -24,7 +24,7 @@ function UserNavbar() {
     navigate(`/`);
   }
   const onProfileClick = () => {
-    navigate("/user/profile")
+    navigate("/campus/profile")
   }
   const onMyCoursesClick = () => {
 
@@ -45,7 +45,7 @@ function UserNavbar() {
               <div className={classes["left-section-links"]}>
                 <span className={classes["section-button"]}></span>
                 <div className={classes["left-section-links"]}>
-                <Link className={classes["list-link"]} to="/user/profile">Profile</Link>
+                <Link className={classes["list-link"]} to="/campus/profile">Profile</Link>
 
                 <Link className={classes["list-link"]} to="*">My Courses</Link>
                 <Link className={classes["list-link"]} to="*">ToDoList</Link>
@@ -67,18 +67,18 @@ function UserNavbar() {
         <div className={classes["navbar-links"]}>
           <div className={classes.links}>
             <NavLink className={classes.link} to={{
-              pathname: '/courses',
+              pathname: '/campus/courses',
               state: {}
             }} ><span>Courses</span></NavLink>
             <NavLink className={classes.link} to={{
-              pathname: '/user/mylearnplace',
+              pathname: '/campus/mylearnplace',
               state: { id }
             }} ><span>MyLearnplace</span></NavLink>
             {/* <Link className={classes.link} to="/community" ><span>Community</span></Link> */}
           </div>
         </div>
         <div className={classes["navbar-button"]}>
-          <button onClick={() => { navigate("/user/profile", { state: id }) }} className={classes.profile}><span><FontAwesomeIcon icon={faUser} /></span></button>
+          <button onClick={() => { navigate("/campus/profile", { state: id }) }} className={classes.profile}><span><FontAwesomeIcon icon={faUser} /></span></button>
           <button onClick={unlogged} className={classes.logout}> Log out <span><FontAwesomeIcon icon={faArrowRightFromBracket} /></span> </button>
 
         </div>

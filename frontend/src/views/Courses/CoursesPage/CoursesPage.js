@@ -69,7 +69,7 @@ function CoursesPage() {
       console.log(data.data[0].slug);
       if (response.ok) {
         if (token) {
-          navigate(`/user/courses/${data.data[0].slug}`, { state: data.data[0] })
+          navigate(`/campus/courses/${data.data[0].slug}`, { state: data.data[0] })
         } 
       }
     } catch (error) {

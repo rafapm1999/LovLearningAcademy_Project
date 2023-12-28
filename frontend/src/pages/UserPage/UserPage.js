@@ -5,6 +5,7 @@ import CourseInfoPage from "../../views/Courses/CoursesInfoPage/CourseInfoPage"
 import LearnPlace from "../../views/LearnPlace/LearnPlace"
 import Profile from "../../views/Profile/Profile"
 import UserNavbar from "../../components/Navbar/UserNavbar/UserNavbar"
+import Unauthorized from "../../views/Unauthorized/Unauthorized";
 import Footer from "../../components/Footer/Footer"
 import ErrorPage from "../../views/ErrorPage/ErrorPage"
 
@@ -17,6 +18,7 @@ function UserPage() {
                 <Route path="/courses/:slug" element={<CourseInfoPage lang="en" />} />
                 <Route path="/mylearnplace" element={<LearnPlace lang="en" />} />
                 <Route path="/profile" element={<Profile lang="en" />} />
+                <Route path="/unauthorized" element={<Unauthorized lang="en" />} />
                 <Route path="*" element={<ErrorPage lang="en" />} />
             </Route>
         </Routes>
@@ -26,9 +28,9 @@ function Layout() {
     return (
         <div>
             <UserNavbar openSideBar lang="en" />
-             
+            <>
                 <Outlet />
-            
+            </>
             <Footer lang="en" />
         </div>
     );

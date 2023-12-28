@@ -20,7 +20,7 @@ function Navbar() {
           <div className={classes["navbar-links"]}>
             <div className={classes.links}>
               <NavLink className={classes.link} to="/courses"><span>Courses</span></NavLink>
-              {!token ? "" : <NavLink className={classes.link} to="/user/mylearnplace"><span>MyLearnplace</span></NavLink>}
+              {!token ? "" : <NavLink className={classes.link} to="/campus/mylearnplace"><span>MyLearnplace</span></NavLink>}
               {!token ? <NavLink className={classes.link} to="/about"><span>About</span></NavLink> : ""}
               {!token ? <NavLink className={classes.link} to="/contact"><span>Contact us</span></NavLink> : ""}
             </div>
@@ -39,14 +39,14 @@ function Navbar() {
           <div className={classes["navbar-logo"]}><NavLink className={classes.logo} to="/">LovLearning Academy</NavLink></div>
           <div className={classes["navbar-links"]}>
             <div className={classes.links}>
-              <NavLink className={classes.link} to="/courses"><span>Courses</span></NavLink>
-              {!token ? "" : <NavLink className={classes.link} to="/user/mylearnplace"><span>MyLearnplace</span></NavLink>}
+              <NavLink className={classes.link} to="/campus/courses"><span>Courses</span></NavLink>
+              {!token ? "" : <NavLink className={classes.link} to="/campus/mylearnplace"><span>MyLearnplace</span></NavLink>}
               {!token ? <NavLink className={classes.link} to="/about"><span>About</span></NavLink> : ""}
               {!token ? <NavLink className={classes.link} to="/contact"><span>Contact us</span></NavLink> : ""}
             </div>
           </div>
           <div className={classes["navbar-button"]}>
-            {!token ? <NavLink className={classes.link} to="/login">Get Started</NavLink> : <NavLink className={classes.link} to="/user/profile"><span><FontAwesomeIcon icon={faUser} /></span></NavLink>}
+            {!token ? <NavLink className={classes.link} to="/login">Get Started</NavLink> : <NavLink className={classes.link} to="/campus/profile"><span><FontAwesomeIcon icon={faUser} /></span></NavLink>}
           </div>
         </div>
       </Fragment>

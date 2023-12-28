@@ -1,4 +1,5 @@
 import Login from "../LoginForm/LoginForm";
+import { takeRole } from "../../../components/Utils";
 import { useNavigate } from "react-router-dom";
 import { Fragment, useEffect, useState } from "react";
 import { validateEmail, validatePassword } from "../../../utils/validate";
@@ -59,7 +60,11 @@ function LoginPage(props) {
           else {
             LocalStorage.setItem("token", data.token);
             document.cookie = `email=${data.data.email}; expires=5 Nov 2023 00:00:00 UTC; domain=localhost; path=/;`;
-              navigate(`/loader-page`, { replace: true });
+            if (takeRole(data.token)==="user") {
+              navigate(`/campus/mylearnplace`, { replace: true });
+            } else if (takeRole(data.token)==="admin") {
+              navigate(`/admin/bbdd-members`, { replace: true });
+            } 
           }
           /* if (loginData.rememberMe) {
             LocalStorage.setItem("email", loginData.email);

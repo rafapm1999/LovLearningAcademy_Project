@@ -10,7 +10,7 @@ function CourseModal(props) {
         navigate("/login");
     }
     const onNavigate = () => {
-        navigate("/user/mylearnplace");
+        navigate("/campus/mylearnplace");
     }
     console.log(props.courseExists);
     if (token && props.courseExists === false) {

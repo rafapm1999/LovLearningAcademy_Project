@@ -86,14 +86,22 @@ function CourseInfoPage() {
     }
   };
 
-
+  //Funcion para hacer un scroll top
+  const scrollTop = (e) => {
+    window.scrollTo({
+      top: 0,
+      behavior: `${e}`, // Opcional, para tener una animación suave
+    });
+  }
 
   //Función para cuando damos al boton de back
   const handleBack = () => {
     if (token) {
-      navigate(`/courses`)
+      navigate(`/campus/courses`)
+      scrollTop("smooth");
     } else if (!token) {
       navigate(`/courses`)
+      scrollTop("smooth");
     }
   }
   //Función para cuando queremos el curso
@@ -102,14 +110,17 @@ function CourseInfoPage() {
     if (token) {
       console.log("entras en getthecourse if token");
       fetchWantCourse();
+      scrollTop("smooth");
     };
   };
 
   //Función para cuando cerramos el modal
   const handleClose = () => {
     setVisible(!visible);
+    scrollTop("smooth");
   }
 
+    
 
   return (
     <div>

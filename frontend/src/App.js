@@ -13,7 +13,7 @@ function App() {
     <Routes>
       <Route path="/*" element={<HomePage></HomePage>} />
       <Route path="/loader-page" element={<LoaderPage />} />
-      <Route path="/user/*" element={<AuthProvider><UserPage></UserPage></AuthProvider>} />
+      <Route path="/campus/*" element={<AuthProvider><UserPage></UserPage></AuthProvider>} />
       <Route path="/admin/*" element={<AuthProviderAdmin><AdminPage></AdminPage></AuthProviderAdmin>} />
     </Routes>
   );

@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { useState, useEffect } from 'react';
 import classes from './UserNavbar.module.css';
 import { NavLink, Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
@@ -14,8 +14,71 @@ function UserNavbar() {
   const token = localStorage.getItem("token");
   const role = takeRole();
   const id = takeID();
+  let takeCourse = [];
   const navigate = useNavigate();
   let [visible, setVisible] = useState(true)
+  const [user, setUser] = useState({})
+  const [courses, setCourses] = useState([])
+
+  const getUser = async (id) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8000/auth/getuser/${id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": token,
+          },
+        }
+      );
+      const data = await response.json();
+      if (response.ok) {
+        console.log(data);
+        setUser(data.data);
+        getUserCourses(data.data);
+      } else {
+        console.log("ko");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  const getCourse = async (slug) => {
+    try {
+      const response = await fetch(`http://localhost:8000/courses/${slug}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      /* let newCourse = data.data[0]; */
+      takeCourse = [data.data[0]];
+      if (response.ok) {
+        console.log(takeCourse);
+        setCourses(prevCourses => [...prevCourses, data.data[0]]);
+
+      }
+    } catch (error) {
+      console.log("Estas aqui");
+      console.log(error);
+
+    }
+  };
+  const getUserCourses = (userData) => {
+    console.log(userData);
+    userData.courses.forEach((course) => {
+      console.log(course);
+      return (getCourse(course))
+    })
+  }
+  useEffect(() => {
+    getUser(id)
+  }, [])
+
+console.log(user);
+
   const unlogged = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("email");
@@ -23,11 +86,16 @@ function UserNavbar() {
     localStorage.removeItem("rememberMe");
     navigate(`/`);
   }
-  const onProfileClick = () => {
+  /* const onProfileClick = () => {
     navigate("/campus/profile")
-  }
+  } */
   const onMyCoursesClick = () => {
-
+    setCourses([]);
+    getUserCourses(user)
+    setTimeout(() => {
+      console.log(courses);
+      navigate(`/campus/mycourses`, {state: courses});
+    }, 100)
   }
   const onToDoListClick = () => {
 
@@ -47,7 +115,7 @@ function UserNavbar() {
                 <div className={classes["left-section-links"]}>
                 <Link className={classes["list-link"]} to="/campus/profile">Profile</Link>
 
-                <Link className={classes["list-link"]} to="*">My Courses</Link>
+                <Link className={classes["list-link"]} onClick={onMyCoursesClick}>My Courses</Link>
                 <Link className={classes["list-link"]} to="*">ToDoList</Link>
                 </div>
               </div>

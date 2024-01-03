@@ -84,12 +84,13 @@
 .main-container {
   width: 10vw;
   border-top: 1px solid white;
-  height: 90vh;
+  height: auto;
   z-index: 0;
   position: absolute;
-  top: 84px;
+  top: 80px;
   left: 0px;
-  background: linear-gradient(125deg, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 60%);
+  background-color: white;
+/*   box-shadow: 0px 6px 5px 1px rgb(160, 160, 160); */
 }
 .left-section {
   width: 10vw;

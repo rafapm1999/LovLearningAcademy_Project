@@ -12,13 +12,15 @@ import {
 
 function UserNavbar() {
   const token = localStorage.getItem("token");
-  const role = takeRole();
+  /* const role = takeRole(); */
   const id = takeID();
   let takeCourse = [];
   const navigate = useNavigate();
   let [visible, setVisible] = useState(true)
   const [user, setUser] = useState({})
   const [courses, setCourses] = useState([])
+  const [coursesSlug, setCoursesSlug] = useState([])
+  const [courseClick, setCourseClick] = useState(false)
 
   const getUser = async (id) => {
     try {
@@ -34,9 +36,10 @@ function UserNavbar() {
       );
       const data = await response.json();
       if (response.ok) {
-        console.log(data);
+        console.log(data.data);
+        console.log(data.data.courses);
         setUser(data.data);
-        getUserCourses(data.data);
+        setCoursesSlug(data.data.courses)
       } else {
         console.log("ko");
       }
@@ -44,6 +47,10 @@ function UserNavbar() {
       console.log(error);
     }
   }
+
+  useEffect(() => {
+    getUser(id);
+  }, [])
   const getCourse = async (slug) => {
     try {
       const response = await fetch(`http://localhost:8000/courses/${slug}`, {
@@ -58,7 +65,6 @@ function UserNavbar() {
       if (response.ok) {
         console.log(takeCourse);
         setCourses(prevCourses => [...prevCourses, data.data[0]]);
-
       }
     } catch (error) {
       console.log("Estas aqui");
@@ -66,19 +72,17 @@ function UserNavbar() {
 
     }
   };
-  const getUserCourses = (userData) => {
-    console.log(userData);
-    userData.courses.forEach((course) => {
-      console.log(course);
-      return (getCourse(course))
+  const getUserCourses = (coursesSlug) => {
+    setCourses([]);
+    console.log(coursesSlug);
+    coursesSlug.forEach((slug) => {
+      console.log(slug);
+      return (getCourse(slug))
     })
   }
-  useEffect(() => {
-    getUser(id)
-  }, [])
 
-console.log(user);
-
+  console.log(user);
+  console.log(courses);
   const unlogged = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("email");
@@ -90,12 +94,15 @@ console.log(user);
     navigate("/campus/profile")
   } */
   const onMyCoursesClick = () => {
-    setCourses([]);
-    getUserCourses(user)
-    setTimeout(() => {
+
+    console.log(coursesSlug);
+    setCourseClick(true)
+    getUserCourses(coursesSlug);
+    
       console.log(courses);
-      navigate(`/campus/mycourses`, {state: courses});
-    }, 100)
+      navigate(`/campus/mycourses`, { state: courses });
+   
+
   }
   const onToDoListClick = () => {
 
@@ -113,17 +120,20 @@ console.log(user);
               <div className={classes["left-section-links"]}>
                 <span className={classes["section-button"]}></span>
                 <div className={classes["left-section-links"]}>
-                <Link className={classes["list-link"]} to="/campus/profile">Profile</Link>
+                  <NavLink className={classes["list-link"]} to={{
+                    pathname: '/campus/profile',
+                    state: {}
+                  }}>Profile</NavLink>
 
-                <Link className={classes["list-link"]} onClick={onMyCoursesClick}>My Courses</Link>
-                <Link className={classes["list-link"]} to="*">ToDoList</Link>
+                  <NavLink className={classes["list-link"]} onClick={ onMyCoursesClick }>My Courses</NavLink>
+                  <NavLink className={classes["list-link"]} to="*">ToDoList</NavLink>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div className={classes["navbar-logo"]}>
-          <button className={classes["display-button"]}onClick={onHandlerClick} ><FontAwesomeIcon icon={visible===true ? faBars : faXmark} size='xl'></FontAwesomeIcon></button>
+          <button className={classes["display-button"]} onClick={onHandlerClick} ><FontAwesomeIcon icon={visible === true ? faBars : faXmark} size='xl'></FontAwesomeIcon></button>
           <NavLink className={classes.logo} to={{
             pathname: '/',
             state: {}

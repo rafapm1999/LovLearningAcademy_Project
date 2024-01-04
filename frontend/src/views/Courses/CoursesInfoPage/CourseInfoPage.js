@@ -130,12 +130,12 @@ function CourseInfoPage() {
       )}
       <div className={`${classes["courseInfoPage-main"]} ${visible && classes["blur"]}`}>
         <div className={classes["course-title"]}>
-          <h1>{courseData.title}</h1>
+          <h1>{courseData!== null ? courseData.title : ""}</h1>
         </div>
         <div div className={classes["main-content"]}>
           <div className={classes["content"]}>
             <div className={classes["course-image"]}>
-              <img src={require(`../../../../public/uploads/${courseData.image}`)} alt={`Photo of the course ${courseData.title}`} width={"850"} height={"450"} />
+              <img src={require(`../../../../public/uploads/${courseData!== null ? courseData.image : ""}`)} alt={`Photo of the course ${courseData!== null ? courseData.title : ""}`} width={"850"} height={"450"} />
             </div>
             <div className={classes["course-details"]}>
               <h3>This course includes:</h3>

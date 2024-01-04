@@ -20,7 +20,7 @@ function LearnPlace() {
     }, 1500)
     return (<Loader pending={pending}></Loader>)
   };
-  let takeCourse = [];
+/*   let takeCourse = [];
 
   const getUser = async (id) => {
     try {
@@ -78,7 +78,7 @@ function LearnPlace() {
 
   useEffect(() => {
     getUser(id)
-  }, [])
+  }, []) */
 
   const onHandlerClick = () => { };
 

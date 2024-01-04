@@ -1,16 +1,16 @@
 import classes from "./MyCourses.module.css";
 import Loader from "../../components/Loader/Loader";
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { takeID } from "../../components/Utils";
 
 function MyCourses() {
   const location = useLocation();
-  const data = location.state;
+  let courses = location.state;
   const token = localStorage.getItem("token")
   const id = takeID(token)
+  const navigate = useNavigate()
   const [user, setUser] = useState({})
-  const [courses, setCourses] = useState([])
   const [pending, setPending] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const coursePerPage = 3;
@@ -20,9 +20,11 @@ function MyCourses() {
     }, 1500)
     return (<Loader pending={pending}></Loader>)
   };
+  if (courses === null) {
+    courses = [];
+  }
+  
 
-
-  console.log(data);
 
   const getUser = async (id) => {
     try {
@@ -47,48 +49,21 @@ function MyCourses() {
       console.log(error);
     }
   }
-/*   const getCourse = async (slug) => {
-    try {
-      const response = await fetch(`http://localhost:8000/courses/${slug}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
-      let newCourse = data.data[0];
-      takeCourse = [data.data[0]];
-      if (response.ok) {
-        console.log(takeCourse);
-        setCourses(prevCourses => [...prevCourses, data.data[0]]);
-
-      }
-    } catch (error) {
-      console.log("Estas aqui");
-      console.log(error);
-
-    }
-  };
-  const getUserCourses = (userData) => {
-    console.log(userData);
-    userData.courses.forEach((course) => {
-      console.log(course);
-      return (getCourse(course))
-    })
-  } */
-
   useEffect(() => {
     getUser(id)
   }, [])
 
-  const onHandlerClick = () => { };
+  const onHandlerClick = (course) => { 
+    let slug = course.slug;
+    navigate(`/campus/mycourses/${slug}`, {state: course})
+  };
 
   //Paginación
   //Creación de la paginación del contenido de la tabla
   const indexOfLastUser = currentPage * coursePerPage;
   const indexOfFirstUser = indexOfLastUser - coursePerPage;
-  const currentCourses = data.slice(indexOfFirstUser, indexOfLastUser);
-  const totalPages = Math.ceil(data.length / coursePerPage);
+  const currentCourses = courses.slice(indexOfFirstUser, indexOfLastUser);
+  const totalPages = Math.ceil(courses.length / coursePerPage);
   const paginate = (pageNumber) => {
     console.log("Has dado click");
     console.log(currentCourses);
@@ -97,7 +72,7 @@ function MyCourses() {
   if (pending === false) {
     return loaderFunction();
   }
-  if (data.length === 0) {
+  if (courses.length === 0) {
     console.log('hAS ENTRADO');
 
     return (
@@ -136,7 +111,7 @@ function MyCourses() {
       <div className={classes["main-container"]}>
         <h1 className={classes.title}>MyLearnplace</h1>
         <div className={classes["user-info-container"]}>
-          <p className={classes["user-info"]}>Happy to see you {user.name}, you have {data.length} {""}
+          <p className={classes["user-info"]}>Happy to see you {user.name}, you have {courses.length} {""}
             courses waiting for you!</p>
         </div>
         <div className={classes["coursesLearnPage-main"]}>
@@ -144,7 +119,7 @@ function MyCourses() {
             return (
               <div
                 onClick={() => {
-                  onHandlerClick(course._id);
+                  onHandlerClick(course);
                 }}
                 className={classes["coursesLearnPage-container"]}
                 key={i}

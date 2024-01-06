@@ -14,6 +14,7 @@ function MyCourseSlug() {
     return (
         <div>
             <h1>{courseData.title}</h1>
+            <img src={require(`../../../public/uploads/${courseData.image}`)} alt={`Foto curso ${courseData.id}`} width={"200"}></img>
             
         </div>
     );

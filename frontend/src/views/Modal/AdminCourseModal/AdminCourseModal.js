@@ -1,19 +1,25 @@
 import classes from './AdminCourseModal.module.css';
 import { useNavigate } from 'react-router-dom';
 import { useRef, useState } from 'react';
+import { generateSlug } from '../../../components/Utils';
 
 function AdminCourseModal(props) {
     const [token, setToken] = useState(localStorage.getItem("token").replaceAll('"', ""))
     const navigate = useNavigate();
+    const [fileImage, setFileImage] = useState()
     const titleRef = useRef("");
     const imageRef = useRef("");
     const levelRef = useRef("");
     const hoursRef = useRef("");
+    const shortDescriptionRef = useRef("");
     const courseInfoRef = useRef("");
     const titleRemoveRef = useRef("");
+    const courseData = props.courseData[0];
+    console.log(courseData);
 
     const fetchEditCourse = async (id) => {
-
+        const formData = new FormData();
+        formData.append('file', fileImage);
         try {
             const response = await fetch(
                 `http://localhost:8000/courses/edit/${id}`,
@@ -24,11 +30,13 @@ function AdminCourseModal(props) {
                         "auth-token": token,
                     },
                     body: JSON.stringify({
-                        title: titleRef.current.value === "" ? props.courseData.title : titleRef.current.value,
-                        info: courseInfoRef.current.value === "" ? props.courseData.info : courseInfoRef.current.value,
-                        image: imageRef.current.value === "" ? props.courseData.image : imageRef.current.value,
-                        level: levelRef.current.value === "" ? props.courseData.level : levelRef.current.value,
-                        quantityHours: hoursRef.current.value === "" ? props.courseData.quantityHours : hoursRef.current.value,
+                        title: titleRef.current.value === "" ? courseData.title : titleRef.current.value,
+                        slug: titleRef.current.value === "" ? courseData.slug : generateSlug(titleRef.current.value),
+                        shortDescription: shortDescriptionRef.current.value === "" ? courseData.shortDescription : shortDescriptionRef.current.value,
+                        info: courseInfoRef.current.value === "" ? courseData.info : courseInfoRef.current.value,
+                        image: imageRef.current.value === "" ? courseData.image : fileImage.name,
+                        level: levelRef.current.value === "" ? courseData.level : levelRef.current.value,
+                        quantityHours: hoursRef.current.value === "" ? courseData.quantityHours : hoursRef.current.value,
                     }),
                 }
             );
@@ -41,6 +49,31 @@ function AdminCourseModal(props) {
 
         } catch (error) {
             console.log("Error de algo");
+            console.log(error);
+            navigate(`/error-page`, { state: error });
+        }
+        try {
+            const response = await fetch(
+                `http://localhost:8000/courses/save-image`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "auth-token": token,
+                    },
+                    body: formData,
+                    mode: "no-cors",
+
+                }
+            );
+            const data = await response.json();
+            console.log(data.data);
+            if (response.ok) {
+                console.log("Has guardado la imagen");
+            }
+
+        } catch (error) {
+            console.log("Save no funciona");
             console.log(error);
             navigate(`/error-page`, { state: error });
         }
@@ -72,7 +105,9 @@ function AdminCourseModal(props) {
         console.log('Hola');
 
     }
-
+    const handleFileChange = (e) => {
+        setFileImage(e.target.files[0])
+    }
     const handlerClose = (e) => {
         console.log('Has entrado en handlerClose');
         if (e === "REMOVE" && titleRemoveRef.current.value === props.courseData.title) {
@@ -100,27 +135,27 @@ function AdminCourseModal(props) {
                                     <div className={classes["course-header"]}>
                                         <div className={classes["info-title"]}>
                                             {/* <p> Nº: {props.courseData.id}</p> */}
-                                            <p className={classes["course-title"]}>{props.courseData.title}</p>
-                                            <p> ID: {props.courseData._id}</p>
+                                            <p className={classes["course-title"]}>{courseData.title}</p>
+                                            <p> ID: {courseData._id}</p>
                                         </div>
                                         <div>
-                                            <img src={require(`../../../../public/uploads/${props.courseData.image}`)} alt={`Photo of the course ${props.courseData.title}`} width={100} />
+                                            <img src={require(`../../../../public/uploads/${courseData.image}`)} alt={`Photo of the course ${courseData.title}`} width={100} />
                                         </div>
                                     </div>
 
                                     <div className={classes["course-data"]}>
                                         <div>
                                             <p>Level</p>
-                                            <p>{props.courseData.level === undefined ? "No hay dificultad" : props.courseData.level}</p>
+                                            <p>{courseData.level === undefined ? "No hay dificultad" : courseData.level}</p>
                                         </div>
                                         <div>
                                             <p>Quantity Hours</p>
-                                            <p>{props.courseData.quantityHours === undefined ? "No hay tiempo total" : props.courseData.quantityHours}</p>
+                                            <p>{courseData.quantityHours === undefined ? "No hay tiempo total" : courseData.quantityHours}</p>
                                         </div>
                                     </div>
                                     <div className={classes["course-info"]}>
                                         <p className={classes["course-info-title"]}>Course Description</p>
-                                        <p>{props.courseData.info}</p>
+                                        <p>{courseData.info}</p>
                                     </div>
                                     <button onClick={() => { handlerClose("closeClick") }} className={classes["md-close"]}><span>X</span></button>
                                 </div>
@@ -135,10 +170,10 @@ function AdminCourseModal(props) {
         /*  console.log(props.courseData.level); */
         const handleSubmitEdit = (e) => {
             e.preventDefault();
-            let id = props.courseData._id;
+            let id = courseData._id;
             /*  console.log('Fetch Edit course'); */
             fetchEditCourse(id);
-            props.onChange();
+            /* props.onChange(); */
             handlerClose();
         }
         return (
@@ -148,11 +183,11 @@ function AdminCourseModal(props) {
                         <div className={classes["type-edit"]}>
                             <div className={`${classes["md-content"]}`}>
                                 <div className={classes["info-container"]}>
-                                    <form onSubmit={handleSubmitEdit}>
+                                    <form onSubmit={handleSubmitEdit} encType="multipart/form-data">
                                         <div className={classes["edit-title"]}>
                                             <div>
                                                 <p> Actual Title</p>
-                                                <p>{props.courseData.title}</p>
+                                                <p>{courseData.title}</p>
                                             </div>
                                             <div>
                                                 <p> New Title</p>
@@ -161,27 +196,27 @@ function AdminCourseModal(props) {
                                                     type="text"
                                                     name="courseTitle"
                                                     id="title"
-                                                    placeholder={props.courseData.title}
+                                                    placeholder={courseData.title}
                                                 />
                                             </div>
                                         </div>
                                         <div className={classes["edit-image"]}>
                                             <div>
                                                 <p>Course Image</p>
-                                                <img src={require(`../../../../public/uploads/${props.courseData.image}`)} alt={`Photo of the course ${props.courseData.title}`} width={50}  />
+                                                <img src={require(`../../../../public/uploads/${courseData.image}`)} alt={`Photo of the course ${courseData.title}`} width={50}  />
                                             </div>
                                             <div>
-                                                <input type="file" id="courseImage" name="image" accept="image/png, image/jpeg" ref={imageRef} />
+                                                <input type="file" id="file" name="file" accept="image/*" ref={imageRef} onChange={handleFileChange} />
                                             </div>
                                         </div>
                                         <div className={classes["level-hours-section"]}>
                                             <div className={classes["edit-level"]}>
                                                 <p> Level</p>
                                                 <select name="select" ref={levelRef}>
-                                                    <option value="Level not exist" selected>{props.courseData.level === undefined ? "Level not exist" : props.courseData.level}</option>
-                                                    {props.courseData.level === "Easy" ? "" : <option value="Easy">Easy</option>}
-                                                    {props.courseData.level === "Medium" ? "" : <option value="Medium">Medium</option>}
-                                                    {props.courseData.level === "Hard" ? "" : <option value="Hard">Hard</option>}
+                                                    <option value="Level not exist" selected>{courseData.level === undefined ? "Level not exist" : courseData.level}</option>
+                                                    {courseData.level === "Easy" ? "" : <option value="Easy">Easy</option>}
+                                                    {courseData.level === "Medium" ? "" : <option value="Medium">Medium</option>}
+                                                    {courseData.level === "Hard" ? "" : <option value="Hard">Hard</option>}
                                                 </select>
                                             </div>
                                             <div className={classes["edit-hours"]}>
@@ -191,7 +226,7 @@ function AdminCourseModal(props) {
                                                     type="number"
                                                     name="email"
                                                     id="quntyHours"
-                                                    placeholder={props.courseData.quantityHours}
+                                                    placeholder={courseData.quantityHours}
                                                 />
                                                 <span> Hours</span>
                                             </div>
@@ -204,7 +239,7 @@ function AdminCourseModal(props) {
                                                     ref={courseInfoRef}
                                                     name="courseInfo"
                                                     id="info"
-                                                    value={props.courseData.info}
+                                                    value={courseData.info}
                                                     maxlength="50"
                                                     rows={5}
                                                     cols={40}
@@ -216,7 +251,7 @@ function AdminCourseModal(props) {
                                                     ref={courseInfoRef}
                                                     name="courseInfo"
                                                     id="info"
-                                                    placeholder={props.courseData.info}
+                                                    placeholder={courseData.info}
                                                     maxlength="50"
                                                     rows={5}
                                                     cols={40}
@@ -224,7 +259,7 @@ function AdminCourseModal(props) {
                                             </div>
                                         </div>
                                         <div className={`${classes["save-button"]} ${classes["submit-button"]}`}>
-                                            <button type="submit" onClick={() => { handlerClose("REMOVE") }}>
+                                            <button type="submit" /* onClick={() => { handlerClose("EDIT") }} */>
                                                 <span>SAVE</span>
                                             </button>
                                         </div>
@@ -245,9 +280,9 @@ function AdminCourseModal(props) {
             const courseTitle = titleRemoveRef.current.value;
             /* console.log(props.courseData.title);
             console.log(courseTitle); */
-            if (props.courseData.title === courseTitle) {
+            if (courseData.title === courseTitle) {
                 /*  console.log('Fetch para remove the course'); */
-                let id = props.courseData._id;
+                let id = courseData._id;
                 /*  console.log('Fetch Remove course'); */
                 fetchRemoveCourse(id);
                 handlerClose("REMOVE");
@@ -269,7 +304,7 @@ function AdminCourseModal(props) {
                                             <p>{"You must to put the same title (with capital and normal letters)"}</p>
                                         </div>
                                         <div className={classes["remove-form"]}>
-                                            <p>{props.courseData.title}</p>
+                                            <p>{courseData.title}</p>
                                             <input
                                                 ref={titleRemoveRef}
                                                 type="text"

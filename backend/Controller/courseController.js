@@ -83,6 +83,13 @@ const deleteCourse = async (req, res) => {
   try {
     const data = await Courses.findByIdAndDelete(req.params.id);
     res.status(200).json({ status: "ok", data, error: null });
+    if (res.status===200) {
+      try {
+        
+      } catch (error) {
+        
+      }
+    }
   } catch (error) {
     res.status(400).json({
       status: "ko",

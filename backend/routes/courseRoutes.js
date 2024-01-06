@@ -12,6 +12,6 @@ router.get("/all-courses", courseController.getAllCourses);
 router.get("/:slug", courseController.getCourse);
 router.post("/create-course", verifyToken, courseController.postCourse);
 router.post("/save-image", upload.single('file'), courseController.saveImage);
-router.patch("/edit/:id", verifyToken,courseController.patchCourse);
+router.patch("/edit/:id", verifyToken, courseController.patchCourse);
 router.delete("/delete/:id", verifyToken, courseController.deleteCourse);
 module.exports = router;

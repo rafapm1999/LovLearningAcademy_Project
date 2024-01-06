@@ -16,7 +16,7 @@ function AdminCourses(props) {
   const [courses, setCourses] = useState([])
   const [coursesCopy, setCoursesCopy] = useState([]);
   const [courseID, setCourseID] = useState("")
-  const [courseData, setCourseData] = useState([])
+  const [courseData, setCourseData] = useState({})
   const [clickAction, setClickAction] = useState("")
   const [pending, setPending] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -65,10 +65,10 @@ function AdminCourses(props) {
 
   };
 
-  const fetchTheCourse = async (id) => {
+  const fetchTheCourse = async (slug) => {
 
     try {
-      const response = await fetch(`http://localhost:8000/courses/${id}`, {
+      const response = await fetch(`http://localhost:8000/courses/${slug}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -125,7 +125,7 @@ function AdminCourses(props) {
     /* fetchTheCourse(courseId); */
     setTimeout(() => {
       setVisible(!visible)
-    },)
+    }, 50)
   };
   //Función para cuando cerramos el modal
   const handleClose = () => {
@@ -157,7 +157,7 @@ function AdminCourses(props) {
 
   //Cuando se ha editado algun curso
   const handlerChange = () => {
-    return props.makeChanges(true)
+    /* return props.makeChanges(true) */
   }
 
   if (pending === false) {
@@ -183,7 +183,7 @@ function AdminCourses(props) {
     return (
       <>
         {ReactDOM.createPortal(
-          <AdminCourseModal courseId={courseID} courseData={courseData} clickType={clickAction} visible={visible} onClose={handleClose} onPending={handlerPending} onChange={handlerChange} />,
+          <AdminCourseModal courseId={courseID} courseData={courseData} clickType={clickAction} visible={visible} onClose={handleClose} onPending={handlerPending} /* onChange={handlerChange} */ />,
           document.querySelector("#modal")
         )}
         <div className={`${classes["coursesPage-root"]} ${visible && classes["blur"]} ${props.openProfile && classes["blur"]}`}>
@@ -214,34 +214,34 @@ function AdminCourses(props) {
                       <td>{course.title}</td>
                       <td>{course._id}</td>
                       <td onClick={() => {
-                        fetchTheCourse(course._id)
+                        fetchTheCourse(course.slug)
                         setTimeout(() => {
                           onHandlerClick(course._id, "INFO")
                         }, 50)
                       }} className={classes["info-button"]}><FontAwesomeIcon onClick={() => {
-                        fetchTheCourse(course._id)
+                        fetchTheCourse(course.slug)
                         setTimeout(() => {
                           onHandlerClick(course._id, "INFO")
                         }, 50)
                       }} icon={faEye} size='xl' /></td>
                       <td onClick={() => {
-                        fetchTheCourse(course._id)
+                        fetchTheCourse(course.slug)
                         setTimeout(() => {
                           onHandlerClick(course._id, "EDIT")
                         }, 50)
                       }} className={classes["edit-button"]}><FontAwesomeIcon onClick={() => {
-                        fetchTheCourse(course._id)
+                        fetchTheCourse(course.slug)
                         setTimeout(() => {
                           onHandlerClick(course._id, "EDIT")
                         }, 50)
                       }} icon={faPenToSquare} size='xl' /></td>
                       <td onClick={() => {
-                        fetchTheCourse(course._id)
+                        fetchTheCourse(course.slug)
                         setTimeout(() => {
                           onHandlerClick(course._id, "REMOVE")
                         }, 50)
                       }} className={classes["remove-button"]}><FontAwesomeIcon onClick={() => {
-                        fetchTheCourse(course._id)
+                        fetchTheCourse(course.slug)
                         setTimeout(() => {
                           onHandlerClick(course._id, "REMOVE")
                         }, 50)

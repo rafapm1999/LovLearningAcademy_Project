@@ -6,7 +6,7 @@ import { takeRole, takeID } from '../../Utils';
 //Importamos FontAwesomeIcon para usarlo en el footer
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faArrowRightFromBracket, faUser, faBars, faXmark
+  faArrowRightFromBracket, faUser, faBars, faXmark, faEnvelope
 } from "@fortawesome/free-solid-svg-icons";
 
 
@@ -21,6 +21,9 @@ function UserNavbar() {
   const [courses, setCourses] = useState([])
   const [coursesSlug, setCoursesSlug] = useState([])
   const [courseClick, setCourseClick] = useState(false)
+  if(!token) {
+    navigate("/")
+  }
 
   const getUser = async (id) => {
     try {
@@ -90,18 +93,15 @@ function UserNavbar() {
     localStorage.removeItem("rememberMe");
     navigate(`/`);
   }
-  /* const onProfileClick = () => {
-    navigate("/campus/profile")
-  } */
   const onMyCoursesClick = () => {
 
     console.log(coursesSlug);
     setCourseClick(true)
     getUserCourses(coursesSlug);
-    
-      console.log(courses);
-      navigate(`/campus/mycourses`, { state: courses });
-   
+
+    console.log(courses);
+    navigate(`/campus/mycourses`, { state: courses });
+
 
   }
   const onToDoListClick = () => {
@@ -124,8 +124,8 @@ function UserNavbar() {
                     pathname: '/campus/profile',
                     state: {}
                   }}>Profile</NavLink>
-
-                  <NavLink className={classes["list-link"]} onClick={ onMyCoursesClick }>My Courses</NavLink>
+                  {/* Este span tengo que preguntarle a fran si esta bien */}
+                  <button className={classes["list-link"]} onClick={()=>{onMyCoursesClick()}}>My Courses</button>
                   <NavLink className={classes["list-link"]} to="*">ToDoList</NavLink>
                 </div>
               </div>
@@ -152,11 +152,10 @@ function UserNavbar() {
               pathname: '/campus/mylearnplace',
               state: { id }
             }} ><span>MyLearnplace</span></NavLink>
-            {/* <Link className={classes.link} to="/community" ><span>Community</span></Link> */}
           </div>
         </div>
         <div className={classes["navbar-button"]}>
-          <button onClick={() => { navigate("/campus/profile", { state: id }) }} className={classes.profile}><span><FontAwesomeIcon icon={faUser} /></span></button>
+          <button onClick={() => { navigate("/campus/messages", { state: id }) }} className={classes.profile}><span><FontAwesomeIcon icon={faEnvelope}/></span></button>
           <button onClick={unlogged} className={classes.logout}> Log out <span><FontAwesomeIcon icon={faArrowRightFromBracket} /></span> </button>
 
         </div>

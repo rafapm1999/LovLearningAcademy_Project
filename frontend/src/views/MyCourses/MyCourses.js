@@ -77,11 +77,11 @@ function MyCourses() {
 
     return (
       <div className={classes["main-container"]}>
-        <h1 className={classes.title}>MyLearnplace</h1>
+        <h1 className={classes.title}>My courses</h1>
         <div className={classes["user-info-container"]}>
 
           <div className={classes["details-info-title"]}>
-            <p>Hello {user.name}, you don't have any course in your MyLearnplace!</p>
+            <p>Hello {user.name}, you don't have any course yet!</p>
             <p>If you want to start to learn with the best courses you'll imagine...</p>
             <p>Follow the next steps!</p>
           </div>
@@ -109,7 +109,7 @@ function MyCourses() {
 
 
       <div className={classes["main-container"]}>
-        <h1 className={classes.title}>MyLearnplace</h1>
+        <h1 className={classes.title}>My courses</h1>
         <div className={classes["user-info-container"]}>
           <p className={classes["user-info"]}>Happy to see you {user.name}, you have {courses.length} {""}
             courses waiting for you!</p>

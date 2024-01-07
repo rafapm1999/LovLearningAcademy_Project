@@ -70,6 +70,27 @@ const patchCourse = async (req, res) => {
       req.body,
       { new: true });
     res.status(200).json({ status: "ok", data, error: null });
+    if (res.status === 200) {
+      try {
+        const users = await Login.findByIdAndUpdate(
+          {
+            courses: req.params.id
+          },
+          {
+            courses: data,
+          },
+          { new: true });
+        res.status(200).json({ status: "ok", data: users, error: null });
+      } catch (error) {
+        es.status(400).json({
+          status: "ko",
+          data: null,
+          error: error.message,
+        });
+      }
+    } else{
+      res.status(200).json({ status: "ko", data: null, error: "Something went wrong when bbdd update the user values" });
+    }
   } catch (error) {
     res.status(400).json({
       status: "ko",
@@ -83,11 +104,11 @@ const deleteCourse = async (req, res) => {
   try {
     const data = await Courses.findByIdAndDelete(req.params.id);
     res.status(200).json({ status: "ok", data, error: null });
-    if (res.status===200) {
+    if (res.status === 200) {
       try {
-        
+
       } catch (error) {
-        
+
       }
     }
   } catch (error) {

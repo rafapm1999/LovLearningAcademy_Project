@@ -30,7 +30,7 @@ function Profile(props) {
       );
       const data = await response.json();
       if (response.ok) {
-        console.log(data);
+       /*  console.log(data); */
 
         setCourses(data.data.courses);
         setUser(data.data)
@@ -57,8 +57,8 @@ function Profile(props) {
   const currentCourses = courses.slice(indexOfFirstUser, indexOfLastUser);
   const totalPages = Math.ceil(courses.length / coursePerPage);
   const paginate = (pageNumber) => {
-    console.log("Has dado click");
-    console.log(currentCourses);
+/*     console.log("Has dado click");
+    console.log(currentCourses); */
     setCurrentPage(pageNumber);
   };
   //Fetch para eliminar el course seleccionado
@@ -72,7 +72,7 @@ function Profile(props) {
       });
       const data = await response.json();
       if (response.ok) {
-        console.log(data.data);
+       /*  console.log(data.data); */
         navigate("/loader-page", { state: data })
       };
     } catch (error) {
@@ -82,12 +82,12 @@ function Profile(props) {
 
   // 
   const onHandlerClick = (userID, courseID) => {
-    console.log(userID);
-    console.log(courseID);
+   /*  console.log(userID);
+    console.log(courseID); */
     fetchRemoveCourse(userID, courseID)
   };
 
-  console.log(user.courses);
+/*   console.log(user.courses); */
 
   return (
     <div className={classes["main-profile"]}>

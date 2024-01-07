@@ -37,7 +37,7 @@ function AdminMembers(props) {
           }
         );
         const data = await response.json();
-        console.log(data);
+       /*  console.log(data); */
         if (response.ok) {
           setUsers(Array(data.data));
           setUsersCopy(Array(data.data))
@@ -66,11 +66,11 @@ function AdminMembers(props) {
       user.name.toLowerCase().includes(wordSearch.toLowerCase())
     );
     setUsers(Array(filteredUsers))
-    console.log(filteredUsers);
+  /*   console.log(filteredUsers); */
   }
 
   if (pending === false) {
-    console.log("pending === false");
+   /*  console.log("pending === false"); */
     return loaderFunction();
   }
   if (pending === true && users[0].length !== 0) {
@@ -80,14 +80,14 @@ function AdminMembers(props) {
     const currentUsers = users[0].slice(indexOfFirstUser, indexOfLastUser);
     const totalPages = Math.ceil(users[0].length / usersPerPage);
     const paginate = (pageNumber) => {
-      console.log("Has dado click");
-      console.log(currentUsers);
+      /* console.log("Has dado click");
+      console.log(currentUsers); */
       setCurrentPage(pageNumber);
     };
-    console.log(wordSearch);
-    console.log('console.log(Math.ceil(users.length / usersPerPage));');
+/*     console.log(wordSearch);
+    console.log('console.log(Math.ceil(users.length / usersPerPage));'); */
 
-    console.log(Math.ceil(users[0].length / usersPerPage));
+   /*  console.log(Math.ceil(users[0].length / usersPerPage)); */
     return (
       <div className={`${classes["usersPage-root"]} ${props.visible && classes["blur"]} ${props.openProfile && classes["blur"]}`}>
         <div className={classes.title}>

@@ -12,9 +12,9 @@ function CourseModal(props) {
     const onNavigate = () => {
         navigate("/campus/mylearnplace");
     }
-    console.log(props.courseExists);
+/*     console.log(props.courseExists); */
     if (token && props.courseExists === false) {
-        console.log(props.userData);
+/*         console.log(props.userData); */
        return(
        <Fragment>
             <div className={`${classes["md-modal"]} ${classes["md-effect-1"]} ${props.visible && classes["md-show"]}`}>

@@ -36,8 +36,8 @@ function SignupForm(props) {
               <input
                 ref={userNameRef}
                 type="text"
-                name="name"
-                id="userName"
+                name="userNameData"
+                id="userNameDataSignup"
                 placeholder="Name"
               />
             </div>
@@ -46,7 +46,7 @@ function SignupForm(props) {
                 ref={userLastNameRef}
                 type="text"
                 name="lastName"
-                id="userLastName"
+                id="userLastNameSignup"
                 placeholder="Lastname"
               />
             </div>
@@ -54,8 +54,8 @@ function SignupForm(props) {
               <input
                 ref={emailRef}
                 type="email"
-                name="email"
-                id="userEmail"
+                name="userEmail"
+                id="userEmailSignup"
                 placeholder="Email"
               />
             </div>
@@ -64,7 +64,7 @@ function SignupForm(props) {
                 ref={passwordRef}
                 type="password"
                 name="password"
-                id="userPassword"
+                id="userPasswordSignup"
                 placeholder="Password"
               />
             </div>
@@ -73,7 +73,7 @@ function SignupForm(props) {
                 ref={rewritePasswordRef}
                 type="password"
                 name="rewritePassword"
-                id="userRewritePassword"
+                id="userRewritePasswordSignup"
                 placeholder="Rewrite the password"
               />
             </div>

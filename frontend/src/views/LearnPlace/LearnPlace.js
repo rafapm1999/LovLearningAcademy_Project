@@ -82,8 +82,8 @@ function LearnPlace() {
 
   const onHandlerClick = () => { };
 
-  console.log(courses);
-  console.log(user);
+/*   console.log(courses);
+  console.log(user); */
 
   //Paginación
   //Creación de la paginación del contenido de la tabla
@@ -92,15 +92,15 @@ function LearnPlace() {
   const currentCourses = courses.slice(indexOfFirstUser, indexOfLastUser);
   const totalPages = Math.ceil(courses.length / coursePerPage);
   const paginate = (pageNumber) => {
-    console.log("Has dado click");
-    console.log(currentCourses);
+  /*   console.log("Has dado click");
+    console.log(currentCourses); */
     setCurrentPage(pageNumber);
   };
   if (pending === false) {
     return loaderFunction();
   }
   if (courses.length === 0) {
-    console.log('hAS ENTRADO');
+    /* console.log('hAS ENTRADO'); */
 
     return (
       <div className={classes["main-container"]}>
@@ -126,7 +126,7 @@ function LearnPlace() {
       </div>
     )
   } else {
-    console.log('hAS ENTRADO A ELSE');
+    /* console.log('hAS ENTRADO A ELSE'); */
    /*  return (
       
 

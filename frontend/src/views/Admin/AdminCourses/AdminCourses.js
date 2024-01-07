@@ -51,7 +51,7 @@ function AdminCourses(props) {
           }
         );
         const data = await response.json();
-        console.log(data);
+      /*   console.log(data); */
         if (response.ok) {
           setCourses(Array(data.data));
           setCoursesCopy(Array(data.data))
@@ -65,10 +65,10 @@ function AdminCourses(props) {
 
   };
 
-  const fetchTheCourse = async (slug) => {
+  const fetchTheCourse = async (id) => {
 
     try {
-      const response = await fetch(`http://localhost:8000/courses/${slug}`, {
+      const response = await fetch(`http://localhost:8000/courses/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -77,8 +77,8 @@ function AdminCourses(props) {
       const data = await response.json();
       if (response.ok) {
         setCourseData(data.data)
-        console.log("Has entrado fetchTheCourse en response.ok");
-        console.log(data.data);
+       /*  console.log("Has entrado fetchTheCourse en response.ok");
+        console.log(data.data); */
       } else {
         console.log("Has entrado fetchTheCourse en !response.ok");
       }
@@ -141,7 +141,7 @@ function AdminCourses(props) {
   }
   //Funcion para cambiar el estado de pending
   const handlerPending = () => {
-    console.log('Has entrado en handlerPending');
+ /*    console.log('Has entrado en handlerPending'); */
 
     setTimeout(() => {
       fetchCourses("RESET");
@@ -161,7 +161,7 @@ function AdminCourses(props) {
   }
 
   if (pending === false) {
-    console.log("pending === false");
+  /*   console.log("pending === false"); */
     return loaderFunction();
   }
 
@@ -214,34 +214,34 @@ function AdminCourses(props) {
                       <td>{course.title}</td>
                       <td>{course._id}</td>
                       <td onClick={() => {
-                        fetchTheCourse(course.slug)
+                        fetchTheCourse(course._id)
                         setTimeout(() => {
                           onHandlerClick(course._id, "INFO")
                         }, 50)
                       }} className={classes["info-button"]}><FontAwesomeIcon onClick={() => {
-                        fetchTheCourse(course.slug)
+                        fetchTheCourse(course._id)
                         setTimeout(() => {
                           onHandlerClick(course._id, "INFO")
                         }, 50)
                       }} icon={faEye} size='xl' /></td>
                       <td onClick={() => {
-                        fetchTheCourse(course.slug)
+                        fetchTheCourse(course._id)
                         setTimeout(() => {
                           onHandlerClick(course._id, "EDIT")
                         }, 50)
                       }} className={classes["edit-button"]}><FontAwesomeIcon onClick={() => {
-                        fetchTheCourse(course.slug)
+                        fetchTheCourse(course._id)
                         setTimeout(() => {
                           onHandlerClick(course._id, "EDIT")
                         }, 50)
                       }} icon={faPenToSquare} size='xl' /></td>
                       <td onClick={() => {
-                        fetchTheCourse(course.slug)
+                        fetchTheCourse(course._id)
                         setTimeout(() => {
                           onHandlerClick(course._id, "REMOVE")
                         }, 50)
                       }} className={classes["remove-button"]}><FontAwesomeIcon onClick={() => {
-                        fetchTheCourse(course.slug)
+                        fetchTheCourse(course._id)
                         setTimeout(() => {
                           onHandlerClick(course._id, "REMOVE")
                         }, 50)

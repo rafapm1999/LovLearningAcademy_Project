@@ -57,16 +57,16 @@ function CoursesPage() {
   };
 
   //Con esta función hacemos un fetch (GET) para cuando clickamos sobre un curso concreto
-  const getCourse = async (slug) => {
+  const getCourse = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8000/courses/${slug}`, {
+      const response = await fetch(`http://localhost:8000/courses/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
       });
       const data = await response.json();
-      console.log(data.data[0].slug);
+/*       console.log(data.data[0].slug); */
       if (response.ok) {
         if (token) {
           navigate(`/campus/courses/${data.data[0].slug}`, { state: data.data[0] })
@@ -174,7 +174,7 @@ function CoursesPage() {
               return (
                 <div
                   onClick={() => {
-                    onHandlerClick(course.slug);
+                    onHandlerClick(course._id);
                     scrollTop("auto");
                   }}
                   className={`${classes["coursesPage-container"]} ${classes[`${course.level.toLowerCase()}`]}`}

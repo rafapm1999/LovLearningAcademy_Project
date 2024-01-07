@@ -78,8 +78,8 @@ function ContactUs() {
             <input
               ref={nameRef}
               type="text"
-              name="name"
-              id="userName"
+              name="userNameDataContact"
+              id="userNameData"
               placeholder="Name"
             />
           </div>
@@ -88,7 +88,7 @@ function ContactUs() {
               ref={lastNameRef}
               type="text"
               name="lastName"
-              id="userLastName"
+              id="userLastNameContact"
               placeholder="Lastname"
             />
           </div>
@@ -96,8 +96,8 @@ function ContactUs() {
             <input
               ref={emailRef}
               type="email"
-              name="email"
-              id="userEmail"
+              name="userEmail"
+              id="userEmailContact"
               placeholder="Email"
             />
           </div>
@@ -105,7 +105,7 @@ function ContactUs() {
             <textarea
               ref={userCommentRef}
               name="userComment"
-              id="userCommentText"
+              id="userCommentTextContact"
               placeholder="What do you tell to us?"
               maxLength="50"
             ></textarea>

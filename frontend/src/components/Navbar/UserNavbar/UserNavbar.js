@@ -39,12 +39,12 @@ function UserNavbar() {
       );
       const data = await response.json();
       if (response.ok) {
-        console.log(data.data);
-        console.log(data.data.courses);
+       /*  console.log(data.data);
+        console.log(data.data.courses); */
         setUser(data.data);
         setCoursesSlug(data.data.courses)
       } else {
-        console.log("ko");
+       /*  console.log("ko"); */
       }
     } catch (error) {
       console.log(error);
@@ -54,9 +54,9 @@ function UserNavbar() {
   useEffect(() => {
     getUser(id);
   }, [])
-  const getCourse = async (slug) => {
+  const getCourse = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8000/courses/${slug}`, {
+      const response = await fetch(`http://localhost:8000/courses/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -66,7 +66,7 @@ function UserNavbar() {
       /* let newCourse = data.data[0]; */
       takeCourse = [data.data[0]];
       if (response.ok) {
-        console.log(takeCourse);
+       /*  console.log(takeCourse); */
         setCourses(prevCourses => [...prevCourses, data.data[0]]);
       }
     } catch (error) {
@@ -77,15 +77,15 @@ function UserNavbar() {
   };
   const getUserCourses = (coursesSlug) => {
     setCourses([]);
-    console.log(coursesSlug);
+   /*  console.log(coursesSlug); */
     coursesSlug.forEach((slug) => {
-      console.log(slug);
+     /*  console.log(slug); */
       return (getCourse(slug))
     })
   }
 
-  console.log(user);
-  console.log(courses);
+ /*  console.log(user);
+  console.log(courses); */
   const unlogged = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("email");
@@ -95,11 +95,11 @@ function UserNavbar() {
   }
   const onMyCoursesClick = () => {
 
-    console.log(coursesSlug);
+   /*  console.log(coursesSlug); */
     setCourseClick(true)
     getUserCourses(coursesSlug);
 
-    console.log(courses);
+   /*  console.log(courses); */
     navigate(`/campus/mycourses`, { state: courses });
 
 

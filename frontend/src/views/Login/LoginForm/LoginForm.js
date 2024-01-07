@@ -36,14 +36,14 @@ function LoginForm(props) {
           <div className={classes.title}>
             <h4>Login now!</h4>
           </div>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} method="POST">
             <div className={classes["form-info"]}>
               <input
                 ref={emailRef}
                 type="email"
-                name="email"
-                id="userEmail"
-                aria-label="Email"
+                name="userEmail"
+                id="userEmailLogin"
+                aria-label="userEmail"
                 placeholder="Email"
                 onChange={handleInputChange}
                 className={(props.onEmptyInfo.email === false) ? classes.danger : ''}
@@ -54,7 +54,7 @@ function LoginForm(props) {
                 ref={passwordRef}
                 type="password"
                 name="password"
-                id="userPassword"
+                id="userPasswordLogin"
                 placeholder="Password"
                 onChange={handleInputChange}
                 className={
@@ -68,9 +68,9 @@ function LoginForm(props) {
                   ref={rememberMeRef}
                   type="checkbox"
                   name="checkbox"
-                  id="rememberMe"
+                  id="rememberMeLogin"
                 />
-                <label htmlFor="rememberMe">
+                <label htmlFor="rememberMeLogin">
                   <span>Remember my details</span>
                 </label>
               </div>

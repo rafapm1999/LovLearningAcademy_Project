@@ -22,14 +22,14 @@ function AdminCreateCourse(props) {
             navigate(-1)
         }
     },)
-    console.log(typeof "");
+   /*  console.log(typeof ""); */
     const fetchCreateCourse = async () => {
-        console.log(typeof imageRef);
+       /*  console.log(typeof imageRef);
         console.log(imageRef.current.value);
 
         console.log(titleRef.current.value);
         console.log(courseInfoRef.current.value);
-        console.log(fileImage);
+        console.log(fileImage); */
         //
         const formData = new FormData();
         formData.append('file', fileImage);
@@ -55,9 +55,9 @@ function AdminCreateCourse(props) {
                 }
             );
             const data = await response.json();
-            console.log(data.data);
+           /*  console.log(data.data); */
             if (response.ok) {
-                console.log("HA SALIDO BIEN!!!");
+               /*  console.log("HA SALIDO BIEN!!!"); */
             }
 
         } catch (error) {
@@ -80,9 +80,9 @@ function AdminCreateCourse(props) {
                 }
             );
             const data = await response.json();
-            console.log(data.data);
+           /*  console.log(data.data); */
             if (response.ok) {
-                console.log("Has guardado la imagen");
+               /*  console.log("Has guardado la imagen"); */
             }
 
         } catch (error) {

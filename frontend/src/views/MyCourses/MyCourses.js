@@ -40,7 +40,7 @@ function MyCourses() {
       );
       const data = await response.json();
       if (response.ok) {
-        console.log(data);
+        /* console.log(data); */
         setUser(data.data);
       } else {
         console.log("ko");
@@ -65,15 +65,15 @@ function MyCourses() {
   const currentCourses = courses.slice(indexOfFirstUser, indexOfLastUser);
   const totalPages = Math.ceil(courses.length / coursePerPage);
   const paginate = (pageNumber) => {
-    console.log("Has dado click");
-    console.log(currentCourses);
+ /*    console.log("Has dado click");
+    console.log(currentCourses); */
     setCurrentPage(pageNumber);
   };
   if (pending === false) {
     return loaderFunction();
   }
   if (courses.length === 0) {
-    console.log('hAS ENTRADO');
+ /*    console.log('hAS ENTRADO'); */
 
     return (
       <div className={classes["main-container"]}>
@@ -99,7 +99,7 @@ function MyCourses() {
       </div>
     )
   } else {
-    console.log('hAS ENTRADO A ELSE');
+/*     console.log('hAS ENTRADO A ELSE'); */
     return (
       
 

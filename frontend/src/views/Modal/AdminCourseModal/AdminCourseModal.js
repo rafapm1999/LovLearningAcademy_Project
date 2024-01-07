@@ -15,7 +15,7 @@ function AdminCourseModal(props) {
     const courseInfoRef = useRef("");
     const titleRemoveRef = useRef("");
     const courseData = props.courseData[0];
-    console.log(courseData);
+    /* console.log(courseData); */
 
     const fetchEditCourse = async (id) => {
         const formData = new FormData();
@@ -41,10 +41,10 @@ function AdminCourseModal(props) {
                 }
             );
             const data = await response.json();
-            console.log(data.data);
+          /*   console.log(data.data); */
             if (response.ok) {
-                console.log("HA SALIDO BIEN!!!");
-                return (props.onPending);
+       /*          console.log("HA SALIDO BIEN!!!"); */
+                return (props.onPending());
             }
 
         } catch (error) {
@@ -67,9 +67,9 @@ function AdminCourseModal(props) {
                 }
             );
             const data = await response.json();
-            console.log(data.data);
+   /*          console.log(data.data); */
             if (response.ok) {
-                console.log("Has guardado la imagen");
+           /*      console.log("Has guardado la imagen"); */
             }
 
         } catch (error) {
@@ -92,9 +92,9 @@ function AdminCourseModal(props) {
                 }
             );
             const data = await response.json();
-            console.log(data.data);
+        /*     console.log(data.data); */
             if (response.ok) {
-                console.log("HA BORRADO EL CURSO BIEN!!!");
+          /*       console.log("HA BORRADO EL CURSO BIEN!!!"); */
                 return (handlerClose());
             }
         } catch (error) {
@@ -102,20 +102,18 @@ function AdminCourseModal(props) {
             console.log(error);
             navigate(`/error-page`, { state: error });
         }
-        console.log('Hola');
-
     }
     const handleFileChange = (e) => {
         setFileImage(e.target.files[0])
     }
     const handlerClose = (e) => {
-        console.log('Has entrado en handlerClose');
+ /*        console.log('Has entrado en handlerClose'); */
         if (e === "REMOVE" && titleRemoveRef.current.value === props.courseData.title) {
             props.onClose();
             props.onPending();
-            console.log("Son iguales");
+    /*         console.log("Son iguales"); */
         } else {
-            console.log("No son iguales");
+    /*         console.log("No son iguales"); */
         }
         if (e === "closeClick") {
             props.onClose();
@@ -176,6 +174,9 @@ function AdminCourseModal(props) {
             /* props.onChange(); */
             handlerClose();
         }
+        const onChangeFunction = () => {
+
+        }
         return (
             <div>
                 <div className={classes["modal-main"]}>
@@ -206,17 +207,17 @@ function AdminCourseModal(props) {
                                                 <img src={require(`../../../../public/uploads/${courseData.image}`)} alt={`Photo of the course ${courseData.title}`} width={50}  />
                                             </div>
                                             <div>
-                                                <input type="file" id="file" name="file" accept="image/*" ref={imageRef} onChange={handleFileChange} />
+                                                <input type="file" id="file" name="file" accept="image/*" ref={imageRef} onChange={() => {handleFileChange()}} />
                                             </div>
                                         </div>
                                         <div className={classes["level-hours-section"]}>
                                             <div className={classes["edit-level"]}>
                                                 <p> Level</p>
-                                                <select name="select" ref={levelRef}>
-                                                    <option value="Level not exist" selected>{courseData.level === undefined ? "Level not exist" : courseData.level}</option>
-                                                    {courseData.level === "Easy" ? "" : <option value="Easy">Easy</option>}
-                                                    {courseData.level === "Medium" ? "" : <option value="Medium">Medium</option>}
-                                                    {courseData.level === "Hard" ? "" : <option value="Hard">Hard</option>}
+                                                <select name="select" id="select" ref={levelRef}>
+                                                    {courseData.level === undefined ?  <option value="Level not exist">Level not exist</option>: courseData.level}
+                                                    {courseData.level === "Easy" ? "" : <option id="easy" name="easy" value="Easy">Easy</option>}
+                                                    {courseData.level === "Medium" ? "" : <option id="medium" name="medium" value="Medium">Medium</option>}
+                                                    {courseData.level === "Hard" ? "" : <option id="hard" name="hard" value="Hard">Hard</option>}
                                                 </select>
                                             </div>
                                             <div className={classes["edit-hours"]}>
@@ -224,7 +225,7 @@ function AdminCourseModal(props) {
                                                 <input
                                                     ref={hoursRef}
                                                     type="number"
-                                                    name="email"
+                                                    name="quntyHours"
                                                     id="quntyHours"
                                                     placeholder={courseData.quantityHours}
                                                 />
@@ -236,25 +237,25 @@ function AdminCourseModal(props) {
                                             <div className={classes["actual-description"]}>
                                                 <p>Actual Description</p>
                                                 <textarea
-                                                    ref={courseInfoRef}
-                                                    name="courseInfo"
-                                                    id="info"
+                                                    /* ref={courseInfoRef} */
+                                                    name="actualInfo"
+                                                    id="actualInfo"
                                                     value={courseData.info}
-                                                    maxlength="50"
                                                     rows={5}
                                                     cols={40}
+                                                    onChange={onChangeFunction}
                                                 ></textarea>
                                             </div>
                                             <div className={classes["new-description"]}>
                                                 <p>New Description</p>
                                                 <textarea
                                                     ref={courseInfoRef}
-                                                    name="courseInfo"
-                                                    id="info"
+                                                    name="newInfo"
+                                                    id="newInfo"
                                                     placeholder={courseData.info}
-                                                    maxlength="50"
                                                     rows={5}
                                                     cols={40}
+                                                    onChange={onChangeFunction}
                                                 ></textarea>
                                             </div>
                                         </div>

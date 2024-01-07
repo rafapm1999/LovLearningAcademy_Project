@@ -29,11 +29,11 @@ function CourseInfoPage() {
       const response = await fetch(`http://localhost:8000/auth/getuser/${userId}`);
       let existingData = await response.json();
 
-      console.log(existingData);
+/*       console.log(existingData);
       console.log(courseData);
       console.log(userId);
       console.log(token)
-      console.log(existingData.data.courses);
+      console.log(existingData.data.courses); */
 
       // Verificar si existingData.courses es un array o está ausente
       if (!Array.isArray(existingData.data.courses)) {
@@ -42,18 +42,18 @@ function CourseInfoPage() {
 
       // Verificar si el curso ya existe en el "user-dashboard"
       const courseExist = existingData.data.courses.some((course) => {
-        console.log(course);
-        console.log(courseData.slug);
-        return course === courseData.slug;
+  /*       console.log(course);
+        console.log(courseData.slug); */
+        return course === courseData._id;
       });
       setCourseRepeat(courseExist);
-      console.log(courseExist);
+   /*    console.log(courseExist); */
 
       if (response.ok && courseExist === false) {
-        console.log(courseData.slug);
-        existingData.data.courses = [...existingData.data.courses, ...Array(courseData.slug)];
+/*         console.log(courseData.slug); */
+        existingData.data.courses = [...existingData.data.courses, ...Array(courseData._id)];
         const patchTheCourse = async (id) => {
-          console.log(courseExisting);
+      /*     console.log(courseExisting); */
           try {
             const patchResponse = await fetch(`http://localhost:8000/auth/${id}`, {
               method: "PATCH",
@@ -69,7 +69,7 @@ function CourseInfoPage() {
             const data = await patchResponse.json();
 
             if (patchResponse.ok) {
-              console.log(data);
+     /*          console.log(data); */
             };
           } catch (error) {
             console.log(error);
@@ -79,7 +79,7 @@ function CourseInfoPage() {
         setCourseExisting(courseData.data)
         return patchTheCourse(userId);
       } else if (response.ok && courseExist === true) {
-       console.log("el curso ya existe");
+ /*       console.log("el curso ya existe"); */
       }
     } catch (error) {
       console.log(error);
@@ -108,7 +108,7 @@ function CourseInfoPage() {
   const getTheCourse = () => {
     setVisible(!visible);
     if (token) {
-      console.log("entras en getthecourse if token");
+/*       console.log("entras en getthecourse if token"); */
       fetchWantCourse();
       scrollTop("smooth");
     };

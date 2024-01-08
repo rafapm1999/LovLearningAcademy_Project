@@ -22,14 +22,14 @@ function AdminCreateCourse(props) {
             navigate(-1)
         }
     },)
-   /*  console.log(typeof ""); */
+    /*  console.log(typeof ""); */
     const fetchCreateCourse = async () => {
-       /*  console.log(typeof imageRef);
-        console.log(imageRef.current.value);
-
-        console.log(titleRef.current.value);
-        console.log(courseInfoRef.current.value);
-        console.log(fileImage); */
+        /*  console.log(typeof imageRef);
+         console.log(imageRef.current.value);
+ 
+         console.log(titleRef.current.value);
+         console.log(courseInfoRef.current.value);
+         console.log(fileImage); */
         //
         const formData = new FormData();
         formData.append('file', fileImage);
@@ -55,9 +55,9 @@ function AdminCreateCourse(props) {
                 }
             );
             const data = await response.json();
-           /*  console.log(data.data); */
+            /*  console.log(data.data); */
             if (response.ok) {
-               /*  console.log("HA SALIDO BIEN!!!"); */
+                /*  console.log("HA SALIDO BIEN!!!"); */
             }
 
         } catch (error) {
@@ -80,9 +80,9 @@ function AdminCreateCourse(props) {
                 }
             );
             const data = await response.json();
-           /*  console.log(data.data); */
+            /*  console.log(data.data); */
             if (response.ok) {
-               /*  console.log("Has guardado la imagen"); */
+                /*  console.log("Has guardado la imagen"); */
             }
 
         } catch (error) {
@@ -104,6 +104,22 @@ function AdminCreateCourse(props) {
     const handlerBack = () => {
         navigate(`/admin/bbdd-courses`);
     }
+    //Creado 08/01 y comento los required del form para probar
+    const onHandlerSection = () => {
+        console.log("click");
+        return (
+            <div>
+                <p>Title</p>
+                <input
+                    type="text"
+                    name="sectionInfo"
+                    id="sectionInfo"
+                    placeholder="Section Info"
+                    
+                />
+            </div>
+        )
+    }
     return (
         <div className={`${classes["main-container"]} ${props.visible && classes["blur"]} ${props.openProfile && classes["blur"]}`}>
             <div>
@@ -123,14 +139,14 @@ function AdminCreateCourse(props) {
                                 name="courseTitle"
                                 id="title"
                                 placeholder="Course Title"
-                                required
+                                /* required */
                             />
                         </div>
                     </div>
                     <div className={classes["image"]}>
                         <div>
                             <p>Image</p>
-                            <input type="file" id="file" name="file" accept="image/*" ref={imageRef} onChange={handleFileChange} required />
+                            <input type="file" id="file" name="file" accept="image/*" ref={imageRef} onChange={handleFileChange} /* required */ />
                         </div>
                     </div>
                     <div className={classes["level-hours-section"]}>
@@ -150,7 +166,7 @@ function AdminCreateCourse(props) {
                                     type="number"
                                     name="quntyHours"
                                     id="quntyHours"
-                                    required
+                                    /* required */
                                 />
                                 <span> Hours</span>
                             </div>
@@ -158,13 +174,13 @@ function AdminCreateCourse(props) {
                     </div>
                     <div className={classes["shortDescription"]}>
                         <p>Short Description</p>
-                            <input
-                                ref={shortDescriptionRef}
-                                type="text"
-                                name="shortDescription"
-                                id="shortDescription"
-                                required
-                            />
+                        <input
+                            ref={shortDescriptionRef}
+                            type="text"
+                            name="shortDescription"
+                            id="shortDescription"
+                            /* required */
+                        />
                     </div>
                     <div className={classes["description"]}>
                         <p>Description</p>
@@ -176,8 +192,12 @@ function AdminCreateCourse(props) {
                             rows={10}
                             cols={60}
                             placeholder='Course Description'
-                            required
+                            /* required */
                         ></textarea>
+                    </div>
+                    <div className={classes["newSectionButton"]}>
+                        <button onClick={onHandlerSection}>Section</button>
+                        {onHandlerSection}
                     </div>
                     <div className={`${classes["save-button"]} ${classes["submit-button"]}`}>
                         <button type="submit">

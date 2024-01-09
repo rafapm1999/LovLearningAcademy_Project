@@ -7,6 +7,7 @@ const fs = require("node:fs")
 
 const getAllCourses = async (req, res) => {
   try {
+    //Para hacer consultas con paginacion => const data = await Courses.find().skip(0).limit(5);
     const data = await Courses.find();
     res.status(200).json({ status: "ok", data, error: null });
   } catch (error) {

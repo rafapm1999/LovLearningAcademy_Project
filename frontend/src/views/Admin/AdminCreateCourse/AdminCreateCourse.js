@@ -104,22 +104,6 @@ function AdminCreateCourse(props) {
     const handlerBack = () => {
         navigate(`/admin/bbdd-courses`);
     }
-    //Creado 08/01 y comento los required del form para probar
-    const onHandlerSection = () => {
-        console.log("click");
-        return (
-            <div>
-                <p>Title</p>
-                <input
-                    type="text"
-                    name="sectionInfo"
-                    id="sectionInfo"
-                    placeholder="Section Info"
-                    
-                />
-            </div>
-        )
-    }
     return (
         <div className={`${classes["main-container"]} ${props.visible && classes["blur"]} ${props.openProfile && classes["blur"]}`}>
             <div>
@@ -194,10 +178,6 @@ function AdminCreateCourse(props) {
                             placeholder='Course Description'
                             /* required */
                         ></textarea>
-                    </div>
-                    <div className={classes["newSectionButton"]}>
-                        <button onClick={onHandlerSection}>Section</button>
-                        {onHandlerSection}
                     </div>
                     <div className={`${classes["save-button"]} ${classes["submit-button"]}`}>
                         <button type="submit">

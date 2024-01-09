@@ -35,8 +35,9 @@ function CoursesPage() {
   const fetchCourses = async () => {
     if (pending === false) {
       try {
+        //`http://localhost:8000/courses/all-courses/${currentPage}`
         const response = await fetch(
-          "http://localhost:8000/courses/all-courses",
+          `http://localhost:8000/courses/all-courses`,
           {
             method: "GET",
             headers: {
@@ -125,8 +126,8 @@ function CoursesPage() {
   if (pending === false) {
     return loaderFunction();
   }
-
-  if (pending === true && courses[0].length !== 0) {
+  else if (pending === true && courses[0].length !== 0) {
+    //Calculo para skip = (valorPaginaQueMandas - 1) * Limit -----> skip = (currentPage - 1) * limit = 5
     //Creación de la paginación del contenido de la tabla
     const indexOfLastUser = currentPage * coursePerPage;
     const indexOfFirstUser = indexOfLastUser - coursePerPage;

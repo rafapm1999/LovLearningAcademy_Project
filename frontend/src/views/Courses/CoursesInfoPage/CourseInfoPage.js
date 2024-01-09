@@ -121,7 +121,9 @@ function CourseInfoPage() {
   }
 
     
-
+  // let infoCourse = courseData.info.split('\n');
+  // infoCourse.map((texto => {console.log(texto)} ));
+  // let cont =1;
   return (
     <div>
       {ReactDOM.createPortal(
@@ -132,7 +134,7 @@ function CourseInfoPage() {
         <div className={classes["course-title"]}>
           <h1>{courseData!== null ? courseData.title : ""}</h1>
         </div>
-        <div div className={classes["main-content"]}>
+        <div className={classes["main-content"]}>
           <div className={classes["content"]}>
             <div className={classes["course-image"]}>
               <img src={require(`../../../../public/uploads/${courseData!== null ? courseData.image : ""}`)} alt={`Photo of the course ${courseData!== null ? courseData.title : ""}`} width={"850"} height={"450"} />

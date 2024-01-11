@@ -6,72 +6,73 @@ import CourseModal from "../../Modal/CourseModal/CourseModal";
 import Loader from "../../../components/Loader/Loader";
 
 function CoursesPage() {
+  //Obtención del token de autenticidad y guardado mediante useState
   const [token, setToken] = useState(localStorage.getItem("token"));
+
+  // UseState para usarlo con el modal
   const [visible, setVisible] = useState(false);
+
   //Creamos la constante courses con useState para que parte de un array vacío
   const [courses, setCourses] = useState([]);
 
-
-  //Creamos una constante pending para usarla con un loader
+  //Creamos una constante pending para usarla como "semaforo" con un loader
   const [pending, setPending] = useState(false);
+
+  // Variables y logica para el bucador
   const [coursesCopy, setCoursesCopy] = useState([]);
   const inputRef = useRef("");
-
-
-  //Creamos un useState para la palabra buscada
   const [wordSearch, setWordSearch] = useState("");
-  //Paginación
-  const [currentPage, setCurrentPage] = useState(1);
-  const coursePerPage = 9;
+
+
+
+  //Para navegar entre componentes
   const navigate = useNavigate();
+
+  //Funcion para loader
   const loaderFunction = () => {
-    setTimeout(() => {
-      setPending(true)
-    }, 1500)
     return (<Loader pending={pending}></Loader>)
   };
 
   //Con esta funcion hacemos un fetch (GET) de todos los cursos de nuestra base de datos
-  const fetchCourses = async () => {
-    if (pending === false) {
-      try {
-        //`http://localhost:8000/courses/all-courses/${currentPage}`
-        const response = await fetch(
-          `http://localhost:8000/courses/all-courses`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        const data = await response.json();
-
-        if (response.ok) {
-          setCourses(Array(data.data));
-          setCoursesCopy(Array(data.data));
+  const fetchCourses = async (skip) => {
+    try {
+      //`http://localhost:8000/courses/all-courses/${currentPage}`
+      const response = await fetch(
+        `http://localhost:8000/courses/all-courses`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      } catch (error) {
-        navigate(`/error-page`, { state: error });
+      );
+      const data = await response.json();
+
+      if (response.ok) {
+        setCourses(Array(data.data));
+        setCoursesCopy(Array(data.data));
+        setPending(true);
       }
+    } catch (error) {
+      navigate(`/error-page`, { state: error });
     }
   };
 
   //Con esta función hacemos un fetch (GET) para cuando clickamos sobre un curso concreto
-  const getCourse = async (id) => {
+  const getCourse = async (slug) => {
     try {
-      const response = await fetch(`http://localhost:8000/courses/${id}`, {
+      const response = await fetch(`http://localhost:8000/courses/${slug}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
       });
       const data = await response.json();
-/*       console.log(data.data[0].slug); */
       if (response.ok) {
         if (token) {
-          navigate(`/campus/courses/${data.data[0].slug}`, { state: data.data[0] })
-        } 
+          console.log({id: data.data[0]._id});
+          navigate(`/campus/courses/${data.data[0].slug}`, { state: {course: data.data[0], id: data.data[0]._id} })
+        }
       }
     } catch (error) {
       console.log("Estas aqui");
@@ -82,8 +83,8 @@ function CoursesPage() {
   };
   //Usamos useEffect para hacer un fetch de todos los cursos cuando se carga el componente CoursesPage
   useEffect(() => {
-    fetchCourses();
-  }, []);
+    fetchCourses(currentPage);
+  }, [pending]);
 
   //Esta función nos genera el fetch del elemento concreto que hemos clickado gracias a que recibe su id
   const onHandlerClick = (slug) => {
@@ -92,7 +93,6 @@ function CoursesPage() {
     } else {
       getCourse(slug);
     }
-
   };
 
   //Funcion para cuando se hace el submit cal pulsar el boton search
@@ -102,8 +102,7 @@ function CoursesPage() {
       course.title.toLowerCase().includes(wordSearch.toLowerCase())
     );
     setCourses(Array(filteredCourses))
-
-  }
+  };
 
   //Funcion para hacer un scroll top
   const scrollTop = (e) => {
@@ -111,39 +110,41 @@ function CoursesPage() {
       top: 0,
       behavior: `${e}`, // Opcional, para tener una animación suave
     });
-  }
+  };
 
   //Función para cuando cerramos el modal
   const handleClose = () => {
     setVisible(!visible);
-  }
-  /* Revisar esta parte y poner un loader para usarlo en !pending */
-  /* if (!Array.isArray(courses)) {
+  };
 
-    <h1>Hola Mundo</h1>
+  //Paginación
+  const [currentPage, setCurrentPage] = useState(1);
+  const coursePerPage = 9;
 
-  } */
+  //Renderizado del componente
   if (pending === false) {
     return loaderFunction();
-  }
-  else if (pending === true && courses[0].length !== 0) {
+  } else if (pending === true && courses[0].length !== 0) {
+
     //Calculo para skip = (valorPaginaQueMandas - 1) * Limit -----> skip = (currentPage - 1) * limit = 5
     //Creación de la paginación del contenido de la tabla
-    const indexOfLastUser = currentPage * coursePerPage;
-    const indexOfFirstUser = indexOfLastUser - coursePerPage;
-    const currentCourses = courses[0].slice(indexOfFirstUser, indexOfLastUser);
+    const indexOfLastCourse = currentPage * coursePerPage;
+    const indexOfFirstCourse = indexOfLastCourse - coursePerPage;
+    const currentCourses = courses[0].slice(indexOfFirstCourse, indexOfLastCourse);
     const totalPages = Math.ceil(courses[0].length / coursePerPage);
     const paginate = (pageNumber) => {
-
       setCurrentPage(pageNumber);
     };
-    return (
 
+    return (
       <div>
+        {/* Modal */}
         {ReactDOM.createPortal(
-          <CourseModal visible={visible} /* data={courseData.data} */ onClose={handleClose} /* userId={userId} */ logged={token} /* courseExists={courseRepeat} */ />,
+          <CourseModal visible={visible} onClose={handleClose} logged={token} />,
           document.querySelector("#modal")
         )}
+
+        {/* Component */}
         <div className={`${classes["coursesPage-root"]} ${visible && classes["blur"]}`}>
           <div className={classes.title}>
             <h1>Courses</h1>
@@ -175,7 +176,7 @@ function CoursesPage() {
               return (
                 <div
                   onClick={() => {
-                    onHandlerClick(course._id);
+                    onHandlerClick(course.slug);
                     scrollTop("auto");
                   }}
                   className={`${classes["coursesPage-container"]} ${classes[`${course.level.toLowerCase()}`]}`}
@@ -190,17 +191,25 @@ function CoursesPage() {
               );
             })}
           </div>
+
           {/* Pagination component */}
           <div className={classes["pagination-main"]}>
             <div className={classes["pagination-container"]}>
               <div className={classes["pagination-info"]}>
                 <button onClick={() => {
                   paginate(currentPage === 1 ? currentPage : currentPage - 1)
+                  if (currentPage !== 1 ) {
+                    fetchCourses(currentPage)
+                  }
+                  console.log(currentPage);
                   scrollTop("smooth");
                 }}> <span>&#5176;</span> Back </button>
                 <span>Page {currentPage} of {totalPages}</span>
                 <button onClick={() => {
                   paginate(currentPage === totalPages ? currentPage : currentPage + 1)
+                  if (currentPage !== totalPages ) {
+                    fetchCourses(currentPage)
+                  }
                   scrollTop("smooth");
                 }}> Next <span>&#5171;</span></button>
               </div>
@@ -241,8 +250,8 @@ function CoursesPage() {
         <div> <p>No existe ningun curso</p></div>
       </div>
     )
-  }
+  };
 
-}
+};
 
 export default CoursesPage;

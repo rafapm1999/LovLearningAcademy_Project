@@ -22,7 +22,7 @@ const getAllCourses = async (req, res) => {
 const getCourse = async (req, res) => {
   try {
     const data = await Courses.find({
-      _id: req.params.id,
+      slug: req.params.slug,
     });
     res.status(200).json({ status: "ok", data, error: null });
   } catch (error) {

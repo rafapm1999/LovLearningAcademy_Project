@@ -28,6 +28,14 @@ const coursesSchema = new mongoose.Schema({
     quantityHours: {
         type: Number,
         required: false,
+    },
+    visible: {
+        type: Boolean,
+        required: true,
+    },
+    subject: {
+        type: Object,
+        required: false,
     }
 });
 

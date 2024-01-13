@@ -51,6 +51,8 @@ function AdminCreateCourse(props) {
                         image: fileImage.name,
                         level: levelRef.current.value,
                         quantityHours: hoursRef.current.value,
+                        visible: false,
+                        subject: {}
                     }),
                 }
             );

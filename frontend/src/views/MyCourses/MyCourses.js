@@ -5,26 +5,69 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { takeID } from "../../components/Utils";
 
 function MyCourses() {
-  const location = useLocation();
-  let courses = location.state;
-  const token = localStorage.getItem("token")
+  //Obtención del token de autenticidad y guardado mediante useState
+  const [token, setToken] = useState(localStorage.getItem("token"));
+
+  //Sacamos el id del token recibido mediente localStorage
   const id = takeID(token)
+
   const navigate = useNavigate()
   const [user, setUser] = useState({})
-  const [pending, setPending] = useState(false);
+  const [courses, setCourses] = useState([])
+  const [coursesSlug, setCoursesSlug]= useState([]);
+  const [pending, setPending] = useState(true);
+  let takeCourse = [];
+
+  //Variables para paginación
   const [currentPage, setCurrentPage] = useState(1);
   const coursePerPage = 3;
-  const loaderFunction = () => {
-    setTimeout(() => {
-      setPending(true)
-    }, 1500)
-    return (<Loader pending={pending}></Loader>)
-  };
-  if (courses === null) {
-    courses = [];
-  }
-  
 
+  const loaderFunction = () => {
+    if (coursesSlug.length === courses.length) {
+      console.log(coursesSlug.length);
+      console.log(courses.length);
+      console.log(courses);
+      setTimeout(() => {
+        setPending(false)
+      })
+    }
+    return (<Loader></Loader>)
+  };
+
+  const getUserCourse = async (id) => {
+    console.log(id);
+    try {
+      const response = await fetch(`http://localhost:8000/courses/mycourses/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      console.log(data);
+      takeCourse = [data.data];
+      if (response.ok) {
+        console.log("GETCOURSE");
+        console.log(pending);
+        setCourses(prevCourses => [...prevCourses, data.data]);
+      }
+    } catch (error) {
+      console.log("Estas aqui");
+      console.log(error);
+    }
+  };
+
+  const getUserCourses = (userCourses) => {
+    let cont = 0;
+    userCourses.forEach((id) => {
+      getUserCourse(id)
+      cont++
+    })
+    if (cont === userCourses.length) {
+      setPending(false)
+    }
+
+  }
 
   const getUser = async (id) => {
     try {
@@ -40,8 +83,9 @@ function MyCourses() {
       );
       const data = await response.json();
       if (response.ok) {
-        /* console.log(data); */
         setUser(data.data);
+        setCoursesSlug(data.data.courses)
+        getUserCourses(data.data.courses)
       } else {
         console.log("ko");
       }
@@ -49,13 +93,14 @@ function MyCourses() {
       console.log(error);
     }
   }
+
   useEffect(() => {
     getUser(id)
   }, [])
 
-  const onHandlerClick = (course) => { 
+  const onHandlerClick = (course) => {
     let slug = course.slug;
-    navigate(`/campus/mycourses/${slug}`, {state: course})
+    navigate(`/campus/mycourses/${slug}`, { state: course })
   };
 
   //Paginación
@@ -65,17 +110,15 @@ function MyCourses() {
   const currentCourses = courses.slice(indexOfFirstUser, indexOfLastUser);
   const totalPages = Math.ceil(courses.length / coursePerPage);
   const paginate = (pageNumber) => {
- /*    console.log("Has dado click");
-    console.log(currentCourses); */
     setCurrentPage(pageNumber);
   };
-  if (pending === false) {
+
+  if (pending === true) {
     return loaderFunction();
-  }
-  if (courses.length === 0) {
- /*    console.log('hAS ENTRADO'); */
+  } else if (pending === false && courses.length === 0) {
 
     return (
+      /* Component */
       <div className={classes["main-container"]}>
         <h1 className={classes.title}>My courses</h1>
         <div className={classes["user-info-container"]}>
@@ -98,16 +141,11 @@ function MyCourses() {
         </div>
       </div>
     )
-  } else {
-/*     console.log('hAS ENTRADO A ELSE'); */
+  } else if (pending === false && courses.length !== 0) {
+    console.log(courses);
     return (
-      
 
-
-
-
-
-
+      /* Component */
       <div className={classes["main-container"]}>
         <h1 className={classes.title}>My courses</h1>
         <div className={classes["user-info-container"]}>
@@ -116,24 +154,44 @@ function MyCourses() {
         </div>
         <div className={classes["coursesLearnPage-main"]}>
           {currentCourses.map((course, i) => {
-            return (
-              <div
-                onClick={() => {
-                  onHandlerClick(course);
-                }}
-                className={classes["coursesLearnPage-container"]}
-                key={i}
-              >
-                <div className={classes["coursesLearnPage-info"]}>
-                  <h3>{course.title}</h3>
-                  <img src={require(`../../../public/uploads/${course.image}`)} alt={`Foto curso ${course.id}`} width={"150"}></img>
-                  <p>{course.shortDescription}</p>
+            if (course.visible === true) {
+              return (
+                <div
+                  onClick={() => {
+                    onHandlerClick(course);
+                  }}
+                  className={classes["coursesLearnPage-container"]}
+                  key={i}
+                >
+                  <div className={classes["coursesLearnPage-info"]}>
+                    <h3>{course.title}</h3>
+                    <img src={require(`../../../public/uploads/${course.image}`)} alt={`Foto curso ${course.id}`} width={"150"}></img>
+                    <p>{course.shortDescription}</p>
+                  </div>
                 </div>
-              </div>
-            );
+              );
+            } else if (course.visible === false) {
+              return (
+                <div
+                  onClick={() => {
+                    alert("Our administrators are currently editing and improving the course content. Sorry for the disturbances")
+                  }}
+                  className={`${classes["coursesLearnPage-container"]} ${classes["maintenace-bg"]}`}
+                  key={i}
+                >
+                  <div className={classes["coursesLearnPage-info"]}>
+                    <h3>{course.title}</h3>
+                    <h3 className={classes.maintenance}>This course is currently under maintenance</h3>
+                    <img src={require(`../../../public/uploads/${course.image}`)} alt={`Foto curso ${course.id}`} width={"150"}></img>
+                    <p>{course.shortDescription}</p>
+                  </div>
+                </div>
+              );
+            }
           })}
         </div>
-{/*         Pagination component  */}
+
+        {/*         Pagination component  */}
         <div className={classes["pagination-main"]}>
           <div className={classes["pagination-container"]}>
             <div className={classes["pagination-info"]}>
@@ -146,7 +204,6 @@ function MyCourses() {
       </div>
     );
   }
-
 }
 
 export default MyCourses;

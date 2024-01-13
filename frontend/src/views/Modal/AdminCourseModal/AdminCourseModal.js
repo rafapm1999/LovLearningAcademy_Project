@@ -11,11 +11,12 @@ function AdminCourseModal(props) {
     const imageRef = useRef("");
     const levelRef = useRef("");
     const hoursRef = useRef("");
+    const visibleRef = useRef("");
     const shortDescriptionRef = useRef("");
     const courseInfoRef = useRef("");
     const titleRemoveRef = useRef("");
     const courseData = props.courseData[0];
-    /* console.log(courseData); */
+    console.log(courseData);
 
     const fetchEditCourse = async (id) => {
         const formData = new FormData();
@@ -36,14 +37,15 @@ function AdminCourseModal(props) {
                         info: courseInfoRef.current.value === "" ? courseData.info : courseInfoRef.current.value,
                         image: imageRef.current.value === "" ? courseData.image : fileImage.name,
                         level: levelRef.current.value === "" ? courseData.level : levelRef.current.value,
+                        visible: visibleRef.current.value === "" ? courseData.visible : visibleRef.current.value,
                         quantityHours: hoursRef.current.value === "" ? courseData.quantityHours : hoursRef.current.value,
                     }),
                 }
             );
             const data = await response.json();
-          /*   console.log(data.data); */
+            /*   console.log(data.data); */
             if (response.ok) {
-       /*          console.log("HA SALIDO BIEN!!!"); */
+                /*          console.log("HA SALIDO BIEN!!!"); */
                 return (props.onPending());
             }
 
@@ -67,9 +69,9 @@ function AdminCourseModal(props) {
                 }
             );
             const data = await response.json();
-   /*          console.log(data.data); */
+            /*          console.log(data.data); */
             if (response.ok) {
-           /*      console.log("Has guardado la imagen"); */
+                /*      console.log("Has guardado la imagen"); */
             }
 
         } catch (error) {
@@ -92,9 +94,9 @@ function AdminCourseModal(props) {
                 }
             );
             const data = await response.json();
-        /*     console.log(data.data); */
+            /*     console.log(data.data); */
             if (response.ok) {
-          /*       console.log("HA BORRADO EL CURSO BIEN!!!"); */
+                /*       console.log("HA BORRADO EL CURSO BIEN!!!"); */
                 return (handlerClose());
             }
         } catch (error) {
@@ -107,13 +109,13 @@ function AdminCourseModal(props) {
         setFileImage(e.target.files[0])
     }
     const handlerClose = (e) => {
- /*        console.log('Has entrado en handlerClose'); */
+        /*        console.log('Has entrado en handlerClose'); */
         if (e === "REMOVE" && titleRemoveRef.current.value === props.courseData.title) {
             props.onClose();
             props.onPending();
-    /*         console.log("Son iguales"); */
+            /*         console.log("Son iguales"); */
         } else {
-    /*         console.log("No son iguales"); */
+            /*         console.log("No son iguales"); */
         }
         if (e === "closeClick") {
             props.onClose();
@@ -122,6 +124,10 @@ function AdminCourseModal(props) {
 
 
     if (props.clickType === "INFO") {
+        const onPreviewClick = (slug, courseData) => {
+            console.log(slug);
+            navigate(`/admin/preview/${slug}`, {state: courseData});
+        }
 
         return (
             <>
@@ -132,7 +138,6 @@ function AdminCourseModal(props) {
                                 <div className={classes["info-container"]}>
                                     <div className={classes["course-header"]}>
                                         <div className={classes["info-title"]}>
-                                            {/* <p> Nº: {props.courseData.id}</p> */}
                                             <p className={classes["course-title"]}>{courseData.title}</p>
                                             <p> ID: {courseData._id}</p>
                                         </div>
@@ -151,9 +156,8 @@ function AdminCourseModal(props) {
                                             <p>{courseData.quantityHours === undefined ? "No hay tiempo total" : courseData.quantityHours}</p>
                                         </div>
                                     </div>
-                                    <div className={classes["course-info"]}>
-                                        <p className={classes["course-info-title"]}>Course Description</p>
-                                        <p>{courseData.info}</p>
+                                    <div className={`${classes["preview-button"]} ${classes["submit-button"]}`}>
+                                        <button onClick={() => {onPreviewClick(courseData.slug, courseData)}}>Preview</button>
                                     </div>
                                     <button onClick={() => { handlerClose("closeClick") }} className={classes["md-close"]}><span>X</span></button>
                                 </div>
@@ -204,17 +208,17 @@ function AdminCourseModal(props) {
                                         <div className={classes["edit-image"]}>
                                             <div>
                                                 <p>Course Image</p>
-                                                <img src={require(`../../../../public/uploads/${courseData.image}`)} alt={`Photo of the course ${courseData.title}`} width={50}  />
+                                                <img src={require(`../../../../public/uploads/${courseData.image}`)} alt={`Photo of the course ${courseData.title}`} width={50} />
                                             </div>
                                             <div>
-                                                <input type="file" id="file" name="file" accept="image/*" ref={imageRef} onChange={() => {handleFileChange()}} />
+                                                <input type="file" id="file" name="file" accept="image/*" ref={imageRef} onChange={() => { handleFileChange() }} />
                                             </div>
                                         </div>
                                         <div className={classes["level-hours-section"]}>
                                             <div className={classes["edit-level"]}>
                                                 <p> Level</p>
                                                 <select name="select" id="select" ref={levelRef}>
-                                                    {courseData.level === undefined ?  <option value="Level not exist">Level not exist</option>: courseData.level}
+                                                    {courseData.level === undefined ? <option value="Level not exist">Level not exist</option> : courseData.level}
                                                     {courseData.level === "Easy" ? "" : <option id="easy" name="easy" value="Easy">Easy</option>}
                                                     {courseData.level === "Medium" ? "" : <option id="medium" name="medium" value="Medium">Medium</option>}
                                                     {courseData.level === "Hard" ? "" : <option id="hard" name="hard" value="Hard">Hard</option>}
@@ -230,6 +234,15 @@ function AdminCourseModal(props) {
                                                     placeholder={courseData.quantityHours}
                                                 />
                                                 <span> Hours</span>
+                                            </div>
+                                            <div className={classes["edit-visible"]}>
+                                                <p>Visibility</p>
+                                                {console.log(courseData.visible)}
+                                                    <select name="visible" id="visible" ref={visibleRef}>
+                                                        <option id="default" name="default" value="default">{courseData.visible === false ? "Hidden" : "Visible"}</option>
+                                                        {courseData.visible === false ? "" : <option id="ocult" name="ocult" value={false}>Hidden</option>}
+                                                        {courseData.visible === true ? "" : <option id="visible" name="visible" value={true}>Visible</option>}
+                                                    </select>
                                             </div>
                                         </div>
                                         <div className={classes["edit-description"]}>
@@ -261,8 +274,9 @@ function AdminCourseModal(props) {
                                         </div>
                                         <div className={`${classes["save-button"]} ${classes["submit-button"]}`}>
                                             <button type="submit" /* onClick={() => { handlerClose("EDIT") }} */>
-                                                <span>SAVE</span>
+                                                <span>Save</span>
                                             </button>
+                                            <button onClick={() => {navigate(`/admin/edit/${courseData._id}`, {state: courseData}) }}>Edit Themes</button>
                                         </div>
                                     </form>
                                     <button onClick={() => { handlerClose("closeClick") }} className={classes["md-close"]}><span>X</span></button>
@@ -316,7 +330,7 @@ function AdminCourseModal(props) {
                                         </div>
                                         <div className={`${classes["remove-button"]} ${classes["submit-button"]}`}>
                                             <button type="submit" onClick={() => { handlerClose("REMOVE") }}>
-                                                <span>REMOVE</span>
+                                                <span>Remove</span>
                                             </button>
                                         </div>
                                     </form>

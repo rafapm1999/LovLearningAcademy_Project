@@ -24,7 +24,31 @@ const getCourse = async (req, res) => {
     const data = await Courses.find({
       slug: req.params.slug,
     });
-    res.status(200).json({ status: "ok", data, error: null });
+    if (!data) {
+      res.status(200).json({ status: "ko", data: null, error });
+    } else {
+      res.status(200).json({ status: "ok", data, error: null });
+    }
+  } catch (error) {
+    res.status(400).json({
+      status: "ko",
+      data: null,
+      error: error.message,
+    });
+  }
+};
+
+const getUserCourse = async (req, res) => {
+  console.log(req.params.id);
+  try {
+    const data = await Courses.findById(
+      req.params.id,
+    );
+    if (!data) {
+      res.status(200).json({ status: "ko", data: null, error });
+    } else {
+      res.status(200).json({ status: "ok", data, error: null });
+    }
   } catch (error) {
     res.status(400).json({
       status: "ko",
@@ -36,7 +60,7 @@ const getCourse = async (req, res) => {
 
 const postCourse = async (req, res) => {
   try {
-    const { title, slug, shortDescription, info, level, quantityHours } = req.body;
+    const { title, slug, shortDescription, info, level, quantityHours, visible, subject } = req.body;
 
     const newCourse = new Courses({
       title,
@@ -46,6 +70,8 @@ const postCourse = async (req, res) => {
       image: req.body.image, // Accede al archivo cargado a través de req.file
       level,
       quantityHours,
+      visible,
+      subject
     });
 
     const course = await newCourse.save();
@@ -120,4 +146,4 @@ const saveImage = (req, res) => {
 
 
 
-module.exports = { getAllCourses, getCourse, postCourse, patchCourse, deleteCourse, saveImage };
+module.exports = { getAllCourses, getCourse, getUserCourse, postCourse, patchCourse, deleteCourse, saveImage };

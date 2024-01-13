@@ -158,7 +158,7 @@
   font-size: 1.2rem;
   font-weight: bold;
 }
-.course-header .course-title{
+.course-header .course-title {
   font-size: 1.9rem;
 }
 .course-data {
@@ -168,7 +168,7 @@
   width: 100%;
   margin-top: 2rem;
 }
-.course-data div > :first-child{
+.course-data div > :first-child {
   font-size: 1.2rem;
   font-weight: bold;
 }
@@ -193,6 +193,25 @@ form .form-info {
   font-size: 1.3rem;
   margin: 0.5em 0;
   padding: 1rem;
+}
+.preview-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem ;
+}
+.preview-button > button {
+  padding: 1.9rem;
+  border: 3px solid #1e90ff;
+  border-radius: 0.5rem;
+  background: #1e90ff;
+  color: white;
+  font-weight: bold;
+}
+.preview-button > button:hover {
+  box-shadow: 0 0 7px 2px #1e90ff;
+  background: white;
+  color: #1e90ff;
 }
 /* Remove modal */
 .remove-header {
@@ -335,28 +354,28 @@ form .form-info {
 .edit-description {
   width: 100%;
 }
-.edit-description > p{
+.edit-description > p {
   text-align: center;
   font-size: 1rem;
   font-weight: bold;
 }
-.edit-description div{
+.edit-description div {
   margin-bottom: 1rem;
 }
 /* Arreglar este css ya que crea conflicto con los demas */
-[class*="-description"] > p{
+[class*="-description"] > p {
   font-size: 1.2rem;
   /* font-weight: bold; */
   margin-bottom: 0.2rem;
 }
-[class*="-description"] textarea{
+[class*="-description"] textarea {
   border: 1px solid black;
   padding: 0.9rem;
   resize: none;
 }
-.save-button{
+.save-button {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
 .save-button > button {

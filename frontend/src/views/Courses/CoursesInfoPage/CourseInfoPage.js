@@ -30,13 +30,12 @@ function CourseInfoPage() {
     courseData = location.state.course;
   }
 
-  console.log(courseData);
   //Variables para funcionamiento de la logica
-
   const [courseExisting, setCourseExisting] = useState([]);
   const [courseRepeat, setCourseRepeat] = useState("")
   const [visible, setVisible] = useState(false);
 
+  //Fetch para cuando queremos añadir un curso
   const fetchWantCourse = async () => {
     try {
       // Obtener los datos existentes del usuario
@@ -82,13 +81,6 @@ function CourseInfoPage() {
     }
   };
 
-
-
-    //Funcion para loader
-    const loaderFunction = () => {
-        return (<Loader></Loader>)
-    };
-
   //Funcion para hacer un scroll top
   const scrollTop = (e) => {
     window.scrollTo({
@@ -100,10 +92,10 @@ function CourseInfoPage() {
   //Función para cuando damos al boton de back
   const handleBack = () => {
     if (token) {
-      navigate(`/campus/courses`)
+      navigate(-1)
       scrollTop("smooth");
     } else if (!token) {
-      navigate(`/courses`)
+      navigate(-1)
       scrollTop("smooth");
     }
   }
@@ -125,6 +117,7 @@ function CourseInfoPage() {
     scrollTop("smooth");
   }
 
+  //Funcion para cuando clickamos el boton back
   const navigateBack = () => {
     setTimeout(() => {
       return navigate(-1)
@@ -132,17 +125,18 @@ function CourseInfoPage() {
     return (<Loader></Loader>)
   }
 
+  //Este codigo hay que revisarlo para que la info respete los espacios y los enters
   /*  /*   let infoCourse = courseData.info.split('\n'); 
    let infoCourse = courseData.info.split('\n').map((salto) => {
      return salto + <br />
    }); */
 
-  let cont = 1;
-  console.log(location.state);
+  /* let cont = 1; */
+
   if (location.state === null || location.state === undefined) {
     return navigateBack()
   } else {
-    console.log(courseData);
+
     return (
       <div>
 
@@ -160,7 +154,7 @@ function CourseInfoPage() {
           <div className={classes["main-content"]}>
             <div className={classes["content"]}>
               <div className={classes["course-image"]}>
-                 <img src={require(`../../../../public/uploads/${courseData !== null ? courseData.image : ""}`)} alt={`Photo of the course ${courseData !== null ? courseData.title : ""}`} width={"850"} height={"450"} />
+                <img src={require(`../../../../public/uploads/${courseData !== null ? courseData.image : ""}`)} alt={`Photo of the course ${courseData !== null ? courseData.title : ""}`} width={"850"} height={"450"} />
               </div>
               <div className={classes["course-details"]}>
                 <h3>This course includes:</h3>

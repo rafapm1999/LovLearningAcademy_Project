@@ -23,8 +23,6 @@ function CoursesPage() {
   const inputRef = useRef("");
   const [wordSearch, setWordSearch] = useState("");
 
-
-
   //Para navegar entre componentes
   const navigate = useNavigate();
 
@@ -70,7 +68,6 @@ function CoursesPage() {
       const data = await response.json();
       if (response.ok) {
         if (token) {
-          console.log({id: data.data[0]._id});
           navigate(`/campus/courses/${data.data[0].slug}`, { state: {course: data.data[0], id: data.data[0]._id} })
         }
       }
@@ -173,22 +170,24 @@ function CoursesPage() {
           </div>
           <div className={classes["coursesPage-main"]}>
             {currentCourses.map((course, i) => {
-              return (
-                <div
-                  onClick={() => {
-                    onHandlerClick(course.slug);
-                    scrollTop("auto");
-                  }}
-                  className={`${classes["coursesPage-container"]} ${classes[`${course.level.toLowerCase()}`]}`}
-                  key={i}
-                >
-                  <div className={classes["coursesPage-info"]}>
-                    <h3>{course.title}</h3>
-                    <img className={classes["image"]} src={require(`../../../../public/uploads/${course.image}`)} alt={`Foto curso ${course.title || "Sin titulo"}`} width={"150"}></img>
-                    <p>{course.shortDescription}</p>
+              if (course.visible === true) {
+                return (
+                  <div
+                    onClick={() => {
+                      onHandlerClick(course.slug);
+                      scrollTop("auto");
+                    }}
+                    className={`${classes["coursesPage-container"]} ${classes[`${course.level.toLowerCase()}`]}`}
+                    key={i}
+                  >
+                    <div className={classes["coursesPage-info"]}>
+                      <h3>{course.title}</h3>
+                      <img className={classes["image"]} src={require(`../../../../public/uploads/${course.image}`)} alt={`Foto curso ${course.title || "Sin titulo"}`} width={"150"}></img>
+                      <p>{course.shortDescription}</p>
+                    </div>
                   </div>
-                </div>
-              );
+                );
+              } 
             })}
           </div>
 

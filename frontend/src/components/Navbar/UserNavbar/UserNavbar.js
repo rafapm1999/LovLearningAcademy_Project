@@ -124,8 +124,10 @@ function UserNavbar() {
                     pathname: '/campus/profile',
                     state: {}
                   }}>Profile</NavLink>
-                  {/* Este span tengo que preguntarle a fran si esta bien */}
-                  <button className={classes["list-link"]} onClick={()=>{onMyCoursesClick()}}>My Courses</button>
+                  <NavLink className={classes["list-link"]} to={{
+                    pathname: '/campus/mycourses',
+                    state: {}
+                  }}>My Courses</NavLink>
                   <NavLink className={classes["list-link"]} to="*">ToDoList</NavLink>
                 </div>
               </div>

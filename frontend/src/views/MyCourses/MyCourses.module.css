@@ -135,5 +135,11 @@
     font-size: 1rem;
     text-align: left;
   }
+  .maintenance{
+    color: red;
+  }
+  .maintenace-bg{
+    background-color: rgba(255, 0, 0, 0.205);
+  }
   
   

@@ -65,10 +65,10 @@ function AdminCourses(props) {
 
   };
 
-  const fetchTheCourse = async (id) => {
+  const fetchTheCourse = async (slug) => {
 
     try {
-      const response = await fetch(`http://localhost:8000/courses/${id}`, {
+      const response = await fetch(`http://localhost:8000/courses/${slug}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -141,8 +141,6 @@ function AdminCourses(props) {
   }
   //Funcion para cambiar el estado de pending
   const handlerPending = () => {
- /*    console.log('Has entrado en handlerPending'); */
-
     setTimeout(() => {
       fetchCourses("RESET");
     },);
@@ -150,6 +148,7 @@ function AdminCourses(props) {
       handleClose();
     }, 100);
   };
+
   //Funcion para crear nuevo curso 
   const createCourse = () => {
     navigate("/admin/create-course")
@@ -161,7 +160,7 @@ function AdminCourses(props) {
   }
 
   if (pending === false) {
-  /*   console.log("pending === false"); */
+
     return loaderFunction();
   }
 
@@ -172,20 +171,17 @@ function AdminCourses(props) {
     const currentCourses = courses[0].slice(indexOfFirstUser, indexOfLastUser);
     const totalPages = Math.ceil(courses[0].length / coursePerPage);
     const paginate = (pageNumber) => {
-      /*  console.log("Has dado click");
-       console.log(currentCourses); */
       setCurrentPage(pageNumber);
     };
-    /* console.log('userdata');
-    console.log(props.userData);
-    console.log(courses);
-    console.log(props.openProfile); */
+    
     return (
       <>
+      {/* Modal */}
         {ReactDOM.createPortal(
           <AdminCourseModal courseId={courseID} courseData={courseData} clickType={clickAction} visible={visible} onClose={handleClose} onPending={handlerPending} /* onChange={handlerChange} */ />,
           document.querySelector("#modal")
         )}
+        {/* Component */}
         <div className={`${classes["coursesPage-root"]} ${visible && classes["blur"]} ${props.openProfile && classes["blur"]}`}>
           <div className={classes.title}>
             <h1>Courses</h1>
@@ -214,34 +210,34 @@ function AdminCourses(props) {
                       <td>{course.title}</td>
                       <td>{course._id}</td>
                       <td onClick={() => {
-                        fetchTheCourse(course._id)
+                        fetchTheCourse(course.slug)
                         setTimeout(() => {
                           onHandlerClick(course._id, "INFO")
                         }, 50)
                       }} className={classes["info-button"]}><FontAwesomeIcon onClick={() => {
-                        fetchTheCourse(course._id)
+                        fetchTheCourse(course.slug)
                         setTimeout(() => {
                           onHandlerClick(course._id, "INFO")
                         }, 50)
                       }} icon={faEye} size='xl' /></td>
                       <td onClick={() => {
-                        fetchTheCourse(course._id)
+                        fetchTheCourse(course.slug)
                         setTimeout(() => {
                           onHandlerClick(course._id, "EDIT")
                         }, 50)
                       }} className={classes["edit-button"]}><FontAwesomeIcon onClick={() => {
-                        fetchTheCourse(course._id)
+                        fetchTheCourse(course.slug)
                         setTimeout(() => {
                           onHandlerClick(course._id, "EDIT")
                         }, 50)
                       }} icon={faPenToSquare} size='xl' /></td>
                       <td onClick={() => {
-                        fetchTheCourse(course._id)
+                        fetchTheCourse(course.slug)
                         setTimeout(() => {
                           onHandlerClick(course._id, "REMOVE")
                         }, 50)
                       }} className={classes["remove-button"]}><FontAwesomeIcon onClick={() => {
-                        fetchTheCourse(course._id)
+                        fetchTheCourse(course.slug)
                         setTimeout(() => {
                           onHandlerClick(course._id, "REMOVE")
                         }, 50)
@@ -252,6 +248,7 @@ function AdminCourses(props) {
               </tbody>
             </table>
           </div>
+
           {/* Pagination component */}
           <div className={classes["pagination-main"]}>
             <div className={classes["pagination-container"]}>

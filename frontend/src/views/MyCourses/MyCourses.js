@@ -20,7 +20,7 @@ function MyCourses() {
 
   //Variables para paginación
   const [currentPage, setCurrentPage] = useState(1);
-  const coursePerPage = 3;
+  const coursePerPage = 6;
 
   const loaderFunction = () => {
     if (coursesSlug.length === courses.length) {
@@ -94,14 +94,26 @@ function MyCourses() {
     }
   }
 
-  useEffect(() => {
-    getUser(id)
-  }, [])
+ 
 
   const onHandlerClick = (course) => {
     let slug = course.slug;
     navigate(`/campus/mycourses/${slug}`, { state: course })
   };
+
+  //Funcion para hacer un scroll top
+  const scrollTop = (e) => {
+    window.scrollTo({
+        top: 0,
+        behavior: `${e}`,
+    });
+}
+
+scrollTop("smooth")
+
+useEffect(() => {
+  getUser(id)
+}, [])
 
   //Paginación
   //Creación de la paginación del contenido de la tabla
@@ -195,9 +207,15 @@ function MyCourses() {
         <div className={classes["pagination-main"]}>
           <div className={classes["pagination-container"]}>
             <div className={classes["pagination-info"]}>
-              <button onClick={() => paginate(currentPage === 1 ? currentPage : currentPage - 1)}> <span>&#5176;</span> Back </button>
+              <button onClick={() =>{ 
+                scrollTop("smooth");
+                paginate(currentPage === 1 ? currentPage : currentPage - 1)
+                }}> <span>&#5176;</span> Back </button>
               <span>Page {currentPage} of {totalPages}</span>
-              <button onClick={() => paginate(currentPage === totalPages ? currentPage : currentPage + 1)}> Next <span>&#5171;</span></button>
+              <button onClick={() => {
+                scrollTop("smooth");
+                paginate(currentPage === totalPages ? currentPage : currentPage + 1)
+                }}> Next <span>&#5171;</span></button>
             </div>
           </div>
         </div>

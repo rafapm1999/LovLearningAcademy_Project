@@ -1,0 +1,19 @@
+.back-button-container {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.back-button-container > .back-button {
+  padding: 1.2rem;
+  background-color: #1e90ff;
+  color: white;
+  margin-right: 2rem;
+  border: 2px solid #1e90ff;
+  cursor: pointer;
+  transition-duration: 0.9s;
+  transition-timing-function: ease-in-out;
+}
+.back-button:hover{
+    background-color: white;
+    color: #1e90ff;
+}

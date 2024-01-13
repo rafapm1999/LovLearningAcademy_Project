@@ -1,78 +1,127 @@
 import classes from './AdminEditCourse.module.css';
+import ReactDOM from "react-dom";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useRef, useState } from 'react';
-import { generateSlug } from '../../../components/Utils';
-
+import { useEffect, useState } from 'react';
+import AdminEditCourseModal from '../../Modal/AdminEditCourseModal/AdminEditCourseModal';
+import Loader from "../../../components/Loader/Loader";
 
 function AdminEditCourse() {
     const [token, setToken] = useState(localStorage.getItem("token").replaceAll('"', ""))
     const navigate = useNavigate();
     const location = useLocation();
-    let courseData = "";
-    if (location.state !== null) {
-        courseData = location.state;
-    }
+    const [pending, setPending] = useState(true);
+    const [visible, setVisible] = useState(false);
+    const [courseData, setCourseData] = useState("");
+    const [editThemeData, setEditThemeData] = useState("")
+    let courseSlug = "";
+    let newDataInfo = "";
 
-    const subjectTitleRef = useRef("");
-    const videoUrlRef = useRef("");
-
-    const fetchEditCourse = async (id) => {
+    const fetchTheCourse = async (slug) => {
+        console.log(slug);
         try {
-            const response = await fetch(
-                `http://localhost:8000/courses/edit/${id}`,
-                {
-                    method: "PATCH",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "auth-token": token,
-                    },
-                    body: JSON.stringify({
-                        subject: "hola",
-                    }),
-                }
-            );
+            const response = await fetch(`http://localhost:8000/courses/${slug}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
             const data = await response.json();
             if (response.ok) {
-                
+                console.log("FetchTheCourse");
+                console.log(data.data);
+                setCourseData(data.data[0])
+                setPending(false)
+
+            } else {
+                console.log("Has entrado fetchTheCourse en !response.ok");
             }
+        } catch {
 
-        } catch (error) {
-            console.log("Error de algo");
-            console.log(error);
-            navigate(`/error-page`, { state: error });
         }
+    };
+
+    if (location.state !== null && token && newDataInfo === "") {
+        console.log('COges la info de location.state');
+        courseSlug = location.state;
+        console.log(courseSlug);
+    } else if (location.state === null || location.state === undefined && token) {
+        navigate(-1);
     }
 
-    const handleSubmitEdit = (e) => {
-        e.preventDefault();
-        let id = courseData._id;
-        fetchEditCourse(id);
+    const handlerNewData = (e) => {
+        fetchTheCourse(e)
     }
 
-    return (
-        <div>
-            <form onSubmit={handleSubmitEdit}>
-                <div>
-                    <input
-                        type='text'
-                        ref={subjectTitleRef}
-                        name="subjectTitle"
-                        id="subjectTitle"
-                        placeholder='Title'
-                    />
-                     <input
-                        type='text'
-                        ref={videoUrlRef}
-                        name="subjectTitle"
-                        id="subjectTitle"
-                        placeholder='Title'
-                    />
-                   <iframe width="560" height="315" src="https://www.youtube.com/embed/wGxDfSWC4Ww" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    const handlerClose = () => {
+        setEditThemeData("")
+        setVisible(false);
+    };
+
+    const handlerPending = (e) => {
+        setPending(e);
+    }
+
+    const onNewThemeClick = () => {
+        setEditThemeData("")
+        setVisible(!visible);
+    }
+
+    const loaderFunction = () => {
+        return (<Loader></Loader>)
+    };
+
+    const onEditTheme = (e) => {
+        console.log("Has clickado");
+        setEditThemeData(e)
+        setVisible(!visible)
+    }
+
+    useEffect(() => {
+        fetchTheCourse(courseSlug)
+    }, [])
+
+    if (pending === true) {
+        return loaderFunction();
+    } else if (pending === false) {
+        console.log('COurseData para renderizar');
+
+        console.log(courseData);
+        return (
+            <>
+                {ReactDOM.createPortal(
+                    <AdminEditCourseModal courseData={courseData} editThemeData={editThemeData} newData={handlerNewData} onPending={handlerPending} onClose={handlerClose} visible={visible} />,
+                    document.querySelector("#modal")
+                )}
+                <div className={`${classes["courseInfoPage-main"]} ${visible && classes["blur"]}`}>
+                    <button type='button' onClick={() => {
+                        navigate(-1)
+                    }}>Back</button>
+                    <div>
+                        <h1>{courseData.title}</h1>
+                        <h2>Themes</h2>
+                    </div>
+                    <div>
+                        <button type='button' onClick={onNewThemeClick}>New theme</button>
+                    </div>
+                    <div>
+                        {courseData.subject !== "" ? Array(courseData.subject).map((content, key) => {
+                            return (
+                                <div key={1} >
+                                    <button onClick={() => {onEditTheme(content)}}>Edit</button>
+                                    <h3>{content.title}</h3>
+                                    <iframe width="560" height="315" src={courseData.subject.url} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                                    <p>{content.description}</p>
+                                </div>
+                            )
+                        }) :
+                        ""
+                        }
+                    </div>
+                    <div className={`${visible && classes["modal-main"]}`}></div>
                 </div>
-
-            </form>
-        </div>
-    );
+            </>
+        );
+    }
 }
 
 export default AdminEditCourse;

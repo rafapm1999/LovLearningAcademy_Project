@@ -34,8 +34,18 @@ const coursesSchema = new mongoose.Schema({
         required: true,
     },
     subject: {
-        type: Object,
-        required: false,
+        title: {
+            type: String,
+            required: false,
+        },
+        url: {
+            type: String,
+            required: false,
+        },
+        description: {
+            type: String,
+            required: false,
+        }
     }
 });
 

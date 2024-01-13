@@ -178,7 +178,7 @@ function AdminCourses(props) {
       <>
       {/* Modal */}
         {ReactDOM.createPortal(
-          <AdminCourseModal courseId={courseID} courseData={courseData} clickType={clickAction} visible={visible} onClose={handleClose} onPending={handlerPending} /* onChange={handlerChange} */ />,
+          <AdminCourseModal courseId={courseID} courseData={courseData} clickType={clickAction} visible={visible} onClose={handleClose} onPending={handlerPending} />,
           document.querySelector("#modal")
         )}
         {/* Component */}

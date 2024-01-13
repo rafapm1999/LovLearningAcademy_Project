@@ -181,6 +181,7 @@ function AdminCourseModal(props) {
         const onChangeFunction = () => {
 
         }
+        console.log(courseData.slug);
         return (
             <div>
                 <div className={classes["modal-main"]}>
@@ -276,7 +277,7 @@ function AdminCourseModal(props) {
                                             <button type="submit" /* onClick={() => { handlerClose("EDIT") }} */>
                                                 <span>Save</span>
                                             </button>
-                                            <button onClick={() => {navigate(`/admin/edit/${courseData._id}`, {state: courseData}) }}>Edit Themes</button>
+                                            <button onClick={() => {navigate(`/admin/edit/${courseData._id}`, {state: courseData.slug}) }}>Edit Themes</button>
                                         </div>
                                     </form>
                                     <button onClick={() => { handlerClose("closeClick") }} className={classes["md-close"]}><span>X</span></button>

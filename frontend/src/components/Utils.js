@@ -1,11 +1,10 @@
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 //Funcion para verificar el Token
 export function verifyToken() {
 
   let token = localStorage.getItem("token");
-  if((token!==null)||(token!==undefined))
-  {
+  if ((token !== null) || (token !== undefined)) {
     fetch(``, {
       method: "POST",
       headers: {
@@ -17,24 +16,24 @@ export function verifyToken() {
       .then((data) => {
         if (data.code === 401 || data.result === "ko") {
           localStorage.removeItem("token");
-          window.location.href="/admin/login";
+          window.location.href = "/admin/login";
         }
       })
       .catch((error) => {
         localStorage.removeItem("token");
-        window.location.href="/admin/login";
+        window.location.href = "/admin/login";
       });
   }
-  else{
-    window.location.href="/admin/login";
+  else {
+    window.location.href = "/admin/login";
   }
 }
 
 //Funcion para obtener role del usuario
-export function takeRole(){
+export function takeRole() {
   const token = localStorage.getItem("token");
-  let role ='';
-  if((token!==null)||(token!==undefined)){
+  let role = '';
+  if ((token !== null) || (token !== undefined)) {
     const decoded = jwtDecode(token);
     role = decoded.role;
   }
@@ -42,10 +41,10 @@ export function takeRole(){
 }
 
 //Funcion para obtener role del usuario
-export function takeID(){
+export function takeID() {
   const token = localStorage.getItem("token");
-  let id ='';
-  if((token!==null)||(token!==undefined)){
+  let id = '';
+  if ((token !== null) || (token !== undefined)) {
     const decoded = jwtDecode(token);
     id = decoded.id;
   }
@@ -70,5 +69,10 @@ export function generateSlug(str) {
     .replace(/[^a-z0-9 -]/g, "") // remove invalid chars
     .replace(/\s+/g, "-") // collapse whitespace and replace by -
     .replace(/-+/g, "-"); // collapse dashes
+  return str;
+}
+
+export function generateURL(str) {
+  str = str.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/")
   return str;
 }

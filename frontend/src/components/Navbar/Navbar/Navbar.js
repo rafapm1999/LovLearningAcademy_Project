@@ -2,16 +2,24 @@
 import { Fragment, useState } from 'react';
 import classes from './Navbar.module.css';
 //Importamos Link de react-roouter-dom para los botones del Navbar
-import { NavLink } from "react-router-dom";
-import { takeRole } from '../../Utils';
+import { NavLink, useNavigate } from "react-router-dom";
+import { takeRole, takeID } from '../../Utils';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faUser
+  faArrowRightFromBracket, faUser, faBars, faXmark, faEnvelope
 } from "@fortawesome/free-solid-svg-icons";
 
 
 function Navbar() {
   const [token, setToken] = useState(localStorage.getItem("token"))
+  const navigate = useNavigate();
+  const unlogged = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("email");
+    localStorage.removeItem("role");
+    localStorage.removeItem("rememberMe");
+    navigate(`/`);
+  }
   if (!token) {
     return (
       <Fragment>
@@ -20,9 +28,8 @@ function Navbar() {
           <div className={classes["navbar-links"]}>
             <div className={classes.links}>
               <NavLink className={classes.link} to="/courses"><span>Courses</span></NavLink>
-              {!token ? "" : <NavLink className={classes.link} to="/campus/mylearnplace"><span>MyLearnplace</span></NavLink>}
-              {!token ? <NavLink className={classes.link} to="/about"><span>About</span></NavLink> : ""}
-              {!token ? <NavLink className={classes.link} to="/contact"><span>Contact us</span></NavLink> : ""}
+              <NavLink className={classes.link} to="/about"><span>About</span></NavLink>
+              <NavLink className={classes.link} to="/contact"><span>Contact us</span></NavLink>
             </div>
           </div>
           <div className={classes["navbar-button"]}>
@@ -33,6 +40,7 @@ function Navbar() {
     )
 
   } else if (takeRole(token) === "user") {
+    const id = takeID(token);
     return (
       <Fragment>
         <div className={classes["navbar-main"]}>
@@ -40,13 +48,13 @@ function Navbar() {
           <div className={classes["navbar-links"]}>
             <div className={classes.links}>
               <NavLink className={classes.link} to="/campus/courses"><span>Courses</span></NavLink>
-              {!token ? "" : <NavLink className={classes.link} to="/campus/mylearnplace"><span>MyLearnplace</span></NavLink>}
-              {!token ? <NavLink className={classes.link} to="/about"><span>About</span></NavLink> : ""}
-              {!token ? <NavLink className={classes.link} to="/contact"><span>Contact us</span></NavLink> : ""}
+              <NavLink className={classes.link} to="/campus/mycourses"><span>My Courses</span></NavLink>
             </div>
           </div>
           <div className={classes["navbar-button"]}>
-            {!token ? <NavLink className={classes.link} to="/login">Get Started</NavLink> : <NavLink className={classes.link} to="/campus/profile"><span><FontAwesomeIcon icon={faUser} /></span></NavLink>}
+            <button onClick={() => { navigate("/campus/messages", { state: id }) }} className={classes.profile}><span><FontAwesomeIcon icon={faEnvelope} /></span></button>
+            <button onClick={() => { navigate("/campus/profile", { state: id }) }} className={classes.profile}><span><FontAwesomeIcon icon={faUser} /></span></button>
+            <button onClick={unlogged} className={classes.logout}> Log out <span><FontAwesomeIcon icon={faArrowRightFromBracket} /></span> </button>
           </div>
         </div>
       </Fragment>
@@ -58,11 +66,11 @@ function Navbar() {
           <div className={classes["navbar-logo"]}><NavLink className={classes.logo} to="/">LovLearning Academy</NavLink></div>
           <div className={classes["navbar-links"]}>
             <div className={classes.links}>
-              <NavLink className={classes.link} /* onClick={closeAll} */ to={{
+              <NavLink className={classes.link} to={{
                 pathname: '/admin/bbdd-members',
                 state: {}
               }} ><span>All Members</span></NavLink>
-              <NavLink className={classes.link} /* onClick={closeAll} */ to={{
+              <NavLink className={classes.link} to={{
                 pathname: '/admin/bbdd-courses',
                 state: {}
               }} ><span>All courses</span></NavLink>

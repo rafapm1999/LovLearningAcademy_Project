@@ -5,7 +5,7 @@ import { Fragment, useEffect, useState } from "react";
 import { validateEmail, validatePassword } from "../../../utils/validate";
 import { LocalStorage } from "../../../services/LocalStorage.service";
 
-function LoginPage(props) {
+function LoginPage() {
   const navigate = useNavigate();
   const [loginInfo, setLoginInfo] = useState({
     email: "",
@@ -20,10 +20,12 @@ function LoginPage(props) {
       behavior: `${e}`, // Opcional, para tener una animación suave
     });
   }
+
   useEffect(() => {
     scrollTop("auto")
   })
 
+  //Fetch para el envio del formulario login
   const handleSubmitForm = async (loginData) => {
     if (
       //Si el email es valido y el password cumple los requisitos entonces hacemos fetch (POST)
@@ -50,37 +52,23 @@ function LoginPage(props) {
           }),
         });
         const data = await response.json();
-     /*    console.log(data); */
-
         if (response.ok) {
-/*           console.log(data); */
           if (data.status === 'ko') {
-            alert('Error, datos incorrecto');
+            alert('Error, datos incorrectos');
           }
-          else {
+          else if (data.status === 'ok') {
             LocalStorage.setItem("token", data.token);
-            document.cookie = `email=${data.data.email}; expires=5 Nov 2023 00:00:00 UTC; domain=localhost; path=/;`;
+            document.cookie = `email=${data.data.email}; expires=5 Nov 2027 00:00:00 UTC; domain=localhost; path=/;`;
             if (takeRole(data.token)==="user") {
-              navigate(`/campus/mylearnplace`, { replace: true });
+              navigate(`/campus/mycourses`, { replace: true });
             } else if (takeRole(data.token)==="admin") {
               navigate(`/admin/bbdd-members`, { replace: true });
             } 
           }
-          /* if (loginData.rememberMe) {
-            LocalStorage.setItem("email", loginData.email);
-            LocalStorage.setItem("rememberMe", loginData.rememberMe);
-            
-            //document.cookie('recuedame', 'true', '/', '2023-10-27 00:00:00') ---> GUARDar info durante un tiempo en cookies
-          } */
-
-          //Usamos setTimeout para navegar a /user-dashboard usando state para guardar el data que nos devulve el fetch
-          /* setTimeout(() => {
-            navigate("/loader-page", {state: data});
-          }, 100); */
         }
         //Revisar este codigo porque va relacionado con lo de border red si la info es incorrecta 
         if (!response.ok) {
-          alert('Error, datos incorrecto');
+          alert('Error, datos incorrectos');
           setLoginInfo({
             email: loginData.email = false,
             password: loginData.password = false,
@@ -95,19 +83,14 @@ function LoginPage(props) {
       !validateEmail(loginData.email) ||
       !validatePassword(loginData.password)
     ) {
-      /* setLoginInfo({
+      setLoginInfo({
         email: loginData.email === false,
         password: loginData.password === false,
-      }); */
+      });
     }
   };
-
   return (
     <Fragment>
-      {/* {ReactDOM.createPortal(
-        <Modal visible={visible} onLogin={handleSubmitForm} data={loginInfo} />,
-        document.querySelector("#modal")
-      )} */}
       <Login
         onLogin={handleSubmitForm}
         onEmptyInfo={loginInfo}

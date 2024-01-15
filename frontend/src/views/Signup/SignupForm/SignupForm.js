@@ -1,5 +1,5 @@
 import classes from "./SignupForm.module.css";
-import { Fragment, useRef } from "react";
+import { useRef } from "react";
 
 function SignupForm(props) {
   const userNameRef = useRef("");
@@ -18,16 +18,12 @@ function SignupForm(props) {
     };
     props.onLogin(signupData);
   };
-  /* const handleLogin = (e) => {
-    e.preventDefault();
-    props.onRegister(true);
-  };
- */
   return (
-    <Fragment>
-      <div className={classes["form-root"]}>
+    <>
+
+      <div className={`${classes["form-root"]} ${props.visible && classes["blur"]}`}>
         <div className={classes["login-img"]}></div>
-        <div className={classes["form-main"]}>
+        <div className={`${classes["form-main"]} `}>
           <div className={classes.title}>
             <h4>Create new account now</h4>
           </div>
@@ -81,7 +77,7 @@ function SignupForm(props) {
               className={`${classes["form-info"]} ${classes["submit-button"]}`}
             >
               <button type="submit">
-                <span>Signup!</span>
+                <span>Signup</span>
               </button>
             </div>
           </form>
@@ -90,8 +86,9 @@ function SignupForm(props) {
             <a href="/login">Login</a>
           </div>
         </div>
+        <div className={props.visible && classes["modal-main"]}></div>
       </div>
-    </Fragment>
+    </>
   );
 }
 

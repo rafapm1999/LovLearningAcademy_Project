@@ -13,99 +13,20 @@ import {
 function UserNavbar() {
   const token = localStorage.getItem("token");
   /* const role = takeRole(); */
-  const id = takeID();
-  let takeCourse = [];
+  const id = takeID(token);
   const navigate = useNavigate();
   let [visible, setVisible] = useState(true)
-  const [user, setUser] = useState({})
-  const [courses, setCourses] = useState([])
-  const [coursesSlug, setCoursesSlug] = useState([])
-  const [courseClick, setCourseClick] = useState(false)
-  if(!token) {
+  
+  if (!token) {
     navigate("/")
   }
 
-  const getUser = async (id) => {
-    try {
-      const response = await fetch(
-        `http://localhost:8000/auth/getuser/${id}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": token,
-          },
-        }
-      );
-      const data = await response.json();
-      if (response.ok) {
-       /*  console.log(data.data);
-        console.log(data.data.courses); */
-        setUser(data.data);
-        setCoursesSlug(data.data.courses)
-      } else {
-       /*  console.log("ko"); */
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  useEffect(() => {
-    getUser(id);
-  }, [])
-  const getCourse = async (id) => {
-    try {
-      const response = await fetch(`http://localhost:8000/courses/${id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
-      /* let newCourse = data.data[0]; */
-      takeCourse = [data.data[0]];
-      if (response.ok) {
-       /*  console.log(takeCourse); */
-        setCourses(prevCourses => [...prevCourses, data.data[0]]);
-      }
-    } catch (error) {
-      console.log("Estas aqui");
-      console.log(error);
-
-    }
-  };
-  const getUserCourses = (coursesSlug) => {
-    setCourses([]);
-   /*  console.log(coursesSlug); */
-    coursesSlug.forEach((slug) => {
-     /*  console.log(slug); */
-      return (getCourse(slug))
-    })
-  }
-
- /*  console.log(user);
-  console.log(courses); */
   const unlogged = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("email");
     localStorage.removeItem("role");
     localStorage.removeItem("rememberMe");
     navigate(`/`);
-  }
-  const onMyCoursesClick = () => {
-
-   /*  console.log(coursesSlug); */
-    setCourseClick(true)
-    getUserCourses(coursesSlug);
-
-   /*  console.log(courses); */
-    navigate(`/campus/mycourses`, { state: courses });
-
-
-  }
-  const onToDoListClick = () => {
-
   }
   const onHandlerClick = () => {
     setVisible(!visible);
@@ -114,7 +35,7 @@ function UserNavbar() {
   return (
     <>
       <div className={classes["navbar-main"]}>
-        <div className={`${visible && classes["hidden"]}`}>
+        <div className={`${classes["navbar-display"]}`}>
           <div className={classes["main-container"]}>
             <div className={classes["left-section"]}>
               <div className={classes["left-section-links"]}>
@@ -150,18 +71,21 @@ function UserNavbar() {
               pathname: '/campus/courses',
               state: {}
             }} ><span>Courses</span></NavLink>
+          </div>
+          <div className={classes.links}>
             <NavLink className={classes.link} to={{
-              pathname: '/campus/mylearnplace',
+              pathname: '/campus/mycourses',
               state: { id }
-            }} ><span>MyLearnplace</span></NavLink>
+            }} ><span>My Courses</span></NavLink>
           </div>
         </div>
-        <div className={classes["navbar-button"]}>
-          <button onClick={() => { navigate("/campus/messages", { state: id }) }} className={classes.profile}><span><FontAwesomeIcon icon={faEnvelope}/></span></button>
-          <button onClick={unlogged} className={classes.logout}> Log out <span><FontAwesomeIcon icon={faArrowRightFromBracket} /></span> </button>
 
+        <div className={classes["navbar-button"]}>
+          <button onClick={() => { navigate("/campus/messages", { state: id }) }} className={classes.profile}><span><FontAwesomeIcon icon={faEnvelope} /></span></button>
+          <button onClick={() => { navigate("/campus/profile", { state: id }) }} className={classes.profile}><span><FontAwesomeIcon icon={faUser} /></span></button>
+          <button onClick={unlogged} className={classes.logout}> Log out <span><FontAwesomeIcon icon={faArrowRightFromBracket} /></span> </button>
         </div>
-      </div>
+      </div >
     </>
   );
 }

@@ -3,12 +3,10 @@ import Signup from "../SignupForm/SignupForm";
 import Modal from "../../Modal/Modal/Modal";
 import ReactDOM from "react-dom";
 /* import { useNavigate } from "react-router-dom"; */
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { validateEmail, validatePassword } from "../../../utils/validate";
 
 function SignupPage() {
-  /*   const navigate = useNavigate(); */
-  /*   const [login, setLogin] = useState(false); */
   const [visible, setVisible] = useState(false);
   const [loginInfo, setLoginInfo] = useState({
     loggedIn: false,
@@ -41,7 +39,6 @@ function SignupPage() {
           }),
         });
         const data = await response.json();
-      
         if (response.ok) {
           setLoginInfo({
             loggedIn: true,
@@ -101,16 +98,14 @@ function SignupPage() {
       setVisible(!visible);
     };
   }
-
   return (
-    <Fragment>
+    <>
       {ReactDOM.createPortal(
         <Modal visible={visible} onLogin={handleVisibility} data={loginInfo} />,
         document.querySelector("#modal")
       )}
-
-      <Signup onLogin={handleVisibility} /* onRegister={setLogin} */></Signup>
-    </Fragment>
+      <Signup onLogin={handleVisibility} visible={visible}></Signup>
+    </>
   );
 }
 

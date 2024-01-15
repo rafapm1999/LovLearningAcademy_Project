@@ -4,21 +4,23 @@
   align-items: center;
   flex-direction: row;
   width: 100vw;
-  height: 10vh;
+  height: auto;
+  padding: 2rem;
+  z-index: 5000;
 }
 .navbar-logo {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 30vw;
+  height: auto;
 }
-.navbar-logo > .logo{
+.navbar-logo > .logo {
   color: black;
   text-decoration: none;
   font-size: 1.2rem;
   font-weight: bold;
 }
-
 .navbar-links {
   width: 40vw;
 }
@@ -49,33 +51,30 @@
   cursor: pointer;
   color: black;
   text-decoration: overline;
-  transition-duration: .1s;
+  transition-duration: 0.1s;
   transition-timing-function: ease-in-out;
 }
 .navbar-button .link:hover {
   background-color: #ffffff;
   color: #1e90ff;
 }
-.navbar-button button{
+.navbar-button button {
   padding: 1.2em 2em;
   background-color: #1e90ff;
   color: white;
   border: 2px solid #1e90ff;
-  transition-duration: .1s;
+  transition-duration: 0.1s;
   transition-timing-function: ease-in-out;
+  margin-left: 1rem;
 }
-.navbar-button button:hover{
+.navbar-button button:hover {
   background-color: #ffffff;
   color: #1e90ff;
   cursor: pointer;
 }
-.navbar-button .logout{
+.navbar-button .logout {
   margin-left: 1rem;
 }
-.logout span{
+.logout span {
   margin-left: 0.5rem;
 }
-.navbar-button .profile{
-  margin-right: 0.5rem;
-}
-

@@ -18,7 +18,7 @@ function AdminCourses(props) {
   const [courseID, setCourseID] = useState("")
   const [courseData, setCourseData] = useState({})
   const [clickAction, setClickAction] = useState("")
-  const [pending, setPending] = useState(false);
+  const [pending, setPending] = useState(true);
   const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
   //Creamos un useState para la palabra buscada
@@ -29,17 +29,13 @@ function AdminCourses(props) {
   const coursePerPage = 6;
 
   const loaderFunction = () => {
-    setTimeout(() => {
-      setPending(true)
-      setAdminRole(!adminRole)
-    }, 1500)
-    return (<Loader adminRole={adminRole}></Loader>)
+    return (<Loader></Loader>)
   };
 
 
 
   const fetchCourses = async (e) => {
-    if (pending === false || e === "RESET") {
+    if (pending === true || e === "RESET") {
       try {
         const response = await fetch(
           "http://localhost:8000/courses/all-courses",
@@ -77,8 +73,7 @@ function AdminCourses(props) {
       const data = await response.json();
       if (response.ok) {
         setCourseData(data.data)
-       /*  console.log("Has entrado fetchTheCourse en response.ok");
-        console.log(data.data); */
+        
       } else {
         console.log("Has entrado fetchTheCourse en !response.ok");
       }
@@ -89,33 +84,6 @@ function AdminCourses(props) {
 
   useEffect(() => {
     fetchCourses();
-
-    //Reunion del 16/11
-    /* if (pending === false) {
-      console.log('HAS ENTRADO EN EL TRY');
-
-      try {
-        const response = fetch(
-          "http://localhost:8000/courses/all-courses",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        const data = response.json();
-        console.log(data);
-        if (response.ok) {
-          setCourses(Array(data.data));
-          setCoursesCopy(Array(data.data))
-          setPending(false)
-        }
-      } catch (error) {
-        console.log("Error de algo");
-        //navigate(`/error-page`, { state: error });
-      }
-    }; */
   }, []);
 
   //Función para cuando hacemos click
@@ -154,17 +122,11 @@ function AdminCourses(props) {
     navigate("/admin/create-course")
   }
 
-  //Cuando se ha editado algun curso
-  const handlerChange = () => {
-    /* return props.makeChanges(true) */
-  }
-
-  if (pending === false) {
-
+  if (pending === true) {
     return loaderFunction();
   }
 
-  if (pending === true && courses[0].length !== 0) {
+  if (pending === false && courses[0].length !== 0) {
     //Creación de la paginación del contenido de la tabla
     const indexOfLastUser = currentPage * coursePerPage;
     const indexOfFirstUser = indexOfLastUser - coursePerPage;
@@ -182,7 +144,7 @@ function AdminCourses(props) {
           document.querySelector("#modal")
         )}
         {/* Component */}
-        <div className={`${classes["coursesPage-root"]} ${visible && classes["blur"]} ${props.openProfile && classes["blur"]}`}>
+        <div className={`${classes["coursesPage-root"]} ${visible && classes["blur"]}`}>
           <div className={classes.title}>
             <h1>Courses</h1>
           </div>
@@ -259,7 +221,7 @@ function AdminCourses(props) {
               </div>
             </div>
           </div>
-          <div className={`${visible && classes["modal-main"]} ${props.openProfile && classes["modal-main"]}`}></div>
+          <div className={`${visible && classes["modal-main"]}`}></div>
         </div>
       </>
     );

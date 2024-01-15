@@ -1,11 +1,12 @@
 import classes from "./LoginForm.module.css";
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useRef } from "react";
 
 function LoginForm(props) {
   //Creamos constantes de referencia para el formulario de login
   const emailRef = useRef("");
   const passwordRef = useRef("");
   const rememberMeRef = useRef(false)
+
   //Esta función se ejecuta cuando se envia el formulario
   const handleSubmit = (e) => {
     //Evitamos la recarga por defecto del form
@@ -16,9 +17,11 @@ function LoginForm(props) {
       password: passwordRef.current.value,
       rememberMe: rememberMeRef.current.checked,
     };
+
     //Enviamos por props a LoginPage la información recibida
     props.onLogin(loginData);
   };
+
   //Esta función hace que si la info esta vacía se guarde como true, y sino como false
   const handleInputChange = (e) => {
     let loginInfoChange = {
@@ -34,7 +37,7 @@ function LoginForm(props) {
         <div className={classes["login-img"]}></div>
         <div className={classes["form-main"]}>
           <div className={classes.title}>
-            <h4>Login now!</h4>
+            <h4>Login now</h4>
           </div>
           <form onSubmit={handleSubmit} method="POST">
             <div className={classes["form-info"]}>
@@ -46,7 +49,7 @@ function LoginForm(props) {
                 aria-label="userEmail"
                 placeholder="Email"
                 onChange={handleInputChange}
-                className={(props.onEmptyInfo.email === false) ? classes.danger : ''}
+                className={classes[(props.onEmptyInfo.email === false) ? classes.danger : '']}
               />
             </div>
             <div className={classes["form-info"]}>
@@ -79,7 +82,7 @@ function LoginForm(props) {
               className={`${classes["form-info"]} ${classes["submit-button"]}`}
             >
               <button type="submit">
-                <span>Login!</span>
+                <span>Login</span>
               </button>
             </div>
           </form>

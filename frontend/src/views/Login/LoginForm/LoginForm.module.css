@@ -40,17 +40,25 @@ form .form-info > input {
   width: 25vw;
   border-radius: 0.25rem;
   padding: 0.6rem;
+  border: 1px solid rgba(128, 128, 128, 0.425);
+}
+form .form-info > input:focus{
+  border: 1px solid #1e90ff;
+  background-color: white;
 }
 .title {
-  color: white;
   display: inline;
   font-size: 1.9rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #1e90ff;
+  border-radius: 49% 51% 64% 36% / 34% 34% 66% 66% ;
+  padding: 2rem;
 }
 .title > h4 {
-  color: black;
+  text-align: center;
+  color: white;
   font-size: 2.5rem;
 }
 form .remember {
@@ -130,7 +138,8 @@ form .remember input[type="checkbox"]:checked + label {
   color: #1e90ff;
 }
 .danger {
-  border: 1px solid red;
+  border: 5px solid red;
+  background-color: rgba(255, 0, 0, 0.26);
 }
 .success {
   border: 1px solid green;

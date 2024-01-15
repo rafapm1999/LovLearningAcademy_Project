@@ -4,7 +4,7 @@
   align-items: center;
   flex-direction: row;
   width: 100vw;
-  height: 89.9vh;
+  height: auto;
 }
 .form-main {
   display: flex;
@@ -12,18 +12,27 @@
   align-items: center;
   flex-direction: column;
   background-color: transparent;
-  height: 100vh;
+  height: auto;
   width: 50vw;
-  z-index: 2000;
+  z-index: 100;
+}
+.modal-main {
+  z-index: 1000;
+  width: 100vw;
+  height: auto;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
 }
 .login-img {
   position: absolute;
+  top: 175px;
   background-image: url(../../../assets/bg-signup.jpg);
   background-size: cover;
-  background-position:  bottom right;
+  background-position:  top 70% right;
   background-repeat: no-repeat;
   width: 100vw;
-  height: 90vh;
+  height: 70vh;
 }
 form .form-info {
   width: 100vw;
@@ -40,17 +49,25 @@ form .form-info > input {
   width: 25vw;
   border-radius: 0.25rem;
   padding: 0.6rem;
+  border: 1px solid rgba(128, 128, 128, 0.425);
+}
+form .form-info > input:focus{
+  border: 1px solid #1e90ff;
+  background-color: white;
 }
 .title {
-  color: white;
-  display: inline;
+  width: 15vw;
   font-size: 1.9rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #1e90ff;
+  border-radius: 49% 51% 37% 63% / 45% 39% 61% 55% ;
+  padding: 2rem;
 }
 .title > h4 {
-  color: black;
+  text-align: center;
+  color: white;
   font-size: 2.5rem;
 }
 form .remember {
@@ -63,28 +80,12 @@ form .remember {
   border-radius: 0.25rem;
   margin-bottom: 1em;
 }
-.checkbox{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-}
-form .remember input[type="checkbox"] {
-  cursor: pointer;
-  width: 2vw;
-}
-form .remember label > span{
-  font-size: 1rem;
-  color: darkgrey;
-  cursor: pointer;
-}
-form .remember input[type="checkbox"]:checked + label {
-  color: white;
-}
 .form-links {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   flex-direction: column;
+  padding: 2rem;
 }
 .form-links :nth-child(2) {
   text-decoration: none;
@@ -124,17 +125,9 @@ form .remember input[type="checkbox"]:checked + label {
   transition-timing-function: ease-in-out;
   border: 2px solid #1e90ff;
 }
-/* .photo{
-    z-index: 15;
-    display: inline-block;
-    height: 100px;
-    width: 100px;
-    background-color: black;
-} */
 .submit-button button:hover {
   background-color: #ffffff;
-  color: #1e90ff;
-  
+  color: #1e90ff; 
 }
 .danger {
   border: 1px solid red;
@@ -144,4 +137,7 @@ form .remember input[type="checkbox"]:checked + label {
 }
 .empty {
   border: 1px solid rgb(255, 255, 255);
+}
+.blur{
+  filter: blur(5px);
 }

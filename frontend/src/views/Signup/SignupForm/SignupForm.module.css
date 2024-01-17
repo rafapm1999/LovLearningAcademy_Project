@@ -1,6 +1,6 @@
 .form-root {
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
   flex-direction: row;
   width: 100vw;
@@ -29,7 +29,7 @@
   top: 175px;
   background-image: url(../../../assets/bg-signup.jpg);
   background-size: cover;
-  background-position:  top 70% right;
+  background-position: top 70% right;
   background-repeat: no-repeat;
   width: 100vw;
   height: 70vh;
@@ -51,7 +51,7 @@ form .form-info > input {
   padding: 0.6rem;
   border: 1px solid rgba(128, 128, 128, 0.425);
 }
-form .form-info > input:focus{
+form .form-info > input:focus {
   border: 1px solid #1e90ff;
   background-color: white;
 }
@@ -62,7 +62,7 @@ form .form-info > input:focus{
   justify-content: center;
   align-items: center;
   background-color: #1e90ff;
-  border-radius: 49% 51% 37% 63% / 45% 39% 61% 55% ;
+  border-radius: 49% 51% 37% 63% / 45% 39% 61% 55%;
   padding: 2rem;
 }
 .title > h4 {
@@ -89,10 +89,12 @@ form .remember {
 }
 .form-links :nth-child(2) {
   text-decoration: none;
-  background-color: white;
-  color: black;
+  background-color: #1e90ff;
+  color: white;
   padding: 0.5em 1em;
-  border: 1px solid white;
+  border: 2px solid #1e90ff;
+  border-radius: 0.3rem;
+  font-weight: bold;
   cursor: pointer;
   transition-duration: 0.2s;
   transition-timing-function: ease-in;
@@ -100,14 +102,12 @@ form .remember {
 .form-links :nth-child(2):hover {
   background-color: white;
   color: #1e90ff;
-  border: 1px solid #1e90ff;
-  transform: scale(1.1);
+  border: 2px solid #1e90ff;
 }
 .form-links :nth-child(1) {
   text-decoration: none;
   color: black;
   padding: 1em 2.5em 1em 2.5em;
-  /*     margin: 2em 0 .9em 0; */
   border-top: 1px solid black;
   cursor: pointer;
   transition-duration: 0.2s;
@@ -127,7 +127,7 @@ form .remember {
 }
 .submit-button button:hover {
   background-color: #ffffff;
-  color: #1e90ff; 
+  color: #1e90ff;
 }
 .danger {
   border: 1px solid red;
@@ -138,6 +138,167 @@ form .remember {
 .empty {
   border: 1px solid rgb(255, 255, 255);
 }
-.blur{
+.blur {
   filter: blur(5px);
+}
+
+@media only screen and (min-width: 1920px) and (max-width: 1080px) {
+}
+@media only screen and (min-width: 1366px) and (max-width: 768px) {
+}
+@media only screen and (min-width: 1536px) and (max-width: 864px) {
+}
+@media only screen and (min-width: 414px) and (max-width: 896px) {
+  .form-root {
+    justify-content: center;
+    margin: 2rem 0;
+  }
+  .login-img {
+    background-image: url();
+    background-color: #cac8c7bb;
+  }
+  form .form-info {
+    width: 90vw;
+  }
+  .title {
+    width: 50vw;
+    font-size: 1.5rem;
+  }
+  .title > h4 {
+    font-size: 1.5rem;
+  }
+  form .form-info {
+    margin: 0.2em 0;
+    padding: 0.7rem;
+  }
+  form .form-info > input {
+    width: 70vw;
+  }
+  .form-links {
+    width: 90vw;
+  }
+}
+@media only screen and (min-width: 375px) and (max-width: 667px) {
+}
+@media only screen and (min-width: 360px) and (max-width: 640px) {
+  .form-root {
+    justify-content: center;
+    margin: 0;
+    height: 80vh;
+  }
+  .login-img {
+    background-image: url();
+    background-color: #cac8c7bb;
+    height: 50vh;
+    padding: 5rem;
+  }
+  form .form-info {
+    width: 95vw;
+  }
+  .title {
+    width: 50vw;
+    font-size: 1.9rem;
+  }
+  .title > h4 {
+    font-size: 1.5rem;
+  }
+  form .form-info {
+    margin: 0.2em 0;
+    padding: 0.7rem;
+  }
+  form .form-info > input {
+    width: 85vw;
+  }
+  .form-links {
+    width: 90vw;
+  }
+}
+@media only screen and (max-width: 360px) {
+  .form-root {
+    justify-content: center;
+    margin: 1.9rem 0;
+    height: 70vh;
+  }
+  .login-img {
+    top: 160px;
+    background-image: url();
+    background-color: #cac8c7bb;
+    height: 59vh;
+  }
+  form .form-info {
+    width: 95vw;
+    margin: 0;
+  }
+  .title {
+    width: 50vw;
+    margin-top: 1rem;
+  }
+  .title > h4 {
+    font-size: 1.5rem;
+  }
+  form .form-info {
+    margin: 0;
+    padding: 0.7rem;
+  }
+  form .form-info > input {
+    width: 85vw;
+    margin: 0;
+  }
+  .form-links {
+    width: 80vw;
+    margin: 0;
+  }
+  .form-links :nth-child(1) {
+    padding: 1em;
+    margin-bottom: 0rem;
+  }
+  .form-links :nth-child(2) {
+    margin-bottom: 2.5rem;
+  }
+}
+@media only screen and (max-width: 280px) {
+  .form-root {
+    justify-content: center;
+    margin: .5rem 0;
+    height: 70vh;
+  }
+  .login-img {
+    top: 170px;
+    background-image: url();
+    background-color: #cac8c7bb;
+    height: 45vh;
+    width: 100vw;
+  }
+  form .form-info {
+    width: 95vw;
+    margin: 0;
+  }
+  .title {
+    width: 60vw;
+    margin-top: 1rem;
+  }
+  .title > h4 {
+    font-size: 1.5rem;
+  }
+  form .form-info {
+    margin: 0;
+    padding: .5rem;
+  }
+  form .form-info > input {
+    width: 85vw;
+    margin: 0;
+  }
+  .form-links {
+    width: 90vw;
+    margin: .5rem;
+    padding: 0;
+  }
+  .form-links :nth-child(1) {
+    padding: 1em;
+    margin-bottom: .5rem;
+    text-align: center;
+  }
+  .form-links :nth-child(2) {
+    margin-bottom: 3rem;
+  }
 }

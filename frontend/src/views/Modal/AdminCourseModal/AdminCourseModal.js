@@ -18,7 +18,11 @@ function AdminCourseModal(props) {
     const courseData = props.courseData[0];
     console.log(courseData);
 
-    const fetchEditCourse = async (id) => {
+    const fetchEditCourseData = async (id) => {
+        console.log(id);
+        console.log(courseData);
+        console.log(fileImage);
+        console.log(courseData.image);
         const formData = new FormData();
         formData.append('file', fileImage);
         try {
@@ -43,9 +47,7 @@ function AdminCourseModal(props) {
                 }
             );
             const data = await response.json();
-            /*   console.log(data.data); */
             if (response.ok) {
-                /*          console.log("HA SALIDO BIEN!!!"); */
                 return (props.onPending());
             }
 
@@ -55,24 +57,27 @@ function AdminCourseModal(props) {
             navigate(`/error-page`, { state: error });
         }
         try {
-            const response = await fetch(
-                `http://localhost:8000/courses/save-image`,
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "auth-token": token,
-                    },
-                    body: formData,
-                    mode: "no-cors",
+            if (imageRef.current.value !== "") {
+                const response = await fetch(
+                    `http://localhost:8000/courses/save-image`,
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "auth-token": token,
+                        },
+                        body: formData,
+                        mode: "no-cors",
 
+                    }
+                );
+                const data = await response.json();
+                /*          console.log(data.data); */
+                if (response.ok) {
+                    /*      console.log("Has guardado la imagen"); */
                 }
-            );
-            const data = await response.json();
-            /*          console.log(data.data); */
-            if (response.ok) {
-                /*      console.log("Has guardado la imagen"); */
             }
+
 
         } catch (error) {
             console.log("Save no funciona");
@@ -126,7 +131,7 @@ function AdminCourseModal(props) {
     if (props.clickType === "INFO") {
         const onPreviewClick = (slug, courseData) => {
             console.log(slug);
-            navigate(`/admin/preview/${slug}`, {state: courseData});
+            navigate(`/admin/preview/${slug}`, { state: courseData });
         }
 
         return (
@@ -157,7 +162,7 @@ function AdminCourseModal(props) {
                                         </div>
                                     </div>
                                     <div className={`${classes["preview-button"]} ${classes["submit-button"]}`}>
-                                        <button onClick={() => {onPreviewClick(courseData.slug, courseData)}}>Preview</button>
+                                        <button onClick={() => { onPreviewClick(courseData.slug, courseData) }}>Preview</button>
                                     </div>
                                     <button onClick={() => { handlerClose("closeClick") }} className={classes["md-close"]}><span>X</span></button>
                                 </div>
@@ -174,8 +179,7 @@ function AdminCourseModal(props) {
             e.preventDefault();
             let id = courseData._id;
             /*  console.log('Fetch Edit course'); */
-            fetchEditCourse(id);
-            /* props.onChange(); */
+            fetchEditCourseData(id);
             handlerClose();
         }
         const onChangeFunction = () => {
@@ -212,7 +216,7 @@ function AdminCourseModal(props) {
                                                 <img src={require(`../../../../public/uploads/${courseData.image}`)} alt={`Photo of the course ${courseData.title}`} width={50} />
                                             </div>
                                             <div>
-                                                <input type="file" id="file" name="file" accept="image/*" ref={imageRef} onChange={() => { handleFileChange() }} />
+                                                <input type="file" id="file" name="file" accept="image/*" ref={imageRef} onChange={handleFileChange} />
                                             </div>
                                         </div>
                                         <div className={classes["level-hours-section"]}>
@@ -239,11 +243,11 @@ function AdminCourseModal(props) {
                                             <div className={classes["edit-visible"]}>
                                                 <p>Visibility</p>
                                                 {console.log(courseData.visible)}
-                                                    <select name="visible" id="visible" ref={visibleRef}>
-                                                        <option id="default" name="default" value="default">{courseData.visible === false ? "Hidden" : "Visible"}</option>
-                                                        {courseData.visible === false ? "" : <option id="ocult" name="ocult" value={false}>Hidden</option>}
-                                                        {courseData.visible === true ? "" : <option id="visible" name="visible" value={true}>Visible</option>}
-                                                    </select>
+                                                <select name="visible" id="visible" ref={visibleRef}>
+                                                    <option id="default" name="default" value={courseData.visible}>{courseData.visible ? "Visible" : "Hidden"}</option>
+                                                    {courseData.visible === false ? "" : <option id="ocult" name="ocult" value={false}>Hidden</option>}
+                                                    {courseData.visible === true ? "" : <option id="visible" name="visible" value={true}>Visible</option>}
+                                                </select>
                                             </div>
                                         </div>
                                         <div className={classes["edit-description"]}>
@@ -274,10 +278,10 @@ function AdminCourseModal(props) {
                                             </div>
                                         </div>
                                         <div className={`${classes["save-button"]} ${classes["submit-button"]}`}>
-                                            <button type="submit" /* onClick={() => { handlerClose("EDIT") }} */>
+                                            <button type="submit">
                                                 <span>Save</span>
                                             </button>
-                                            <button onClick={() => {navigate(`/admin/edit/${courseData._id}`, {state: courseData.slug}) }}>Edit Themes</button>
+                                            <button onClick={() => { navigate(`/admin/edit/${courseData._id}`, { state: courseData.slug }) }}>Edit Themes</button>
                                         </div>
                                     </form>
                                     <button onClick={() => { handlerClose("closeClick") }} className={classes["md-close"]}><span>X</span></button>

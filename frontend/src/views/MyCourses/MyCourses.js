@@ -14,7 +14,7 @@ function MyCourses() {
   const navigate = useNavigate()
   const [user, setUser] = useState({})
   const [courses, setCourses] = useState([])
-  const [coursesSlug, setCoursesSlug]= useState([]);
+  const [coursesSlug, setCoursesSlug] = useState([]);
   const [pending, setPending] = useState(true);
   let takeCourse = [];
 
@@ -94,7 +94,7 @@ function MyCourses() {
     }
   }
 
- 
+
 
   const onHandlerClick = (course) => {
     let slug = course.slug;
@@ -104,22 +104,39 @@ function MyCourses() {
   //Funcion para hacer un scroll top
   const scrollTop = (e) => {
     window.scrollTo({
-        top: 0,
-        behavior: `${e}`,
+      top: 0,
+      behavior: `${e}`,
     });
-}
+  }
 
-scrollTop("smooth")
+  scrollTop("smooth")
 
-useEffect(() => {
-  getUser(id)
-}, [])
+  useEffect(() => {
+    getUser(id)
+  }, [])
 
   //Paginación
   //Creación de la paginación del contenido de la tabla
   const indexOfLastUser = currentPage * coursePerPage;
   const indexOfFirstUser = indexOfLastUser - coursePerPage;
-  const currentCourses = courses.slice(indexOfFirstUser, indexOfLastUser);
+
+  // Función de comparación para ordenar primero los cursos con visible: true
+  const compareCourses = (a, b) => {
+    if (a.visible === b.visible) {
+      return 0; // Mantener el orden actual si ambos tienen el mismo valor de visible
+    }
+    return a.visible ? -1 : 1; // Poner primero los cursos con visible: true
+  };
+
+  const currentCourses = courses
+  .sort(compareCourses) // Aplicar la función de comparación
+  .slice(indexOfFirstUser, indexOfLastUser);
+ /*  const currentCourses = courses.slice(indexOfFirstUser, indexOfLastUser).sort((a) => {
+    if (a.visible === true) {
+      console.log(a.visible);
+      return 1
+    }
+  }); */
   const totalPages = Math.ceil(courses.length / coursePerPage);
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -207,15 +224,15 @@ useEffect(() => {
         <div className={classes["pagination-main"]}>
           <div className={classes["pagination-container"]}>
             <div className={classes["pagination-info"]}>
-              <button onClick={() =>{ 
+              <button onClick={() => {
                 scrollTop("smooth");
                 paginate(currentPage === 1 ? currentPage : currentPage - 1)
-                }}> <span>&#5176;</span> Back </button>
+              }}> <span>&#5176;</span> Back </button>
               <span>Page {currentPage} of {totalPages}</span>
               <button onClick={() => {
                 scrollTop("smooth");
                 paginate(currentPage === totalPages ? currentPage : currentPage + 1)
-                }}> Next <span>&#5171;</span></button>
+              }}> Next <span>&#5171;</span></button>
             </div>
           </div>
         </div>

@@ -142,6 +142,13 @@ form .remember {
   filter: blur(5px);
 }
 
+/* max-width 1200 */
+/* "" 1024  tablet horizontal*/
+/* "" 920 */
+/* "" 768 movil horinzontal */
+/* "" 560  */
+/* "" 360 */
+
 @media only screen and (min-width: 1920px) and (max-width: 1080px) {
 }
 @media only screen and (min-width: 1366px) and (max-width: 768px) {

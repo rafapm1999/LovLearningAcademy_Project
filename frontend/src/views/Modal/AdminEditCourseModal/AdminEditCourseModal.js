@@ -1,7 +1,7 @@
 import classes from './AdminEditCourseModal.module.css';
 import { useRef, useState } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
-import { generateURL } from '../../../components/Utils';
+import { generateURL, uniqueId } from '../../../components/Utils';
 
 function AdminEditCourseModal(props) {
     const [token, setToken] = useState(localStorage.getItem("token").replaceAll('"', ""))
@@ -11,43 +11,109 @@ function AdminEditCourseModal(props) {
     const themeDescriptionRef = useRef("");
 
     const fetchEditCourse = async (id, newData) => {
-
+        let newDataCourse = []
+        console.log(newData);
         try {
-            const response = await fetch(
-                `http://localhost:8000/courses/edit/${id}`,
-                {
+            // Obtener la información actual del curso
+            const currentCourseResponse = await fetch(`http://localhost:8000/courses/edit/${id}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "auth-token": token,
+                },
+            });
+
+            if (!currentCourseResponse.ok) {
+                throw new Error("Error al obtener la información del curso");
+            }
+
+            const currentCourseData = await currentCourseResponse.json();
+            console.log(currentCourseData.data[0]);
+
+            // Verificar si ya hay información en el campo subject
+            if (currentCourseData.data[0].subject && Array.isArray(currentCourseData.data[0].subject)) {
+                // Acumular la información anterior con newData.subject
+                newDataCourse = [...currentCourseData.data[0].subject, ...newData]
+            }
+
+            console.log(newDataCourse);
+
+            try {  // Realizar la solicitud PATCH con newData actualizado
+
+            console.log(newDataCourse);
+                const patchResponse = await fetch(`http://localhost:8000/courses/edit/${id}`, {
                     method: "PATCH",
                     headers: {
                         "Content-Type": "application/json",
                         "auth-token": token,
                     },
                     body: JSON.stringify({
-                        subject: newData,
+                        subject: newDataCourse
                     }),
+                });
+
+                if (!patchResponse.ok) {
+                    throw new Error("Error al actualizar el curso");
                 }
-            );
-            const data = await response.json();
-            if (response.ok) {
-                console.log(data);
+
+                const updatedCourseData = await patchResponse.json();
+                console.log(updatedCourseData);
+
+                // Resto de tu lógica después de actualizar el curso...
+
                 props.onClose();
-                props.newData(data.data.slug);
+                props.newData(updatedCourseData.data.slug);
                 props.onPending(true);
             }
+            catch {
 
+            }
         } catch (error) {
-            console.log("Error de algo");
-            console.log(error);
+            console.error("Error en fetchEditCourse:", error);
             navigate(`/error-page`, { state: error });
         }
     };
 
+
+    /*   const fetchEditCourse = async (id, newData) => {
+  
+          try {
+              const response = await fetch(
+                  `http://localhost:8000/courses/edit/${id}`,
+                  {
+                      method: "PATCH",
+                      headers: {
+                          "Content-Type": "application/json",
+                          "auth-token": token,
+                      },
+                      body: JSON.stringify({
+                          subject: newData,
+                      }),
+                  }
+              );
+              const data = await response.json();
+              if (response.ok) {
+                  console.log(data);
+                  props.onClose();
+                  props.newData(data.data.slug);
+                  props.onPending(true);
+              }
+  
+          } catch (error) {
+              console.log("Error de algo");
+              console.log(error);
+              navigate(`/error-page`, { state: error });
+          }
+      }; */
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        let newData = {
-            title: themeTitleRef.current.value,
-            url: generateURL(`${themeVideoUrlRef.current.value}`),
-            description: themeDescriptionRef.current.value,
-        }
+        let newData = [{
+            _id: uniqueId(),
+            themeTitle: themeTitleRef.current.value,
+            themeUrl: generateURL(`${themeVideoUrlRef.current.value}`),
+            themeDescription: themeDescriptionRef.current.value,
+    }]
         console.log(newData);
         let id = props.courseData._id;
         fetchEditCourse(id, newData);
@@ -101,9 +167,9 @@ function AdminEditCourseModal(props) {
                 </div>
             </div >
         );
-    } else if ( props.editThemeData !== "" ) {
+    } else if (props.editThemeData !== "") {
         console.log('Has entrado en props.editThemeData !== ""');
-        
+
         let editThemeData = props.editThemeData;
         return (
             <div>

@@ -22,6 +22,7 @@ function CoursesPage() {
   const [coursesCopy, setCoursesCopy] = useState([]);
   const inputRef = useRef("");
   const [wordSearch, setWordSearch] = useState("");
+  const visibility = true;
 
   //Para navegar entre componentes
   const navigate = useNavigate();
@@ -32,11 +33,11 @@ function CoursesPage() {
   };
 
   //Con esta funcion hacemos un fetch (GET) de todos los cursos de nuestra base de datos
-  const fetchCourses = async (skip) => {
+  const fetchCourses = async (skip, visibility) => {
     try {
       //`http://localhost:8000/courses/all-courses/${currentPage}`
       const response = await fetch(
-        `http://localhost:8000/courses/all-courses`,
+        `http://localhost:8000/courses/all-courses-true`,
         {
           method: "GET",
           headers: {
@@ -45,6 +46,7 @@ function CoursesPage() {
         }
       );
       const data = await response.json();
+      console.log(data);
 
       if (response.ok) {
         setCourses(Array(data.data));
@@ -52,6 +54,7 @@ function CoursesPage() {
         setPending(true);
       }
     } catch (error) {
+      console.log(error);
       navigate(`/error-page`, { state: error });
     }
   };

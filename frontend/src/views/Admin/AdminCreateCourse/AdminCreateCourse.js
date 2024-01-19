@@ -52,7 +52,7 @@ function AdminCreateCourse(props) {
                         level: levelRef.current.value,
                         quantityHours: hoursRef.current.value,
                         visible: false,
-                        subject: {}
+                        subject: []
                     }),
                 }
             );

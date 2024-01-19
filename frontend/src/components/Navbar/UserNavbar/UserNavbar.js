@@ -81,7 +81,7 @@ function UserNavbar() {
         </div>
 
         <div className={classes["navbar-button"]}>
-          <button onClick={() => { navigate("/campus/messages", { state: id }) }} className={classes.profile}><span><FontAwesomeIcon icon={faEnvelope} /></span></button>
+          {/* <button onClick={() => { navigate("/campus/messages", { state: id }) }} className={classes.profile}><span><FontAwesomeIcon icon={faEnvelope} /></span></button> */}
           <button onClick={() => { navigate("/campus/profile", { state: id }) }} className={classes.profile}><span><FontAwesomeIcon icon={faUser} /></span></button>
           <button onClick={unlogged} className={classes.logout}> Log out <span><FontAwesomeIcon icon={faArrowRightFromBracket} /></span> </button>
         </div>

@@ -48,7 +48,7 @@ function AdminNavbar(props) {
           </div>
         </div>
         <div className={classes["navbar-button"]}>
-          <button onClick={() => {navigate("/admin/admin-page")}} className={classes.profile}><span><FontAwesomeIcon icon={faUser} /></span></button>
+          {/* <button onClick={() => {navigate("/admin/admin-page")}} className={classes.profile}><span><FontAwesomeIcon icon={faUser} /></span></button> */}
           <button onClick={unlogged} className={classes.logout}> Log out <span><FontAwesomeIcon icon={faArrowRightFromBracket} /></span></button>
         </div>
       </div>

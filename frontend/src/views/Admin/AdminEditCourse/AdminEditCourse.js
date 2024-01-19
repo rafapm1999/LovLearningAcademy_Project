@@ -85,7 +85,7 @@ function AdminEditCourse() {
     } else if (pending === false) {
         console.log('COurseData para renderizar');
 
-        console.log(courseData);
+        console.log(courseData.subject);
         return (
             <>
                 {ReactDOM.createPortal(
@@ -104,13 +104,13 @@ function AdminEditCourse() {
                         <button type='button' onClick={onNewThemeClick}>New theme</button>
                     </div>
                     <div>
-                        {courseData.subject !== "" ? Array(courseData.subject).map((content, key) => {
+                        {courseData.subject !== "" ? courseData.subject.map((content, key) => {
                             return (
                                 <div key={1} >
                                     <button onClick={() => {onEditTheme(content)}}>Edit</button>
-                                    <h3>{content.title}</h3>
-                                    <iframe width="560" height="315" src={courseData.subject.url} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-                                    <p>{content.description}</p>
+                                    <h3>{content.themeTitle}</h3>
+                                    <iframe width="560" height="315" src={content.themeUrl} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                                    <p>{content.themeDescription}</p>
                                 </div>
                             )
                         }) :

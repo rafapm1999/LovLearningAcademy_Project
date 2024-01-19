@@ -49,10 +49,10 @@ function CourseComplete() {
                 <div className={`${classes[""]}`}>
                     <button onClick={onCloseLeftSection} className={classes["close-list-button"]}> x </button>
                     <ul className={classes["data-list"]}>
-                        {courseData.subject !== "" ? Array(courseData.subject).map((content, key) => {
+                        {courseData.subject !== "" ? courseData.subject.map((content, key) => {
                             return (
                                 <li>
-                                    <a name="Tema" className={classes["info-list"]}>{content.title}</a>
+                                    <a name="Tema" className={classes["info-list"]}>{content.themeTitle}</a>
                                 </li>
                             )
                         }) :
@@ -79,17 +79,17 @@ function CourseComplete() {
                         </div>
                     </div>
                     <div className={classes["courseComplete-course-info"]}>
-                        {courseData.subject !== "" ? Array(courseData.subject).map((content, key) => {
+                        {courseData.subject !== "" ? courseData.subject.map((content, key) => {
                             return (
                                 <div key={1} >
                                     <div className={classes["courseComplete-course-info-title"]}>
-                                        <h3>{content.title}</h3>
+                                        <h3>{content.themeTitle}</h3>
                                     </div>
                                     <div className={classes["courseComplete-course-info-video"]}>
-                                        <iframe className={classes["course-video"]} width="1120" height="630" src={courseData.subject.url} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                                        <iframe className={classes["course-video"]} width="1120" height="630" src={content.themeUrl} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                                     </div>
                                     <div className={classes["courseComplete-course-info-description"]}>
-                                        <p>{content.description}</p>
+                                        <p>{content.themeDescription}</p>
                                     </div>
                                 </div>
                             )

@@ -47,7 +47,7 @@ function AdminCourses(props) {
           }
         );
         const data = await response.json();
-      /*   console.log(data); */
+        /*   console.log(data); */
         if (response.ok) {
           setCourses(Array(data.data));
           setCoursesCopy(Array(data.data))
@@ -73,7 +73,7 @@ function AdminCourses(props) {
       const data = await response.json();
       if (response.ok) {
         setCourseData(data.data)
-        
+
       } else {
         console.log("Has entrado fetchTheCourse en !response.ok");
       }
@@ -112,9 +112,8 @@ function AdminCourses(props) {
     setTimeout(() => {
       fetchCourses("RESET");
     },);
-    setTimeout(() => {
-      handleClose();
-    }, 100);
+    setPending(true)
+    handleClose();
   };
 
   //Funcion para crear nuevo curso 
@@ -135,10 +134,10 @@ function AdminCourses(props) {
     const paginate = (pageNumber) => {
       setCurrentPage(pageNumber);
     };
-    
+
     return (
       <>
-      {/* Modal */}
+        {/* Modal */}
         {ReactDOM.createPortal(
           <AdminCourseModal courseId={courseID} courseData={courseData} clickType={clickAction} visible={visible} onClose={handleClose} onPending={handlerPending} />,
           document.querySelector("#modal")

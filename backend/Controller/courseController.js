@@ -19,6 +19,20 @@ const getAllCourses = async (req, res) => {
   }
 };
 
+const getAllCoursesTrue = async (req, res) => {
+  try {
+    //Para hacer consultas con paginacion => const data = await Courses.find().skip(0).limit(5);
+    const data = await Courses.find({ visible: true });
+    res.status(200).json({ status: "ok", data, error: null });
+  } catch (error) {
+    res.status(400).json({
+      status: "ko",
+      data: null,
+      error: error.message,
+    });
+  }
+};
+
 const getCourse = async (req, res) => {
   try {
     const data = await Courses.find({
@@ -90,6 +104,25 @@ const postCourse = async (req, res) => {
   }
 };
 
+const getCourseEdit = async (req, res) => {
+  try {
+    const data = await Courses.find({
+      _id: req.params.id,
+    });
+    if (!data) {
+      res.status(200).json({ status: "ko", data: null, error });
+    } else {
+      res.status(200).json({ status: "ok", data, error: null });
+    }
+  } catch (error) {
+    res.status(400).json({
+      status: "ko",
+      data: null,
+      error: error.message,
+    });
+  }
+};
+
 const patchCourse = async (req, res) => {
   try {
     const data = await Courses.findByIdAndUpdate(
@@ -146,4 +179,4 @@ const saveImage = (req, res) => {
 
 
 
-module.exports = { getAllCourses, getCourse, getUserCourse, postCourse, patchCourse, deleteCourse, saveImage };
+module.exports = { getAllCourses , getAllCoursesTrue, getCourse, getUserCourse, postCourse, getCourseEdit, patchCourse, deleteCourse, saveImage };

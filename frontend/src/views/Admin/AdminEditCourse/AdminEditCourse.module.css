@@ -9,3 +9,77 @@
   position: absolute;
   top: 0;
 }
+.back-button {
+  padding: 1.5rem 2rem;
+  background-color: #1e90ff;
+  border: 2px solid #1e90ff;
+  margin: 2rem;
+  color: white;
+}
+.back-button:hover{
+  color: #1e90ff;
+  background-color: white;
+}
+.courseInfoPage-main {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 2rem 0;
+}
+.courseInfoPage-main > .courseInfoPage-main-header {
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.newTheme-button {
+  padding: 1rem;
+  border: 2px solid #2bc04b;
+  background-color: #2bc04b;
+  margin: 3rem;
+  color: white;
+  font-weight: bold;
+}
+.newTheme-button:hover {
+  background-color: white;
+  color: #2bc04b;
+}
+.courseTheme-target-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.courseTheme-target-container {
+  padding: 1rem;
+  box-shadow: 0 0 6px 1px rgb(160, 160, 160);
+  margin: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.courseTheme-target-container-button {
+  width: 25vw;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.courseTheme-target-container-button > button {
+  padding: 1rem;
+  background-color: #1e90ff;
+  border: 2px solid #1e90ff;
+  color: white;
+}
+.courseTheme-target-container-button > button:hover {
+  background-color: white;
+  color: #1e90ff;
+}
+.courseTheme-target-container > h3 {
+  padding: 1rem;
+}
+.courseTheme-target-container > p {
+  padding: 1rem;
+}

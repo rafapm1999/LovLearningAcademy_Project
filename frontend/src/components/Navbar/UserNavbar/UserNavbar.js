@@ -70,7 +70,7 @@ function UserNavbar() {
             <NavLink className={classes.link} to={{
               pathname: '/campus/courses',
               state: {}
-            }} ><span>Courses</span></NavLink>
+            }} ><span>Course Store</span></NavLink>
           </div>
           <div className={classes.links}>
             <NavLink className={classes.link} to={{

@@ -12,7 +12,8 @@ function AdminEditCourse() {
     const [pending, setPending] = useState(true);
     const [visible, setVisible] = useState(false);
     const [courseData, setCourseData] = useState("");
-    const [editThemeData, setEditThemeData] = useState("")
+    const [editThemeData, setEditThemeData] = useState(false)
+    const [editThemeCourseData, setEditCourseThemeData] = useState(false)
     let courseSlug = "";
     let newDataInfo = "";
 
@@ -53,7 +54,7 @@ function AdminEditCourse() {
     }
 
     const handlerClose = () => {
-        setEditThemeData("")
+        setEditThemeData(false)
         setVisible(false);
     };
 
@@ -62,7 +63,7 @@ function AdminEditCourse() {
     }
 
     const onNewThemeClick = () => {
-        setEditThemeData("")
+        setEditThemeData(false)
         setVisible(!visible);
     }
 
@@ -70,7 +71,8 @@ function AdminEditCourse() {
         return (<Loader></Loader>)
     };
 
-    const onEditTheme = (e) => {
+    const onEditTheme = (info, e) => {
+        setEditCourseThemeData(info)
         console.log("Has clickado");
         setEditThemeData(e)
         setVisible(!visible)
@@ -89,32 +91,40 @@ function AdminEditCourse() {
         return (
             <>
                 {ReactDOM.createPortal(
-                    <AdminEditCourseModal courseData={courseData} editThemeData={editThemeData} newData={handlerNewData} onPending={handlerPending} onClose={handlerClose} visible={visible} />,
+                    <AdminEditCourseModal courseData={courseData} editThemeData={editThemeData} editThemeCourseData={editThemeCourseData} newData={handlerNewData} onPending={handlerPending} onClose={handlerClose} visible={visible} />,
                     document.querySelector("#modal")
                 )}
+                <button className={classes["back-button"]} type='button' onClick={() => {
+                    navigate(-1)
+                }}>Back</button>
                 <div className={`${classes["courseInfoPage-main"]} ${visible && classes["blur"]}`}>
-                    <button type='button' onClick={() => {
-                        navigate(-1)
-                    }}>Back</button>
-                    <div>
-                        <h1>{courseData.title}</h1>
-                        <h2>Themes</h2>
+
+                    <div className={classes["courseInfoPage-main-header"]}>
+                        <div>
+                            <img src={require(`../../../../public/uploads/${courseData.image}`)} alt={`Foto curso ${courseData.id}`} width={"400"}></img>
+                        </div>
+                        <div>
+                            <h1>{courseData.title}</h1>
+                            <h2>Themes</h2>
+                        </div>
                     </div>
                     <div>
-                        <button type='button' onClick={onNewThemeClick}>New theme</button>
+                        <button className={classes["newTheme-button"]} type='button' onClick={onNewThemeClick}>New theme</button>
                     </div>
-                    <div>
+                    <div className={classes["courseTheme-target-main"]}>
                         {courseData.subject !== "" ? courseData.subject.map((content, key) => {
                             return (
-                                <div key={1} >
-                                    <button onClick={() => {onEditTheme(content)}}>Edit</button>
+                                <div className={classes["courseTheme-target-container"]} key={1} >
+                                    <div className={classes["courseTheme-target-container-button"]}>
+                                        <button onClick={() => { onEditTheme(content, true) }}>Edit</button>
+                                    </div>
                                     <h3>{content.themeTitle}</h3>
                                     <iframe width="560" height="315" src={content.themeUrl} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                                     <p>{content.themeDescription}</p>
                                 </div>
                             )
                         }) :
-                        ""
+                            ""
                         }
                     </div>
                     <div className={`${visible && classes["modal-main"]}`}></div>

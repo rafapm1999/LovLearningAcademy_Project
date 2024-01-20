@@ -4,7 +4,9 @@
   align-items: center;
   flex-direction: row;
   width: 100vw;
-  height: 10vh;
+  height: auto;
+  padding: 2rem;
+  z-index: 5000;
 }
 .navbar-display{
   visibility: hidden;

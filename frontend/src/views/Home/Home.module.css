@@ -96,6 +96,14 @@
   width: 15vw;
   height: 19vh;
 }
+.info-section-1 > .img-section-1-user {
+  background-image: url(../../assets/homePage_user_img_1.jpg);
+  background-size: cover;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  width: 15vw;
+  height: 19vh;
+}
 .info-section-1 > .details-section-1 {
   background: linear-gradient(to right, white 65%, transparent);
   width: 40vw;
@@ -118,6 +126,14 @@
 }
 .info-section-2 > .img-section-2 {
   background-image: url(../../assets/homePage-img-section-2.jpg);
+  background-size: cover;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  width: 15vw;
+  height: 19vh;
+}
+.info-section-2 > .img-section-2-user {
+  background-image: url(../../assets/homePage_user_img_2.jpg);
   background-size: cover;
   background-position: bottom;
   background-repeat: no-repeat;

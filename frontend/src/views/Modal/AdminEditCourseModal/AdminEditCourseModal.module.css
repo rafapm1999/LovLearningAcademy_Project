@@ -81,17 +81,32 @@
 }
 .info-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     flex-direction: column; 
     padding: 15px 40px 30px;
     font-weight: 300;
     font-size: 1.15em;
 }
-.info-container > p{
-    margin: 3rem 0;
-    padding: 10px 0;
-    font-size: 1.15em;
+.info-container > form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem;
+}
+.info-container-input{
+    width: 20vw;
+    margin: 1rem;
+    padding: .5rem;  
+}
+.save-button{
+    cursor: pointer;
+    padding: 1rem;
+    background-color: #41bd5c;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
 }
 .md-close{
     position: absolute;

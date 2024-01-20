@@ -21,7 +21,7 @@ function CourseModal(props) {
                 <div className={`${classes["md-modal"]} ${classes["md-effect-1"]} ${props.visible && classes["md-show"]}`}>
                     <div className={`${classes["md-content"]}`}>
                         <div className={classes["info-container"]}>
-                            <p>{`Congrats! The ${props.data.title} course is now in MyLearnplace. Enjoy it!`}</p>
+                            <p>{`Congrats! The ${props.data.title} course is now in My Courses. Enjoy it!`}</p>
                             <button onClick={onNavigate} className={classes["md-loggin"]}><span>Start it now!</span></button>
                             <button onClick={props.onClose} className={classes["md-close"]}><span>X</span></button>
                         </div>
@@ -38,8 +38,8 @@ function CourseModal(props) {
                 <div className={`${classes["md-modal"]} ${classes["md-effect-1"]} ${props.visible && classes["md-show"]}`}>
                     <div className={`${classes["md-content"]}`}>
                         <div className={classes["info-container"]}>
-                            <p>{`The ${props.data.title} course is already in your MyLearnplace. Go there and let start to learn!`}</p>
-                            <button onClick={onNavigate} className={classes["md-loggin"]}><span>Go to MyLearnplace</span></button>
+                            <p>{`The ${props.data.title} course is already in your My Courses. Go there and let start to learn!`}</p>
+                            <button onClick={onNavigate} className={classes["md-loggin"]}><span>Go to My Courses</span></button>
                             <button onClick={props.onClose} className={classes["md-close"]}><span>X</span></button>
                         </div>
                     </div>

@@ -3,31 +3,58 @@
   height: auto;
   display: flex;
   justify-content: start;
-  align-items: center;
+  align-items: start;
 }
 .courseComplete-leftSection {
-  width: 15vw;
-  height: auto;
+  height: 50vh;
+  width: 5vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: visible;
+
+}
+.left-section {
   display: flex;
   justify-content: start;
-  align-items: start;
-  background-color: lightblue;
-  border: 1px solid black;
-  visibility: visible;
-  transition-duration: 0.3s;
-  transition-timing-function: ease-in-out;
+  align-items: center;
+  width: 5vw;
+}
+.data-list {
+  position: fixed;
+  top: 90px;
+  height: auto;
+  padding: 0 2rem ;
+  list-style: none;
+  background-color: rgba(255, 255, 255, 0.904);
 }
 .close-list-button {
-  display: block;
-  margin: 1rem 3rem;
+  position: relative;
+  left: 80px;
+  margin: 1rem 0rem;
   padding: 1.2rem;
-  background-color: blue;
-  color: black;
+  background-color: #1e90ff;
+  border: 2px solid #1e90ff;
+  color:white;
   cursor: pointer;
+}
+.close-list-button:hover{
+  background-color: white;
+  color:#1e90ff;
+}
+ul .info-list {
+  display: block;
+  padding: 2rem 1.5rem;
+  margin: 0rem 0.5rem;
+  background-color: #1e90ff;
+  color: white;
+  font-weight: bold;
+  border: 2px solid #1e90ff;
 }
 .list-button {
   position: fixed;
   top: 100px;
+  left: 20px;
   visibility: visible;
   padding: 1.2rem;
   background-color: #1e90ff;
@@ -35,19 +62,19 @@
   color: white;
   cursor: pointer;
 }
-.list-button:hover{
+.list-button:hover {
   background-color: white;
-  color:  #1e90ff;
+  color: #1e90ff;
 }
 .courseComplete-container {
   width: auto;
-  height:auto;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: start;
   flex-direction: column;
 }
-.courseComplete-container-info{
+.courseComplete-container-info {
   background-color: white;
   width: 100vw;
   display: flex;
@@ -55,7 +82,7 @@
   align-items: center;
   flex-direction: column;
 }
-.courseComplete-header{
+.courseComplete-header {
   width: 100vw;
   height: auto;
   background-color: white;
@@ -66,18 +93,18 @@
   align-items: center;
   flex-direction: row;
 }
-.courseComplete-header-img{
-  margin: 0 3rem;
+.courseComplete-header-img {
+  margin: 0 1.5rem;
 }
-.courseComplete-header-title{
+.courseComplete-header-title {
   margin: 0 3rem;
   width: 30vw;
 }
 
 .back-button-container {
- position: fixed;
- right: 0;
- top: 100px;
+  position: fixed;
+  right: 0;
+  top: 100px;
 }
 .back-button-container > .back-button {
   padding: 1.2rem;
@@ -102,48 +129,63 @@
   margin: 0px;
   padding: 0px;
   visibility: hidden;
-  transition-duration: 0.2s;
-  transition-timing-function: ease-in-out;
 }
-.courseComplete-course-info{
-  padding: 2rem;
+.courseComplete-course-info {
+  padding: 2.2rem;
 }
-.courseComplete-course-info-title{
+.courseComplete-course-info > .courseComplete-course-info-container{
+  box-shadow: 0 0 6px 1px rgb(160, 160, 160);
+  width: 65vw;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 5rem;
+}
+.courseComplete-course-info-title {
+  width: 60vw;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 2rem;
-  padding: 2rem;
-  border-top: 1px solid #000;
+  padding: 2rem 5rem;
+  background-color: white;
+
 }
-.courseComplete-course-info-title > h3{
+.courseComplete-course-info-title > h3 {
   color: black;
   font-weight: bold;
   font-size: 1.9rem;
+  
 }
-.courseComplete-course-info-video{
+.courseComplete-course-info-video {
   background-color: black;
   width: 1130px;
   height: 640px;
+  margin: 2rem;
+  border: 5px solid white;
+}
+.courseComplete-course-info-video > .course-video{
   display: flex;
-  border: 5px solid #1e90ff;
   justify-content: center;
   align-items: center;
-  background-image: url(../../components/Loader/Loader.js);
 }
-.courseComplete-course-info-description{
+.courseComplete-course-info-description {
+  width: 40vw;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 2rem;
   padding: 2rem;
+  background-color: white;
 }
 .courseComplete-course-info-description > p {
   color: black;
   font-weight: bold;
   font-size: 1.2rem;
 }
-.courseComplete-noThemes{
+.courseComplete-noThemes {
   width: 100vw;
   height: 30vh;
   display: flex;
@@ -152,9 +194,3 @@
   margin: 2rem;
   padding: 2rem;
 }
-
-
-
-
-
-

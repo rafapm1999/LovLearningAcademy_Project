@@ -34,19 +34,40 @@ function Home() {
     return (
       <Fragment>
         <div className={`${classes["homePage-main"]}`}>
-          <div className={`${classes["homePage-main-header"]}`}>
-            <div className={`${classes["homePage-main-header"]}`}>
-              <div>
-                <img src={require(`../../assets/${carrouselImages[index]}`)} alt={`Foto curso ${carrouselImages[index]}`} width={700} />
-              </div>
-            </div>
-            <div className={`${classes["homePage-main-side"]}`}>
-              <div className={`${classes["homePage-main-leftside"]}`}>
-              </div>
-              <div className={`${classes["homePage-main-centerside"]}`}>
-              </div>
+          <div className={`${classes["homePage-info"]}`}>
+            <div className={classes["info-container"]}>
+              <h3>
+                You are the best <span>learning lover!</span>
+              </h3>
             </div>
           </div>
+          <div className={classes["homePage-details"]}>
+            <div className={classes["container-2"]}>
+              <section className={classes["info-section-1"]}>
+                <div className={classes["img-section-1-user"]}></div>
+                <div className={classes["details-section-1"]}>
+                  <Link className={classes.link} to="/campus/mycourses">
+                    <h3>
+                      Let's start to learn with <span>My Courses</span>
+                    </h3>
+                  </Link>
+                  <p>Lorem ipsum dolor sit amet consectetur.</p>
+                </div>
+              </section>
+              <section className={classes["info-section-2"]}>
+                <div className={classes["details-section-2"]}>
+                  <Link className={classes.link} to="/campus/courses">
+                    <h3>
+                      Get the newest courses in the <span>Courses Store</span>
+                    </h3>
+                  </Link>
+                  <p>Lorem ipsum dolor sit amet consectetur.</p>
+                </div>
+                <div className={classes["img-section-2-user"]}></div>
+              </section>
+            </div>
+          </div>
+
         </div>
       </Fragment>
     );

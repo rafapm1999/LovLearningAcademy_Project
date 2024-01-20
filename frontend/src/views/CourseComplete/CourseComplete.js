@@ -4,7 +4,7 @@ import { takeID } from "../../components/Utils";
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-    faChartBar
+    faChartBar, faXmarkCircle
 } from "@fortawesome/free-regular-svg-icons";
 import Loader from "../../components/Loader/Loader"
 
@@ -46,12 +46,13 @@ function CourseComplete() {
     return (
         <div className={classes["courseComplete-main"]}>
             <section className={`${classes["courseComplete-leftSection"]} ${visible === false && classes["close"]}`}>
-                <div className={`${classes[""]}`}>
-                    <button onClick={onCloseLeftSection} className={classes["close-list-button"]}> x </button>
+                <div className={`${classes["left-section"]}`}>
+                 {/*    <button onClick={onCloseLeftSection} className={classes["close-list-button"]}> x </button> */}
                     <ul className={classes["data-list"]}>
+                    <button onClick={onCloseLeftSection} className={classes["close-list-button"]}><FontAwesomeIcon icon={faXmarkCircle} size='xl' /></button>
                         {courseData.subject !== "" ? courseData.subject.map((content, key) => {
                             return (
-                                <li>
+                                <li key={key}>
                                     <a name="Tema" className={classes["info-list"]}>{content.themeTitle}</a>
                                 </li>
                             )
@@ -81,9 +82,9 @@ function CourseComplete() {
                     <div className={classes["courseComplete-course-info"]}>
                         {courseData.subject !== "" ? courseData.subject.map((content, key) => {
                             return (
-                                <div key={1} >
+                                <section id={content._id} key={key} className={classes["courseComplete-course-info-container"]}>
                                     <div className={classes["courseComplete-course-info-title"]}>
-                                        <h3>{content.themeTitle}</h3>
+                                        <h3 >{content.themeTitle}</h3>
                                     </div>
                                     <div className={classes["courseComplete-course-info-video"]}>
                                         <iframe className={classes["course-video"]} width="1120" height="630" src={content.themeUrl} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
@@ -91,7 +92,7 @@ function CourseComplete() {
                                     <div className={classes["courseComplete-course-info-description"]}>
                                         <p>{content.themeDescription}</p>
                                     </div>
-                                </div>
+                                </section>
                             )
                         }) :
                             <div className={classes["courseComplete-noThemes"]}>

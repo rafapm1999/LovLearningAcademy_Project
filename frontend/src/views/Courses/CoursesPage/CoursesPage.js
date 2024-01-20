@@ -147,7 +147,7 @@ function CoursesPage() {
         {/* Component */}
         <div className={`${classes["coursesPage-root"]} ${visible && classes["blur"]}`}>
           <div className={classes.title}>
-            <h1>Courses</h1>
+            {/* <h1>Courses</h1> */}
           </div>
           <div className={classes.search}>
             <form onSubmit={handleSearch}>

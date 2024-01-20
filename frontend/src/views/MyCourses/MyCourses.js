@@ -179,7 +179,7 @@ function MyCourses() {
         <h1 className={classes.title}>My courses</h1>
         <div className={classes["user-info-container"]}>
           <p className={classes["user-info"]}>Happy to see you {user.name}, you have {courses.length} {""}
-            courses waiting for you!</p>
+            courses!</p>
         </div>
         <div className={classes["coursesLearnPage-main"]}>
           {currentCourses.map((course, i) => {

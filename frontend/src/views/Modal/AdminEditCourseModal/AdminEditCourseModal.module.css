@@ -100,13 +100,37 @@
     margin: 1rem;
     padding: .5rem;  
 }
+.button-section{
+    width: 10vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
 .save-button{
     cursor: pointer;
     padding: 1rem;
     background-color: #41bd5c;
+    border: 2px solid #41bd5c;
     border-radius: 5px;
     color: white;
     font-weight: bold;
+}
+.save-button:hover{
+    background-color: white;
+    color: #41bd5c;
+}
+.remove-button{
+    cursor: pointer;
+    padding: 1rem;
+    background-color: #bd4f41;
+    border: 2px solid #bd4f41;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+.remove-button:hover{
+    color: #bd4f41;
+    background-color: white;
 }
 .md-close{
     position: absolute;

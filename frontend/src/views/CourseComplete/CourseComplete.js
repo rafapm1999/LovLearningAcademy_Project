@@ -47,9 +47,10 @@ function CourseComplete() {
         <div className={classes["courseComplete-main"]}>
             <section className={`${classes["courseComplete-leftSection"]} ${visible === false && classes["close"]}`}>
                 <div className={`${classes["left-section"]}`}>
-                 {/*    <button onClick={onCloseLeftSection} className={classes["close-list-button"]}> x </button> */}
                     <ul className={classes["data-list"]}>
-                    <button onClick={onCloseLeftSection} className={classes["close-list-button"]}><FontAwesomeIcon icon={faXmarkCircle} size='xl' /></button>
+                        <div className={classes["close-list-button-container"]}>
+                            <button onClick={onCloseLeftSection} className={classes["close-list-button"]}><FontAwesomeIcon icon={faXmarkCircle} size='xl' /></button>
+                        </div>
                         {courseData.subject !== "" ? courseData.subject.map((content, key) => {
                             return (
                                 <li key={key}>

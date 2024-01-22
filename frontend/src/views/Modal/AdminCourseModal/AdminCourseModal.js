@@ -196,17 +196,14 @@ function AdminCourseModal(props) {
                                     <form onSubmit={handleSubmitEdit} encType="multipart/form-data">
                                         <div className={classes["edit-title"]}>
                                             <div>
-                                                <p> Actual Title</p>
-                                                <p>{courseData.title}</p>
-                                            </div>
-                                            <div>
-                                                <p> New Title</p>
+                                                <p>Title</p>
                                                 <input
                                                     ref={titleRef}
+                                                    defaultValue={courseData.title}
                                                     type="text"
                                                     name="courseTitle"
                                                     id="title"
-                                                    placeholder={courseData.title}
+                                                    placeholder={"Title"}
                                                 />
                                             </div>
                                         </div>
@@ -250,30 +247,33 @@ function AdminCourseModal(props) {
                                                 </select>
                                             </div>
                                         </div>
-                                        <div className={classes["edit-description"]}>
-                                            <p>Course Description</p>
-                                            <div className={classes["actual-description"]}>
-                                                <p>Actual Description</p>
+                                        <div className={classes["edit-short-description"]}>
+                                            <p>Short Description</p>
+                                            <div className={classes["actual-short-description"]}>
                                                 <textarea
-                                                    /* ref={courseInfoRef} */
-                                                    name="actualInfo"
-                                                    id="actualInfo"
-                                                    value={courseData.info}
+                                                    ref={courseInfoRef}
+                                                    name="newInfo"
+                                                    id="newInfo"
+                                                    defaultValue={courseData.shortDescription}
+                                                    placeholder={"Short Description"}
                                                     rows={5}
                                                     cols={40}
                                                     onChange={onChangeFunction}
                                                 ></textarea>
                                             </div>
+                                        </div>
+                                        <div className={classes["edit-description"]}>
+                                            <p>Course Description</p>
                                             <div className={classes["new-description"]}>
-                                                <p>New Description</p>
                                                 <textarea
                                                     ref={courseInfoRef}
                                                     name="newInfo"
                                                     id="newInfo"
-                                                    placeholder={courseData.info}
-                                                    rows={5}
-                                                    cols={40}
+                                                    placeholder={"Description"}
+                                                    rows={10}
+                                                    cols={55}
                                                     onChange={onChangeFunction}
+                                                    defaultValue={courseData.info}
                                                 ></textarea>
                                             </div>
                                         </div>

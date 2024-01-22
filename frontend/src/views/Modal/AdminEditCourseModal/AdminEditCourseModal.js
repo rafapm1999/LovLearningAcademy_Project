@@ -143,6 +143,25 @@ function AdminEditCourseModal(props) {
         fetchEditingCourseTheme(courseData._id, finalCourse)
 
     }
+    const handleSubmitRemove = (e) => {
+        e.preventDefault();
+        console.log(courseData);
+        console.log(props.editThemeCourseData)
+        console.log(props.editThemeCourseData._id);
+        let originalCourse = courseData.subject
+        let finalCourse = [];
+        let cont = 0;
+        courseData.subject.some((course) => {
+            cont++
+            if (course._id === props.editThemeCourseData._id) {
+                originalCourse.splice(cont - 1, 1)
+            }
+        });
+        finalCourse = originalCourse;
+        console.log(finalCourse);
+        fetchEditingCourseTheme(courseData._id, finalCourse)
+
+    }
 
     console.log(props.editThemeData);
     if (props.editThemeData === false) {
@@ -239,8 +258,10 @@ function AdminEditCourseModal(props) {
                                             placeholder={editThemeData.description}
                                             required
                                         />
-                                        <button className={classes["save-button"]} type='submit'>Save</button>
-
+                                        <div className={classes["button-section"]}>
+                                            <button className={classes["save-button"]} type='submit'>Save</button>
+                                            <button className={classes["remove-button"]} type='button' onClick={handleSubmitRemove}>Remove</button>
+                                        </div>
                                     </form>
                                     <button type='button' onClick={() => { props.onClose() }} className={classes["md-close"]}><span>X</span></button>
                                 </div>
@@ -251,7 +272,10 @@ function AdminEditCourseModal(props) {
                 </div>
             </div >
         );
-
+    } else if (courseData.subject[0] === null || courseData.subject[0] === undefined ) {
+        return( <h2>Don't have any themes yet.</h2>)
+           
+         
     }
 
 

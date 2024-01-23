@@ -176,7 +176,7 @@
   height: 40vh;
   background-color: blue;
 }
-.homePage-main-centerside{
+.homePage-main-centerside {
   width: 55vw;
   height: 40vh;
   background-color: green;
@@ -195,3 +195,112 @@
     color: #ff5050;
   }
 }
+
+@media (max-width: 1200px) {
+  .container-1 {
+    background-image: url("");
+    width: 0;
+    height: 0;
+    visibility: hidden;
+  }
+  .homePage-details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(transparent, #f1e5d9, transparent);
+    width: 100vw;
+    height: 60vh;
+  }
+}
+@media (max-width: 1024px) {
+}
+@media (max-width: 992px) {
+  .container-2 {
+    height: 50vh;
+  }
+  .info-section-1 > .img-section-1 {
+    width: 25vw;
+    height: 19vh;
+  }
+  .info-section-1 > .img-section-1-user {
+    width: 25vw;
+    height: 19vh;
+  }
+  .info-section-2 > .img-section-2 {
+    width: 25vw;
+    height: 19vh;
+  }
+  .info-section-2 > .img-section-2-user {
+    width: 25vw;
+    height: 19vh;
+  }
+}
+@media (max-width: 768px) {
+ /*  .info-section-2 > .details-section-2 {
+    border-radius: 0;
+    height: 25vh;
+  }
+  .info-section-1 > .details-section-1 {
+    border-radius: 0;
+    height: 25vh;
+  } */
+  .homePage-title {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+  }
+  .homePage-info {
+    align-items: center;
+  }
+  .info-container {
+    justify-content: center;
+    align-items: center;
+
+    margin-right: 0;
+    margin-top: 2rem;
+  }
+  .info-container > h3 {
+    font-size: 1.5rem;
+  }
+  .container-2 > .info-section-1 {
+    justify-content: center;
+    width: 70vw;
+    background-image: url(../../assets/homePage-img-section-2.jpg);
+    background-size: cover;
+    background-position: top left;
+    background-repeat: no-repeat;
+    border-radius: 2rem 0 0 0;
+  }
+  .info-section-1 > .img-section-1 {
+    visibility: hidden;
+    width: 0;
+  }
+  .info-section-1 > .img-section-1-user {
+    visibility: hidden;
+    width: 0;
+  }
+  .info-section-1 > .details-section-1 {
+    width: 70vw;
+  }
+  .container-2 > .info-section-2 {
+    justify-content: center;
+    width: 70vw;
+    background-image: url(../../assets/homePage-img-section-1.jpg);
+    background-size: cover;
+    background-position: top left;
+    background-repeat: no-repeat;
+    border-radius: 0 0 2rem 0;
+  }
+  .info-section-2 > .img-section-2 {
+    visibility: hidden;
+    width: 0;
+  }
+  .info-section-2 > .img-section-2-user {
+    visibility: hidden;
+    width: 0;
+  }
+  .info-section-2 > .details-section-2 {
+    width: 70vw;
+  }
+}
+

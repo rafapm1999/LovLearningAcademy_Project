@@ -142,20 +142,10 @@ form .remember {
   filter: blur(5px);
 }
 
-/* max-width 1200 */
-/* "" 1024  tablet horizontal*/
-/* "" 920 */
-/* "" 768 movil horinzontal */
-/* "" 560  */
-/* "" 360 */
-
-@media only screen and (min-width: 1920px) and (max-width: 1080px) {
-}
-@media only screen and (min-width: 1366px) and (max-width: 768px) {
-}
-@media only screen and (min-width: 1536px) and (max-width: 864px) {
-}
-@media only screen and (min-width: 414px) and (max-width: 896px) {
+@media only screen and (max-width: 1200px ) {}
+@media only screen and (max-width: 1024px ) {}
+@media only screen and (max-width: 920px ) {}
+@media (max-width: 768px ) {
   .form-root {
     justify-content: center;
     margin: 2rem 0;
@@ -185,9 +175,7 @@ form .remember {
     width: 90vw;
   }
 }
-@media only screen and (min-width: 375px) and (max-width: 667px) {
-}
-@media only screen and (min-width: 360px) and (max-width: 640px) {
+@media (max-width: 560px ) {
   .form-root {
     justify-content: center;
     margin: 0;
@@ -220,7 +208,7 @@ form .remember {
     width: 90vw;
   }
 }
-@media only screen and (max-width: 360px) {
+@media (max-width: 360px ) {
   .form-root {
     justify-content: center;
     margin: 1.9rem 0;
@@ -263,49 +251,5 @@ form .remember {
     margin-bottom: 2.5rem;
   }
 }
-@media only screen and (max-width: 280px) {
-  .form-root {
-    justify-content: center;
-    margin: .5rem 0;
-    height: 70vh;
-  }
-  .login-img {
-    top: 170px;
-    background-image: url();
-    background-color: #cac8c7bb;
-    height: 45vh;
-    width: 100vw;
-  }
-  form .form-info {
-    width: 95vw;
-    margin: 0;
-  }
-  .title {
-    width: 60vw;
-    margin-top: 1rem;
-  }
-  .title > h4 {
-    font-size: 1.5rem;
-  }
-  form .form-info {
-    margin: 0;
-    padding: .5rem;
-  }
-  form .form-info > input {
-    width: 85vw;
-    margin: 0;
-  }
-  .form-links {
-    width: 90vw;
-    margin: .5rem;
-    padding: 0;
-  }
-  .form-links :nth-child(1) {
-    padding: 1em;
-    margin-bottom: .5rem;
-    text-align: center;
-  }
-  .form-links :nth-child(2) {
-    margin-bottom: 3rem;
-  }
-}
+
+

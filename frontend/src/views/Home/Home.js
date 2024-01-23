@@ -88,8 +88,6 @@ function Home() {
             </div>
           </div>
         </div>
-        <div className={classes["CoursesCarrousel"]}>
-        </div>
         <div className={classes["homePage-details"]}>
           <div className={classes["container-1"]}>
             <div className={classes["image-container-1"]}></div>

@@ -125,3 +125,17 @@
 .pagination-info > button:hover {
   cursor: pointer;
 }
+
+/* max-width 1200 */
+/* "" 1024  tablet horizontal*/
+/* "" 920 */
+/* "" 768 movil horinzontal */
+/* "" 560  */
+/* "" 360 */
+
+@media only screen and (max-width: 1200 ) {}
+@media only screen and (max-width: 1024 ) {}
+@media only screen and (max-width: 920 ) {}
+@media only screen and (max-width: 768 ) {}
+@media only screen and (max-width: 560 ) {}
+@media only screen and (max-width: 360 ) {}

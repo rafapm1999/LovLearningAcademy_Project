@@ -99,10 +99,9 @@ function AdminCourseModal(props) {
                 }
             );
             const data = await response.json();
-            /*     console.log(data.data); */
+            console.log(data.data);
             if (response.ok) {
-                /*       console.log("HA BORRADO EL CURSO BIEN!!!"); */
-                return (handlerClose());
+                props.onPending()
             }
         } catch (error) {
             console.log("Error de algo");

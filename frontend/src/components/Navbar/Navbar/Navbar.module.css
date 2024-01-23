@@ -72,9 +72,17 @@
   color: #1e90ff;
   cursor: pointer;
 }
-.navbar-button .logout {
-  margin-left: 1rem;
-}
-.logout span {
-  margin-left: 0.5rem;
+
+@media (max-width: 768px ) {
+  .navbar-main {
+    justify-content: space-around;
+  }
+  .navbar-links {
+    width: 0;
+    visibility: hidden;
+  }
+  .navbar-button .link {
+    padding: .9rem .7rem;
+    text-align: center;
+  }
 }

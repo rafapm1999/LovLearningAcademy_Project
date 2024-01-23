@@ -71,7 +71,7 @@ function CoursesPage() {
       const data = await response.json();
       if (response.ok) {
         if (token) {
-          navigate(`/campus/courses/${data.data[0].slug}`, { state: {course: data.data[0], id: data.data[0]._id} })
+          navigate(`/campus/courses/${data.data[0].slug}`, { state: { course: data.data[0], id: data.data[0]._id } })
         }
       }
     } catch (error) {
@@ -190,17 +190,17 @@ function CoursesPage() {
                     </div>
                   </div>
                 );
-              } 
+              }
             })}
           </div>
 
           {/* Pagination component */}
           <div className={classes["pagination-main"]}>
-            <div className={classes["pagination-container"]}>
+            <div className={classes["pagination-container"]}>                                                                                                      
               <div className={classes["pagination-info"]}>
                 <button onClick={() => {
                   paginate(currentPage === 1 ? currentPage : currentPage - 1)
-                  if (currentPage !== 1 ) {
+                  if (currentPage !== 1) {
                     fetchCourses(currentPage)
                   }
                   console.log(currentPage);
@@ -209,7 +209,7 @@ function CoursesPage() {
                 <span>Page {currentPage} of {totalPages}</span>
                 <button onClick={() => {
                   paginate(currentPage === totalPages ? currentPage : currentPage + 1)
-                  if (currentPage !== totalPages ) {
+                  if (currentPage !== totalPages) {
                     fetchCourses(currentPage)
                   }
                   scrollTop("smooth");
@@ -228,28 +228,9 @@ function CoursesPage() {
         <div className={classes.title}>
           <h1>Courses</h1>
         </div>
-        <div className={classes.search}>
-          <form onSubmit={handleSearch}>
-            <input
-              ref={inputRef}
-              type="text"
-              placeholder="Search your course"
-              value={wordSearch}
-              onChange={e => {
-                setWordSearch(e.target.value)
-                const filteredCourses = courses[0].filter(course =>
-                  course.title.toLowerCase().includes(wordSearch.toLowerCase())
-                );
-                setCourses(Array(filteredCourses))
-                if (e.target.value === "") {
-                  setCourses(coursesCopy)
-                }
-              }}
-            />
-            <button type="submit">Search</button>
-          </form>
+        <div className={classes["coursesPage-main"]}>
+          <h2>Don't have any course</h2>
         </div>
-        <div> <p>No existe ningun curso</p></div>
       </div>
     )
   };

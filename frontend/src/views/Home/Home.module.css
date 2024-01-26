@@ -212,8 +212,6 @@
     height: 60vh;
   }
 }
-@media (max-width: 1024px) {
-}
 @media (max-width: 992px) {
   .container-2 {
     height: 50vh;
@@ -236,14 +234,6 @@
   }
 }
 @media (max-width: 768px) {
- /*  .info-section-2 > .details-section-2 {
-    border-radius: 0;
-    height: 25vh;
-  }
-  .info-section-1 > .details-section-1 {
-    border-radius: 0;
-    height: 25vh;
-  } */
   .homePage-title {
     visibility: hidden;
     width: 0;
@@ -303,4 +293,3 @@
     width: 70vw;
   }
 }
-

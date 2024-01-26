@@ -71,7 +71,7 @@ function Home() {
         </div>
       </Fragment>
     );
-  } else {
+  } else if (!token){
     return (
       <Fragment>
         <div className={`${classes["homePage-main"]}`}>

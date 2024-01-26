@@ -4,7 +4,7 @@
   align-items: center;
   flex-direction: row;
   width: 100vw;
-  height: 89.9vh;
+  height: auto;
 }
 .form-main {
   display: flex;
@@ -12,18 +12,20 @@
   align-items: center;
   flex-direction: column;
   background: transparent;
-  height: 100vh;
+  height: auto;
   width: 50vw;
   z-index: 2000;
+  margin: 5rem;
 }
 .login-img {
   position: absolute;
+  top: 175px;
   background-image: url(../../../assets/bg-login.jpg);
   background-size: cover;
   background-position: left;
   background-repeat: no-repeat;
   width: 100vw;
-  height: 90vh;
+  height: 60vh;
 }
 form .form-info {
   width: 100vw;
@@ -94,21 +96,23 @@ form .remember input[type="checkbox"]:checked + label {
   align-items: center;
   flex-direction: column;
 }
+
 .form-links :nth-child(2) {
   text-decoration: none;
-  background-color: white;
-  color: black;
+  background-color: #1e90ff;
+  color: white;
   padding: 0.5em 1em;
-  border: 1px solid white;
+  border: 2px solid #1e90ff;
   cursor: pointer;
+  border-radius: 0.25rem;
+  font-weight: bold;
   transition-duration: 0.2s;
   transition-timing-function: ease-in;
 }
 .form-links :nth-child(2):hover {
   background-color: white;
   color: #1e90ff;
-  border: 1px solid #1e90ff;
-  transform: scale(1.1);
+  border: 2px solid #1e90ff;
 }
 .form-links :nth-child(1) {
   text-decoration: none;
@@ -147,3 +151,45 @@ form .remember input[type="checkbox"]:checked + label {
 .empty {
   border: 1px solid rgb(255, 255, 255);
 }
+
+@media (max-width: 1200px ) {}
+@media (max-width: 1024px ) {
+  .form-root {
+    justify-content: center;
+    height: 80vh;
+  }
+  .form-main {
+    width: 100vw;
+  }
+  .login-img {
+    background-image: url();
+    background-color: #cac8c7bb;
+  }
+/*   form .form-info {
+    width: 100vw;
+    color: azure;
+    font-size: 1.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5em 0;
+    padding: 1rem;
+  } */
+  form .form-info > input {
+    background-color: white;
+    width: 60vw;
+    border-radius: 0.25rem;
+    padding: 0.6rem;
+    border: 1px solid rgba(128, 128, 128, 0.425);
+  }
+}
+@media (max-width: 992px ) {}
+@media (max-width: 768px ) {
+
+}
+@media (max-width: 576px ) {}
+@media (max-width: 360px ) {}
+
+
+
+

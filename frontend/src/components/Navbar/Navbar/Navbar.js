@@ -53,7 +53,7 @@ function Navbar() {
           </div>
           <div className={classes["navbar-button"]}>
             <button onClick={() => { navigate("/campus/profile", { state: id }) }} className={classes.profile}><span><FontAwesomeIcon icon={faUser} /></span></button>
-            <button onClick={unlogged} className={classes.logout}> Log out <span><FontAwesomeIcon icon={faArrowRightFromBracket} /></span> </button>
+            {/* <button onClick={unlogged} className={classes.logout}> Log out <span><FontAwesomeIcon icon={faArrowRightFromBracket} /></span> </button> */}
           </div>
         </div>
       </Fragment>

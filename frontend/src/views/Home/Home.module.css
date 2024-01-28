@@ -238,6 +238,25 @@
     visibility: hidden;
     width: 0;
     height: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .homePage-title > h1 {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: -1000px;
+    top: 0;
+  }
+  .homePage-title > h1 > span {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: -1000px;
+    top: 0;
   }
   .homePage-info {
     align-items: center;

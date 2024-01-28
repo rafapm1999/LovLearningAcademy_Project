@@ -1,25 +1,20 @@
 .main-profile {
   height: auto;
   width: 100vw;
-  background: linear-gradient(150deg, rgba(214,204,194,1) 25%, white 70%);
+  background: linear-gradient(150deg, rgba(214, 204, 194, 1) 25%, white 70%);
 }
 /* User details */
 .user-info {
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
   flex-direction: row;
   width: 90vw;
 }
-.user-info-img{
-  width: 30vw;
-  height: 90vh;
-  margin-top: 0;
-}
 .user-info-container {
   width: 40vw;
-  margin-left: 15rem;
   text-align: center;
+  margin: 5rem;
 }
 .user-info-details {
   box-shadow: 0 0 6px 1px rgb(160, 160, 160);
@@ -27,115 +22,45 @@
   color: black;
   text-align: left;
   padding: 3rem;
-  margin: 1rem 0 0 5rem;
+  margin: 1rem;
 }
-.user-info-details-title{
+.user-info-details-title {
   margin-top: 1rem;
   font-weight: normal;
   font-size: 1.2rem;
 }
-.user-info-details-data{
+.user-info-details-data {
   margin-bottom: 2rem;
   padding: 1.2rem;
   border-bottom: 1px solid rgb(160, 160, 160);
 }
-.title{
-  text-align: center;
-/*   width: 50vw; */
-}
-/* Table */
-.main-table{
-  margin-top: 2rem;
-/*   width: 50vw; */
-}
-.table-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1rem;
-/*   width: 50vw; */
-}
-.coursesPage-main-table {
-  margin: 1rem 3rem;
-  width: 40vw;
-  border-collapse: collapse;
-  min-height: 400px;
-}
-.coursesPage-main-table th {
-  text-align: start;
-  border: 1px solid #000;
-  padding: 0.5rem;
-  width: 100px;
-}
-.coursesPage-main-table tr {
-  border: 1px solid #000;
-  max-height: 10vh;
-  min-height: 10vh;
-}
-.coursesPage-main-table td {
-  border: 1px solid #000;
-  padding: 0.5rem;
-  width: 100px;
-  text-align: center;
-}
-.coursesPage-info:hover {
-  background-color: #a3a3a3;
-}
-.coursesPage-info td[class*="-button"] {
-  text-align: center;
-  font-weight: bold;
-}
-.coursesPage-info > .info-button:hover {
-  background-color: #1f90c4;
-  color: white;
-  cursor: pointer;
-}
-.coursesPage-info > .edit-button:hover {
-  background-color: #1fc43a;
-  color: white;
-  cursor: pointer;
-}
-.coursesPage-info > .remove-button:hover {
-  background-color: #fc3333;
-  color: white;
-  cursor: pointer;
-}
-/* Pagination */
-.pagination-main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 0.9rem;
-  /* width: 50vw; */
-}
-.pagination-container {
-  box-shadow: 0 0 6px 1px rgb(160, 160, 160);
-}
-.pagination-info {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 40vw;
-  padding: 0.9rem;
-}
-.pagination-info > button {
-  background-color: transparent;
-  padding: 1rem;
-}
-.pagination-info > button:hover {
-  cursor: pointer;
-}
 
-/* max-width 1200 */
-/* "" 1024  tablet horizontal*/
-/* "" 920 */
-/* "" 768 movil horinzontal */
-/* "" 560  */
-/* "" 360 */
-
-@media only screen and (max-width: 1200 ) {}
-@media only screen and (max-width: 1024 ) {}
-@media only screen and (max-width: 920 ) {}
-@media only screen and (max-width: 768 ) {}
-@media only screen and (max-width: 560 ) {}
-@media only screen and (max-width: 360 ) {}
+@media (max-width: 1200px) {
+  .user-info-container {
+    width: 60vw;
+  }
+  .user-info {
+    justify-content: center;
+    width: 100vw;
+  }
+}
+@media (max-width: 1024px) {
+}
+@media (max-width: 992px) {
+  .user-info-container {
+    width: 90vw;
+    margin: 0.5rem;
+  }
+  .coursesPage-main-table {
+    margin: 1rem 0rem;
+    width: 40vw;
+    border-collapse: collapse;
+    min-height: 400px;
+  }
+}
+@media (max-width: 768px) {
+}
+@media (max-width: 576px) {
+}
+@media (max-width: 360px) {
+}

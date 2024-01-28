@@ -42,7 +42,7 @@
   transition-duration: 0.3s;
   transition-timing-function: ease-in-out;
 }
-.search > form > button:hover{
+.search > form > button:hover {
   color: white;
   background-color: #1e90ff;
 }
@@ -63,6 +63,7 @@
 }
 .coursesPage-info > h3 {
   font-size: 1.9rem;
+  text-align: center;
 }
 .coursesPage-info > p {
   text-align: center;
@@ -74,7 +75,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   margin-bottom: 4rem;
 }
 .pagination-container {
@@ -97,3 +98,39 @@
 .blur {
   filter: blur(5px);
 }
+
+@media (max-width: 1200px) {
+  .coursesLearnPage-info {
+    width: 50vw;
+
+  }
+  .pagination-info {
+    width: 80vw;
+  }
+}
+@media (max-width: 992px) {
+  .coursesPage-info {
+    width: 50vw;
+    height: 50vh;
+  }
+  .coursesPage-info {
+    width: 80vw;
+  }
+  .search > form > input {
+    width: 50vw;
+    box-shadow: 0 0 6px 1px rgb(160, 160, 160);
+    margin: 1rem 1rem;
+    padding: 0.9rem;
+  }
+ 
+
+}
+@media (max-width: 768px) {
+  .coursesPage-info > h3 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+}
+
+
+

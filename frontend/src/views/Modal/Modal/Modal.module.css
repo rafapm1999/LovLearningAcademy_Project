@@ -145,3 +145,28 @@
     color: #fff;
     cursor: pointer;
 }
+
+@media (max-width: 1200px) {
+    .md-modal{
+        transform: translateX(-50%) translateY(-50%); 
+    }
+    .info-container {
+        display: flex;
+        justify-content:center;
+        align-items: center;
+        flex-direction: column; 
+        padding: 2rem;
+        font-weight: 300;
+        font-size: 1.15em;
+    }
+}
+@media (max-width: 1024px) {
+}
+@media (max-width: 992px) {
+}
+@media (max-width: 768px) {
+}
+@media (max-width: 576px) {
+}
+@media (max-width: 360px) {
+}

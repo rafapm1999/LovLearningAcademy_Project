@@ -3,6 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100vw;
     flex-wrap: wrap;
     padding: 4em 1em;
   }
@@ -28,6 +29,7 @@
   .coursesLearnPage-container {
     box-shadow: 0 0 6px 1px rgb(160, 160, 160);
     margin: 2em;
+   
   }
   .coursesLearnPage-info {
     display: flex;
@@ -136,5 +138,28 @@
   .maintenace-bg{
     background-color: rgba(255, 0, 0, 0.205);
   }
+  
+  @media (max-width: 1200px) {
+    .coursesLearnPage-info {
+      width: 50vw;
+    }
+  }
+  @media (max-width: 992px) {
+    .coursesLearnPage-info {
+      width: 80vw;
+      height: 50vh;
+    }
+    .pagination-info {
+      width: 80vw;
+    }
+    .user-info {
+      width: 70vw;
+
+    }
+    .coursesLearnPage-info > h3 {
+      font-size: 1.5rem;
+    }
+  }
+ 
   
   

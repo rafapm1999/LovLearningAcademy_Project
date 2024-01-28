@@ -10,13 +10,13 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import AdminCourseModal from '../../Modal/AdminCourseModal/AdminCourseModal';
 
-function AdminCourses(props) {
+function AdminCourses() {
   const [token, setToken] = useState(localStorage.getItem("token").replaceAll('"', ""))
   const [adminRole, setAdminRole] = useState(false)
   const [courses, setCourses] = useState([])
   const [coursesCopy, setCoursesCopy] = useState([]);
   const [courseID, setCourseID] = useState("")
-  const [courseData, setCourseData] = useState({})
+  const [courseData, setCourseData] = useState("")
   const [clickAction, setClickAction] = useState("")
   const [pending, setPending] = useState(true);
   const [visible, setVisible] = useState(false);
@@ -47,7 +47,6 @@ function AdminCourses(props) {
           }
         );
         const data = await response.json();
-        /*   console.log(data); */
         if (response.ok) {
           setCourses(Array(data.data));
           setCoursesCopy(Array(data.data))
@@ -73,6 +72,10 @@ function AdminCourses(props) {
       const data = await response.json();
       if (response.ok) {
         setCourseData(data.data)
+        setTimeout(() => {
+          setVisible(!visible)
+        }, 100)
+        
 
       } else {
         console.log("Has entrado fetchTheCourse en !response.ok");
@@ -90,10 +93,6 @@ function AdminCourses(props) {
   const onHandlerClick = (courseId, clickType) => {
     setCourseID(courseId);
     setClickAction(clickType);
-    /* fetchTheCourse(courseId); */
-    setTimeout(() => {
-      setVisible(!visible)
-    }, 50)
   };
   //Función para cuando cerramos el modal
   const handleClose = () => {
@@ -139,7 +138,7 @@ function AdminCourses(props) {
       <>
         {/* Modal */}
         {ReactDOM.createPortal(
-          <AdminCourseModal courseId={courseID} courseData={courseData} clickType={clickAction} visible={visible} onClose={handleClose} onPending={handlerPending} />,
+          <AdminCourseModal courseId={courseID} courseData={courseData[0]} clickType={clickAction} visible={visible} onClose={handleClose} onPending={handlerPending} />,
           document.querySelector("#modal")
         )}
         {/* Component */}

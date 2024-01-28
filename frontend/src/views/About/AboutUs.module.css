@@ -45,7 +45,7 @@
 .container-info-2 > .bg-photo-2 {
   background-image: url(../../assets/aboutUs-bg-photo-2.jpg);
   background-size: cover;
-  background-position: center;
+  background-position: center 20%;
   background-repeat: no-repeat;
   width: 40vw;
   height: 50vh;

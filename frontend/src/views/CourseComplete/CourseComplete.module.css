@@ -200,3 +200,39 @@ ul .info-list {
   margin: 2rem;
   padding: 2rem;
 }
+
+@media (max-width: 1200px) {
+}
+@media (max-width: 1024px) {
+  .content {
+
+    justify-content: center;
+ 
+    flex-direction: column;
+
+  }
+  .courseComplete-header-title {
+    margin: 0 3rem;
+    width: 80vw;
+  }
+  .back-button-container {
+    position: fixed;
+    left: 20px;
+    top: 100px;
+  }
+  .list-button {
+    visibility: hidden;
+  }
+}
+@media (max-width: 992px) {
+  .courseComplete-header {
+    flex-direction: column;
+  }
+}
+@media (max-width: 768px) {
+}
+@media (max-width: 576px) {
+ 
+}
+@media (max-width: 360px) {
+}

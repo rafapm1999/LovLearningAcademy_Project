@@ -154,7 +154,7 @@ function CourseInfoPage() {
           <div className={classes["main-content"]}>
             <div className={classes["content"]}>
               <div className={classes["course-image"]}>
-                <img src={require(`../../../../public/uploads/${courseData !== null ? courseData.image : ""}`)} alt={`Photo of the course ${courseData !== null ? courseData.title : ""}`} width={"850"} height={"450"} />
+                <img src={require(`../../../../public/uploads/${courseData !== null ? courseData.image : ""}`)} alt={`Photo of the course ${courseData !== null ? courseData.title : ""}`}/>
               </div>
               <div className={classes["course-details"]}>
                 <h3>This course includes:</h3>

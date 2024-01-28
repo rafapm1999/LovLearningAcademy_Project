@@ -30,7 +30,7 @@ function Profile(props) {
       );
       const data = await response.json();
       if (response.ok) {
-       /*  console.log(data); */
+        /*  console.log(data); */
 
         setCourses(data.data.courses);
         setUser(data.data)
@@ -57,8 +57,8 @@ function Profile(props) {
   const currentCourses = courses.slice(indexOfFirstUser, indexOfLastUser);
   const totalPages = Math.ceil(courses.length / coursePerPage);
   const paginate = (pageNumber) => {
-/*     console.log("Has dado click");
-    console.log(currentCourses); */
+    /*     console.log("Has dado click");
+        console.log(currentCourses); */
     setCurrentPage(pageNumber);
   };
   //Fetch para eliminar el course seleccionado
@@ -72,7 +72,7 @@ function Profile(props) {
       });
       const data = await response.json();
       if (response.ok) {
-       /*  console.log(data.data); */
+        /*  console.log(data.data); */
         navigate("/loader-page", { state: data })
       };
     } catch (error) {
@@ -82,12 +82,12 @@ function Profile(props) {
 
   // 
   const onHandlerClick = (userID, courseID) => {
-   /*  console.log(userID);
-    console.log(courseID); */
+    /*  console.log(userID);
+     console.log(courseID); */
     fetchRemoveCourse(userID, courseID)
   };
 
-/*   console.log(user.courses); */
+  /*   console.log(user.courses); */
 
   return (
     <div className={classes["main-profile"]}>
@@ -109,56 +109,8 @@ function Profile(props) {
           </div>
         </div>
         <div className={classes["user-info-img"]}>
-       {/*  <img src={require(`../../assets/profile-picture.jpg`)} alt={`Photo of the course`} width={"auto"} height={"auto"} /> */}
         </div>
       </div>
-      {/* <div className={classes["main-table"]}>
-        <h2 className={classes.title}>My courses</h2>
-        {
-          courses.length !== 0 ?
-            <div className={classes["table-container"]}>
-              <table className={classes["coursesPage-main-table"]}>
-                <thead>
-                  <tr>
-                    <th>Title</th>
-                    <th>Level</th>
-                    <th>Total Hours</th>
-                    <th>Image</th>
-                    <th>Remove</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentCourses.map((course, i) => {
-                    return (
-                      <tr className={classes["coursesPage-info"]} key={i}>
-                        <td>{course.title}</td>
-                        <td>{course.level === undefined ? "Not specificated" : course.level}</td>
-                        <td>{course.quantityHours === undefined ? "Not specificated" : course.quantityHours}</td>
-                        <td className={classes["image"]}><img src={require(`../../../public/uploads/${course.image}`)} alt={`Photo of course ${course.title}`} width={"100"}/></td>
-                        <td onClick={() => { onHandlerClick(user._id, course._id) }} className={classes["remove-button"]}><FontAwesomeIcon onClick={() => { onHandlerClick(user._id, course._id) }} icon={faTrashCan} size='xl' /></td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div> :
-            <h1>You don't have any course yet!</h1>
-        }
-      </div> */}
-      {/* Pagination component */}
-      {/* {
-        courses.length !== 0 ?
-          <div className={classes["pagination-main"]}>
-            <div className={classes["pagination-container"]}>
-              <div className={classes["pagination-info"]}>
-                <button onClick={() => paginate(currentPage === 1 ? currentPage : currentPage - 1)}> <span>&#5176;</span> Back </button>
-                <span>Page {currentPage} of {totalPages}</span>
-                <button onClick={() => paginate(currentPage === totalPages ? currentPage : currentPage + 1)}> Next <span>&#5171;</span></button>
-              </div>
-            </div>
-          </div> :
-          ""
-      } */}
     </div>
   );
 }

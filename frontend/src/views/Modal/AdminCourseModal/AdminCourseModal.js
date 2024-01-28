@@ -15,8 +15,7 @@ function AdminCourseModal(props) {
     const shortDescriptionRef = useRef("");
     const courseInfoRef = useRef("");
     const titleRemoveRef = useRef("");
-    const courseData = props.courseData[0];
-    console.log(courseData);
+    let courseData = props.courseData;
 
     const fetchEditCourseData = async (id) => {
         console.log(id);
@@ -118,11 +117,9 @@ function AdminCourseModal(props) {
             props.onClose();
             props.onPending();
             /*         console.log("Son iguales"); */
-        } else {
-            /*         console.log("No son iguales"); */
-        }
-        if (e === "closeClick") {
+        } else if (e === "closeClick") {
             props.onClose();
+            props.onPending();
         }
     }
 
@@ -184,7 +181,7 @@ function AdminCourseModal(props) {
         const onChangeFunction = () => {
 
         }
-        console.log(courseData.slug);
+        courseData = props.courseData;
         return (
             <div>
                 <div className={classes["modal-main"]}>
@@ -198,11 +195,10 @@ function AdminCourseModal(props) {
                                                 <p>Title</p>
                                                 <input
                                                     ref={titleRef}
-                                                    defaultValue={courseData.title}
                                                     type="text"
                                                     name="courseTitle"
                                                     id="title"
-                                                    placeholder={"Title"}
+                                                    placeholder={courseData.title}
                                                 />
                                             </div>
                                         </div>
@@ -253,8 +249,7 @@ function AdminCourseModal(props) {
                                                     ref={courseInfoRef}
                                                     name="newInfo"
                                                     id="newInfo"
-                                                    defaultValue={courseData.shortDescription}
-                                                    placeholder={"Short Description"}
+                                                    placeholder={courseData.shortDescription}
                                                     rows={5}
                                                     cols={40}
                                                     onChange={onChangeFunction}
@@ -268,11 +263,10 @@ function AdminCourseModal(props) {
                                                     ref={courseInfoRef}
                                                     name="newInfo"
                                                     id="newInfo"
-                                                    placeholder={"Description"}
+                                                    placeholder={courseData.info}
                                                     rows={10}
                                                     cols={55}
                                                     onChange={onChangeFunction}
-                                                    defaultValue={courseData.info}
                                                 ></textarea>
                                             </div>
                                         </div>

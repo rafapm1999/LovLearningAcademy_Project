@@ -1,55 +1,74 @@
-.contactUs-root{
+.contactUs-root {
   width: 100vw;
   height: auto;
 }
 form .form-info {
-    width: 100vw;
-    color: azure;
-    font-size: 1.3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0.5em 0;
-    padding: 1rem;
-  }
+  width: 100vw;
+  color: azure;
+  font-size: 1.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5em 0;
+  padding: 1rem;
+}
+form .form-info > input {
+  background-color: white;
+  width: 40vw;
+  border-radius: 0.25rem;
+  padding: 0.6rem;
+  border: 1px solid black;
+}
+form .form-info > textarea {
+  background-color: white;
+  width: 40vw;
+  height: 40vh;
+  border-radius: 0.25rem;
+  padding: 0.6rem;
+  border: 1px solid black;
+}
+.title {
+  color: black;
+  display: inline;
+  font-size: 1.9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2.3em;
+}
+.submit-button button[type="submit"] {
+  flex-wrap: wrap;
+  background-color: #1e90ff;
+  margin: 1.5rem;
+  padding: 1em 3em;
+  border-radius: 0.3rem;
+  border: 2px solid #1e90ff;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition-duration: 0.9s;
+  transition-timing-function: ease-in-out;
+}
+.submit-button button:hover {
+  background-color: #ffffff;
+  color: #1e90ff;
+}
+
+@media (max-width: 1200px) {
+}
+@media (max-width: 1024px) {
+}
+@media (max-width: 992px) {
   form .form-info > input {
-    background-color: white;
-    width: 25vw;
-    border-radius: 0.25rem;
-    padding: 0.6rem;
-    border: 1px solid black;
+    width: 80vw;
   }
   form .form-info > textarea {
-    background-color: white;
-    width: 25vw;
-    height: 40vh;
-    border-radius: 0.25rem;
-    padding: 0.6rem;
-    border: 1px solid black;
+    width: 80vw;
   }
-  .title {
-    color: black;
-    display: inline;
-    font-size: 1.9rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 2.3em;
-  }
-  .submit-button button[type="submit"] {
-    flex-wrap: wrap;
-    background-color: #1e90ff;
-    margin: 1.5rem;
-    padding: 1em 3em;
-    border-radius: 0.3rem;
-    border: 2px solid #1e90ff;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition-duration: 0.9s;
-    transition-timing-function: ease-in-out;
-  }
-  .submit-button button:hover {
-    background-color: #ffffff;
-    color: #1e90ff;
-  }
+}
+@media (max-width: 768px) {
+}
+@media (max-width: 576px) {
+}
+@media (max-width: 360px) {
+}

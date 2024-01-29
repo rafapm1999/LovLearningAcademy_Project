@@ -47,8 +47,10 @@ export function takeID() {
   if ((token !== null) || (token !== undefined)) {
     const decoded = jwtDecode(token);
     id = decoded.id;
+    return id;
+  } else if((token === null) || (token === undefined)) {
+    console.log("ko");
   }
-  return id;
 }
 
 //Funcion para generar Slug en Dashboard

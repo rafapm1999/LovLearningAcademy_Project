@@ -21,11 +21,11 @@ function Navbar() {
     localStorage.removeItem("rememberMe");
     navigate(`/`);
   }
-
+console.log(token);
   const onHandlerClick = () => {
     setVisible(!visible)
   }
-  if (!token) {
+  if ((!token) || (token === undefined) || (token === null)) {
     return (
       <Fragment>
         <div className={classes["navbar-main"]}>

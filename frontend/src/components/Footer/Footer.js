@@ -1,85 +1,39 @@
-import React from "react";
-//Importamos cada elemento de estilo
-import {
-  Main,
-  Container,
-  Row,
-  Column,
-  LinkContainer,
-  FooterLink,
-  Heading,
-} from "./FooterStyles";
-//Importamos FontAwesomeIcon para usarlo en el footer
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//Guardamos los iconos que vamos a usar 
-import {
-  faSquareTwitter,
-  faLinkedin,
-  faGithub,
-} from "@fortawesome/free-brands-svg-icons";
-//Declaramos el footer y hacemos la estructura importando los elementos declarados
-// en FooterStyles.js
-const Footer = (props) => {
-  let data = props.userData;
- if (data !== undefined && data.role === "user" ) {
-  return(
-    <Main>
-      <Container>
-        <Row>
-          <Column>
-            <Heading>Socials</Heading>
-            <LinkContainer>
-              <FooterLink target="blank" href="https://www.twitter.com">
-                <FontAwesomeIcon icon={faSquareTwitter} size="2xl" />
-              </FooterLink>
-              <FooterLink target="blank" href="https://www.linkedin.com">
-                <FontAwesomeIcon icon={faLinkedin} size="2xl" />
-              </FooterLink>
-              <FooterLink target="blank" href="https://www.github.com">
-                <FontAwesomeIcon icon={faGithub} size="2xl" />
-              </FooterLink>
-            </LinkContainer>
-          </Column>
-          <Column>
-            <Heading>Made with love for CodeSpace Academy</Heading>
-          </Column>
-        </Row>
-      </Container>
-    </Main>
-    )
- } else{
-  return(
-    <Main>
-  <Container>
-    <Row>
-      <Column>
-        <Heading>Socials</Heading>
-        <LinkContainer>
-          <FooterLink target="blank" href="https://www.twitter.com">
-            <FontAwesomeIcon icon={faSquareTwitter} size="2xl" />
-          </FooterLink>
-          <FooterLink target="blank" href="https://www.linkedin.com">
-            <FontAwesomeIcon icon={faLinkedin} size="2xl" />
-          </FooterLink>
-          <FooterLink target="blank" href="https://www.github.com">
-            <FontAwesomeIcon icon={faGithub} size="2xl" />
-          </FooterLink>
-        </LinkContainer>
-      </Column>
-      <Column>
-        <Heading>About Us</Heading>
-        <FooterLink href="/about">Info</FooterLink>
-      </Column>
-      <Column>
-        <Heading>Contact us</Heading>
-        <FooterLink href="/contact">Contact form</FooterLink>
-      </Column>
-    </Row>
-  </Container>
-</Main>
-  )
- }
-    
+import classes from './Footer.module.css';
+import { Link } from "react-router-dom"
 
-};
+function Footer() {
+  return (
+    <div className={classes["footer-root"]}>
+      <div className={classes["footer-sections-main"]}>
+        <section className={classes["socials-section"]}>
+          <h4 className={classes["title"]}>Socials</h4>
+          <ul>
+            <li className={classes["list"]}>
+              <a className={classes["link"]} href='https://github.com/rafapm1999' target='_blank'>Github</a>
+            </li>
+            <li className={classes["list"]}>
+              <a className={classes["link"]} href='https://www.linkedin.com/in/rafael-portillo-morales/' target='_blank'>Linkedin</a>
+            </li>
+          </ul>
+        </section>
+        <section className={classes["about-section"]}>
+          <h4 className={classes["title"]}>Our Info</h4>
+          <ul>
+            <li className={classes["list"]}><Link className={classes["link"]} to="/about">About Us</Link></li>
+          </ul>
+        </section>
+        <section className={classes["contact-section"]}>
+          <h4 className={classes["title"]}>Send a message</h4>
+          <ul>
+            <li className={classes["list"]}><Link className={classes["link"]} to="/contact">Contact Us</Link></li>
+          </ul>
+        </section>
+      </div>
+      <div className={classes["footer-data-main"]}>
+        <h4 className={classes["title"]}>Creating and programming by rafaCode</h4>
+      </div>
+    </div>
+  );
+}
+
 export default Footer;

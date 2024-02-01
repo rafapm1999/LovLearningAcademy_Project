@@ -20,7 +20,6 @@ function UserPage() {
                 <Route path="/courses/:slug" element={<CourseInfoPage lang="en" />} />
                 <Route path="/mycourses" element={<MyCourses lang="en" />} />
                 <Route path="/mycourses/:slug" element={<CourseComplete lang="en"/> } />
-                <Route path="/mylearnplace" element={<LearnPlace lang="en" />} />
                 <Route path="/profile" element={<Profile lang="en" />} />
                 <Route path="/unauthorized" element={<Unauthorized lang="en" />} />
                 <Route path="*" element={<ErrorPage lang="en" />} />
@@ -31,7 +30,7 @@ function UserPage() {
 function Layout() {
     return (
         <div>
-            <UserNavbar openSideBar lang="en" />
+            <UserNavbar lang="en" />
             <>
                 <Outlet />
             </>

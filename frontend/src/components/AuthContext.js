@@ -1,7 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 
-
 export const AuthContext = createContext();
 
 export const AuthProvider = (props) => {
@@ -10,7 +9,7 @@ export const AuthProvider = (props) => {
   useEffect(() => {
     if (token) {
       if ((token === undefined) || (token === null)) {
-        localStorage.removeItem("token");
+        localStorage.removeItem("token"); 
       }
       else {
         fetch(`http://localhost:8000/user/verifyToken`, {
@@ -31,7 +30,6 @@ export const AuthProvider = (props) => {
             }
           }).catch((error) => {
             localStorage.removeItem("token");
-
           });
       }
     } else {
@@ -40,7 +38,7 @@ export const AuthProvider = (props) => {
 
   }, [token]);
 
-  if ((!token) || (token === undefined) || (token === null)) { return <Navigate to="/" replace /> };
+  if (!token) return <Navigate to="/" replace />;
 
   return (
     <AuthContext.Provider value={{ token, setToken }}>

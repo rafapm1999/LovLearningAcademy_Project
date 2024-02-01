@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Routes, Outlet } from "react-router-dom";
-import AdminDashPage from "../../views/Admin/AdminDashPage/AdminDashPage"
 import AdminCreateCourse from "../../views/Admin/AdminCreateCourse/AdminCreateCourse"
 import AdminMembers from "../../views/Admin/AdminMembers/AdminMembers"
 import AdminCourses from "../../views/Admin/AdminCourses/AdminCourses"
@@ -14,7 +13,6 @@ function AdminPage() {
     return (
         <Routes>
             <Route path="/" element={<Layout lang="en" />}>
-                <Route path="/admin-page" element={<AdminDashPage lang="en" />} />
                 <Route path="/edit/:id" element={<AdminEditCourse lang="en" />} />
                 <Route path="/create-course" element={<AdminCreateCourse lang="en" />} />
                 <Route path="/bbdd-members" element={<AdminMembers lang="en" />} />

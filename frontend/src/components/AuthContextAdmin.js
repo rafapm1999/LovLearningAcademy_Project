@@ -6,14 +6,10 @@ export const AuthContext = createContext();
 
 export const AuthProviderAdmin = (props) => {
     const [token, setToken] = useState(localStorage.getItem("token"));
-    const tokenRole = takeRole(token);
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (token && tokenRole !== "admin") {
-            localStorage.setItem("token", localStorage.getItem("token"));
-            navigate(`/unauthorized`)
-        } else if (token && tokenRole === "admin") {
+        if (token) {
             if ((token === undefined) || (token === null)) {
                 localStorage.removeItem("token");
             } else {
@@ -32,6 +28,12 @@ export const AuthProviderAdmin = (props) => {
                         }
                         else {
                             localStorage.setItem("token", localStorage.getItem("token"));
+
+                            let role = takeRole(token)
+                            if (role === "user") {
+                                localStorage.removeItem("token");
+                                return <Navigate to="/" replace />;
+                            }
                         }
                     }).catch((error) => {
                         localStorage.removeItem("token");
@@ -43,7 +45,7 @@ export const AuthProviderAdmin = (props) => {
         }
 
     }, [token]);
-   
+
     if (!token) return <Navigate to="/" replace />;
 
 

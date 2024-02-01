@@ -30,6 +30,7 @@ function Home() {
     // Limpiar el intervalo cuando el componente se desmonte para evitar fugas de memoria
 
   }, []);
+  
   if (token) {
     return (
       <Fragment>
@@ -71,7 +72,7 @@ function Home() {
         </div>
       </Fragment>
     );
-  } else if (!token){
+  } else if (!token) {
     return (
       <Fragment>
         <div className={`${classes["homePage-main"]}`}>

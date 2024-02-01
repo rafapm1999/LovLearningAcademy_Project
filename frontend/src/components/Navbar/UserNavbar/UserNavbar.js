@@ -13,13 +13,10 @@ import {
 function UserNavbar() {
   const token = localStorage.getItem("token");
   /* const role = takeRole(); */
-  const id = takeID(token);
+ /*  const id = takeID(token); */
   const navigate = useNavigate();
   let [visible, setVisible] = useState(false)
   
-  if (!token) {
-    navigate("/")
-  }
 
   const unlogged = () => {
     localStorage.removeItem("token");
@@ -54,14 +51,14 @@ function UserNavbar() {
           <div className={classes.links}>
             <NavLink className={classes.link} to={{
               pathname: '/campus/mycourses',
-              state: { id }
+              state: {  }
             }} ><span>My Courses</span></NavLink>
           </div>
         </div>
 
         <div className={classes["navbar-button"]}>
           {/* <button onClick={() => { navigate("/campus/messages", { state: id }) }} className={classes.profile}><span><FontAwesomeIcon icon={faEnvelope} /></span></button> */}
-          <button onClick={() => { navigate("/campus/profile", { state: id }) }} className={classes.profile}><span><FontAwesomeIcon icon={faUser} /></span></button>
+          <button onClick={() => { navigate("/campus/profile", {  }) }} className={classes.profile}><span><FontAwesomeIcon icon={faUser} /></span></button>
           <button onClick={unlogged} className={classes.logout}> Log out <span><FontAwesomeIcon icon={faArrowRightFromBracket} /></span> </button>
         </div>
         <button className={classes["display-button"]} onClick={onHandlerClick} ><FontAwesomeIcon icon={visible === false ? faBars : faXmark} size='xl'></FontAwesomeIcon></button>

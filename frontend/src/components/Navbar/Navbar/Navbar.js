@@ -6,10 +6,9 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { takeRole, takeID } from '../../Utils';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faUser, faBars, faXmark
+ faBars, faXmark
 } from "@fortawesome/free-solid-svg-icons";
 import UserNavbar from '../UserNavbar/UserNavbar';
-import AdminNavbar from '../AdminNavbar/AdminNavbar'
 import { useEffect } from 'react';
 
 
@@ -41,19 +40,19 @@ function Navbar() {
           <div className={classes["display-section"]}>
             <div className={`${visible === true ? classes["display-section-list"] : classes["hidden"]}`}>
               <div className={`${visible === true ? classes["display-section-list-links"] : classes["hidden"]}`}>
-                <NavLink className={classes["list-link"]} to={{
+                <NavLink className={classes["list-link"]} onClick={onHandlerClick} to={{
                   pathname: '/courses',
                   state: {}
                 }}>Courses Store</NavLink>
-                <NavLink className={classes["list-link"]} to={{
+                <NavLink className={classes["list-link"]} onClick={onHandlerClick} to={{
                   pathname: '/about',
                   state: {}
                 }}>About</NavLink>
-                <NavLink className={classes["list-link"]} to={{
+                <NavLink className={classes["list-link"]} onClick={onHandlerClick} to={{
                   pathname: '/contact',
                   state: {}
                 }}>Contact Us</NavLink>
-                <NavLink className={classes["list-link"]} to={{
+                <NavLink className={classes["list-link"]} onClick={onHandlerClick} to={{
                   pathname: '/login',
                   state: {}
                 }}>Get Started</NavLink>

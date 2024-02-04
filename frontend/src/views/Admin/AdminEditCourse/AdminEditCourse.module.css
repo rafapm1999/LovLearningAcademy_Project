@@ -9,14 +9,22 @@
   position: absolute;
   top: 0;
 }
-.back-button {
-  padding: 1.5rem 2rem;
-  background-color: #1e90ff;
-  border: 2px solid #1e90ff;
-  margin: 2rem;
-  color: white;
+.back-button-container {
+  position: fixed;
+  right: 0;
+  top: 100px;
 }
-.back-button:hover{
+.back-button-container > .back-button {
+  padding: 1.2rem;
+  background-color: #1e90ff;
+  color: white;
+  margin-right: 2rem;
+  border: 2px solid #1e90ff;
+  cursor: pointer;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-in-out;
+}
+.back-button:hover {
   color: #1e90ff;
   background-color: white;
 }
@@ -33,6 +41,13 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+.courseComplete-header-img {
+  margin: 0 1.5rem;
+}
+.courseComplete-header-title {
+  margin: 0 3rem;
+  width: 30vw;
 }
 .newTheme-button {
   padding: 1rem;
@@ -60,6 +75,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 60vw;
 }
 .courseTheme-target-container-button {
   width: 25vw;
@@ -82,4 +98,49 @@
 }
 .courseTheme-target-container > p {
   padding: 1rem;
+}
+
+@media (max-width: 1200px) {
+}
+@media (max-width: 1024px) {
+  .back-button-container {
+    position: fixed;
+    left: 20px;
+    top: 100px;
+  }
+  .courseInfoPage-main > .courseInfoPage-main-header {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .courseTheme-target-container {
+    padding: 1rem;
+    box-shadow: 0 0 6px 1px rgb(160, 160, 160);
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 90vw;
+  }
+  .courseTheme-course-info-video{
+    width: auto;
+    height: auto;
+  }
+  .courseTheme-target-container-button {
+    width: 85vw;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+  }
+}
+@media (max-width: 992px) {
+}
+@media (max-width: 768px) {
+}
+@media (max-width: 576px) {
+}
+@media (max-width: 360px) {
 }

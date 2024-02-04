@@ -1,11 +1,11 @@
-.usersPage-root{
-  height: 90vh;
+.usersPage-root {
+  height: auto;
   width: 100vw;
 }
 .modal-main {
   z-index: 1000;
   width: 100vw;
-  height: 90vh;
+  height: auto;
   background-color: transparent;
   position: absolute;
   top: 0;
@@ -17,33 +17,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.search {
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 2rem;
-}
-.search > form > input {
-  width: 50vw;
-  box-shadow: 0 0 6px 1px rgb(160, 160, 160);
-  margin: 1rem 3rem;
-  padding: 0.9rem;
-}
-.search > form > button {
-  font-weight: bold;
-  border: 2px solid #1e90ff;
-  padding: 0.9rem;
-  color: #1e90ff;
-  background-color: white;
-  cursor: pointer;
-  transition-duration: 0.3s;
-  transition-timing-function: ease-in-out;
-}
-.search > form > button:hover {
-  color: white;
-  background-color: #1e90ff;
 }
 .data-message {
   display: flex;
@@ -59,27 +32,41 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   margin-top: 5em;
 }
 .usersPage-main-table {
   margin: 1rem 3rem;
-  width: 40vw;
+  width: auto;
   border-collapse: collapse;
   min-height: 400px;
+}
+.usersPage-main-table-mobile {
+  margin: 0;
+  width: 0;
+  height: 0;
+  border-collapse: collapse;
+  visibility: hidden;
+}
+.usersPage-main-table-mobile th {
+  text-align: start;
+  border: 1px solid #000;
+  padding: 0.5rem;
+  width: auto;
 }
 .usersPage-main-table th {
   text-align: start;
   border: 1px solid #000;
   padding: 0.5rem;
-  width: 100px;
+  width: auto;
 }
-tr {
+.usersPage-info tr {
   border: 1px solid #000;
 }
-td {
+.usersPage-info td {
   border: 1px solid #000;
   padding: 0.5rem;
-  width: 100px;
+  width: auto;
 }
 .usersPage-info:hover {
   background-color: #a3a3a3;
@@ -88,17 +75,17 @@ td {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: .9rem;
+  margin: 0.9rem 0;
 }
-.pagination-container{
+.pagination-container {
   box-shadow: 0 0 6px 1px rgb(160, 160, 160);
 }
-.pagination-info{
+.pagination-info {
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 40vw;
-  padding: .9rem;
+  padding: 0.9rem;
 }
 .pagination-info > button {
   background-color: transparent;
@@ -106,4 +93,44 @@ td {
 }
 .pagination-info > button:hover {
   cursor: pointer;
+}
+
+@media (max-width: 1200px) {
+}
+@media (max-width: 1024px) {
+}
+@media (max-width: 992px) {
+  .usersPage-main-table {
+    margin: 1rem 3rem;
+    width: auto;
+    border-collapse: collapse;
+    min-height: 0;
+  }
+  .pagination-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 90vw;
+    padding: 0.9rem;
+  }
+  .usersPage-main-table {
+    position: absolute;
+    margin: 0;
+    width: 0;
+    visibility: hidden;
+  }
+  .usersPage-main-table-mobile {
+    width: auto;
+    visibility: visible;
+    min-height: 400px;
+  }
+  .table-container {
+    margin-top: 1em;
+  }
+}
+@media (max-width: 768px) {
+}
+@media (max-width: 576px) {
+}
+@media (max-width: 360px) {
 }

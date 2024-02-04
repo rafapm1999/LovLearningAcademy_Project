@@ -88,7 +88,7 @@ function CourseComplete() {
                                         <h3 >{content.themeTitle}</h3>
                                     </div>
                                     <div className={classes["courseComplete-course-info-video"]}>
-                                        <iframe className={classes["course-video"]} width="1120" height="630" src={content.themeUrl} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                                        <iframe className={classes["course-video"]} /* width="1120" height="630" */ src={content.themeUrl} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                                     </div>
                                     <div className={classes["courseComplete-course-info-description"]}>
                                         <p>{content.themeDescription}</p>

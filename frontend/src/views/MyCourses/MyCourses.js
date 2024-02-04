@@ -7,10 +7,11 @@ import { takeID } from "../../components/Utils";
 function MyCourses() {
   //Obtención del token de autenticidad y guardado mediante useState
   const [token, setToken] = useState(localStorage.getItem("token"));
-
+  let id = "";
   //Sacamos el id del token recibido mediente localStorage
-  const id = takeID(token)
-
+  if (token) {
+    id = takeID(token)
+  }
   const navigate = useNavigate()
   const [user, setUser] = useState({})
   const [courses, setCourses] = useState([])

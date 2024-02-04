@@ -29,9 +29,9 @@ function Layout() {
     return (
         <div>
             <AdminNavbar lang="en" />
-            <div>
+            <>
                 <Outlet />
-            </div>
+            </>
             <Footer lang="en" />
         </div>
     );

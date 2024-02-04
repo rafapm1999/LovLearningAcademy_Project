@@ -93,8 +93,6 @@ function AdminCreateCourse(props) {
             navigate(`/error-page`, { state: error });
         }
     };
-
-
     const handleFileChange = (e) => {
         setFileImage(e.target.files[0])
     }
@@ -125,20 +123,20 @@ function AdminCreateCourse(props) {
                                 name="courseTitle"
                                 id="title"
                                 placeholder="Course Title"
-                                /* required */
+                                required
                             />
                         </div>
                     </div>
                     <div className={classes["image"]}>
                         <div>
                             <p>Image</p>
-                            <input type="file" id="file" name="file" accept="image/*" ref={imageRef} onChange={handleFileChange} /* required */ />
+                            <input type="file" id="file" name="file" accept="image/*" ref={imageRef} onChange={handleFileChange} required />
                         </div>
                     </div>
                     <div className={classes["level-hours-section"]}>
                         <div className={classes["level"]}>
                             <p>Level</p>
-                            <select name="select" ref={levelRef}>
+                            <select name="select" ref={levelRef} required>
                                 <option value="Easy">Easy</option>
                                 <option value="Medium">Medium</option>
                                 <option value="Hard">Hard</option>
@@ -152,7 +150,7 @@ function AdminCreateCourse(props) {
                                     type="number"
                                     name="quntyHours"
                                     id="quntyHours"
-                                    /* required */
+                                    required
                                 />
                                 <span> Hours</span>
                             </div>
@@ -165,7 +163,7 @@ function AdminCreateCourse(props) {
                             type="text"
                             name="shortDescription"
                             id="shortDescription"
-                            /* required */
+                            required
                         />
                     </div>
                     <div className={classes["description"]}>
@@ -174,11 +172,10 @@ function AdminCreateCourse(props) {
                             ref={courseInfoRef}
                             name="courseInfo"
                             id="info"
-                            /* maxLength="300" */
                             rows={10}
                             cols={60}
                             placeholder='Course Description'
-                            /* required */
+                            required
                         ></textarea>
                     </div>
                     <div className={`${classes["save-button"]} ${classes["submit-button"]}`}>

@@ -94,16 +94,18 @@ function AdminEditCourse() {
                     <AdminEditCourseModal courseData={courseData} editThemeData={editThemeData} editThemeCourseData={editThemeCourseData} newData={handlerNewData} onPending={handlerPending} onClose={handlerClose} visible={visible} />,
                     document.querySelector("#modal")
                 )}
-                <button className={classes["back-button"]} type='button' onClick={() => {
-                    navigate(-1)
-                }}>Back</button>
+                <div className={classes["back-button-container"]}>
+                    <button className={classes["back-button"]} type='button' onClick={() => {
+                        navigate(-1)
+                    }}>Back</button>
+                </div>
                 <div className={`${classes["courseInfoPage-main"]} ${visible && classes["blur"]}`}>
 
                     <div className={classes["courseInfoPage-main-header"]}>
-                        <div>
+                        <div className={classes["courseInfoPage-header-img"]}>
                             <img src={require(`../../../../public/uploads/${courseData.image}`)} alt={`Foto curso ${courseData.id}`} width={"400"}></img>
                         </div>
-                        <div>
+                        <div className={classes["courseInfoPage-header-title"]}>
                             <h1>{courseData.title}</h1>
                             <h2>Themes</h2>
                         </div>
@@ -119,7 +121,7 @@ function AdminEditCourse() {
                                         <button onClick={() => { onEditTheme(content, true) }}>Edit</button>
                                     </div>
                                     <h3>{content.themeTitle}</h3>
-                                    <iframe width="560" height="315" src={content.themeUrl} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                                    <iframe className={classes["courseTheme-course-info-video"]} width="560" height="315" src={content.themeUrl} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                                     <p>{content.themeDescription}</p>
                                 </div>
                             )

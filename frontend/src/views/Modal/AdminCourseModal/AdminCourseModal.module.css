@@ -408,3 +408,36 @@ form .form-info {
   background: white;
   color: #2bc04b;
 }
+
+@media (max-width: 1200px) {
+}
+@media (max-width: 1024px) {
+}
+@media (max-width: 992px) {
+  .course-header {
+    margin-top: 3rem;
+  }
+  .course-header .course-title {
+    font-size: 1.2rem;
+  }
+  .course-header p {
+    margin-right: 0.9rem;
+    font-size: .9rem;
+    font-weight: bold;
+  }
+  .remove-header > p {
+    margin: 0.9rem 0;
+    color: rgb(253, 4, 4);
+    font-size: 1.9rem;
+    text-align: center;
+    }
+    .remove-form > p {
+      text-align: center;
+    }
+}
+@media (max-width: 768px) {
+}
+@media (max-width: 576px) {
+}
+@media (max-width: 360px) {
+}

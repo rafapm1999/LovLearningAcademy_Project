@@ -16,21 +16,22 @@ function Footer() {
             </li>
           </ul>
         </section>
-        <section className={classes["about-section"]}>
-          <h4 className={classes["title"]}>Our Info</h4>
-          <ul>
-            <li className={classes["list"]}><Link className={classes["link"]} to="/about">About Us</Link></li>
-          </ul>
-        </section>
         <section className={classes["contact-section"]}>
           <h4 className={classes["title"]}>Send a message</h4>
           <ul>
             <li className={classes["list"]}><Link className={classes["link"]} to="/contact">Contact Us</Link></li>
           </ul>
         </section>
+        <section className={classes["about-section"]}>
+          <h4 className={classes["title"]}>Our Info</h4>
+          <ul>
+            <li className={classes["list"]}><Link className={classes["link"]} to="/about">About Us</Link></li>
+          </ul>
+        </section>
+
       </div>
       <div className={classes["footer-data-main"]}>
-        <h4 className={classes["title"]}>Creating and programming by rafaCode</h4>
+        <h4 className={classes["title"]}>{"Creating and programming by rafaCode()"}</h4>
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ import {
 import AdminCourseModal from '../../Modal/AdminCourseModal/AdminCourseModal';
 
 function AdminCourses() {
-  const [token, setToken] = useState(localStorage.getItem("token").replaceAll('"', ""))
+  const [token, setToken] = useState(localStorage.getItem("token"))
   const [adminRole, setAdminRole] = useState(false)
   const [courses, setCourses] = useState([])
   const [coursesCopy, setCoursesCopy] = useState([]);
@@ -75,7 +75,7 @@ function AdminCourses() {
         setTimeout(() => {
           setVisible(!visible)
         }, 100)
-        
+
 
       } else {
         console.log("Has entrado fetchTheCourse en !response.ok");
@@ -207,19 +207,70 @@ function AdminCourses() {
                 })}
               </tbody>
             </table>
-          </div>
-
-          {/* Pagination component */}
-          <div className={classes["pagination-main"]}>
-            <div className={classes["pagination-container"]}>
-              <div className={classes["pagination-info"]}>
-                <button onClick={() => paginate(currentPage === 1 ? currentPage : currentPage - 1)}> <span>&#5176;</span> Back </button>
-                <span>Page {currentPage} of {totalPages}</span>
-                <button onClick={() => paginate(currentPage === totalPages ? currentPage : currentPage + 1)}> Next <span>&#5171;</span></button>
+            <table className={classes["coursesPage-main-table-mobile"]}>
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Info</th>
+                  <th>Edit</th>
+                  <th>Remove</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentCourses.map((course, i) => {
+                  return (
+                    <tr className={classes["coursesPage-info"]} key={i}>
+                      <td>{course.title}</td>
+                      <td onClick={() => {
+                        fetchTheCourse(course.slug)
+                        setTimeout(() => {
+                          onHandlerClick(course._id, "INFO")
+                        }, 50)
+                      }} className={classes["info-button"]}><FontAwesomeIcon onClick={() => {
+                        fetchTheCourse(course.slug)
+                        setTimeout(() => {
+                          onHandlerClick(course._id, "INFO")
+                        }, 50)
+                      }} icon={faEye} size='xl' /></td>
+                      <td onClick={() => {
+                        fetchTheCourse(course.slug)
+                        setTimeout(() => {
+                          onHandlerClick(course._id, "EDIT")
+                        }, 50)
+                      }} className={classes["edit-button"]}><FontAwesomeIcon onClick={() => {
+                        fetchTheCourse(course.slug)
+                        setTimeout(() => {
+                          onHandlerClick(course._id, "EDIT")
+                        }, 50)
+                      }} icon={faPenToSquare} size='xl' /></td>
+                      <td onClick={() => {
+                        fetchTheCourse(course.slug)
+                        setTimeout(() => {
+                          onHandlerClick(course._id, "REMOVE")
+                        }, 50)
+                      }} className={classes["remove-button"]}><FontAwesomeIcon onClick={() => {
+                        fetchTheCourse(course.slug)
+                        setTimeout(() => {
+                          onHandlerClick(course._id, "REMOVE")
+                        }, 50)
+                      }} icon={faTrashCan} size='xl' /></td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+            {/* Pagination component */}
+            <div className={classes["pagination-main"]}>
+              <div className={classes["pagination-container"]}>
+                <div className={classes["pagination-info"]}>
+                  <button onClick={() => paginate(currentPage === 1 ? currentPage : currentPage - 1)}> <span>&#5176;</span> Back </button>
+                  <span>Page {currentPage} of {totalPages}</span>
+                  <button onClick={() => paginate(currentPage === totalPages ? currentPage : currentPage + 1)}> Next <span>&#5171;</span></button>
+                </div>
               </div>
             </div>
+            <div className={`${visible && classes["modal-main"]}`}></div>
           </div>
-          <div className={`${visible && classes["modal-main"]}`}></div>
         </div>
       </>
     );

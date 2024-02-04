@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Loader from "../../../components/Loader/Loader";
 
 function AdminMembers(props) {
-  const token = localStorage.getItem("token").replaceAll('"', ""); 
+  const token = localStorage.getItem("token");
   const [pending, setPending] = useState(true);
   const [users, setUsers] = useState([])
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ function AdminMembers(props) {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
-              "auth-token": token,
+              "auth-token": token.replaceAll('"', ""),
             },
           }
         );
@@ -94,22 +94,43 @@ function AdminMembers(props) {
               })}
             </tbody>
           </table>
-        </div>
+          <table className={classes["usersPage-main-table-mobile"]}>
+            <thead>
+              <tr>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Courses</th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentUsers.map((user, i) => {
+                return (
+                  <tr className={classes["usersPage-info"]} key={i}>
+                    <td>{user.email}</td>
+                    <td>{user.role}</td>
+                    <td>{user.courses.length}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
 
-        {/* Pagination component */}
-        <div className={classes["pagination-main"]}>
-          <div className={classes["pagination-container"]}>
-            <div className={classes["pagination-info"]}>
+          {/* Pagination component */}
+          <div className={classes["pagination-main"]}>
+            <div className={classes["pagination-container"]}>
+              <div className={classes["pagination-info"]}>
 
-              <button onClick={() => paginate(currentPage === 1 ? currentPage : currentPage - 1)}> <span>&#5176;</span> Back </button>
-              <span>Page {currentPage} of {totalPages}</span>
-              <button onClick={() => paginate(currentPage === totalPages ? currentPage : currentPage + 1)}> Next <span>&#5171;</span></button>
+                <button onClick={() => paginate(currentPage === 1 ? currentPage : currentPage - 1)}> <span>&#5176;</span> Back </button>
+                <span>Page {currentPage} of {totalPages}</span>
+                <button onClick={() => paginate(currentPage === totalPages ? currentPage : currentPage + 1)}> Next <span>&#5171;</span></button>
 
+              </div>
             </div>
           </div>
+          <div className={`${props.visible && classes["modal-main"]} ${props.openProfile && classes["modal-main"]}`}></div>
         </div>
-        <div className={`${props.visible && classes["modal-main"]} ${props.openProfile && classes["modal-main"]}`}></div>
       </div>
+
     );
   };
 }

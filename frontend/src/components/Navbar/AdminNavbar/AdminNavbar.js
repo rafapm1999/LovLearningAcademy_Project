@@ -25,7 +25,12 @@ function AdminNavbar() {
   return (
     <Fragment>
       <div className={classes["navbar-main"]}>
-        <div className={classes["navbar-logo"]}><p className={classes.logo}>LovLearning Academy</p></div>
+        <div className={classes["navbar-logo"]}>
+          <NavLink className={classes.logo} onClick={onHandlerClick} to={{
+            pathname: '/',
+            state: {}
+          }}>User Preview</NavLink>
+        </div>
         <div className={classes["navbar-links"]}>
           <div className={classes.links}>
             <NavLink className={classes.link} to={{
@@ -53,7 +58,7 @@ function AdminNavbar() {
                 pathname: '/admin/bbdd-courses',
                 state: {}
               }}>All courses</NavLink>
-                <NavLink className={classes["list-link"]} onClick={unlogged} to={{
+              <NavLink className={classes["list-link"]} onClick={unlogged} to={{
                 pathname: '/',
                 state: {}
               }}>Log out <span><FontAwesomeIcon icon={faArrowRightFromBracket} /></span></NavLink>

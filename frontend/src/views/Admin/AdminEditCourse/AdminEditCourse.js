@@ -114,7 +114,7 @@ function AdminEditCourse() {
                         <button className={classes["newTheme-button"]} type='button' onClick={onNewThemeClick}>New theme</button>
                     </div>
                     <div className={classes["courseTheme-target-main"]}>
-                        {courseData.subject !== "" ? courseData.subject.map((content, key) => {
+                        {courseData.subject.length !== 0 ? courseData.subject.map((content, key) => {
                             return (
                                 <div className={classes["courseTheme-target-container"]} key={1} >
                                     <div className={classes["courseTheme-target-container-button"]}>
@@ -126,8 +126,10 @@ function AdminEditCourse() {
                                 </div>
                             )
                         }) :
-                            ""
-                        }
+                        <div className={classes["courseComplete-noThemes"]}>
+                        <h3 >Ups... Themes not enables yet!</h3>
+                    </div>
+                    }
                     </div>
                     <div className={`${visible && classes["modal-main"]}`}></div>
                 </div>

@@ -18,7 +18,7 @@ function UserPage() {
             <Route path="/" element={<Layout lang="en" />}>
                 <Route path="/courses" element={<CoursesPage lang="en" />} />
                 <Route path="/courses/:slug" element={<CourseInfoPage lang="en" />} />
-                <Route path="/mycourses" element={<MyCourses lang="en" />} />
+                <Route  index path="/mycourses" element={<MyCourses lang="en" />} />
                 <Route path="/mycourses/:slug" element={<CourseComplete lang="en"/> } />
                 <Route path="/profile" element={<Profile lang="en" />} />
                 <Route path="/unauthorized" element={<Unauthorized lang="en" />} />

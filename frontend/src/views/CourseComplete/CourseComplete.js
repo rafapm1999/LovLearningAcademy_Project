@@ -42,7 +42,7 @@ function CourseComplete() {
     useEffect(() => {
         scrollTop("auto")
     }, [])
-
+console.log(courseData.subject.lenght);
     return (
         <div className={classes["courseComplete-main"]}>
             <section className={`${classes["courseComplete-leftSection"]} ${visible === false && classes["close"]}`}>
@@ -51,7 +51,7 @@ function CourseComplete() {
                         <div className={classes["close-list-button-container"]}>
                             <button onClick={onCloseLeftSection} className={classes["close-list-button"]}><FontAwesomeIcon icon={faXmarkCircle} size='xl' /></button>
                         </div>
-                        {courseData.subject !== "" ? courseData.subject.map((content, key) => {
+                        {courseData.subject.length !== 0  ? courseData.subject.map((content, key) => {
                             return (
                                 <li key={key}>
                                     <a name="Tema" className={classes["info-list"]}>{content.themeTitle}</a>
@@ -81,7 +81,7 @@ function CourseComplete() {
                         </div>
                     </div>
                     <div className={classes["courseComplete-course-info"]}>
-                        {courseData.subject !== "" ? courseData.subject.map((content, key) => {
+                        {courseData.subject.length !== 0 ? courseData.subject.map((content, key) => {
                             return (
                                 <section id={content._id} key={key} className={classes["courseComplete-course-info-container"]}>
                                     <div className={classes["courseComplete-course-info-title"]}>

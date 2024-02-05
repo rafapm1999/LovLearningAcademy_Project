@@ -10,6 +10,7 @@ function AdminEditCourseModal(props) {
     const themeVideoUrlRef = useRef("");
     const themeDescriptionRef = useRef("");
     let courseData = props.courseData;
+    const [remove, setRemove] = useState(false)
     const fetchEditCourse = async (id, newData) => {
         let newDataCourse = []
         console.log(newData);
@@ -162,6 +163,9 @@ function AdminEditCourseModal(props) {
         fetchEditingCourseTheme(courseData._id, finalCourse)
 
     }
+    const handlerRemove = () => {
+        setRemove(!remove)
+    }
 
     console.log(props.editThemeData);
     if (props.editThemeData === false) {
@@ -258,12 +262,18 @@ function AdminEditCourseModal(props) {
                                             placeholder={editThemeData.description}
                                             required
                                         />
+                                        <div>
+                                            {remove === true ? <h4 className={classes["advertise"]}>You want to remove this theme, are you shure?</h4> : ""}
+                                        </div>
                                         <div className={classes["button-section"]}>
-                                            <button className={classes["save-button"]} type='submit'>Save</button>
-                                            <button className={classes["remove-button"]} type='button' onClick={handleSubmitRemove}>Remove</button>
+                                            {remove === true ? <button onClick={handleSubmitRemove} type='button' className={classes["save-button"]}>Yes</button> : <button onClick={handleSubmitEdit} className={classes["save-button"]} type='button'>Save</button>}
+                                            {remove === true ? <button onClick={handlerRemove}  type='button' className={classes["remove-button"]}>No</button> : <button className={classes["remove-button"]} type='button' /* type='button' */ onClick={handlerRemove}>Remove</button>}
                                         </div>
                                     </form>
-                                    <button type='button' onClick={() => { props.onClose() }} className={classes["md-close"]}><span>X</span></button>
+                                    <button type='button' onClick={() => { 
+                                        props.onClose();
+                                        setRemove(false);
+                                     }} className={classes["md-close"]}><span>X</span></button>
                                 </div>
                             </div>
                         </div>
@@ -272,10 +282,10 @@ function AdminEditCourseModal(props) {
                 </div>
             </div >
         );
-    } else if (courseData.subject[0] === null || courseData.subject[0] === undefined ) {
-        return( <h2>Don't have any themes yet.</h2>)
-           
-         
+    } else if (courseData.subject[0] === null || courseData.subject[0] === undefined) {
+        return (<h2>Don't have any themes yet.</h2>)
+
+
     }
 
 

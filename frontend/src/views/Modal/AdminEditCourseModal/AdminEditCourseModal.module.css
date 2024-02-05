@@ -37,7 +37,7 @@
     opacity: 1;
 }
 .md-content{
-    height: 30vh;
+    height: AUTO;
     color: #fff;
     position: relative;
     border-radius: .5rem;
@@ -101,7 +101,7 @@
     padding: .5rem;  
 }
 .button-section{
-    width: 10vw;
+    width: 20vw;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -169,12 +169,31 @@
 .md-loggin > span{
     color: #1e90ff;
 }
+.advertise{
+    padding: 2rem;
+    margin: 1rem;
+    color: red;
+    text-align: center;
+    font-weight: bold;
+    background-color: white;
+}
 
 @media (max-width: 1200px) {
 }
 @media (max-width: 1024px) {
 }
 @media (max-width: 992px) {
+    .info-container-input{
+        width: 60vw;
+        margin: 1rem;
+        padding: .5rem;  
+    }
+    .button-section{
+        width: 50vw;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
 }
 @media (max-width: 768px) {
 }

@@ -6,10 +6,11 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { takeRole, takeID } from '../../Utils';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
- faBars, faXmark
+  faBars, faXmark
 } from "@fortawesome/free-solid-svg-icons";
 import UserNavbar from '../UserNavbar/UserNavbar';
 import { useEffect } from 'react';
+import AdminNavbar from '../AdminNavbar/AdminNavbar';
 
 
 function Navbar() {
@@ -19,8 +20,8 @@ function Navbar() {
   const onHandlerClick = () => {
     setVisible(!visible)
   }
-  
-    if ((!token) || (token === undefined) || (token === null)) {
+
+  if ((!token) || (token === undefined) || (token === null)) {
     return (
       <Fragment>
         <div className={classes["navbar-main"]}>
@@ -62,13 +63,18 @@ function Navbar() {
         </div>
       </Fragment>
     )
-
   } else if (token) {
+    if (takeRole(token) === "user") {
       return (
         <UserNavbar></UserNavbar>
       )
-    } 
+    } else if (takeRole(token) === "admin") {
+      return (
+      <AdminNavbar></AdminNavbar>
+      )
+    }
   }
+}
 
 
 export default Navbar;

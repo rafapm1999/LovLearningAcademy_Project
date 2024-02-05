@@ -99,6 +99,15 @@
 .courseTheme-target-container > p {
   padding: 1rem;
 }
+.courseComplete-noThemes {
+  width: 100vw;
+  height: 30vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem;
+  padding: 2rem;
+}
 
 @media (max-width: 1200px) {
 }

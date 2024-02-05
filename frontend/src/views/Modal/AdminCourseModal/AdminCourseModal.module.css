@@ -198,7 +198,7 @@ form .form-info {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 2rem ;
+  margin-top: 2rem;
 }
 .preview-button > button {
   padding: 1.9rem;
@@ -284,28 +284,30 @@ form .form-info {
 }
 /* Edit modal */
 .edit-title {
+  margin-top: 2rem;
+}
+.edit-title div {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 1rem 0;
-  width: 100%;
-}
-.edit-title div {
   color: black;
   font-size: 1.9rem;
-  width: 100%;
   margin-bottom: 1rem;
 }
-.edit-title div > :first-child {
+.edit-title > div > :first-child {
+  width: 30vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 1.2rem;
+  margin-bottom: 1rem;
   font-weight: bold;
-
 }
 .edit-title input {
   font-size: 1.2rem;
   border: 2px solid white;
-  width: 100%;
+  width: 20vw;
   box-shadow: 0 0 6px 1px rgb(116, 111, 111);
 }
 .edit-title input:hover {
@@ -316,7 +318,7 @@ form .form-info {
 }
 .edit-image {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: end;
   width: 100%;
   margin-bottom: 1.5rem;
@@ -326,10 +328,9 @@ form .form-info {
 }
 .level-hours-section {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   flex-direction: row;
-  width: 100%;
   margin-bottom: 1.5rem;
 }
 .level-hours-section > div p {
@@ -342,11 +343,15 @@ form .form-info {
   align-items: start;
   flex-direction: column;
   height: 10%;
+  margin-right: 2rem;
 }
 
 .edit-level > select {
   background-color: #fff;
   border: 1px solid black;
+}
+.edit-hours{
+  margin-right: 2rem;
 }
 .edit-hours input {
   width: 50px;
@@ -354,29 +359,34 @@ form .form-info {
   border: 1px solid black;
 }
 .edit-description {
-  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  flex-direction: column;
 }
 .edit-description > p {
   text-align: center;
   font-size: 1rem;
   font-weight: bold;
 }
-.edit-description div {
+.edit-description > div {
   margin-bottom: 1rem;
 }
-.edit-short-description{
+.edit-short-description {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   margin-top: 1rem;
+  width: 100vw;
 }
-.edit-short-description > p{
+.edit-short-description > p {
   text-align: center;
   font-size: 1rem;
   font-weight: bold;
 }
-.actual-short-description{
+.actual-short-description {
   resize: none;
 }
 /* Arreglar este css ya que crea conflicto con los demas */
@@ -393,8 +403,9 @@ form .form-info {
 }
 .save-button {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
+  width: 100vw;
 }
 .save-button > button {
   padding: 1.5rem;
@@ -407,6 +418,9 @@ form .form-info {
 .save-button > button:hover {
   background: white;
   color: #2bc04b;
+}
+.editTheme-button {
+  margin-left: 2rem;
 }
 
 @media (max-width: 1200px) {
@@ -422,7 +436,7 @@ form .form-info {
   }
   .course-header p {
     margin-right: 0.9rem;
-    font-size: .9rem;
+    font-size: 0.9rem;
     font-weight: bold;
   }
   .remove-header > p {
@@ -430,10 +444,30 @@ form .form-info {
     color: rgb(253, 4, 4);
     font-size: 1.9rem;
     text-align: center;
-    }
-    .remove-form > p {
-      text-align: center;
-    }
+  }
+  .remove-form > p {
+    text-align: center;
+  }
+  .edit-title input {
+    font-size: 1.2rem;
+    border: 2px solid white;
+    width: 45vw;
+    box-shadow: 0 0 6px 1px rgb(116, 111, 111);
+  }
+  [class*="-description"] textarea {
+    border: 1px solid black;
+    padding: 0.9rem;
+    resize: none;
+    width: 40vw;
+  }
+  .edit-image {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
 }
 @media (max-width: 768px) {
 }

@@ -31,8 +31,7 @@ export const AuthProviderAdmin = (props) => {
 
                             let role = takeRole(token)
                             if (role === "user") {
-                                localStorage.removeItem("token");
-                                return <Navigate to="/" replace />;
+                                window.location.href="/unauthorized";
                             }
                         }
                     }).catch((error) => {

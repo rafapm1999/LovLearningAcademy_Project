@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 
 
 function Home() {
-  const [token, setToken] = useState(localStorage.getItem("token"))
+  const token = localStorage.getItem("token");
+  // const [token, setToken] = useState(localStorage.getItem("token"))
   //Carrusel para palabras clave del h1
   const words = ["community", "people", "members", "courses"];
   const carrouselImages = ["carrousel-1.jpg", "carrousel-2.jpg"];

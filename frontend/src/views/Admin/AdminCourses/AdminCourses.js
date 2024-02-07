@@ -53,7 +53,6 @@ function AdminCourses() {
           setPending(false)
         }
       } catch (error) {
-        console.log(error);
         navigate(`/error-page`, { state: error });
       }
     };
@@ -61,7 +60,6 @@ function AdminCourses() {
   };
 
   const fetchTheCourse = async (slug) => {
-
     try {
       const response = await fetch(`http://localhost:8000/courses/${slug}`, {
         method: "GET",
@@ -75,12 +73,10 @@ function AdminCourses() {
         setTimeout(() => {
           setVisible(!visible)
         }, 100)
-
-
       } else {
-        console.log("Has entrado fetchTheCourse en !response.ok");
+
       }
-    } catch {
+    } catch(error) {
 
     }
   };
@@ -275,7 +271,6 @@ function AdminCourses() {
       </>
     );
   } else if (courses[0].length === 0) {
-    console.log("Hasta entrado en courses[0].length === 0")
     return (
       <div className={classes["coursesPage-root"]}>
         <div className={classes.title}>

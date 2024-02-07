@@ -4,7 +4,7 @@ import { jwtDecode } from "jwt-decode";
 export function verifyToken() {
 
   let token = localStorage.getItem("token");
-  if ((token !== null) || (token !== undefined)) {
+  if ((token !== '') && (token !== null) && (token !== undefined)) {
     fetch(``, {
       method: "POST",
       headers: {
@@ -16,16 +16,16 @@ export function verifyToken() {
       .then((data) => {
         if (data.code === 401 || data.result === "ko") {
           localStorage.removeItem("token");
-          window.location.href = "/admin/login";
+          window.location.href = "/login";
         }
       })
       .catch((error) => {
         localStorage.removeItem("token");
-        window.location.href = "/admin/login";
+        window.location.href = "/login";
       });
   }
   else {
-    window.location.href = "/admin/login";
+    window.location.href = "/login";
   }
 }
 
@@ -33,7 +33,7 @@ export function verifyToken() {
 export function takeRole() {
   const token = localStorage.getItem("token");
   let role = '';
-  if ((token !== null) || (token !== undefined)) {
+  if ((token !== '') && (token !== null) && (token !== undefined)) {
     const decoded = jwtDecode(token);
     role = decoded.role;
   }
@@ -44,11 +44,11 @@ export function takeRole() {
 export function takeID() {
   const token = localStorage.getItem("token");
   let id = '';
-  if ((token !== null) || (token !== undefined)) {
+  if ((token !== '') && (token !== null) && (token !== undefined)) {
     const decoded = jwtDecode(token);
     id = decoded.id;
     return id;
-  } else if((token === null) || (token === undefined)) {
+  } else if((token === '') || (token === null) || (token === undefined)) {
     console.log("ko");
   }
 }

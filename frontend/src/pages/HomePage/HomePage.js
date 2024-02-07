@@ -6,7 +6,6 @@ import Courses from "../../views/Courses/CoursesPage/CoursesPage"
 import ContactUs from "../../views/Contact/ContactUs"
 import SignupPage from "../../views/Signup/SignupPage/SignupPage"
 import LoginPage from "../../views/Login/LoginPage/LoginPage"
-import LoaderPage from "../../views/LoaderPage/LoaderPage"
 import ErrorPage from "../../views/ErrorPage/ErrorPage"
 import Unauthorized from "../../views/Unauthorized/Unauthorized";
 import Navbar from "../../components/Navbar/Navbar/Navbar"
@@ -22,7 +21,6 @@ function HomePage() {
                 <Route path="/contact" element={<ContactUs lang="en" />} />
                 <Route path="/signup" element={<SignupPage lang="en" />} />
                 <Route path="/login" element={<LoginPage lang="en" />} />
-                <Route path="/loader-page" element={<LoaderPage lang="en" />} /> 
                 <Route path="/unauthorized" element={<Unauthorized lang="en" />}/>
                 <Route path="*" element={<ErrorPage lang="en" />} />
             </Route>

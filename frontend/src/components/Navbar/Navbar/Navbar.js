@@ -20,8 +20,8 @@ function Navbar() {
   const onHandlerClick = () => {
     setVisible(!visible)
   }
-
-  if ((!token) || (token === undefined) || (token === null)) {
+  
+  if ((token === '') || (token === undefined) || (token === null)) {
     return (
       <Fragment>
         <div className={classes["navbar-main"]}>

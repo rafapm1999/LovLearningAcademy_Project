@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
+import { takeRole } from "../components/Utils"
 
 export const AuthContext = createContext();
 
@@ -27,6 +28,10 @@ export const AuthProvider = (props) => {
             }
             else {
               localStorage.setItem("token", localStorage.getItem("token"));
+              let role = takeRole(token)
+              if (role === "admin") {
+                  window.location.href="/unauthorized";
+              }
             }
           }).catch((error) => {
             localStorage.removeItem("token");
@@ -35,7 +40,6 @@ export const AuthProvider = (props) => {
     } else {
       localStorage.removeItem("token");
     }
-
   }, [token]);
 
   if (!token) return <Navigate to="/" replace />;

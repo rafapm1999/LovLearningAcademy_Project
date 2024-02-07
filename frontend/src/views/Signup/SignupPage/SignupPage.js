@@ -1,12 +1,20 @@
 import Signup from "../SignupForm/SignupForm";
-/* import classes from "./SignupPage.module.css"; */
 import Modal from "../../Modal/Modal/Modal";
 import ReactDOM from "react-dom";
-/* import { useNavigate } from "react-router-dom"; */
+import { takeRole } from "../../../components/Utils";
 import { useState } from "react";
 import { validateEmail, validatePassword } from "../../../utils/validate";
 
 function SignupPage() {
+  const token = localStorage.getItem('token');
+  if((token !== '') && (token !== null) && (token !== undefined)){
+    if (takeRole(token) === "user") {
+      window.location.href="/";
+    } else if (takeRole(token) === "admin") {
+      window.location.href="/admin/bbdd-members";
+    }
+   
+  }
   const [visible, setVisible] = useState(false);
   const [loginInfo, setLoginInfo] = useState({
     loggedIn: false,

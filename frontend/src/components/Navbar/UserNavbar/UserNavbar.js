@@ -18,7 +18,8 @@ function UserNavbar() {
 
   const unlogged = () => {
     localStorage.removeItem("token");
-    navigate(`/login`);
+    // navigate(`/login`);
+    window.location.href="/login";
   }
   const onHandlerClick = () => {
     setVisible(!visible);

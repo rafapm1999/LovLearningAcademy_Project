@@ -6,6 +6,15 @@ import { validateEmail, validatePassword } from "../../../utils/validate";
 import { LocalStorage } from "../../../services/LocalStorage.service";
 
 function LoginPage() {
+  const token = localStorage.getItem('token');
+  if((token !== '') && (token !== null) && (token !== undefined)){
+    if (takeRole(token) === "user") {
+      window.location.href="/";
+    } else if (takeRole(token) === "admin") {
+      window.location.href="/admin/bbdd-members";
+    }
+   
+  }
   const navigate = useNavigate();
   const [loginInfo, setLoginInfo] = useState({
     email: "",

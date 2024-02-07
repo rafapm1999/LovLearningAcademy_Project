@@ -1,7 +1,7 @@
 import { Fragment, useState } from 'react';
 import classes from './AdminNavbar.module.css';
-import { NavLink, Link } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
+
 //Importamos FontAwesomeIcon para usarlo en el footer
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,14 +10,14 @@ import {
 
 function AdminNavbar() {
   const [visible, setVisible] = useState(false)
-  const navigate = useNavigate();
   const unlogged = () => {
 
     localStorage.removeItem("token");
     localStorage.removeItem("email");
     localStorage.removeItem("role");
     localStorage.removeItem("rememberMe");
-    navigate("/");
+    // navigate("/");
+    window.location.href="/login";
   }
   const onHandlerClick = () => {
     setVisible(!visible)
@@ -26,10 +26,7 @@ function AdminNavbar() {
     <Fragment>
       <div className={classes["navbar-main"]}>
         <div className={classes["navbar-logo"]}>
-          <NavLink className={classes.logo} onClick={onHandlerClick} to={{
-            pathname: '/',
-            state: {}
-          }}>User Preview</NavLink>
+          <p className={classes.logo}>LovLearning Academy</p>
         </div>
         <div className={classes["navbar-links"]}>
           <div className={classes.links}>

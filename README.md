@@ -5,7 +5,19 @@ Hello World! Im Rafael Portillo and this is my final project for CodeSpace Acade
 <h2>Getting Started</h2>
 <h3>Installing</h3>
 <p>git clone https://github.com/rafapm1999/LovLearningAcademy_Project.git</p>
-<h3>Endpoints</h3>
+
+<h3>Frontend</h3>
+<p>cd frontend/</p>
+<p>npm install</p>
+<p>npm start</p>
+
+<h3>Backend</h3>
+<p>cd backend/</p>
+<p>npm install</p>
+<p>sudo systemctl start mongod.service</p>
+<p>npm run dev</p>
+
+<h2>Endpoints</h2>
 <table>
   <thead>
     <tr>

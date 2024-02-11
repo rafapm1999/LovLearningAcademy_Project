@@ -10,7 +10,7 @@ Hello World! Im Rafael Portillo and this is my final project for CodeSpace Acade
 > You have to follow the steps for the project to work correctly.
 
 <h3>Installing the project</h3>
-<p>git clone https://github.com/rafapm1999/LovLearningAcademy_Project.git</p>
+<code>git clone https://github.com/rafapm1999/LovLearningAcademy_Project.git</code>
 
 <h3>Installing dependences</h3>
 <h4>Frontend</h4>

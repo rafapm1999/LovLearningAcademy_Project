@@ -22,29 +22,14 @@ Hello World! Im Rafael Portillo and this is my final project for CodeSpace Acade
 <ol>
   <li><code>cd backend/</code></li>
   <li><code>npm install</code></li>
+  <li><code>sudo systemctl start mongod.service</code></li>
 </ol>
-
 <h3>Prepare the database</h3>
 <ol>
-  <li>Set up MongoDB: Make sure you have a MongoDB instance running.</li>
-  <li>If the <code>.env</code> file does not exist in the Backend directory create a <code>.env</code> file and configure the following environment variables:
-     <ul>
-      <li>
-        <code>
-        # Content that the .env file must have in the backend directory
-        PORT=8000
-        MONGO_URI=mongodb://localhost:27017/training-project
-        TOKEN=627de5fad350e14d5b472e6951cc8bb30c03054468e87b2a4ad0a35b4cc0d886
-        REFRESH_TOKEN=215876161ecf774215fc8fcdf42592a1a24f20062dc195e517af8026d1e6199f
-        </code>
-      </li>
-    </ul>
-  </li>
-  <li>
-   
-  </li>
+  <li>Set up MongoDB: Make sure you have a MongoDB instance running. <code>sudo systemctl status mongod.service</code></li>
+  <li>Extract the zip file: <code>unzip mongoDB-LovLearning_Project.zip</code></li>
+  <li>Import the database file ("mongoDB-LovLearning_Project"): <code>#</code></li>
 </ol>
-
 <h2>Endpoints</h2>
 <table>
   <thead>

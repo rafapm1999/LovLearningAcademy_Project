@@ -5,3 +5,22 @@ Hello World! Im Rafael Portillo and this is my final project for CodeSpace Acade
 <h2>Getting Started</h2>
 <h3>Installing</h3>
 <p>git clone https://github.com/rafapm1999/LovLearningAcademy_Project.git</p>
+<h3>Endpoints</h3>
+<table>
+  <thead>
+    <tr>
+      <td>URL</td>
+      <td>TYPE</td>
+      <td>DESCRIPTION</td>
+      <td>ROLE</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>

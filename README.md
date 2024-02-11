@@ -13,6 +13,7 @@ Hello World! Im Rafael Portillo and this is my final project for CodeSpace Acade
 <code>git clone https://github.com/rafapm1999/LovLearningAcademy_Project.git</code>
 
 <h3>Installing dependences</h3>
+<code>cd LovLearning_Project</code>
 <h4>Frontend</h4>
 <ol>
   <li><code>cd frontend/</code></li>

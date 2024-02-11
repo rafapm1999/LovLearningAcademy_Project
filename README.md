@@ -30,7 +30,13 @@ Hello World! Im Rafael Portillo and this is my final project for CodeSpace Acade
   <li>If the <code>.env</code> file does not exist in the Backend directory create a <code>.env</code> file and configure the following environment variables:
      <ul>
       <li>
-        <code># Content that the .env file must have in the backend directory</code>
+        <code>
+        # Content that the .env file must have in the backend directory
+        PORT=8000
+        MONGO_URI=mongodb://localhost:27017/training-project
+        TOKEN=627de5fad350e14d5b472e6951cc8bb30c03054468e87b2a4ad0a35b4cc0d886
+        REFRESH_TOKEN=215876161ecf774215fc8fcdf42592a1a24f20062dc195e517af8026d1e6199f
+        </code>
       </li>
     </ul>
   </li>
@@ -51,10 +57,28 @@ Hello World! Im Rafael Portillo and this is my final project for CodeSpace Acade
   </thead>
   <tbody>
     <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>http://localhost:8000/auth/login</td>
+      <td>POST</td>
+      <td>Access to your personal account</td>
+      <td>PUBLIC</td>
+    </tr>
+    <tr>
+      <td>http://localhost:8000/auth/signup</td>
+      <td>POST</td>
+      <td>Create your personal account</td>
+      <td>PUBLIC</td>
+    </tr>
+    <tr>
+      <td>http://localhost:8000/contact/contact-us</td>
+      <td>POST</td>
+      <td>Send a message for the administrators</td>
+      <td>PUBLIC</td>
+    </tr>
+    <tr>
+      <td>http://localhost:8000/auth/getuser/:id</td>
+      <td>GET</td>
+      <td>Get the user info</td>
+      <td>USER</td>
     </tr>
   </tbody>
 </table>

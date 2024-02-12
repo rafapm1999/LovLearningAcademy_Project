@@ -168,50 +168,6 @@ const deleteCourse = async (req, res) => {
   }
 };
 
-/* const deleteCourse = async (req, res) => {
-  try {
-    const users = await Login.find();
-    res.status(200).json({ status: "ok", data, error: null });
-    if (res.status === 200) {
-      let cont = 0;
-      users.forEach((user) => {
-        user.courses.some((course) => {
-          cont ++
-          if (course === req.params.id) {
-            course.splice(cont -1, 1)
-            const data =  Login.findByIdAndUpdate(
-              user._id,
-              user,
-              { new: true });
-              res.status(200).json({ status: "ok", data, error: null });
-          }
-        })
-        console.log(user);
-      })
-    }
-    console.log(users);
-  } catch (error) {
-    
-  } */
- /*  try {
-    const data = await Courses.findByIdAndDelete(req.params.id);
-    res.status(200).json({ status: "ok", data, error: null });
-    if (res.status === 200) {
-      try {
-
-      } catch (error) {
-
-      }
-    }
-  } catch (error) {
-    res.status(400).json({
-      status: "ko",
-      data: null,
-      error: error.message,
-    });
-  } */
-/* }; */
-
 const saveImage = (req, res) => {
   function saveCourseImage(file) {
     const newPath = `../frontend/public/uploads/${file.originalname}`

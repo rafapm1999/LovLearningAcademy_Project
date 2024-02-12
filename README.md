@@ -18,6 +18,7 @@ Hello World! Im Rafael Portillo and this is my final project for CodeSpace Acade
 <ol>
   <li><code>cd frontend/</code></li>
   <li><code>npm install</code></li>
+  <li><code>cd ..</code></li>
 </ol>
 <h4>Backend</h4>
 <ol>
@@ -28,9 +29,99 @@ Hello World! Im Rafael Portillo and this is my final project for CodeSpace Acade
 <h3>Prepare the database</h3>
 <ol>
   <li>Set up MongoDB: Make sure you have a MongoDB instance running. <code>sudo systemctl status mongod.service</code></li>
-  <li>Extract the zip file: <code>unzip mongoDB-LovLearning_Project.zip</code></li>
-  <li>Import the database file ("mongoDB-LovLearning_Project"): <code>#</code></li>
+  <li>Exit to the mongod.service: CTRL + C</li>
+  <li>Go to the root of the project. (<code>cd ..</code>)</li>
+  <li>Extract the zip file: <code>unzip BBDD.zip</code></li>
+  <li>Import the dummy database file ("BBDD") to your MongoDB Compass:
+    <br>
+  <code>mongoimport --uri="mongodb://localhost:27017/LovLearningBBDD" --collection=courses --file=BBDD/courses.json</code>
+    <br>
+  <code>mongoimport --uri="mongodb://localhost:27017/LovLearningBBDD" --collection=logins --file=BBDD/logins.json</code>
+    <br>
+  <code>mongoimport --uri="mongodb://localhost:27017/LovLearningBBDD" --collection=contacts --file=BBDD/contacts.json</code>
+  </li>
 </ol>
+<h3>Create the .env folder</h3>
+<ol>
+  <li>cd backend/</li>
+  <li>Create the .env folder: through commands;
+  <br>
+  <code>echo "PORT=8000" > .env</code>
+  <br>
+  <code>echo "MONGO_URI=mongodb://localhost:27017/LovLearningBBDD" >> .env</code>
+  <br>
+  <code>echo "TOKEN=627de5fad350e14d5b472e6951cc8bb30c03054468e87b2a4ad0a35b4cc0d886" >> .env</code>
+  <br>
+  <code>echo "REFRESH_TOKEN=215876161ecf774215fc8fcdf42592a1a24f20062dc195e517af8026d1e6199f" >> .env</code>
+  </li>
+  <li>Create the .env folder: through IDE;
+  <br>
+    Copy this code and paste it into the previously created .env folder in the root of the backend directory.
+   <br>
+  <code>PORT=8000</code>
+   <br>
+  <code>MONGO_URI=mongodb://localhost:27017/LovLearningBBDD</code>
+   <br>
+  <code>TOKEN=627de5fad350e14d5b472e6951cc8bb30c03054468e87b2a4ad0a35b4cc0d886</code>
+   <br>
+  <code>REFRESH_TOKEN=215876161ecf774215fc8fcdf42592a1a24f20062dc195e517af8026d1e6199f</code>   
+  </li>
+</ol>
+<h3>Let's start with the project</h3>
+<h4>Running the backend</h4>
+<ol>
+  <li>In the Backend directory: <code>npm run dev</code></li>
+</ol>
+
+  > [!IMPORTANT]
+  > You must to see this message in your shell.
+> <br>
+  > [nodemon] 2.0.22
+> <br>
+  > [nodemon] to restart at any time, enter `rs`
+> <br>
+  > [nodemon] watching path(s): *.*
+> <br>
+  > [nodemon] watching extensions: js,mjs,json
+> <br>
+  > [nodemon] starting `node ./app.js`
+> <br>
+  > Server running on port 8000
+> <br>
+  > Successfully connected to the database!!
+
+<h4>Running the Frontend</h4>
+<ol>
+  <li>In the Frontend directory: <code>npm start</code></li>
+</ol>
+<h2>Comments</h2>
+You can use a test user and administrator to test the project's functionalities. (Both users contain dummy data.)
+<table>
+  <thead>
+    <tr>
+      <td>EMAIL</td>
+      <td>PASSWORD</td>
+      <td>DESCRIPTION</td>
+      <td>ROLE</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>admin@admin.com</td>
+      <td>adminADMIN1$</td>
+      <td>The dummy administrator. You can see all users as they are registered in the Academy, view all courses as well as update or delete them.</td>
+      <td>ADMIN</td>
+    </tr>
+    <tr>
+      <td>user@user.com</td>
+      <td>userUSER1$</td>
+      <td>The dummy user. You can get courses from the "Course Store" and view them.</td>
+      <td>USER</td>
+    </tr>
+    </tbody>
+</table>
+Or register with your own data.
+
 <h2>Endpoints</h2>
 <table>
   <thead>

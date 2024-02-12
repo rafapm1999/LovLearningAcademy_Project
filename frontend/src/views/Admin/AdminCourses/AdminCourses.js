@@ -11,8 +11,6 @@ import {
 import AdminCourseModal from '../../Modal/AdminCourseModal/AdminCourseModal';
 
 function AdminCourses() {
-  const [token, setToken] = useState(localStorage.getItem("token"))
-  const [adminRole, setAdminRole] = useState(false)
   const [courses, setCourses] = useState([])
   const [coursesCopy, setCoursesCopy] = useState([]);
   const [courseID, setCourseID] = useState("")

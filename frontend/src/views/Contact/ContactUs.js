@@ -81,6 +81,7 @@ function ContactUs() {
               name="userNameDataContact"
               id="userNameData"
               placeholder="Name"
+              required
             />
           </div>
           <div className={classes["form-info"]}>
@@ -90,6 +91,7 @@ function ContactUs() {
               name="lastName"
               id="userLastNameContact"
               placeholder="Lastname"
+              required
             />
           </div>
           <div className={classes["form-info"]}>
@@ -99,6 +101,7 @@ function ContactUs() {
               name="userEmail"
               id="userEmailContact"
               placeholder="Email"
+              required
             />
           </div>
           <div className={classes["form-info"]}>
@@ -108,6 +111,7 @@ function ContactUs() {
               id="userCommentTextContact"
               placeholder="What do you tell to us?"
               maxLength="50"
+              required
             ></textarea>
           </div>
           <div className={`${classes["form-info"]} ${classes["submit-button"]}`}>

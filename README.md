@@ -66,5 +66,89 @@ Hello World! Im Rafael Portillo and this is my final project for CodeSpace Acade
       <td>Get the user info</td>
       <td>USER</td>
     </tr>
+     <tr>
+      <td>http://localhost:8000/auth/:id</td>
+      <td>PATCH</td>
+      <td>Modificate info of the user.</td>
+      <td>USER/ADMIN</td>
+    </tr>
+    <tr>
+      <td>http://localhost:8000/auth/alluser</td>
+      <td>GET</td>
+      <td>Get the info of all users.</td>
+      <td>ADMIN</td>
+    </tr>
+     <tr>
+      <td>http://localhost:8000/auth/deleteusercourse/:userID/:courseID</td>
+      <td>DELETE</td>
+      <td>Delete downloaded users courses.</td>
+      <td>USER</td>
+    </tr>
+     <tr>
+      <td>http://localhost:8000/auth/refreshToken</td>
+      <td>GET</td>
+      <td>Refresh the token key.</td>
+      <td>ANY</td>
+    </tr>
+     <tr>
+      <td>http://localhost:8000/courses/all-courses</td>
+      <td>GET</td>
+      <td>Get all courses.</td>
+      <td>ADMIN</td>
+    </tr>
+    <tr>
+      <td>http://localhost:8000/courses/all-courses-true</td>
+      <td>GET</td>
+      <td>Get all courses with visibility option enable.</td>
+      <td>USER</td>
+    </tr>
+    <tr>
+      <td>http://localhost:8000/courses/:slug</td>
+      <td>GET</td>
+      <td>Get the course info.</td>
+      <td>USER/ADMIN</td>
+    </tr>
+    <tr>
+      <td>http://localhost:8000/courses/mycourses/:id</td>
+      <td>GET</td>
+      <td>Get the user courses list. </td>
+      <td>USER</td>
+    </tr>
+    <tr>
+      <td>http://localhost:8000/courses/create-course</td>
+      <td>POST</td>
+      <td>Create new course.</td>
+      <td>ADMIN</td>
+    </tr>
+    <tr>
+      <td>http://localhost:8000/courses/save-image</td>
+      <td>POST</td>
+      <td>Save the image </td>
+      <td>ADMIN</td>
+    </tr>
+    <tr>
+      <td>http://localhost:8000/courses/edit/:id</td>
+      <td>GET</td>
+      <td>Get editable course data.</td>
+      <td>ADMIN</td>
+    </tr>
+    <tr>
+      <td>http://localhost:8000/courses/edit/:id</td>
+      <td>PATCH</td>
+      <td>Modificate course info.</td>
+      <td>ADMIN</td>
+    </tr>
+    <tr>
+      <td>http://localhost:8000/courses/delete/:id</td>
+      <td>DELETE</td>
+      <td>Delete course.</td>
+      <td>ADMIN</td>
+    </tr>
+    <tr>
+      <td>http://localhost:8000/users/verifyToken</td>
+      <td>POST</td>
+      <td>Verify the token key.</td>
+      <td>ANY</td>
+    </tr>
   </tbody>
 </table>
